@@ -1,14 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search>
-  <entry>
-    <title><![CDATA[起点]]></title>
-    <url>%2F2019%2F06%2F17%2FACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[ACM正式启程经过大一的ACM淘汰赛后终于正式留下来了，由小白变成入门一路过来很不容易，感谢大一 一学年学长的栽培，马上要迎来大学的第一个暑假，杭电集训如期而至，海量的算法，希望在今后剩余的ACM生涯里可以和我的两位队友摘得区域赛金牌，打破计科无金的历史。]]></content>
+<search> 
+  
+  
+    
+    <entry>
+      <title></title>
+      <link href="/2019/06/21/CF/"/>
+      <url>/2019/06/21/CF/</url>
+      
+        <content type="html"><![CDATA[<hr><p>title:  Ropewalkers</p><p>date: 2019:6:21</p><p>tags: [codeforce]</p><p>categories: ACM</p><hr><p>time limit per test</p><p>1 second</p><p>memory limit per test</p><p>256 megabytes</p><p>input</p><p>standard input</p><p>output</p><p>standard output</p><p>Polycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.</p><p>The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was <strong>at least</strong> dd.</p><p>Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad <strong>can not</strong> move at the same time (<strong>Only one of them can move at each moment</strong>). Ropewalkers can be at the same positions at the same time and can “walk past each other”.</p><p>You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd.</p><p>Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides.</p><p>Input</p><p>The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance.</p><p>Output</p><p>Output one integer — the minimum duration (in seconds) of the performance.</p><p>先排序再按照中间那个数为轴来进行调整。</p><p>``</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ll = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">  <span class="keyword">int</span> x[]=&#123;a,b,c&#125;;</span><br><span class="line">  sort(x,x+<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">0</span>]-x[<span class="number">1</span>]))+max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">1</span>]-x[<span class="number">2</span>]))&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>起点</title>
+      <link href="/2019/06/17/ACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B/"/>
+      <url>/2019/06/17/ACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B/</url>
+      
+        <content type="html"><![CDATA[<h1 id="ACM正式启程"><a href="#ACM正式启程" class="headerlink" title="ACM正式启程"></a>ACM正式启程</h1><p>经过大一的ACM淘汰赛后终于正式留下来了，由小白变成入门一路过来很不容易，感谢大一 一学年学长的栽培，马上要迎来大学的第一个暑假，杭电集训如期而至，海量的算法，希望在今后剩余的ACM生涯里可以和我的两位队友摘得区域赛金牌，打破计科无金的历史。</p>]]></content>
+      
+      
       <categories>
-        <category>ACM</category>
+          
+          <category> ACM </category>
+          
       </categories>
-      <tags>
-        <tag>学习</tag>
-      </tags>
-  </entry>
+      
+      
+        <tags>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
 </search>
