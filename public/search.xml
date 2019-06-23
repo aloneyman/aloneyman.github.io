@@ -1,9 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title><![CDATA[Unity如何导入资源]]></title>
     <url>%2F2019%2F06%2F23%2FUnity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82%2F</url>
     <content type="text"><![CDATA[Unity如何导入资源。要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。 就是这个东西啦，右键Assets，选择Import Package 。]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ropewalkers]]></title>
+    <url>%2F2019%2F06%2F21%2FRopewalkers%2F</url>
+    <content type="text"><![CDATA[RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad. The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was at least dd. Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad can not move at the same time (Only one of them can move at each moment). Ropewalkers can be at the same positions at the same time and can “walk past each other”. You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd. Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides. Input The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance. Output Output one integer — the minimum duration (in seconds) of the performance. `` 123456789101112131415161718#include &lt;bits/stdc++.h&gt;using namespace std;using ll = long long;int main()&#123; int a, b, c, d; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d; int x[]=&#123;a,b,c&#125;; sort(x,x+3); cout&lt;&lt;max(0,d-abs(x[0]-x[1]))+max(0,d-abs(x[1]-x[2]))&lt;&lt;'\n'; return 0;&#125;]]></content>
+      <categories>
+        <category>codeforces</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Email from Polycarp]]></title>
@@ -20,17 +37,6 @@
     <title><![CDATA[Email from Polycarp]]></title>
     <url>%2F2019%2F06%2F21%2FExam%20in%20BerSU%20(easy%20version)%2F</url>
     <content type="text"><![CDATA[Exam in BerSU (easy version)The only difference between easy and hard versions is constraints. A session has begun at Beland State University. Many students are taking exams. Polygraph Poligrafovich is going to examine a group of nn students. Students will take the exam one-by-one in order from 11-th to nn-th. Rules of the exam are following: The ii-th student randomly chooses a ticket. if this ticket is too hard to the student, he doesn’t answer and goes home immediately (this process is so fast that it’s considered no time elapses). This student fails the exam. if the student finds the ticket easy, he spends exactly titi minutes to pass the exam. After it, he immediately gets a mark and goes home. Students take the exam in the fixed order, one-by-one, without any interruption. At any moment of time, Polygraph Poligrafovich takes the answer from one student. The duration of the whole exam for all students is MM minutes (maxti≤Mmaxti≤M), so students at the end of the list have a greater possibility to run out of time to pass the exam. For each student ii, you should count the minimum possible number of students who need to fail the exam so the ii-th student has enough time to pass the exam. For each student ii, find the answer independently. That is, if when finding the answer for the student i1i1 some student jj should leave, then while finding the answer for i2i2 (i2&gt;i1i2&gt;i1) the student jj student does not have to go home. Input The first line of the input contains two integers nn and MM (1≤n≤1001≤n≤100, 1≤M≤1001≤M≤100) — the number of students and the total duration of the exam in minutes, respectively. The second line of the input contains nn integers titi (1≤ti≤1001≤ti≤100) — time in minutes that ii-th student spends to answer to a ticket. It’s guaranteed that all values of titi are not greater than MM. Output Print nn numbers: the ii-th number must be equal to the minimum number of students who have to leave the exam in order to ii-th student has enough time to pass the exam. 思路题目中要求剪掉的数目最少，即每次减少人腾出的时间更多，并且ti&lt;=100，所以我们很容易想到从大到小的进行贪心。然后后每次利用桶来进行每个时间对应的人数的维护就好了。 123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int N=2e5+7;int n,m,a[N],s[N],num[102];int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); for(int i=1;i&lt;=n;i++) &#123; scanf(&quot;%d&quot;,&amp;a[i]); s[i]=s[i-1]+a[i]; &#125; for(int i=1;i&lt;=n;i++) if(s[i]&lt;=m)printf(&quot;0 &quot;),num[a[i]]++; else&#123; int rest=s[i]-m,ans=0; for(int j=100;j;j--) &#123; if(j*num[j]&lt;rest) rest-=j*num[j],ans+=num[j]; else&#123;ans+=(rest+j-1)/j;break;&#125; //这一步理解有点困难，其实小伙伴可以画一条数轴就明白了。 printf(&quot;%d &quot;,ans); num[a[i]]++; &#125; &#125;&#125;]]></content>
-      <categories>
-        <category>codeforces</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Ropewalkers]]></title>
-    <url>%2F2019%2F06%2F21%2FRopewalkers%2F</url>
-    <content type="text"><![CDATA[RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad. The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was at least dd. Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad can not move at the same time (Only one of them can move at each moment). Ropewalkers can be at the same positions at the same time and can “walk past each other”. You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd. Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides. Input The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance. Output Output one integer — the minimum duration (in seconds) of the performance. `` 123456789101112131415161718#include &lt;bits/stdc++.h&gt;using namespace std;using ll = long long;int main()&#123; int a, b, c, d; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d; int x[]=&#123;a,b,c&#125;; sort(x,x+3); cout&lt;&lt;max(0,d-abs(x[0]-x[1]))+max(0,d-abs(x[1]-x[2]))&lt;&lt;'\n'; return 0;&#125;]]></content>
       <categories>
         <category>codeforces</category>
       </categories>
