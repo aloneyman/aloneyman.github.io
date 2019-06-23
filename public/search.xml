@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[title]]></title>
+    <url>%2F2019%2F06%2F23%2Ftitle%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[Unity如何导入资源]]></title>
     <url>%2F2019%2F06%2F23%2FUnity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82%2F</url>
-    <content type="text"><![CDATA[Unity如何导入资源。要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。 就是这个东西啦，右键Assets，选择Import Package 。]]></content>
+    <content type="text"><![CDATA[Unity如何导入资源。要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。 ![](C:\Users\chhac\Desktop\1347731-20180319155539996-316236425.png 就是这个东西啦，右键Assets，选择Import Package 。]]></content>
       <categories>
         <category>学习</category>
       </categories>
