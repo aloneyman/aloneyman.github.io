@@ -1,182 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<search> 
-  
-  
-    
-    <entry>
-      <title>Unity中的一些鼠标事件</title>
-      <link href="/2019/06/26/2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6/"/>
-      <url>/2019/06/26/2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Unity中的一些鼠标事件"><a href="#Unity中的一些鼠标事件" class="headerlink" title="Unity中的一些鼠标事件"></a>Unity中的一些鼠标事件</h1><p> 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。</p><a id="more"></a><p>  GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下</p><p>  GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下</p><p>  GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下</p><p> 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。</p>]]></content>
-      
-      
+<search>
+  <entry>
+    <title><![CDATA[Unity中的一些鼠标事件]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[Unity中的一些鼠标事件 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。 GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下 GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下 GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。]]></content>
       <categories>
-          
-          <category> 学习 </category>
-          
+        <category>学习</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Unity </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Unity常用函数和变量汇总</title>
-      <link href="/2019/06/26/2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB/"/>
-      <url>/2019/06/26/2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB/</url>
-      
-        <content type="html"><![CDATA[<h3 id="1，代码。"><a href="#1，代码。" class="headerlink" title="1，代码。"></a>1，代码。</h3><a id="more"></a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">float3 WorldSpaceViewDir(float4 v)  //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向</span><br><span class="line"> </span><br><span class="line">float3 ObjSpaceViewDir(float4 v)    //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向</span><br><span class="line"> </span><br><span class="line">float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化</span><br><span class="line"> </span><br><span class="line">float3 UnityWorldSpaceLightDir(float4 v)    //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化</span><br><span class="line"> </span><br><span class="line">float3 ObjSpaceLightDir(float4 v)   //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化</span><br><span class="line"> </span><br><span class="line">float3 UnityObjectToWorldNormal(float3 norm)    //把法线从模型空间转换到世界空间中</span><br><span class="line"> </span><br><span class="line">float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中</span><br><span class="line"> </span><br><span class="line">float3 UnityWorldToObjectDir(float3 dir)    //把方向矢量从世界空间转换到模型空间中</span><br><span class="line"> </span><br><span class="line">float3 Shade4PointLights(...)   //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照</span><br></pre></td></tr></table></figure><h3 id="2，语义。"><a href="#2，语义。" class="headerlink" title="2，语义。"></a>2，语义。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">POSITION    //模型空间中的顶点位置，通常是float4类型</span><br><span class="line"> </span><br><span class="line">NORMAL  //顶点法线，通常是float3类型</span><br><span class="line"> </span><br><span class="line">TANGENT //顶点法线，通常是float4类型</span><br><span class="line"> </span><br><span class="line">TEXCOORDn   //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型</span><br><span class="line"> </span><br><span class="line">COLOR   //顶点颜色，通常是fixed4或float4类型</span><br><span class="line"> </span><br><span class="line">SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的</span><br><span class="line">POSITION，但是最好是使用SV_POSITION</span><br><span class="line"> </span><br><span class="line">COLOR0  //输出第一组顶点颜色</span><br><span class="line"> </span><br><span class="line">COLOR1  //输出第二组顶点颜色</span><br><span class="line"> </span><br><span class="line">TEXCOORD0~TEXCOORD7    //输出纹理坐标</span><br><span class="line"> </span><br><span class="line">SV_Target   //输出值将会存储到渲染目标（render target）中</span><br></pre></td></tr></table></figure><h3 id="3，变量。"><a href="#3，变量。" class="headerlink" title="3，变量。"></a>3，变量。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">UNITY_MATRIX_MVP    //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_V  //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_P  //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_T_MV   //UNITY_MATRIX_MV的转置矩阵</span><br><span class="line"> </span><br><span class="line">UNITY_MATRIX_IT_MV  //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵</span><br><span class="line"> </span><br><span class="line">unity_ObjectToWorld(_Object2World)  //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间</span><br><span class="line"> </span><br><span class="line">unity_WorldToObject(_World2Object)  //用于将顶点/方向矢量从世界空间转换到模型空间</span><br></pre></td></tr></table></figure><h3 id="4，摄像机和屏幕参数。"><a href="#4，摄像机和屏幕参数。" class="headerlink" title="4，摄像机和屏幕参数。"></a>4，摄像机和屏幕参数。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">float3  _WorldSpaceCameraPos  //该摄像机在世界空间中的位置</span><br><span class="line"> </span><br><span class="line">float4  _ProjectionParams    //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离</span><br><span class="line"> </span><br><span class="line">float4  _ScreenParams   //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度</span><br><span class="line"> </span><br><span class="line">float4  _ZBufferParams  //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值</span><br><span class="line"> </span><br><span class="line">float4  unity_OrthoParams   //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度</span><br><span class="line"> </span><br><span class="line">float4x4  unity_CameraProjection    //该摄像机的投影矩阵</span><br><span class="line"> </span><br><span class="line">float4x4  unity_CameraInvProjection  //该摄像机的投影矩阵的逆矩阵</span><br><span class="line"> </span><br><span class="line">float4  unity_CameraWorldClipPlanes[6]   //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面</span><br></pre></td></tr></table></figure><h3 id="5-内置的光照变量。"><a href="#5-内置的光照变量。" class="headerlink" title="5,内置的光照变量。"></a>5,内置的光照变量。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">_LightColor0    float4  //该Pass处理的逐像素光源的颜色</span><br><span class="line"> </span><br><span class="line">_WorldSpaceLightPos0    float4  //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1</span><br><span class="line"> </span><br><span class="line">_LightMatrix0   float4x4    //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理</span><br><span class="line"> </span><br><span class="line">unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0   float4  //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置</span><br><span class="line"> </span><br><span class="line">unity_4LightAtten() float4  //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子</span><br><span class="line"> </span><br><span class="line">unity_LightColor    half4[4]    //仅用于Base Pass，存储了前4个非重要的点光源的颜色</span><br></pre></td></tr></table></figure><h3 id="6，LightMode标签支持的渲染路径设置选项。"><a href="#6，LightMode标签支持的渲染路径设置选项。" class="headerlink" title="6，LightMode标签支持的渲染路径设置选项。"></a>6，LightMode标签支持的渲染路径设置选项。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Always  //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照</span><br><span class="line">ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和Lightmaps</span><br><span class="line">ForwardAdd  //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源</span><br><span class="line">Deferred    //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）</span><br><span class="line">ShadowCaster    //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中</span><br><span class="line">PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分</span><br><span class="line">PrepassFinal    //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色</span><br><span class="line">Vertex,VertexLMRGBM和VertexLM    //用于遗留的顶点照明渲染</span><br></pre></td></tr></table></figure><h3 id="7，顶点照明渲染路径中可以使用的内置变量。"><a href="#7，顶点照明渲染路径中可以使用的内置变量。" class="headerlink" title="7，顶点照明渲染路径中可以使用的内置变量。"></a>7，顶点照明渲染路径中可以使用的内置变量。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">unity_LightColor    half4[8]     //光源颜色</span><br><span class="line"> </span><br><span class="line">unity_LightPosition float4[8]   //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1</span><br><span class="line"> </span><br><span class="line">unity_LightAtten    half4[8]    //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果</span><br><span class="line"> </span><br><span class="line">unity_SpotDirection float4[8]   //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0）</span><br></pre></td></tr></table></figure><h3 id="8，顶点照明渲染路径中可以使用的内置函数。"><a href="#8，顶点照明渲染路径中可以使用的内置函数。" class="headerlink" title="8，顶点照明渲染路径中可以使用的内置函数。"></a>8，顶点照明渲染路径中可以使用的内置函数。</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">float3 ShadeVertexLights(float4 vertex,float normal)     //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光</span><br><span class="line"> </span><br><span class="line">float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight)  //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Unity常用函数和变量汇总]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB%2F</url>
+    <content type="text"><![CDATA[1，代码。 1234567891011121314151617float3 WorldSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向 float3 ObjSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向 float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化 float3 UnityWorldSpaceLightDir(float4 v) //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化 float3 ObjSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化 float3 UnityObjectToWorldNormal(float3 norm) //把法线从模型空间转换到世界空间中 float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中 float3 UnityWorldToObjectDir(float3 dir) //把方向矢量从世界空间转换到模型空间中 float3 Shade4PointLights(...) //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照 2，语义。1234567891011121314151617181920POSITION //模型空间中的顶点位置，通常是float4类型 NORMAL //顶点法线，通常是float3类型 TANGENT //顶点法线，通常是float4类型 TEXCOORDn //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型 COLOR //顶点颜色，通常是fixed4或float4类型 SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的POSITION，但是最好是使用SV_POSITION COLOR0 //输出第一组顶点颜色 COLOR1 //输出第二组顶点颜色 TEXCOORD0~TEXCOORD7 //输出纹理坐标 SV_Target //输出值将会存储到渲染目标（render target）中 3，变量。1234567891011121314151617UNITY_MATRIX_MVP //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间 UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间 UNITY_MATRIX_V //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间 UNITY_MATRIX_P //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间 UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间 UNITY_MATRIX_T_MV //UNITY_MATRIX_MV的转置矩阵 UNITY_MATRIX_IT_MV //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵 unity_ObjectToWorld(_Object2World) //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间 unity_WorldToObject(_World2Object) //用于将顶点/方向矢量从世界空间转换到模型空间 4，摄像机和屏幕参数。123456789101112131415float3 _WorldSpaceCameraPos //该摄像机在世界空间中的位置 float4 _ProjectionParams //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离 float4 _ScreenParams //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度 float4 _ZBufferParams //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值 float4 unity_OrthoParams //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度 float4x4 unity_CameraProjection //该摄像机的投影矩阵 float4x4 unity_CameraInvProjection //该摄像机的投影矩阵的逆矩阵 float4 unity_CameraWorldClipPlanes[6] //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面 5,内置的光照变量。1234567891011_LightColor0 float4 //该Pass处理的逐像素光源的颜色 _WorldSpaceLightPos0 float4 //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1 _LightMatrix0 float4x4 //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理 unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0 float4 //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置 unity_4LightAtten() float4 //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子 unity_LightColor half4[4] //仅用于Base Pass，存储了前4个非重要的点光源的颜色 6，LightMode标签支持的渲染路径设置选项。12345678Always //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和LightmapsForwardAdd //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源Deferred //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）ShadowCaster //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分PrepassFinal //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色Vertex,VertexLMRGBM和VertexLM //用于遗留的顶点照明渲染 7，顶点照明渲染路径中可以使用的内置变量。1234567unity_LightColor half4[8] //光源颜色 unity_LightPosition float4[8] //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1 unity_LightAtten half4[8] //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果 unity_SpotDirection float4[8] //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0） 8，顶点照明渲染路径中可以使用的内置函数。123float3 ShadeVertexLights(float4 vertex,float normal) //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光 float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight) //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理]]></content>
       <categories>
-          
-          <category> 学习 </category>
-          
+        <category>学习</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Unity </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Unity如何导入资源</title>
-      <link href="/2019/06/23/Unity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82/"/>
-      <url>/2019/06/23/Unity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82/</url>
-      
-        <content type="html"><![CDATA[<h1 id="Unity如何导入资源。"><a href="#Unity如何导入资源。" class="headerlink" title="Unity如何导入资源。"></a>Unity如何导入资源。</h1><p>要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。</p><a id="more"></a><p><img src="/.com//G:%5Ccaicaihexo%5Csource_posts%5CUnity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82.assets%5C1347731-20180319155539996-316236425-1561299062493.png" alt></p><p>就是这个东西啦，右键Assets，选择Import Package 。</p>]]></content>
-      
-      
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[unity3d中awake和start函数的理解。]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-unity3d%E4%B8%ADawake%E5%92%8Cstart%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E3%80%82%2F</url>
+    <content type="text"><![CDATA[unity3d中awake和start函数的理解。1、 Awake函数 ​ 首先，我们来看unity的参考手册中对Awake函数的一些说明情况： ​ 当脚本实例被加载时会调用Awake函数；Awake函数在所有的游戏对象被初始化完毕之后才会被调用；在脚本实例的整个生命周期中，Awake函数仅执行一次。那么，脚本实例何时被加载，脚本实例的整个生命周期又代表了什么，因为对这些概念存有疑惑，所以在此基础之上，自己又在引擎中进行了一些测试，通过打印输出的方式查看了一下Awake函数的执行情况，总结如下（没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象（即gameObject）的初始状态为关闭状态，那么运行程序，Awake函数不会执行；反之，如果游戏对象的初始状态为开启状态，那么Awake函数会执行。并且，值得注意的一点是，Awake函数的执行与否与脚本实例的状态（启用或禁用）并没有关系，而是与脚本实例所绑定的游戏对象的状态有关。 ​ （2） 在不切换场景的前提下，原本处于关闭状态的游戏对象，当它被首次开启时，Awake函数会执行，并且是只在首次开启时才会执行；而已经开启（激活）的游戏对象（Awake函数已经执行过一次），将它关闭后再次开启，Awake函数不会再次执行。看来这是对应了手册中说明的在脚本实例的整个生命周期中仅执行一次的情况。 ​ （3） 如果重新加载场景，那么场景内Awake函数的执行情况重新遵循上述两点。 2、 Start函数 ​ 还是先看参考手册中对Start函数的一些说明情况： ​ 当Update函数第一次被调用前会调用Start函数；Start函数只在脚本实例被启用时才会执行；Start函数总是在Awake函数之后执行。在此基础之上，自己的测试总结如下 （没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象被关闭，那么Start函数不会执行。想一想这是理所当然的，游戏对象关闭了，脚本实例不会被加载，Awake函数不会执行，Start函数不会执行，Update函数等也不会执行。 ​ （2） 如果游戏对象开启了，对象上绑定的脚本实例被禁用了，那么Start函数不会执行。这是Start函数的特点，只有在脚本实例被启用时它才会执行，这个说明中有提到。注意，这与Awake函数是有区别的。 ​ （3） 如果游戏对象开启了，对象上绑定的脚本实例也开启了，那么Start函数会执行。并且Start函数只会在脚本实例首次被开启时才会执行。如果是已经开启过的脚本实例被关闭后再次开启，那么Start函数不会再次执行。 ​ （4） 如果重新加载场景，那么场景内Start函数的执行情况重新遵循上述三点。 ​ 除此之外，还有对Awake函数和Start函数都比较重要的一点，那就是当游戏对象之间存在父子关系时（不论层级的多少）。这时，父游戏对象的状态（开启或关闭）完全决定了子游戏对象上的脚本函数的执行情况。总的来说就是，只有在父游戏对象被开启的状态下，程序才会考虑是否调用子游戏对象上的脚本函数（Awake与Start等）。自上而下，以此类推。 ​ 最后，自己对于Awake与Start函数的使用，一般都是在Awake函数中获取游戏对象或者脚本实例的信息，然后在Start函数中进行一些获取之后的初始化设置。]]></content>
       <categories>
-          
-          <category> 学习 </category>
-          
+        <category>学习</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> Unity </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Email from Polycarp</title>
-      <link href="/2019/06/21/Exam%20in%20BerSU%20(easy%20version)/"/>
-      <url>/2019/06/21/Exam%20in%20BerSU%20(easy%20version)/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Exam-in-BerSU-easy-version"><a href="#Exam-in-BerSU-easy-version" class="headerlink" title="Exam in BerSU (easy version)"></a>Exam in BerSU (easy version)</h2><p><strong>The only difference between easy and hard versions is constraints.</strong></p><p>A session has begun at Beland State University. Many students are taking exams.</p><a id="more"></a><p>Polygraph Poligrafovich is going to examine a group of nn students. Students will take the exam one-by-one in order from 11-th to nn-th. Rules of the exam are following:</p><ul><li>The ii-th student randomly chooses a ticket.</li><li>if this ticket is too hard to the student, he doesn’t answer and goes home immediately (this process is so fast that it’s considered no time elapses). This student fails the exam.</li><li>if the student finds the ticket easy, he spends exactly titi minutes to pass the exam. After it, he immediately gets a mark and goes home.</li></ul><p>Students take the exam in the fixed order, one-by-one, without any interruption. At any moment of time, Polygraph Poligrafovich takes the answer from one student.</p><p>The duration of the whole exam for all students is MM minutes (maxti≤Mmaxti≤M), so students at the end of the list have a greater possibility to run out of time to pass the exam.</p><p>For each student ii, you should count the minimum possible number of students who need to fail the exam so the ii-th student has enough time to <strong>pass</strong> the exam.</p><p>For each student ii, find the answer independently. That is, if when finding the answer for the student i1i1 some student jj should leave, then while finding the answer for i2i2 (i2&gt;i1i2&gt;i1) the student jj student does not have to go home.</p><p>Input</p><p>The first line of the input contains two integers nn and MM (1≤n≤1001≤n≤100, 1≤M≤1001≤M≤100) — the number of students and the total duration of the exam in minutes, respectively.</p><p>The second line of the input contains nn integers titi (1≤ti≤1001≤ti≤100) — time in minutes that ii-th student spends to answer to a ticket.</p><p>It’s guaranteed that all values of titi are not greater than MM.</p><p>Output</p><p>Print nn numbers: the ii-th number must be equal to the minimum number of students who have to leave the exam in order to ii-th student has enough time to pass the exam.</p><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><p><strong>题目中要求剪掉的数目最少，即每次减少人腾出的时间更多，并且ti&lt;=100，所以我们很容易想到从大到小的进行贪心。然后后每次利用桶来进行每个时间对应的人数的维护就好了。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=2e5+7;</span><br><span class="line">int n,m,a[N],s[N],num[102];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    scanf(&quot;%d%d&quot;,&amp;n,&amp;m);</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">&#123;</span><br><span class="line">scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">s[i]=s[i-1]+a[i];</span><br><span class="line">&#125;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">    if(s[i]&lt;=m)printf(&quot;0 &quot;),num[a[i]]++;</span><br><span class="line">    else&#123;</span><br><span class="line">        int rest=s[i]-m,ans=0;</span><br><span class="line">        for(int j=100;j;j--)</span><br><span class="line">        &#123;</span><br><span class="line">if(j*num[j]&lt;rest)</span><br><span class="line">rest-=j*num[j],ans+=num[j];</span><br><span class="line">        else&#123;ans+=(rest+j-1)/j;break;&#125;</span><br><span class="line">        //这一步理解有点困难，其实小伙伴可以画一条数轴就明白了。</span><br><span class="line">        printf(&quot;%d &quot;,ans);</span><br><span class="line">        num[a[i]]++;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Unity如何导入资源]]></title>
+    <url>%2F2019%2F06%2F23%2FUnity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82%2F</url>
+    <content type="text"><![CDATA[Unity如何导入资源。要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。 就是这个东西啦，右键Assets，选择Import Package 。]]></content>
       <categories>
-          
-          <category> codeforces </category>
-          
+        <category>学习</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> codeforces </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Email from Polycarp</title>
-      <link href="/2019/06/21/Email%20from%20Polycarp/"/>
-      <url>/2019/06/21/Email%20from%20Polycarp/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Email-from-Polycarp"><a href="#Email-from-Polycarp" class="headerlink" title="Email from Polycarp"></a>Email from Polycarp</h2><p>Methodius received an email from his friend Polycarp. However, Polycarp’s keyboard is broken, so pressing a key on it once may cause the corresponding symbol to appear more than once (if you press a </p><a id="more"></a><p>key on a regular keyboard, it prints exactly one symbol).</p><p>For example, as a result of typing the word “hello”, the following words <strong>could</strong> be printed: “hello”, “hhhhello”, “hheeeellllooo”, but the following <strong>could not</strong> be printed: “hell”, “helo”, “hhllllooo”.</p><p>Note, that when you press a key, the corresponding symbol must appear (possibly, more than once). The keyboard is broken in a random manner, it means that pressing the same key you can get the different number of letters in the result.</p><p>For each word in the letter, Methodius has guessed what word Polycarp actually wanted to write, but he is not sure about it, so he asks you to help him.</p><p>You are given a list of pairs of words. For each pair, determine if the second word could be printed by typing the first one on Polycarp’s keyboard.</p><p>Input</p><p>The first line of the input contains one integer nn (1≤n≤1051≤n≤105) — the number of pairs to check. Further input contains nn descriptions of pairs.</p><p>The first line of each description contains a single non-empty word ss consisting of lowercase Latin letters. The second line of the description contains a single non-empty word tt consisting of lowercase Latin letters. The lengths of both strings are not greater than 106106.</p><p>It is guaranteed that the total length of all words ss in the input is not greater than 106106. Also, it is guaranteed that the total length of all words tt in the input is not greater than 106106.</p><p>Output</p><p>Output nn lines. In the ii-th line for the ii-th pair of words ss and tt print YES if the word tt could be printed by typing the word ss. Otherwise, print NO.</p><h2 id="思路："><a href="#思路：" class="headerlink" title="思路："></a>思路：</h2><p><strong>主串中出现字母的顺序必须在父串中按照相同顺序出现，并且出现的次数必须大于等于父串中字母出现的顺序。</strong></p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn = 1e6 +50;</span><br><span class="line">string a,b;</span><br><span class="line">int Next[maxn];</span><br><span class="line">int m,n;</span><br><span class="line">bool su;</span><br><span class="line">void fun(string a,string b)</span><br><span class="line">&#123;</span><br><span class="line">    int i=0,j=0;</span><br><span class="line">    int ii=0,jj=0;</span><br><span class="line">    while(i&lt;a.size()&amp;&amp;j&lt;b.size())</span><br><span class="line">    &#123;</span><br><span class="line">        ii=i;</span><br><span class="line">        jj=j;</span><br><span class="line">        while(ii&lt;a.size()&amp;&amp;a[i]==a[ii])ii++;</span><br><span class="line">        while(jj&lt;b.size()&amp;&amp;b[j]==b[jj])jj++;</span><br><span class="line">        if(a[i]!=b[j])su=0;</span><br><span class="line">        if(abs(ii-i)&gt;abs(jj-j))su=0;</span><br><span class="line">        i=ii;</span><br><span class="line">        j=jj;</span><br><span class="line">    &#125;</span><br><span class="line">    if(i!=a.size()||j!=b.size())</span><br><span class="line">        su=0;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    while(n--)</span><br><span class="line">    &#123;</span><br><span class="line">        su=1;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        fun(a,b);</span><br><span class="line">        if(su==1)</span><br><span class="line">            cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">        else</span><br><span class="line">            cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;`</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Email from Polycarp]]></title>
+    <url>%2F2019%2F06%2F21%2FEmail%20from%20Polycarp%2F</url>
+    <content type="text"><![CDATA[Email from PolycarpMethodius received an email from his friend Polycarp. However, Polycarp’s keyboard is broken, so pressing a key on it once may cause the corresponding symbol to appear more than once (if you press a key on a regular keyboard, it prints exactly one symbol). For example, as a result of typing the word “hello”, the following words could be printed: “hello”, “hhhhello”, “hheeeellllooo”, but the following could not be printed: “hell”, “helo”, “hhllllooo”. Note, that when you press a key, the corresponding symbol must appear (possibly, more than once). The keyboard is broken in a random manner, it means that pressing the same key you can get the different number of letters in the result. For each word in the letter, Methodius has guessed what word Polycarp actually wanted to write, but he is not sure about it, so he asks you to help him. You are given a list of pairs of words. For each pair, determine if the second word could be printed by typing the first one on Polycarp’s keyboard. Input The first line of the input contains one integer nn (1≤n≤1051≤n≤105) — the number of pairs to check. Further input contains nn descriptions of pairs. The first line of each description contains a single non-empty word ss consisting of lowercase Latin letters. The second line of the description contains a single non-empty word tt consisting of lowercase Latin letters. The lengths of both strings are not greater than 106106. It is guaranteed that the total length of all words ss in the input is not greater than 106106. Also, it is guaranteed that the total length of all words tt in the input is not greater than 106106. Output Output nn lines. In the ii-th line for the ii-th pair of words ss and tt print YES if the word tt could be printed by typing the word ss. Otherwise, print NO. 思路：主串中出现字母的顺序必须在父串中按照相同顺序出现，并且出现的次数必须大于等于父串中字母出现的顺序。 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;string.h&gt;using namespace std;const int maxn = 1e6 +50;string a,b;int Next[maxn];int m,n;bool su;void fun(string a,string b)&#123; int i=0,j=0; int ii=0,jj=0; while(i&lt;a.size()&amp;&amp;j&lt;b.size()) &#123; ii=i; jj=j; while(ii&lt;a.size()&amp;&amp;a[i]==a[ii])ii++; while(jj&lt;b.size()&amp;&amp;b[j]==b[jj])jj++; if(a[i]!=b[j])su=0; if(abs(ii-i)&gt;abs(jj-j))su=0; i=ii; j=jj; &#125; if(i!=a.size()||j!=b.size()) su=0;&#125;int main()&#123; int n; cin&gt;&gt;n; while(n--) &#123; su=1; cin&gt;&gt;a&gt;&gt;b; fun(a,b); if(su==1) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; &#125;&#125;`]]></content>
       <categories>
-          
-          <category> codeforces </category>
-          
+        <category>codeforces</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> codeforces </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Ropewalkers</title>
-      <link href="/2019/06/21/Ropewalkers/"/>
-      <url>/2019/06/21/Ropewalkers/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Ropewalkers"><a href="#Ropewalkers" class="headerlink" title="Ropewalkers"></a>Ropewalkers</h2><p>Polycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.</p><a id="more"></a><p>The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was <strong>at least</strong> dd.</p><p>Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad <strong>can not</strong> move at the same time (<strong>Only one of them can move at each moment</strong>). Ropewalkers can be at the same positions at the same time and can “walk past each other”.</p><p>You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd.</p><p>Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides.</p><p>Input</p><p>The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance.</p><p>Output</p><p>Output one integer — the minimum duration (in seconds) of the performance.</p><p>``</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ll = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">  <span class="keyword">int</span> x[]=&#123;a,b,c&#125;;</span><br><span class="line">  sort(x,x+<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">0</span>]-x[<span class="number">1</span>]))+max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">1</span>]-x[<span class="number">2</span>]))&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
-      
-      
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ropewalkers]]></title>
+    <url>%2F2019%2F06%2F21%2FRopewalkers%2F</url>
+    <content type="text"><![CDATA[RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad. The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was at least dd. Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad can not move at the same time (Only one of them can move at each moment). Ropewalkers can be at the same positions at the same time and can “walk past each other”. You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd. Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides. Input The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance. Output Output one integer — the minimum duration (in seconds) of the performance. `` 123456789101112131415161718#include &lt;bits/stdc++.h&gt;using namespace std;using ll = long long;int main()&#123; int a, b, c, d; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d; int x[]=&#123;a,b,c&#125;; sort(x,x+3); cout&lt;&lt;max(0,d-abs(x[0]-x[1]))+max(0,d-abs(x[1]-x[2]))&lt;&lt;'\n'; return 0;&#125;]]></content>
       <categories>
-          
-          <category> codeforces </category>
-          
+        <category>codeforces</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> codeforces </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>起点</title>
-      <link href="/2019/06/17/ACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B/"/>
-      <url>/2019/06/17/ACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B/</url>
-      
-        <content type="html"><![CDATA[<h1 id="ACM正式启程"><a href="#ACM正式启程" class="headerlink" title="ACM正式启程"></a>ACM正式启程</h1><p>经过大一的ACM淘汰赛后终于正式留下来了，由小白变成入门一路过来很不容易，感谢大一 一学年学长的栽培，马上要迎来大学的第一个暑假，杭电集训如期而至，海量的算法，希望在今后剩余的ACM生涯里可以和我的两位队友摘得区域赛金牌，打破计科无金的历史。</p>]]></content>
-      
-      
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Email from Polycarp]]></title>
+    <url>%2F2019%2F06%2F21%2FExam%20in%20BerSU%20(easy%20version)%2F</url>
+    <content type="text"><![CDATA[Exam in BerSU (easy version)The only difference between easy and hard versions is constraints. A session has begun at Beland State University. Many students are taking exams. Polygraph Poligrafovich is going to examine a group of nn students. Students will take the exam one-by-one in order from 11-th to nn-th. Rules of the exam are following: The ii-th student randomly chooses a ticket. if this ticket is too hard to the student, he doesn’t answer and goes home immediately (this process is so fast that it’s considered no time elapses). This student fails the exam. if the student finds the ticket easy, he spends exactly titi minutes to pass the exam. After it, he immediately gets a mark and goes home. Students take the exam in the fixed order, one-by-one, without any interruption. At any moment of time, Polygraph Poligrafovich takes the answer from one student. The duration of the whole exam for all students is MM minutes (maxti≤Mmaxti≤M), so students at the end of the list have a greater possibility to run out of time to pass the exam. For each student ii, you should count the minimum possible number of students who need to fail the exam so the ii-th student has enough time to pass the exam. For each student ii, find the answer independently. That is, if when finding the answer for the student i1i1 some student jj should leave, then while finding the answer for i2i2 (i2&gt;i1i2&gt;i1) the student jj student does not have to go home. Input The first line of the input contains two integers nn and MM (1≤n≤1001≤n≤100, 1≤M≤1001≤M≤100) — the number of students and the total duration of the exam in minutes, respectively. The second line of the input contains nn integers titi (1≤ti≤1001≤ti≤100) — time in minutes that ii-th student spends to answer to a ticket. It’s guaranteed that all values of titi are not greater than MM. Output Print nn numbers: the ii-th number must be equal to the minimum number of students who have to leave the exam in order to ii-th student has enough time to pass the exam. 思路题目中要求剪掉的数目最少，即每次减少人腾出的时间更多，并且ti&lt;=100，所以我们很容易想到从大到小的进行贪心。然后后每次利用桶来进行每个时间对应的人数的维护就好了。 123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int N=2e5+7;int n,m,a[N],s[N],num[102];int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); for(int i=1;i&lt;=n;i++) &#123; scanf(&quot;%d&quot;,&amp;a[i]); s[i]=s[i-1]+a[i]; &#125; for(int i=1;i&lt;=n;i++) if(s[i]&lt;=m)printf(&quot;0 &quot;),num[a[i]]++; else&#123; int rest=s[i]-m,ans=0; for(int j=100;j;j--) &#123; if(j*num[j]&lt;rest) rest-=j*num[j],ans+=num[j]; else&#123;ans+=(rest+j-1)/j;break;&#125; //这一步理解有点困难，其实小伙伴可以画一条数轴就明白了。 printf(&quot;%d &quot;,ans); num[a[i]]++; &#125; &#125;&#125;]]></content>
       <categories>
-          
-          <category> ACM </category>
-          
+        <category>codeforces</category>
       </categories>
-      
-      
-        <tags>
-            
-            <tag> 学习 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-  
-  
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[起点]]></title>
+    <url>%2F2019%2F06%2F17%2FACM%E6%AD%A3%E5%BC%8F%E5%90%AF%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[ACM正式启程经过大一的ACM淘汰赛后终于正式留下来了，由小白变成入门一路过来很不容易，感谢大一 一学年学长的栽培，马上要迎来大学的第一个暑假，杭电集训如期而至，海量的算法，希望在今后剩余的ACM生涯里可以和我的两位队友摘得区域赛金牌，打破计科无金的历史。]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>学习</tag>
+      </tags>
+  </entry>
 </search>
