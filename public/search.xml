@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Unity中animator 和animation区别]]></title>
+    <url>%2F2019%2F06%2F27%2F2019-06-27-Unity%E4%B8%ADanimator-%E5%92%8Canimation%E5%8C%BA%E5%88%AB%2F</url>
+    <content type="text"><![CDATA[Unity中animator 和animation区别此文章转载于极视学堂！！！！ ①Animation和Animator 虽然都是控制动画的播放，但是它们的用法和相关语法都是大有不同的。 Animation 控制一个动画的播放，而Animator是多个动画之间相互切换，并且Animator 有一个动画控制器，俗称动画状态机。 ②Animator 利用它做动画的切换是很方便的，但是它有一个缺点就是占用内存比Animation大。 好吧！下面直接通过操作，深入理解它们的用法。 （一） Animation模块 1.新建一个Unity3d 项目，在场景中新增一个TestAnimation对象，并且在对象上附加Animation组件； 2.选中TestAnimation对象，按快捷键：ctrl+6 打开动画编辑器，新建test.anim 动画。 3.添加AnimationPlay.cs 播放类。 using UnityEngine; using System.Collections; public class AnimationPlay : MonoBehaviour { Animation _anim; // Use this for initialization void Start () { _anim = GetComponent(); if (_anim != null) _anim.Play(“Test”); } } 4.直接运行看效果哈！ （二） Animator 模块 1.新建一个Unity3d 项目，在场景中新增一个TestAnimator对象，在Unity 编辑器中Window -&gt; Animation 弹出Animation 编辑页面，新建一个动画保存，命名为Move.anim； 同时我们发现因为使用方式是直接用动画控制器创建动画，它还会生成一个TestAnimation.controller文件，而这个文件就是我们所说的状态机控制器Controller。 2.选中需要制作动画的对象TestAnimator，例如我需要改变对象的Position，然后在Add Property 上面添加。 3.选中TestAnimation.controller这个文件，Window -&gt; Animator 打开Aniamtor 编辑器。 4.需要增加一个largen.anim动画，可以让它们互相切换。 5.直接运行看效果。]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Unity中的一些鼠标事件]]></title>
     <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[Unity中的一些鼠标事件 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。 GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下 GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下 GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。]]></content>
