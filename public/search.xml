@@ -69,7 +69,7 @@
   <entry>
     <title><![CDATA[除法分块]]></title>
     <url>%2F2019%2F07%2F07%2F2019-07-08-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%2F</url>
-    <content type="text"><![CDATA[除法分块 求以NN为被除数，在[0,N][0,N]的范围内，将所得的商向下取整相同的所有除数区间。 N∈[0,109] 做法 维护两个变量L,RL,R，代表当前除数区间为闭区间[L,R][L,R]，LL初始值为11。 然后在L≤NL≤N时循环进行下面的过程： 设t=⌊NL⌋t=⌊NL⌋ 当前答案区间的右端点R=⌊Nt⌋R=⌊Nt⌋ L=R+1 1234567891011//经典模板：long long solve(int N)&#123; int L= 1,R; long long tot = 0; while (L &lt;= N)&#123; R = N / (N / L); //求出右边的范围 tot += (N / L) * (R - L + 1); //求出商相同区间的值 L = R + 1; //区间往后移动1 &#125; return tot;&#125;]]></content>
+    <content type="text"><![CDATA[除法分块 求以NN为被除数，在[0,N][0,N]的范围内，将所得的商向下取整相同的所有除数区间。 N∈[0,109] 做法 维护两个变量L,RL,R，代表当前除数区间为闭区间[L,R][L,R]，LL初始值为11。 然后在L≤NL≤N时循环进行下面的过程： 设t=⌊NL⌋t=⌊NL⌋ 当前答案区间的右端点R=⌊Nt⌋R=⌊Nt⌋ L=R+1 1234567891011//经典模板：long long solve(int N)&#123; int L= 1,R; long long tot = 0; while (L &lt;= N)&#123; R = N / (N / L); //求出右边的范围 tot += (N / L) * (R - L + 1); //求出商相同区间的值 L = R + 1; //区间往后移动1 &#125; return tot;&#125; 附上模板题Light OJ 1245题意：求 $$sum(n/i) i=[1,n];$$在使用除法分块后我们可以讲复杂度从n降为sqrt从而避免超时，这道题也有规律，可以枚举出来，会返现有循环节。 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;long long solve(long long n)&#123; long long l=1,r; long long tot=0; while(l&lt;=n) &#123; //n/l就是这段区间的等分价; r=n/(n/l); tot+=(n/l)*(r-l+1);//等分价值乘区间总长度就是这段区间的贡献率 l=r+1; &#125; return tot;&#125;int main()&#123; int t; cin&gt;&gt;t; int cas=1; while(t--) &#123; long long m; cin&gt;&gt;m; printf(&quot;Case %d: %lld\n&quot;,cas++,solve(m)); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
