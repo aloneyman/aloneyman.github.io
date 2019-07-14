@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="C. Candies! time limit per test 2 seconds">
+  <meta name="description" content="分析：1、若有类似“2 3 3 ”则后手胜，因为有这个序列就必须在这个序列中去石子（因为如果在这个序列以外取子，则会导致输的后者情况），但在这个序列中取不到可解情况，所以该状态为必败态；">
 <meta name="keywords" content="codeforces">
 <meta property="og:type" content="article">
-<meta property="og:title" content="572 Div2 C">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/06/26/2019-06-26-572-Div2-C/index.html">
+<meta property="og:title" content="573 Div2 D">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/07/15/2019-07-15-573-Div2-D/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="C. Candies! time limit per test 2 seconds">
+<meta property="og:description" content="分析：1、若有类似“2 3 3 ”则后手胜，因为有这个序列就必须在这个序列中去石子（因为如果在这个序列以外取子，则会导致输的后者情况），但在这个序列中取不到可解情况，所以该状态为必败态；">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-12T10:41:33.751Z">
+<meta property="og:updated_time" content="2019-07-14T16:10:26.200Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="572 Div2 C">
-<meta name="twitter:description" content="C. Candies! time limit per test 2 seconds">
+<meta name="twitter:title" content="573 Div2 D">
+<meta name="twitter:description" content="分析：1、若有类似“2 3 3 ”则后手胜，因为有这个序列就必须在这个序列中去石子（因为如果在这个序列以外取子，则会导致输的后者情况），但在这个序列中取不到可解情况，所以该状态为必败态；">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/06/26/2019-06-26-572-Div2-C/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/07/15/2019-07-15-573-Div2-D/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>572 Div2 C | Cai's blogs</title>
+  <title>573 Div2 D | Cai's blogs</title>
   
 
 
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/06/26/2019-06-26-572-Div2-C/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/15/2019-07-15-573-Div2-D/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -387,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">572 Div2 C
+          <h1 class="post-title" itemprop="name headline">573 Div2 D
 
               
             
@@ -413,24 +413,12 @@
                 
               
 
-              <time title="创建时间：2019-06-26 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-26T00:00:00+08:00">2019-06-26</time>
+              <time title="创建时间：2019-07-15 00:00:00 / 修改时间：00:10:26" itemprop="dateCreated datePublished" datetime="2019-07-15T00:00:00+08:00">2019-07-15</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-12 18:41:33" itemprop="dateModified" datetime="2019-07-12T18:41:33+08:00">2019-07-12</time>
               
             
           </span>
@@ -466,8 +454,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/06/26/2019-06-26-572-Div2-C/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/26/2019-06-26-572-Div2-C/" itemprop="commentCount"></span>
+                <a href="/2019/07/15/2019-07-15-573-Div2-D/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/15/2019-07-15-573-Div2-D/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -502,58 +490,13 @@
       
 
       
-        <p>C. Candies!</p>
-<p>time limit per test</p>
-<p>2 seconds</p>
+        <p>分析：1、若有类似“2 3 3 ”则后手胜，因为有这个序列就必须在这个序列中去石子（因为如果在这个序列以外取子，则会导致输的后者情况），但在这个序列中取不到可解情况，所以该状态为必败态；</p>
 <a id="more"></a>
 
-<p>memory limit per test</p>
-<p>256 megabytes</p>
-<p>input</p>
-<p>standard input</p>
-<p>output</p>
-<p>standard output</p>
-<p>Consider a sequence of digits of length 2k2k [a1,a2,…,a2k][a1,a2,…,a2k]. We perform the following operation with it: replace pairs (a2i+1,a2i+2)(a2i+1,a2i+2) with (a2i+1+a2i+2)mod10(a2i+1+a2i+2)mod10 for 0≤i&lt;2k−10≤i&lt;2k−1. For every ii where a2i+1+a2i+2≥10a2i+1+a2i+2≥10 we get a candy! As a result, we will get a sequence of length 2k−12k−1.</p>
-<p>Less formally, we partition sequence of length 2k2k into 2k−12k−1 pairs, each consisting of 2 numbers: the first pair consists of the first and second numbers, the second of the third and fourth ……, the last pair consists of the (2k−12k−1)-th and (2k2k)-th numbers. For every pair such that sum of numbers in it is at least 1010, we get a candy. After that, we replace every pair of numbers with a remainder of the division of their sum by 1010 (and don’t change the order of the numbers).</p>
-<p>Perform this operation with a resulting array until it becomes of length 11. Let f([a1,a2,…,a2k])f([a1,a2,…,a2k]) denote the number of candies we get in this process.</p>
-<p>For example: if the starting sequence is [8,7,3,1,7,0,9,4][8,7,3,1,7,0,9,4] then:</p>
-<p>After the first operation the sequence becomes [(8+7)mod10,(3+1)mod10,(7+0)mod10,(9+4)mod10][(8+7)mod10,(3+1)mod10,(7+0)mod10,(9+4)mod10] == [5,4,7,3][5,4,7,3], and we get 22 candies as 8+7≥108+7≥10 and 9+4≥109+4≥10.</p>
-<p>After the second operation the sequence becomes [(5+4)mod10,(7+3)mod10][(5+4)mod10,(7+3)mod10] == [9,0][9,0], and we get one more candy as 7+3≥107+3≥10.</p>
-<p>After the final operation sequence becomes [(9+0)mod10][(9+0)mod10] == [9][9].</p>
-<p>Therefore, f([8,7,3,1,7,0,9,4])=3f([8,7,3,1,7,0,9,4])=3 as we got 33 candies in total.</p>
-<p>You are given a sequence of digits of length nn s1,s2,…sns1,s2,…sn. You have to answer qq queries of the form (li,ri)(li,ri), where for ii-th query you have to output f([sli,sli+1,…,sri])f([sli,sli+1,…,sri]). It is guaranteed that ri−li+1ri−li+1 is of form 2k2k for some nonnegative integer kk.</p>
-<p>Input</p>
-<p>The first line contains a single integer nn (1≤n≤1051≤n≤105) — the length of the sequence.</p>
-<p>The second line contains nn digits s1,s2,…,sns1,s2,…,sn (0≤si≤90≤si≤9).</p>
-<p>The third line contains a single integer qq (1≤q≤1051≤q≤105) — the number of queries.</p>
-<p>Each of the next qq lines contains two integers lili, riri (1≤li≤ri≤n1≤li≤ri≤n) — ii-th query. It is guaranteed that ri−li+1ri−li+1 is a nonnegative integer power of 22.</p>
-<p>Output</p>
-<p>Output qq lines, in ii-th line output single integer — f([sli,sli+1,…,sri])f([sli,sli+1,…,sri]), answer to the ii-th query.Examples</p>
-<p>input</p>
-<p>Copy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">8</span><br><span class="line">8 7 3 1 7 0 9 4</span><br><span class="line">3</span><br><span class="line">1 8</span><br><span class="line">2 5</span><br><span class="line">7 7</span><br></pre></td></tr></table></figure>
-
-<p>output</p>
-<p>Copy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">1</span><br><span class="line">0</span><br></pre></td></tr></table></figure>
-
-<p>input</p>
-<p>Copy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">6</span><br><span class="line">0 1 2 3 3 5</span><br><span class="line">3</span><br><span class="line">1 2</span><br><span class="line">1 4</span><br><span class="line">3 6</span><br></pre></td></tr></table></figure>
-
-<p>output</p>
-<p>Copy</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">0</span><br><span class="line">0</span><br><span class="line">1</span><br></pre></td></tr></table></figure>
-
-<p>Note</p>
-<p>The first example illustrates an example from the statement.</p>
-<p>f([7,3,1,7])=1f([7,3,1,7])=1: sequence of operations is [7,3,1,7]→[(7+3)mod10,(1+7)mod10][7,3,1,7]→[(7+3)mod10,(1+7)mod10] == [0,8][0,8] and one candy as 7+3≥107+3≥10 →→ [(0+8)mod10][(0+8)mod10] == [8][8], so we get only 11 candy.</p>
-<p>f([9])=0f([9])=0 as we don’t perform operations with it.</p>
-<p><strong><em>我的思路是直接除以10就完了</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int arr[100005];</span><br><span class="line">long sum[100005];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;arr[i];</span><br><span class="line">        sum[i]=sum[i-1]+arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    int temp;</span><br><span class="line">    cin&gt;&gt;temp;</span><br><span class="line">    while(temp--)</span><br><span class="line">    &#123;</span><br><span class="line">        int a,b,ans;</span><br><span class="line">        cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">        if(a!=b)</span><br><span class="line">        ans=sum[b]-sum[a-1];</span><br><span class="line">        else</span><br><span class="line">            ans=arr[a];</span><br><span class="line">        //cout&lt;&lt;ans&lt;&lt;endl;</span><br><span class="line">        cout&lt;&lt;ans/10&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong><em>附上大佬DP代码后面研究</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">#define N 500500</span><br><span class="line">using namespace std;</span><br><span class="line">int n,m,l,r,lg[N],mi[20],a[N],f[N][20],g[N][20];</span><br><span class="line">int main()&#123;</span><br><span class="line">	//freopen(&quot;1.in&quot;,&quot;r&quot;,stdin);</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;n);</span><br><span class="line">	lg[1]=0;mi[0]=1;</span><br><span class="line">	for(int i=1;(1&lt;&lt;(i-1))&lt;=n;i++)&#123;</span><br><span class="line">		lg[1&lt;&lt;i]=i;</span><br><span class="line">		mi[i]=1&lt;&lt;i;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)&#123;</span><br><span class="line">		scanf(&quot;%d&quot;,&amp;a[i]);</span><br><span class="line">		g[i][0]=a[i];</span><br><span class="line">	&#125;</span><br><span class="line">	for(int j=1;mi[j]&lt;=n;j++)</span><br><span class="line">		for(int i=1;i+mi[j]-1&lt;=n;i++)&#123;</span><br><span class="line">			f[i][j]=f[i][j-1]+f[i+mi[j-1]][j-1]+(g[i][j-1]+g[i+mi[j-1]][j-1]&gt;=10);</span><br><span class="line">			g[i][j]=(g[i][j-1]+g[i+mi[j-1]][j-1])%10;</span><br><span class="line">		&#125;</span><br><span class="line">	scanf(&quot;%d&quot;,&amp;m);</span><br><span class="line">	while(m--)&#123;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;l,&amp;r);</span><br><span class="line">		printf(&quot;%d\n&quot;,f[l][lg[r-l+1]]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>　　　 2、若序列中有俩对相同的石子，则后手胜；</p>
+<p>　　　3、除1、2情况外就把利用sum+起来，每个加就+a[i]-i   为了把他提到前面他不能再动的最优状态（因为俩者都采取最优策略！！！）</p>
+<p><strong><em>第三种状态还没清楚暂时挂这里过后解决</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#define INF 0x3f3f3f3f</span><br><span class="line">#define ll long long</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int manx=100005;</span><br><span class="line">ll n, s[110000], cnt, s2c;</span><br><span class="line">bool tl;</span><br><span class="line">long long arr[manx];</span><br><span class="line">int main() &#123;</span><br><span class="line">	cin.tie(0);</span><br><span class="line">	ios::sync_with_stdio(false);</span><br><span class="line">	for(int i=0;i&lt;110000;i++)</span><br><span class="line">	s[i]=INF; </span><br><span class="line">	//REP(i, 110000)s[i] = MINF;</span><br><span class="line">	cin &gt;&gt; n;</span><br><span class="line">	if (n == 1) &#123;</span><br><span class="line">		ll a;</span><br><span class="line">		cin &gt;&gt; a;</span><br><span class="line">		cout &lt;&lt; (a % 2 == 0 ? &quot;cslnb&quot; : &quot;sjfnb&quot;) &lt;&lt; endl;</span><br><span class="line">		return 0;</span><br><span class="line">	&#125;</span><br><span class="line">	//REP(i, n)cin &gt;&gt; s[i];</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	cin&gt;&gt;s[i];</span><br><span class="line">	sort(s, s + n);</span><br><span class="line">	//REP(i, n) &#123;</span><br><span class="line">	for(int i=0;i&lt;n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cnt += s[i] - i;</span><br><span class="line">		if (s[i] == s[i + 1])s2c++;</span><br><span class="line">		if (s[i] == 0 &amp;&amp; s[i + 1] == 0)tl = true;</span><br><span class="line">		if (s[i] + 1 == s[i + 1] &amp;&amp; s[i + 1] == s[i + 2])tl = true;</span><br><span class="line">	&#125;</span><br><span class="line">	if (s2c &gt;= 2)tl = true;</span><br><span class="line">	if (cnt % 2 == 0)tl = true;</span><br><span class="line">	cout &lt;&lt; (tl ? &quot;cslnb&quot; : &quot;sjfnb&quot;) &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -594,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/23/Unity如何导入资源。/" rel="next" title="Unity如何导入资源">
-                <i class="fa fa-chevron-left"></i> Unity如何导入资源
+              <a href="/2019/07/13/2019-07-13-573-Div2-C/" rel="next" title="573 Div2 C">
+                <i class="fa fa-chevron-left"></i> 573 Div2 C
               </a>
             
           </div>
@@ -603,10 +546,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/26/2019-06-26-Unity常用函数和变量汇总/" rel="prev" title="Unity常用函数和变量汇总">
-                Unity常用函数和变量汇总 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -673,7 +612,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">22</span>
+                    <span class="site-state-item-count">24</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -962,7 +901,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/06/26/2019-06-26-572-Div2-C/'
+    refer: '2019/07/15/2019-07-15-573-Div2-D/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
