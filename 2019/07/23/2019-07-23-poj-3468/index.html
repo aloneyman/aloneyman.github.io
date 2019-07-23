@@ -96,18 +96,18 @@
 
 
 
-  <meta name="description" content="本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理">
-<meta name="keywords" content="数论">
+  <meta name="description" content="线段树区间求和+区间修改板子">
+<meta name="keywords" content="线段树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="费马小引理">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/07/07/2019-07-07-费马小引理/index.html">
+<meta property="og:title" content="poj 3468">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/07/23/2019-07-23-poj-3468/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理">
+<meta property="og:description" content="线段树区间求和+区间修改板子">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-07T08:12:23.089Z">
+<meta property="og:updated_time" content="2019-07-23T08:53:36.180Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="费马小引理">
-<meta name="twitter:description" content="本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理">
+<meta name="twitter:title" content="poj 3468">
+<meta name="twitter:description" content="线段树区间求和+区间修改板子">
 
 
 
@@ -115,7 +115,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/07/07/2019-07-07-费马小引理/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/07/23/2019-07-23-poj-3468/">
 
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>费马小引理 | Cai's blogs</title>
+  <title>poj 3468 | Cai's blogs</title>
   
 
 
@@ -370,7 +370,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/07/2019-07-07-费马小引理/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/23/2019-07-23-poj-3468/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -387,7 +387,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">费马小引理
+          <h1 class="post-title" itemprop="name headline">poj 3468
 
               
             
@@ -413,7 +413,7 @@
                 
               
 
-              <time title="创建时间：2019-07-07 00:00:00 / 修改时间：16:12:23" itemprop="dateCreated datePublished" datetime="2019-07-07T00:00:00+08:00">2019-07-07</time>
+              <time title="创建时间：2019-07-23 00:00:00 / 修改时间：16:53:36" itemprop="dateCreated datePublished" datetime="2019-07-23T00:00:00+08:00">2019-07-23</time>
             
 
             
@@ -454,8 +454,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/07/07/2019-07-07-费马小引理/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/07/2019-07-07-费马小引理/" itemprop="commentCount"></span>
+                <a href="/2019/07/23/2019-07-23-poj-3468/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/23/2019-07-23-poj-3468/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -490,15 +490,10 @@
       
 
       
-        <p>本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下</p>
-<p>费马小定理</p>
+        <p><strong><em>线段树区间求和+区间修改板子</em></strong></p>
 <a id="more"></a>
 
-<pre><code>对于费马小定理，我们知道‘+’、‘-’、‘*’的取模都比较的好处理，但是遇到‘/’的取模就比较繁琐了。</code></pre><p>公式：对于gcd(a, b)=1，也就是a,b互质的情况下，若b为素数（质数），则有a^(b-1)=1(mod b)。</p>
-<p>特别的，可以推导出：由a^(b-1)=1(mod b)</p>
-<pre><code>则有啊a^(b-2)=1/a(mod b)，即，a^(-1)=a^(b-2)%b</code></pre><p>欧拉函数</p>
-<pre><code>欧拉函数：oula(n)表示小于n的且与与n互质的数的个数</code></pre><p>oula(n)=n<em>(1-1/p1)</em>(1-1/p2)<em>……</em>(1-1/pk)，其中，pi均为小于n且与n互质的数</p>
-<h2 id="那么，就有欧拉的模版了："><a href="#那么，就有欧拉的模版了：" class="headerlink" title="那么，就有欧拉的模版了："></a>那么，就有欧拉的模版了：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ll oula(ll n)</span><br><span class="line">&#123;</span><br><span class="line">	ll res=n;</span><br><span class="line">	for(int i=2;i*i&lt;=n;i++)</span><br><span class="line">	if(n%i==0)</span><br><span class="line">	&#123;</span><br><span class="line">		res=res/i*(i-1);</span><br><span class="line">		while(n%i==0)n/i;</span><br><span class="line">	&#125;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#define ll long long</span><br><span class="line">#define lson l, mid, rt &lt;&lt; 1</span><br><span class="line">#define rson mid + 1, r, rt &lt;&lt; 1 | 1</span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">const int MAXN = 1e5 + 10;</span><br><span class="line">ll sum[MAXN &lt;&lt; 2];</span><br><span class="line">ll add[MAXN &lt;&lt; 2];</span><br><span class="line"></span><br><span class="line">void push_up(int rt)&#123;//向上更新</span><br><span class="line">    sum[rt] = sum[rt &lt;&lt; 1] + sum[rt &lt;&lt; 1 | 1];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void push_down(int rt, int m)&#123;</span><br><span class="line">    if(add[rt])&#123;//若有标记,则将标记向下移动一层</span><br><span class="line">        add[rt &lt;&lt; 1] += add[rt];</span><br><span class="line">        add[rt &lt;&lt; 1 | 1] += add[rt];</span><br><span class="line">        sum[rt &lt;&lt; 1] += (m - (m &gt;&gt; 1)) * add[rt];</span><br><span class="line">        sum[rt &lt;&lt; 1 | 1] += (m &gt;&gt; 1) * add[rt];</span><br><span class="line">        add[rt] = 0;//取消本层标记</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void build(int l, int r, int rt)&#123;//建树</span><br><span class="line">    add[rt] = 0;</span><br><span class="line">    if(l == r)&#123;</span><br><span class="line">        scanf(&quot;%lld&quot;, &amp;sum[rt]);</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    int mid = (l + r) &gt;&gt; 1;</span><br><span class="line">    build(lson);</span><br><span class="line">    build(rson);</span><br><span class="line">    push_up(rt);//向上更新</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">void update(int L, int R, ll key, int l, int r, int rt)&#123;//区间更新</span><br><span class="line">    if(L &lt;= l &amp;&amp; R &gt;= r)&#123;</span><br><span class="line">        sum[rt] += (r - l + 1) * key;</span><br><span class="line">        add[rt] += key;</span><br><span class="line">        return;</span><br><span class="line">    &#125;</span><br><span class="line">    push_down(rt, r - l + 1);//向下更新</span><br><span class="line">    int mid = (l + r) &gt;&gt; 1;</span><br><span class="line">    if(L &lt;= mid) update(L, R, key, lson);</span><br><span class="line">    if(R &gt; mid) update(L, R, key, rson);</span><br><span class="line">    push_up(rt);//向上更新</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll query(int L, int R, int l, int r, int rt)&#123;//区间求和</span><br><span class="line">    if(L &lt;= l &amp;&amp; R &gt;= r) return sum[rt];</span><br><span class="line">    push_down(rt, r - l + 1);//向下更新</span><br><span class="line">    int mid = (l + r) &gt;&gt; 1;</span><br><span class="line">    ll ans = 0;</span><br><span class="line">    if(L &lt;= mid) ans += query(L, R, lson);</span><br><span class="line">    if(R &gt; mid) ans += query(L, R, rson);</span><br><span class="line">    return ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int n, m;</span><br><span class="line">    scanf(&quot;%d%d&quot;, &amp;n, &amp;m);</span><br><span class="line">    build(1, n, 1);</span><br><span class="line">    while(m--)&#123;</span><br><span class="line">        char str[3];</span><br><span class="line">        int x, y;</span><br><span class="line">        ll z;</span><br><span class="line">        scanf(&quot;%s&quot;, str);</span><br><span class="line">        if(str[0] == &apos;C&apos;)&#123;</span><br><span class="line">            scanf(&quot;%d%d%lld&quot;, &amp;x, &amp;y, &amp;z);</span><br><span class="line">            update(x, y, z, 1, n, 1);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            scanf(&quot;%d%d&quot;, &amp;x, &amp;y);</span><br><span class="line">            printf(&quot;%lld\n&quot;, query(x, y, 1, n, 1));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -526,7 +521,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/数论/" rel="tag"># 数论</a>
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
           
         </div>
       
@@ -539,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-欧拉函数&欧拉筛选的应用/" rel="next" title="欧拉函数&欧拉筛选的应用">
-                <i class="fa fa-chevron-left"></i> 欧拉函数&欧拉筛选的应用
+              <a href="/2019/07/23/2019-07-23-HDU-1698/" rel="next" title="HDU 1698">
+                <i class="fa fa-chevron-left"></i> HDU 1698
               </a>
             
           </div>
@@ -548,10 +543,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/07/08/2019-07-08-简单数论推论/" rel="prev" title="简单数论推论">
-                简单数论推论 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -600,17 +591,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <div class="site-overview-wrap sidebar-panel">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -708,23 +690,6 @@
         </div>
       </div>
 
-      
-      <!--noindex-->
-        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-            
-            
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#那么，就有欧拉的模版了："><span class="nav-number">1.</span> <span class="nav-text">那么，就有欧拉的模版了：</span></a></li></ol></div>
-            
-
-          </div>
-        </div>
-      <!--/noindex-->
       
 
       
@@ -935,7 +900,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/07/07/2019-07-07-费马小引理/'
+    refer: '2019/07/23/2019-07-23-poj-3468/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
