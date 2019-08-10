@@ -371,6 +371,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/10/2019-07-10-HDU-2588---GCD（欧拉函数）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="深海的鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/07/10/2019-07-10-HDU-2588---GCD（欧拉函数）/" class="post-title-link" itemprop="url">HDU 2588 - GCD（欧拉函数）</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-10 00:00:00 / 修改时间：16:18:20" itemprop="dateCreated datePublished" datetime="2019-07-10T00:00:00+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ACM/" itemprop="url" rel="index"><span itemprop="name">ACM</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/07/10/2019-07-10-HDU-2588---GCD（欧拉函数）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/10/2019-07-10-HDU-2588---GCD（欧拉函数）/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>GCD<br>Time Limit: 2000/1000 MS (Java/Others)    Memory Limit: 32768/32768 K (Java/Others)<br>Total Submission(s): 3358    Accepted Submission(s): 1802</p>
+<p>Problem Description</p>
+<p>The greatest common divisor GCD(a,b) of two positive integers a and b,sometimes written (a,b),is the largest divisor common to a and b,For example,(1,2)=1,(12,18)=6.<br>(a,b) can be easily found by the Euclidean algorithm. Now Carp is considering a little more difficult problem:<br>Given integers N and M, how many integer X satisfies 1&lt;=X&lt;=N and (X,N)&gt;=M.</p>
+<p>Input</p>
+<p>The first line of input is an integer T(T&lt;=100) representing the number of test cases. The following T lines each contains two numbers N and M (2&lt;=N&lt;=1000000000, 1&lt;=M&lt;=N), representing a test case.</p>
+<p>Output</p>
+<p>For each test case,output the answer on a single line.</p>
+<p>Sample Input</p>
+<p>3</p>
+<p>1 1</p>
+<p>10 2</p>
+<p>10000 72</p>
+<p>Sample Output</p>
+<p>1</p>
+<p>6</p>
+<p>260</p>
+<p>Source</p>
+<p>ECJTU 2009 Spring Contest！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll T,n,m,res;</span><br><span class="line">ll phi(ll x)</span><br><span class="line">&#123;</span><br><span class="line">	if(x==1)	return 1;</span><br><span class="line">	ll res=x; </span><br><span class="line">	for(ll i=2;i*i&lt;=x;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(x%i==0)</span><br><span class="line">		&#123;</span><br><span class="line">			res-=res/i;</span><br><span class="line">			while(x%i==0)	x/=i;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	if(x&gt;1)	res-=res/x;</span><br><span class="line">	return res;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	cin&gt;&gt;T;</span><br><span class="line">	while(T--)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;n&gt;&gt;m;	res=0;</span><br><span class="line">		for(ll i=1;i*i&lt;=n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(n%i)	continue;</span><br><span class="line">			if(i&gt;=m&amp;&amp;i*i!=n)	res+=phi(n/i);</span><br><span class="line">			if(n/i&gt;=m)	res+=phi(i);</span><br><span class="line">		&#125;</span><br><span class="line">		cout&lt;&lt;res&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong><em>为什么是欧拉函数像加？因为欧拉函数可以避免乘数（循环）的时候重复。为什么i^2！=n?因为如果没有这个那么后面两个if语句会执行两次。为什么是i&gt;m？因为我们第一个循环保证了i是m的因子所以gcd(m,i)=i。满足题意。因为gcd(m,i)&gt;=n,那么gcd(m,ki)&gt;=n所以我们只要找出有多少个k倍满足就行了，但是又不能算重复，所以乘以质因子倍就不会重复了。</em></strong></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/09/2019-07-09-数论基础/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2019,199 +2213,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/06/27/2019-06-27-Unity中animator-和animation区别/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="深海的鱼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/06/27/2019-06-27-Unity中animator-和animation区别/" class="post-title-link" itemprop="url">Unity中animator 和animation区别</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-06-27 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-27T00:00:00+08:00">2019-06-27</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-07-06 10:47:05" itemprop="dateModified" datetime="2019-07-06T10:47:05+08:00">2019-07-06</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/06/27/2019-06-27-Unity中animator-和animation区别/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/27/2019-06-27-Unity中animator-和animation区别/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="Unity中animator-和animation区别"><a href="#Unity中animator-和animation区别" class="headerlink" title="Unity中animator 和animation区别"></a>Unity中animator 和animation区别</h2><p>此文章转载于极视学堂！！！！</p>
-<p>①Animation和Animator 虽然都是控制动画的播放，但是它们的用法和相关语法都是大有不同的。</p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/06/27/2019-06-27-Unity中animator-和animation区别/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2260,7 +2261,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">59</span>
+                    <span class="site-state-item-count">60</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
