@@ -536,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/13/P1843 奶牛晒衣服（二分）/" rel="next" title="P1843 奶牛晒衣服 二分">
-                <i class="fa fa-chevron-left"></i> P1843 奶牛晒衣服 二分
+              <a href="/2019/08/13/P2678 跳石头（二分）/" rel="next" title="P2678 跳石头">
+                <i class="fa fa-chevron-left"></i> P2678 跳石头
               </a>
             
           </div>
@@ -546,8 +546,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/13/P2759 奇怪的函数/" rel="prev" title="P2759 奇怪的函数 二分">
-                P2759 奇怪的函数 二分 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/13/P4139 上帝与集合的正确用法/" rel="prev" title="P4139 上帝与集合的正确用法">
+                P4139 上帝与集合的正确用法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1369,6 +1369,53 @@
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 

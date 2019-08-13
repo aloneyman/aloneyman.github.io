@@ -567,8 +567,8 @@ sum(n/i) i=[1,n];</script><p><strong>在使用除法分块后我们可以讲复�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-因子求和&算术基本定理/" rel="next" title="因子求和&算术基本定理">
-                <i class="fa fa-chevron-left"></i> 因子求和&算术基本定理
+              <a href="/2019/07/07/2019-07-07-哥德巴赫猜想/" rel="next" title="哥德巴赫猜想">
+                <i class="fa fa-chevron-left"></i> 哥德巴赫猜想
               </a>
             
           </div>
@@ -577,8 +577,8 @@ sum(n/i) i=[1,n];</script><p><strong>在使用除法分块后我们可以讲复�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-欧拉函数&欧拉筛选的应用/" rel="prev" title="欧拉函数&欧拉筛选的应用">
-                欧拉函数&欧拉筛选的应用 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/08/2019-07-08-简单数论推论/" rel="prev" title="简单数论推论">
+                简单数论推论 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1400,6 +1400,53 @@ sum(n/i) i=[1,n];</script><p><strong>在使用除法分块后我们可以讲复�
   
 
   
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
 
   
 
