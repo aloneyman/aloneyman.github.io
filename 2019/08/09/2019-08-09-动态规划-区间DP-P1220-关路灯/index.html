@@ -497,15 +497,13 @@
       
         <p>理解一下题目大意：</p>
 <a id="more"></a>
-
 <p>关灯不需要额外的时间，经过了灯就关了。但是可能折返回去关某一个大灯会比继续往下走关接下来的一个小灯更优，</p>
 <p>那么可以得到两种状态（沿着当前方向继续往下走，改变方向回去关灯）。</p>
-<p>f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) * ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) * ( sum[i]+sum[n]-sum[j]) );</p>
-<p>f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) * ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) * ( sum[i-1] + sum[n] - sum[j-1] ) );</p>
+<p>f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) <em> ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) </em> ( sum[i]+sum[n]-sum[j]) );</p>
+<p>f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) <em> ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) </em> ( sum[i-1] + sum[n] - sum[j-1] ) );</p>
 <p>f函数代表i到j区间中关闭完路灯停留在在左0/右1位置的最小消耗功率。</p>
 <p>我们画图可以知道我们有两种转移状态一种事i+1-&gt;i和j-1-&gt;j。但是因为关完灯在的位置不同我们又分了两种。所以我们可以得到上述的状态转移方程。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">long long l[55],sum[55],power[55];</span><br><span class="line">long long dp[55][55][2];</span><br><span class="line">const long long INF=0x3f3f3f3f3f3f3f3fll;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		cin&gt;&gt;l[i]&gt;&gt;power[i];</span><br><span class="line">		sum[i]=sum[i-1]+power[i];</span><br><span class="line">	&#125;</span><br><span class="line">	for(int k=1;k&lt;=n;k++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=1,j;(j=i+k-1)&lt;=n;++i)</span><br><span class="line">		&#123;</span><br><span class="line">			if(i&lt;=m&amp;&amp;m&lt;=j)</span><br><span class="line">			&#123;</span><br><span class="line">				dp[i][j][0]=min(dp[i+1][j][0]+(l[i+1]-l[i])*(sum[n]-sum[j]+sum[i]),</span><br><span class="line">								dp[i+1][j][1]+(l[j]-l[i])*(sum[n]-sum[j]+sum[i]));</span><br><span class="line">				dp[i][j][1]=min(dp[i][j-1][1]+(l[j]-l[j-1])*(sum[n]-sum[j-1]+sum[i-1]),</span><br><span class="line">								dp[i][j-1][0]+(l[j]-l[i])*(sum[n]+sum[i-1]-sum[j-1]));</span><br><span class="line">			&#125;</span><br><span class="line">			else&#123;</span><br><span class="line">				dp[i][j][0] = dp[i][j][1] = INF;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;min(dp[1][n][0],dp[1][n][1])&lt;&lt;endl;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -545,8 +543,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/08/2019-08-08-模运算笔记/" rel="next" title="模运算笔记">
-                <i class="fa fa-chevron-left"></i> 模运算笔记
+              <a href="/2019/08/09/2019-08-09-CF11B-Jumping-Jack/" rel="next" title="CF11B Jumping Jack">
+                <i class="fa fa-chevron-left"></i> CF11B Jumping Jack
               </a>
             
           </div>
@@ -555,8 +553,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/09/2019-08-09-CF11B-Jumping-Jack/" rel="prev" title="CF11B Jumping Jack">
-                CF11B Jumping Jack <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/10/2019-08-10-动态规划-区间DP-P4170-[CQOI2007]涂色/" rel="prev" title="动态规划-区间DP-P4170 [CQOI2007]涂色">
+                动态规划-区间DP-P4170 [CQOI2007]涂色 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

@@ -497,9 +497,7 @@
       
         <h4 id="存在依赖关系的背包DP："><a href="#存在依赖关系的背包DP：" class="headerlink" title="存在依赖关系的背包DP："></a>存在依赖关系的背包DP：</h4><p><strong><em>这道题的思维真的很不错，如果存在附件，那么我们就只看主件，至于如何只看主件，我在注释中已经说了。</em></strong></p>
 <a id="more"></a>
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">/* preblem:R21862874</span><br><span class="line"> * 很好的一道存在依赖关系的01背包问题，如何解决依赖关系，博主是用了二维数组来记录的。</span><br><span class="line"> * 并且循环的时候只循环主键，在扫描过程中自动把附件的价值进行了讨论。</span><br><span class="line"> * 总之这道题是很好的一道入门题。</span><br><span class="line">*/</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#include&lt;iostream&gt;  </span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int m_v[32005];</span><br><span class="line">int m_w[32005];</span><br><span class="line">int p_v[32005][3];</span><br><span class="line">int p_w[32005][3];</span><br><span class="line">int dp[32005]=&#123;0&#125;;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int m, n;</span><br><span class="line">    cin &gt;&gt; m &gt;&gt; n;</span><br><span class="line">    for (int i = 1; i &lt;= n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int a, b, c;</span><br><span class="line">        cin &gt;&gt; a &gt;&gt; b &gt;&gt; c;</span><br><span class="line">        if(!c)</span><br><span class="line">        &#123;</span><br><span class="line">            m_w[i] = a;</span><br><span class="line">            m_v[i] = a * b;</span><br><span class="line">            //cout&lt;&lt;m_w[1]&lt;&lt;endl;</span><br><span class="line">        &#125;</span><br><span class="line">        else</span><br><span class="line">        &#123;</span><br><span class="line">            p_w[c][0]++;</span><br><span class="line">            p_w[c][p_w[c][0]] = a;</span><br><span class="line">            p_v[c][p_w[c][0]] = a * b;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    for (int i = 1; i &lt;= n;i++)</span><br><span class="line">        for (int j = m ; m_v[i]&gt;0&amp;&amp;j &gt;= m_w[i]; j--)</span><br><span class="line">        &#123;</span><br><span class="line">            dp[j] = max(dp[j], dp[j - m_w[i]] + m_v[i]);</span><br><span class="line">            //cout&lt;&lt;m_v[i]&lt;&lt;endl;</span><br><span class="line">            //cout&lt;&lt;dp[j]&lt;&lt;endl;</span><br><span class="line">            if(j&gt;=m_w[i]+p_w[i][1])</span><br><span class="line">                dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1]] + m_v[i] + p_v[i][1]);</span><br><span class="line">            if(j&gt;=m_w[i]+p_w[i][2])</span><br><span class="line">                dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][2]] + m_v[i] + p_v[i][2]);</span><br><span class="line">            if(j&gt;=m_w[i]+p_w[i][1]+p_w[i][2])</span><br><span class="line">                dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1] - p_w[i][2]] + p_v[i][1] + m_v[i] + p_v[i][2]);</span><br><span class="line">        &#125;</span><br><span class="line">    //for(int i=0;i&lt;=m;i++)</span><br><span class="line">    //cout&lt;&lt;dp[i]&lt;&lt;endl;</span><br><span class="line">    cout &lt;&lt; dp[m] &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -539,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/31/2019-07-31-线性动态规划-导弹拦截系统-P1020/" rel="next" title="线性动态规划-导弹拦截系统-P1020">
-                <i class="fa fa-chevron-left"></i> 线性动态规划-导弹拦截系统-P1020
+              <a href="/2019/07/31/2019-07-31-动态规划入门-HDU1159/" rel="next" title="动态规划入门-HDU1159">
+                <i class="fa fa-chevron-left"></i> 动态规划入门-HDU1159
               </a>
             
           </div>
@@ -549,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/03/2019-08-03-P3374-【模板】树状数组-1/" rel="prev" title="P3374 【模板】树状数组 1">
-                P3374 【模板】树状数组 1 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/31/2019-07-31-线性动态规划-导弹拦截系统-P1020/" rel="prev" title="线性动态规划-导弹拦截系统-P1020">
+                线性动态规划-导弹拦截系统-P1020 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

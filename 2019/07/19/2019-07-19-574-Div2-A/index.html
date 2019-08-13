@@ -500,7 +500,6 @@
 <p>2 seconds</p>
 <p>memory limit per test</p>
 <a id="more"></a>
-
 <p>256 megabytes</p>
 <p>input</p>
 <p>standard input</p>
@@ -519,7 +518,6 @@
 <p>Print exactly one integer — the maximum number of students that can get a favorite drink.</p>
 <p><strong><em>常规思维题没什么好说的。</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int arr[1005];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	cin&gt;&gt;n&gt;&gt;m;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int temp;</span><br><span class="line">		cin&gt;&gt;temp;</span><br><span class="line">		arr[temp]++;</span><br><span class="line">	&#125;</span><br><span class="line">	int ji=0;</span><br><span class="line">	for(int i=1;i&lt;=m;i++)</span><br><span class="line">	if(arr[i]&amp;1)ji++;</span><br><span class="line">	if(n&amp;1)ji--;</span><br><span class="line">	cout&lt;&lt;n-ji/2&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>

@@ -109,12 +109,12 @@
 <meta property="og:site_name" content="Cai&#39;s blogs">
 <meta property="og:description" content="Problem DescriptionLele now is thinking about a simple function f(x).">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://cclf.caicaimengxin.com/.com//G:%5Ccaicaihexo%5Csource_posts%5C20140222175739078">
+<meta property="og:image" content="https://cclf.caicaimengxin.com/.com//caicaihexo/source/_posts/20140222175739078">
 <meta property="og:updated_time" content="2019-07-07T07:19:47.224Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HDU 1757 A Simple Math Problem（矩阵快速幂）">
 <meta name="twitter:description" content="Problem DescriptionLele now is thinking about a simple function f(x).">
-<meta name="twitter:image" content="https://cclf.caicaimengxin.com/.com//G:%5Ccaicaihexo%5Csource_posts%5C20140222175739078">
+<meta name="twitter:image" content="https://cclf.caicaimengxin.com/.com//caicaihexo/source/_posts/20140222175739078">
 
 
 
@@ -511,8 +511,7 @@
       
         <p>Problem Description<br>Lele now is thinking about a simple function f(x).</p>
 <a id="more"></a>
-
-<p>If x &lt; 10 f(x) = x.<br>If x &gt;= 10 f(x) = a0 * f(x-1) + a1 * f(x-2) + a2 * f(x-3) + …… + a9 * f(x-10);<br>And ai(0&lt;=i&lt;=9) can only be 0 or 1 .</p>
+<p>If x &lt; 10 f(x) = x.<br>If x &gt;= 10 f(x) = a0 <em> f(x-1) + a1 </em> f(x-2) + a2 <em> f(x-3) + …… + a9 </em> f(x-10);<br>And ai(0&lt;=i&lt;=9) can only be 0 or 1 .</p>
 <p>Now, I will give a0 ~ a9 and two positive integers k and m ,and could you help Lele to caculate f(k)%m.</p>
 <p>Input<br>The problem contains mutiple test cases.Please process to the end of file.<br>In each case, there will be two lines.<br>In the first line , there are two positive integers k and m. ( k&lt;2*10^9 , m &lt; 10^5 )<br>In the second line , there are ten integers represent a0 ~ a9.</p>
 <p>Output<br>For each case, output f(k) % m in one line.</p>
@@ -527,9 +526,8 @@
 <p>f(x-2)   =   0 1 0 0                             *      f(x-3)</p>
 <p>..               0 0 1 0                                        ..  </p>
 <p>f(x-9)        0 0 0 …       1                            f(x-10)    </p>
-<p><img src="/.com//G:%5Ccaicaihexo%5Csource_posts%5C20140222175739078" alt="img"></p>
+<p><img src="/.com//caicaihexo\source\_posts\20140222175739078" alt="img"></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">ll k, mod;</span><br><span class="line">struct Maxtri&#123;</span><br><span class="line">	int a[15][15];</span><br><span class="line">&#125;;</span><br><span class="line">Maxtri unit, init;</span><br><span class="line">void Creat_Maxtri() &#123;//构造矩阵</span><br><span class="line">	memset(init.a, 0, sizeof(init.a));</span><br><span class="line">	for(int i = 1; i &lt; 10; i++) &#123;</span><br><span class="line">		init.a[i][i-1] = 1;</span><br><span class="line">	&#125;</span><br><span class="line">	memset(unit.a, 0, sizeof(unit.a));</span><br><span class="line">	for(int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">		unit.a[i][i] = 1;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Maxtri Multi(Maxtri a, Maxtri b) &#123;//矩阵相乘</span><br><span class="line">	Maxtri c;</span><br><span class="line">	for(int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">		for(int j = 0; j &lt; 10; j++) &#123;</span><br><span class="line">			c.a[i][j] = 0;</span><br><span class="line">			for(int k = 0; k &lt; 10; k++) &#123;</span><br><span class="line">				c.a[i][j] += (a.a[i][k] * b.a[k][j]) % mod;</span><br><span class="line">				c.a[i][j] %= mod;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return c;</span><br><span class="line">&#125;</span><br><span class="line">Maxtri Fast_Pow(Maxtri a, Maxtri b, int x) &#123; //快速乘</span><br><span class="line">	while(x) &#123;</span><br><span class="line">		if(x&amp;1) &#123;</span><br><span class="line">			b = Multi(a, b);</span><br><span class="line">		&#125;</span><br><span class="line">		a = Multi(a, a);</span><br><span class="line">		x &gt;&gt;= 1;</span><br><span class="line">	&#125;</span><br><span class="line">	return b;</span><br><span class="line">&#125;</span><br><span class="line">int main() &#123;</span><br><span class="line">	while(scanf(&quot;%lld %lld&quot;, &amp;k, &amp;mod) != EOF) &#123;</span><br><span class="line">		Creat_Maxtri();</span><br><span class="line">		for(int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">			scanf(&quot;%d&quot;, &amp;init.a[0][i]);</span><br><span class="line">		&#125;</span><br><span class="line">		if(k &lt; 10) &#123;</span><br><span class="line">			printf(&quot;%d\n&quot;, k%mod);</span><br><span class="line">			continue;</span><br><span class="line">		&#125;</span><br><span class="line">		Maxtri res = Fast_Pow(init, unit, k-9);</span><br><span class="line">		ll ans = 0;</span><br><span class="line">		for(int i = 0; i &lt; 10; i++) &#123;</span><br><span class="line">			ans += (res.a[0][i] * (9-i))%mod;</span><br><span class="line">		&#125;</span><br><span class="line">		printf(&quot;%lld\n&quot;, ans%mod);</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -569,8 +567,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/26/2019-06-26-Unity常用函数和变量汇总/" rel="next" title="Unity常用函数和变量汇总">
-                <i class="fa fa-chevron-left"></i> Unity常用函数和变量汇总
+              <a href="/2019/06/23/Unity如何导入资源。/" rel="next" title="Unity如何导入资源">
+                <i class="fa fa-chevron-left"></i> Unity如何导入资源
               </a>
             
           </div>
@@ -579,8 +577,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/06/26/2019-06-26-unity3d中awake和start函数的理解。/" rel="prev" title="unity3d中awake和start函数的理解。">
-                unity3d中awake和start函数的理解。 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/06/26/2019-06-26-Unity中的一些鼠标事件/" rel="prev" title="Unity中的一些鼠标事件">
+                Unity中的一些鼠标事件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

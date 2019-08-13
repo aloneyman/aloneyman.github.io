@@ -509,13 +509,11 @@
       
         <p>余数求和（数学题）<br>题目描述<br>给出正整数n和k，计算G(n, k)=k mod 1 + k mod 2 + k mod 3 + … + k mod n的值，其中k mod i表示k除以i的余数。例如G(10, 5)=5 mod 1 + 5 mod 2 + 5 mod 3 + 5 mod 4 + 5 mod 5 …… + 5 mod 10=0+1+2+1+0+5+5+5+5+5=29</p>
 <a id="more"></a>
-
 <p>input </p>
 <p>10 5</p>
 <p>output</p>
 <p>29</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	long long n, k;</span><br><span class="line">	cin &gt;&gt; n &gt;&gt; k;</span><br><span class="line">	long long ans = n * k;</span><br><span class="line">	for(long long l = 1, r; l &lt;= n; l = r+1) &#123;</span><br><span class="line">		if(k / l == 0)//如果小于1则直接最后一段等于右端点区间</span><br><span class="line">			r = n;</span><br><span class="line">		else &#123;//不然就讨论右边端点的大小</span><br><span class="line">			r = min(n, k/(k/l));</span><br><span class="line">		&#125;	</span><br><span class="line">		ans -= (k/l)*(r-l+1)*(l+r) / 2;</span><br><span class="line">	&#125;</span><br><span class="line">	cout &lt;&lt; ans &lt;&lt; endl;</span><br><span class="line">	</span><br><span class="line">	return 0;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -555,8 +553,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-08-除法分块/" rel="next" title="除法分块">
-                <i class="fa fa-chevron-left"></i> 除法分块
+              <a href="/2019/07/07/2019-07-07-欧拉函数&欧拉筛选的应用/" rel="next" title="欧拉函数&欧拉筛选的应用">
+                <i class="fa fa-chevron-left"></i> 欧拉函数&欧拉筛选的应用
               </a>
             
           </div>
@@ -565,8 +563,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/08/2019-07-08-简单数论推论/" rel="prev" title="简单数论推论">
-                简单数论推论 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/07/2019-07-07-哥德巴赫猜想/" rel="prev" title="哥德巴赫猜想">
+                哥德巴赫猜想 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

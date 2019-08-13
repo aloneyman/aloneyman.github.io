@@ -497,7 +497,6 @@
       
         <h1 id="Leading-and-Trailing"><a href="#Leading-and-Trailing" class="headerlink" title="Leading and Trailing"></a>Leading and Trailing</h1><p>You are given two integers: <strong>n</strong> and <strong>k</strong>, your task is to find the most significant three digits, and least significant three digits of<strong>nk</strong>.</p>
 <a id="more"></a>
-
 <p>Input</p>
 <p>Input starts with an integer <strong>T (≤ 1000)</strong>, denoting the number of test cases.</p>
 <p>Each case starts with a line containing two integers: <strong>n (2 ≤ n &lt; 231)</strong> and <strong>k (1 ≤ k ≤ 107)</strong>.</p>
@@ -516,9 +515,8 @@
 <p>Case 3: 214 648</p>
 <p>Case 4: 429 296</p>
 <p>Case 5: 665 669</p>
-<p>题意是求出 n^k 的前3 个数 和 后3个数<br>刚开始看到的时候后三个数好求，可以快速幂取余得到<br>对于前三个数，需要利用到数学的变形<br><strong><em>首先，对于任意的一个数都可以转化成 10^x （x 为浮点数） = 10^a * 10^b (a,b 也是浮点数）的形式， *<u>其中 10 ^ a 表示结果的位数，10^b 表示对应位的值。</u></em>所以可以先求到 x 的值，再求到 b 的值，求到 10^b ,即求到了该数对应位置的值（浮点数），再乘以系数，就能得到前3位的值；*</strong></p>
+<p>题意是求出 n^k 的前3 个数 和 后3个数<br>刚开始看到的时候后三个数好求，可以快速幂取余得到<br>对于前三个数，需要利用到数学的变形<br><strong><em>首先，对于任意的一个数都可以转化成 10^x （x 为浮点数） = 10^a </em> 10^b (a,b 也是浮点数）的形式， <em><u>其中 10 ^ a 表示结果的位数，10^b 表示对应位的值。</u></em>所以可以先求到 x 的值，再求到 b 的值，求到 10^b ,即求到了该数对应位置的值（浮点数），再乘以系数，就能得到前3位的值；*</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int Q_pow(long long x,long long m)</span><br><span class="line">&#123;</span><br><span class="line">	long long ans=1;</span><br><span class="line">	while(m)</span><br><span class="line">	&#123;</span><br><span class="line">		if(m&amp;1) ans=(ans*x)%1000;</span><br><span class="line">		x=(x*x)%1000;</span><br><span class="line">		m&gt;&gt;=1;</span><br><span class="line">	&#125;</span><br><span class="line">	return ans;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	int t=1;</span><br><span class="line">	while(n--)</span><br><span class="line">	&#123;</span><br><span class="line">		long long a,b;</span><br><span class="line">		cin&gt;&gt;a&gt;&gt;b;</span><br><span class="line">		double tmp=(double)b*log10(a*1.0);</span><br><span class="line">		tmp=tmp-(int)tmp;</span><br><span class="line">		double ans1=pow(10.0,tmp);</span><br><span class="line">		int result=(int)(ans1*100.0);</span><br><span class="line">		int ans2=Q_pow(a,b);</span><br><span class="line">		printf(&quot;Case %d: %d %03d\n&quot;,t++,result,ans2);</span><br><span class="line">		//cout&lt;&lt;ans1&lt;&lt;&apos; &apos;&lt;&lt;ans2&lt;&lt;endl;</span><br><span class="line">	&#125;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -558,8 +556,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-除法分块模板&洛谷/" rel="next" title="除法分块模板&洛谷">
-                <i class="fa fa-chevron-left"></i> 除法分块模板&洛谷
+              <a href="/2019/07/07/2019-07-07-哥德巴赫猜想/" rel="next" title="哥德巴赫猜想">
+                <i class="fa fa-chevron-left"></i> 哥德巴赫猜想
               </a>
             
           </div>

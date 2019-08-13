@@ -497,14 +497,12 @@
       
         <p>题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)；</p>
 <a id="more"></a>
-
 <p>思路：考虑一直向右，若恰好到达则为最小步数；</p>
 <p>​        若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n;</p>
 <p>​        要向左移动距离n，只需在第n/2步向左走；步数不变；</p>
 <p>​       若(路程-x)为奇数，一直走到偶数的情况；</p>
 <p>  <strong><em>n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int n,m,sum;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int i,j,k;</span><br><span class="line">    while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123;</span><br><span class="line">        if(n&lt;0) n=-n;</span><br><span class="line">        //printf(&quot;%d\n&quot;,n);</span><br><span class="line">        sum=0;</span><br><span class="line">        for(i=0;;i++)&#123;</span><br><span class="line">            sum+=i;</span><br><span class="line">            if(sum==n) break;</span><br><span class="line">            if(sum&gt;n&amp;&amp;(sum-n)%2==0) break;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,i);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -544,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/09/2019-08-09-动态规划-区间DP-P1220-关路灯/" rel="next" title="动态规划-区间DP-P1220 关路灯">
-                <i class="fa fa-chevron-left"></i> 动态规划-区间DP-P1220 关路灯
+              <a href="/2019/08/08/2019-08-08-模运算笔记/" rel="next" title="模运算笔记">
+                <i class="fa fa-chevron-left"></i> 模运算笔记
               </a>
             
           </div>
@@ -554,8 +552,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/10/2019-08-10-动态规划-区间DP-P4170-[CQOI2007]涂色/" rel="prev" title="动态规划-区间DP-P4170 [CQOI2007]涂色">
-                动态规划-区间DP-P4170 [CQOI2007]涂色 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/09/2019-08-09-动态规划-区间DP-P1220-关路灯/" rel="prev" title="动态规划-区间DP-P1220 关路灯">
+                动态规划-区间DP-P1220 关路灯 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

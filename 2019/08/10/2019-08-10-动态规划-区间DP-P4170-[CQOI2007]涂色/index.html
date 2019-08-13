@@ -496,10 +496,8 @@
 
       
         <h4 id="区间DP。题意：题意是求对字符串的最少染色次数，设f-i-j-为字符串的子串s-i-s-j-的最少染色次数。"><a href="#区间DP。题意：题意是求对字符串的最少染色次数，设f-i-j-为字符串的子串s-i-s-j-的最少染色次数。" class="headerlink" title="区间DP。题意：题意是求对字符串的最少染色次数，设f[i][j]为字符串的子串s[i]~s[j]的最少染色次数。"></a>区间DP。题意：题意是求对字符串的最少染色次数，设<code>f[i][j]</code>为字符串的子串<code>s[i]~s[j]</code>的最少染色次数。</h4><a id="more"></a>
-
 <p><strong><em>如果我们首尾字符相同，那么我们可以少花一笔（直接一横花过去），不然我们就以第K个位置分成两个子区间问题。并且每次区间都需要更新。最后dp[1][n]代表1-n区间的最少染色次数。</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string.h&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int dp[55][55];</span><br><span class="line">char a[55];</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	scanf(&quot;%s&quot;,a+1);</span><br><span class="line">    int n=strlen(a+1);</span><br><span class="line">	memset(dp,999999,sizeof dp);</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	dp[i][i]=1;</span><br><span class="line">	for(int l=1;l&lt;n;l++)</span><br><span class="line">	&#123;</span><br><span class="line">		for(int i=1,j=1+l;j&lt;=n;i++,j++)</span><br><span class="line">		&#123;</span><br><span class="line">			if(a[i]==a[j])</span><br><span class="line">				dp[i][j]=min(dp[i+1][j],dp[i][j-1]);</span><br><span class="line">			else</span><br><span class="line">			for(int m=i;m&lt;j;m++)</span><br><span class="line">				dp[i][j]=min(dp[i][j],dp[i][m]+dp[m+1][j]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	printf(&quot;%d&quot;,dp[1][n]);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -539,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/09/2019-08-09-CF11B-Jumping-Jack/" rel="next" title="CF11B Jumping Jack">
-                <i class="fa fa-chevron-left"></i> CF11B Jumping Jack
+              <a href="/2019/08/09/2019-08-09-动态规划-区间DP-P1220-关路灯/" rel="next" title="动态规划-区间DP-P1220 关路灯">
+                <i class="fa fa-chevron-left"></i> 动态规划-区间DP-P1220 关路灯
               </a>
             
           </div>

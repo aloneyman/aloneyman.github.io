@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。   123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;co">
+  <meta name="description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。  123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;con">
 <meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性动态规划-P1233 木棍加工">
 <meta property="og:url" content="https://cclf.caicaimengxin.com/2019/08/06/2019-08-06-线性动态规划-P1233-木棍加工/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。   123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;co">
+<meta property="og:description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。  123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;con">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:updated_time" content="2019-08-06T05:51:36.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="线性动态规划-P1233 木棍加工">
-<meta name="twitter:description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。   123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;co">
+<meta name="twitter:description" content="和最长非上升子序列一个思想：中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。  123456789101112131415161718192021222324252627282930313233#include&amp;lt;iostream&amp;gt;#include&amp;lt;algorithm&amp;gt;using namespace std;con">
 
 
 
@@ -497,9 +497,7 @@
       
         <h3 id="和最长非上升子序列一个思想："><a href="#和最长非上升子序列一个思想：" class="headerlink" title="和最长非上升子序列一个思想："></a>和最长非上升子序列一个思想：</h3><p><strong><em>中间找到大的就替换掉（1，没有多花时间。2，大替小过后可以更延伸的更长。）末尾就代表没找到，则新加一段子序列。</em></strong></p>
 <!--mode-->
-
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int maxn=100005;</span><br><span class="line">int dp[maxn];</span><br><span class="line">struct Node</span><br><span class="line">&#123;</span><br><span class="line">	int l,w;</span><br><span class="line">&#125;node[maxn];</span><br><span class="line">int cmp(const Node a,const Node b)</span><br><span class="line">&#123;</span><br><span class="line">	if(a.l!=b.l)</span><br><span class="line">	return a.l&gt;b.l;</span><br><span class="line">	else</span><br><span class="line">	return a.w&gt;b.w;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n;</span><br><span class="line">	int k=1;</span><br><span class="line">	cin&gt;&gt;n;</span><br><span class="line">	for(int i=1;i&lt;=n;i++)</span><br><span class="line">	cin&gt;&gt;node[i].l&gt;&gt;node[i].w;</span><br><span class="line">	sort(node+1,node+1+n,cmp);</span><br><span class="line">	dp[1]=node[1].w;</span><br><span class="line">	for(int i=2;i&lt;=n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		int j=lower_bound(dp+1,dp+1+k,node[i].w)-dp;</span><br><span class="line">		if(j&lt;=k) dp[j]=node[i].w;</span><br><span class="line">		else dp[++k]=node[i].w;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;k&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>

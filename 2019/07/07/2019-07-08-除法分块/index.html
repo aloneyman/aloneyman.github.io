@@ -515,7 +515,6 @@
 </ul>
 </blockquote>
 <a id="more"></a>
-
 <h3 id="做法"><a href="#做法" class="headerlink" title="做法"></a>做法</h3><hr>
 <p>维护两个变量L,RL,R，代表当前除数区间为<strong>闭区间</strong>[L,R][L,R]，LL初始值为11。</p>
 <p>然后在L≤NL≤N时循环进行下面的过程：</p>
@@ -525,11 +524,10 @@
 <li>L=R+1</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">//经典模板：</span><br><span class="line">long long solve(int N)&#123;</span><br><span class="line">    int L= 1,R;</span><br><span class="line">    long long tot = 0;</span><br><span class="line">    while (L &lt;= N)&#123;</span><br><span class="line">        R = N / (N / L);  //求出右边的范围</span><br><span class="line">        tot += (N / L) * (R - L + 1); //求出商相同区间的值</span><br><span class="line">        L = R + 1; //区间往后移动1</span><br><span class="line">    &#125;</span><br><span class="line">    return tot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="附上模板题Light-OJ-1245"><a href="#附上模板题Light-OJ-1245" class="headerlink" title="附上模板题Light OJ 1245"></a>附上模板题Light OJ 1245</h3><p>题意：<br>求
-$$<br>sum(n/i) i=[1,n];<br>$$<br><strong>在使用除法分块后我们可以讲复杂度从n降为sqrt从而避免超时，这道题也有规律，可以枚举出来，会返现有循环节。</strong></p>
+<h3 id="附上模板题Light-OJ-1245"><a href="#附上模板题Light-OJ-1245" class="headerlink" title="附上模板题Light OJ 1245"></a>附上模板题Light OJ 1245</h3><p>题意：<br>求</p>
+<script type="math/tex; mode=display">
+sum(n/i) i=[1,n];</script><p><strong>在使用除法分块后我们可以讲复杂度从n降为sqrt从而避免超时，这道题也有规律，可以枚举出来，会返现有循环节。</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">long long solve(long long n)</span><br><span class="line">&#123;</span><br><span class="line">	long long l=1,r;</span><br><span class="line">	long long tot=0;</span><br><span class="line">	while(l&lt;=n)</span><br><span class="line">	&#123;</span><br><span class="line">		//n/l就是这段区间的等分价;</span><br><span class="line">		r=n/(n/l);</span><br><span class="line">		tot+=(n/l)*(r-l+1);//等分价值乘区间总长度就是这段区间的贡献率 </span><br><span class="line">		l=r+1; </span><br><span class="line">	&#125;</span><br><span class="line">	return tot;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int t;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	int cas=1;</span><br><span class="line">	while(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		long long m;</span><br><span class="line">		cin&gt;&gt;m;</span><br><span class="line">		printf(&quot;Case %d: %lld\n&quot;,cas++,solve(m));</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -569,8 +567,8 @@ $$<br>sum(n/i) i=[1,n];<br>$$<br><strong>在使用除法分块后我们可以讲
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-哥德巴赫猜想/" rel="next" title="哥德巴赫猜想">
-                <i class="fa fa-chevron-left"></i> 哥德巴赫猜想
+              <a href="/2019/07/07/2019-07-07-因子求和&算术基本定理/" rel="next" title="因子求和&算术基本定理">
+                <i class="fa fa-chevron-left"></i> 因子求和&算术基本定理
               </a>
             
           </div>
@@ -579,8 +577,8 @@ $$<br>sum(n/i) i=[1,n];<br>$$<br><strong>在使用除法分块后我们可以讲
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-除法分块模板&洛谷/" rel="prev" title="除法分块模板&洛谷">
-                除法分块模板&洛谷 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/07/2019-07-07-欧拉函数&欧拉筛选的应用/" rel="prev" title="欧拉函数&欧拉筛选的应用">
+                欧拉函数&欧拉筛选的应用 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

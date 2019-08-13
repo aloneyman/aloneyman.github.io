@@ -496,7 +496,6 @@
 
       
         <h1 id="A-Bi-shoe-and-Phi-shoe-欧拉函数打表"><a href="#A-Bi-shoe-and-Phi-shoe-欧拉函数打表" class="headerlink" title="A - Bi-shoe and Phi-shoe (欧拉函数打表)"></a><a href="https://www.cnblogs.com/nefu929831238/p/5734287.html" target="_blank" rel="noopener">A - Bi-shoe and Phi-shoe (欧拉函数打表)</a></h1><a id="more"></a>
-
 <p>Description</p>
 <p>Bamboo Pole-vault is a massively popular sport in Xzhiland. And Master Phi-shoe is a very popular coach for his success. He needs some bamboos for his students, so he asked his assistant Bi-Shoe to go to the market and buy them. Plenty of Bamboos of all possible integer lengths (yes!) are available in the market. According to Xzhila tradition,</p>
 <p>Score of a bamboo = <strong>Φ (bamboo’s length)</strong></p>
@@ -521,7 +520,6 @@
 <p>Case 3: 4 Xukha</p>
 <p><strong><em>题目大意就是给定N个数，让我们找出刚好比这个大的欧拉函数值F(N)对应的那个N,最后再求和就完事了，需要注意的是，每次循环的时候应该从幸运数开始循环，不然会T</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;string&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef long long ll;</span><br><span class="line">#define maxN 1123456</span><br><span class="line">ll a[maxN];</span><br><span class="line">ll N;</span><br><span class="line">ll sum;</span><br><span class="line">void ola()</span><br><span class="line">&#123;</span><br><span class="line">	for(int i=1;i&lt;maxN;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		a[i]=i;</span><br><span class="line">	&#125;</span><br><span class="line">	for(int i=2;i&lt;maxN;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		if(a[i]==i)</span><br><span class="line">		&#123;</span><br><span class="line">			for(int j=i;j&lt;maxN;j+=i)</span><br><span class="line">			&#123;</span><br><span class="line">				a[j]=a[j]/i*(i-1);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int t;</span><br><span class="line">	ola();</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	int tmp=1;</span><br><span class="line">	while(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		</span><br><span class="line">		int n;</span><br><span class="line">		cin&gt;&gt;n;</span><br><span class="line">		long long sum=0;</span><br><span class="line">		for(int i=0;i&lt;n;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			int temp;</span><br><span class="line">			cin&gt;&gt;temp;</span><br><span class="line">			for(int j=temp+1;;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				if(a[j]&gt;=temp)</span><br><span class="line">				&#123;</span><br><span class="line">					sum+=j;</span><br><span class="line">					break;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		//cout&lt;&lt;sum&lt;&lt;endl;</span><br><span class="line">		printf(&quot;Case %lld: %lld Xukha\n&quot;,tmp++,sum);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -561,8 +559,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-因子求和&算术基本定理/" rel="next" title="因子求和&算术基本定理">
-                <i class="fa fa-chevron-left"></i> 因子求和&算术基本定理
+              <a href="/2019/07/07/2019-07-08-除法分块/" rel="next" title="除法分块">
+                <i class="fa fa-chevron-left"></i> 除法分块
               </a>
             
           </div>
@@ -571,8 +569,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-费马小引理/" rel="prev" title="费马小引理">
-                费马小引理 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/07/2019-07-07-除法分块模板&洛谷/" rel="prev" title="除法分块模板&洛谷">
+                除法分块模板&洛谷 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

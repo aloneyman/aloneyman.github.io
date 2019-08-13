@@ -514,7 +514,6 @@
 <p>1 second</p>
 <p>memory limit per test</p>
 <a id="more"></a>
-
 <p>256 megabytes</p>
 <p>input</p>
 <p>standard input</p>
@@ -531,7 +530,6 @@
 <p>If there is a solution, output “YES” in the first line. In the second line output nn numbers — elements of the array in the order they will stay in the circle. The first and the last element you output are considered neighbors in the circle. If there are multiple solutions, output any of them. You can print the circle starting with any element.</p>
 <p><strong><em>思路：先排序，如果最大的比第二第三的和还要大，则不可能有方案，否则可以先把最大的放在第一个第二大的放在第二个，第三大的放在最后一个，最后中间以此填补。</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int arr[100005];</span><br><span class="line">int brr[100005];</span><br><span class="line">int cmp(int x,int y)</span><br><span class="line">&#123;</span><br><span class="line">    return x&gt;y;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int n;</span><br><span class="line">    cin&gt;&gt;n;</span><br><span class="line">    for(int i=1;i&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        cin&gt;&gt;arr[i];</span><br><span class="line">    &#125;</span><br><span class="line">    sort(arr+1,arr+1+n,cmp);</span><br><span class="line">    if(arr[1]&gt;=arr[2]+arr[3])</span><br><span class="line">        cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;</span><br><span class="line">    else</span><br><span class="line">    &#123;</span><br><span class="line">        brr[1]=arr[1];</span><br><span class="line">        cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl;</span><br><span class="line">        for(int i=2,j=2,k=n;j&lt;=k;)</span><br><span class="line">        &#123;</span><br><span class="line">            //cout&lt;&lt;i&lt;&lt;endl;</span><br><span class="line">            brr[j++]=arr[i++];</span><br><span class="line">            if(j&lt;=k)brr[k--]=arr[i++];</span><br><span class="line">        &#125;</span><br><span class="line">        for(int i=1;i&lt;=n;i++)</span><br><span class="line">        cout&lt;&lt;brr[i]&lt;&lt;&apos; &apos;;</span><br><span class="line">    cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -571,8 +569,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/13/2019-07-13-573-Div2-C/" rel="next" title="573 Div2 C">
-                <i class="fa fa-chevron-left"></i> 573 Div2 C
+              <a href="/2019/07/10/2019-07-10-HDU-2588---GCD（欧拉函数）/" rel="next" title="HDU 2588 - GCD（欧拉函数）">
+                <i class="fa fa-chevron-left"></i> HDU 2588 - GCD（欧拉函数）
               </a>
             
           </div>
@@ -581,8 +579,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/13/2019-06-26-572-Div2-C/" rel="prev" title="572 Div2 C">
-                572 Div2 C <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/13/2019-07-13-573-Div2-C/" rel="prev" title="573 Div2 C">
+                573 Div2 C <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

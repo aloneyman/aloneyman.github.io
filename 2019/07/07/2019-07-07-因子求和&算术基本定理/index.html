@@ -509,7 +509,6 @@
       
         <h1 id="Sigma-Function-因子和"><a href="#Sigma-Function-因子和" class="headerlink" title="Sigma Function (因子和)"></a>Sigma Function (因子和)</h1><p>Sigma Function</p>
 <a id="more"></a>
-
 <p>Description</p>
 <p>Sigma function is an interesting function in Number Theory. It is denoted by the Greek letter Sigma (σ). This function actually denotes the sum of all divisors of a number. For example σ(24) = 1+2+3+4+6+8+12+24=60. Sigma of small numbers is easy to find but for large numbers it is very difficult to find in a straight forward way. But mathematicians have discovered a formula to find sigma. If the prime power decomposition of an integer is</p>
 <p>Then we can write,</p>
@@ -530,21 +529,19 @@
 <p>Case 2: 5</p>
 <p>Case 3: 83</p>
 <p>Case 4: 947</p>
-<p><strong><em>题意：1<del>n (n:1</del>1012)中，因子和为偶数的有几个。</em></strong></p>
+<p><strong><em>题意：1~n (n:1~1012)中，因子和为偶数的有几个。</em></strong></p>
 <p><strong><em>先附上超时代码，根据算术基本定理写的，不了解算术基本定理的，可以查上一篇博客</em></strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N=1e6+5;</span><br><span class="line"> </span><br><span class="line">bool vis[N];</span><br><span class="line">int prime[N],cnt;</span><br><span class="line">void is_prime()</span><br><span class="line">&#123;</span><br><span class="line">    cnt=0;</span><br><span class="line">    memset(vis,0,sizeof(vis));</span><br><span class="line">    for(int i=2;i&lt;N;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        if(!vis[i])</span><br><span class="line">        &#123;</span><br><span class="line">            prime[cnt++]=i;</span><br><span class="line">            for(int j=i+i;j&lt;N;j+=i)</span><br><span class="line">                vis[j]=1;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">bool is_even(long long n)</span><br><span class="line">&#123;</span><br><span class="line">    for(int i=0;i&lt;cnt&amp;&amp;prime[i]*prime[i]&lt;=n;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        int count=0;</span><br><span class="line">        if(n%prime[i]==0)</span><br><span class="line">        &#123;</span><br><span class="line">            while(n%prime[i]==0)</span><br><span class="line">            &#123;</span><br><span class="line">                n/=prime[i];</span><br><span class="line">                count++;</span><br><span class="line">            &#125;</span><br><span class="line">            if(prime[i]&amp;1)</span><br><span class="line">            &#123;</span><br><span class="line">                if(count&amp;1)</span><br><span class="line">                    return true;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    if(n&gt;1&amp;&amp;(n&amp;1))</span><br><span class="line">        return true;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    cin&gt;&gt;t;</span><br><span class="line">    is_prime();</span><br><span class="line">    for(int kase=1;kase&lt;=t;kase++)</span><br><span class="line">    &#123;</span><br><span class="line">        long long n;</span><br><span class="line">        cin&gt;&gt;n;</span><br><span class="line">        long long count=0;</span><br><span class="line">        for(long long i=1;i&lt;=n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(is_even(i))</span><br><span class="line">                cout&lt;&lt;i&lt;&lt;endl;</span><br><span class="line">                count++;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;Case %d: %d\n&quot;,kase,count);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p><strong><em>那我们该如何做这道题？</em></strong></p>
-<p>—》分析：来考虑F（x）为奇数的情况，给据题目中给我们的公式，如果F（x）为奇数，那么这个多项式里面的任何一项都必须是奇数，可以知道p = 2时，        p^e - 1肯定是奇数，如果p ！= 2，当且仅当e为偶数的时候，此项为奇数，证明如下：</p>
+<p>—-》分析：来考虑F（x）为奇数的情况，给据题目中给我们的公式，如果F（x）为奇数，那么这个多项式里面的任何一项都必须是奇数，可以知道p = 2时，        p^e - 1肯定是奇数，如果p ！= 2，当且仅当e为偶数的时候，此项为奇数，证明如下：</p>
 <p>　　原式变形为[ p^(e+1) -p + (p-1) ]/ (p-1) = p*(p^e-1)/(p-1) + 1；</p>
 <p>　　所以p/(p-1) = 1 ，p^e一定是奇数（因为p是质数，质数肯定是奇数）,所以p^e-1为偶数，所以下划线式肯定是奇数，证明成立。</p>
 <p>　　那么题目中的公式可以写成下面的形式：</p>
-<p>　　2^k0 * 3^(2<em>k1) * 5^(2</em>k2) * … * pn^(2*kn);下划线式可以表达为num ^ 2;</p>
+<p>　　2^k0 <em> 3^(2</em>k1) <em> 5^(2</em>k2) <em> … </em> pn^(2*kn);下划线式可以表达为num ^ 2;</p>
 <p>　　又k0&gt;=0， 所以满足条件的解为num^2和2 * num^2;因为满足2的更高次幂也一定是2的倍数，不可重复计算。代码如下：</p>
-<p>–》注意：这个题目不可以直接循环做，尽管题目中给的时间较长，但直接暴力仍然会超，这里直接计算，sqrt无法强制转换为LL，但是此题L也够了；</p>
-<p>–》感悟：数论的题目特点就是代码超短，但思维量和证明超多的那种……</p>
+<p>—》注意：这个题目不可以直接循环做，尽管题目中给的时间较长，但直接暴力仍然会超，这里直接计算，sqrt无法强制转换为LL，但是此题L也够了；</p>
+<p>—》感悟：数论的题目特点就是代码超短，但思维量和证明超多的那种……</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cmath&gt;</span><br><span class="line">#include&lt;iostream&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">#define L long</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t,ca = 0;</span><br><span class="line">    long long n;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%lld&quot;,&amp;n);</span><br><span class="line">        L ans = 0;</span><br><span class="line">        double tmp = n;</span><br><span class="line">        ans = L(sqrt(tmp)) + L(sqrt(tmp/2));</span><br><span class="line">        printf(&quot;Case %d: %ld\n&quot;,++ca,n-ans);</span><br><span class="line">    &#125;</span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
       
     </div>
@@ -584,8 +581,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/27/2019-06-27-Unity中animator-和animation区别/" rel="next" title="Unity中animator 和animation区别">
-                <i class="fa fa-chevron-left"></i> Unity中animator 和animation区别
+              <a href="/2019/07/07/2019-07-07-费马小引理/" rel="next" title="费马小引理">
+                <i class="fa fa-chevron-left"></i> 费马小引理
               </a>
             
           </div>
@@ -594,8 +591,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/07/2019-07-07-欧拉函数&欧拉筛选的应用/" rel="prev" title="欧拉函数&欧拉筛选的应用">
-                欧拉函数&欧拉筛选的应用 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/07/07/2019-07-08-除法分块/" rel="prev" title="除法分块">
+                除法分块 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
