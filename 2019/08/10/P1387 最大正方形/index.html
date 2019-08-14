@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="提意：M个商店，N个供应商，K种商品，每个供应商向每个商店提供一种商品有他相应的代价，我们需要将这个代价最小化，并且满足各个商店的需求。">
-<meta name="keywords" content="网络流">
+  <meta name="description" content="动态规划水题:">
+<meta name="keywords" content="动态规划">
 <meta property="og:type" content="article">
-<meta property="og:title" content="POJ 2516最小费用最大流">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/07/30/2019-07-30-POJ-2516最小费用最大流/index.html">
+<meta property="og:title" content="P1387 最大正方形">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/08/10/P1387 最大正方形/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="提意：M个商店，N个供应商，K种商品，每个供应商向每个商店提供一种商品有他相应的代价，我们需要将这个代价最小化，并且满足各个商店的需求。">
+<meta property="og:description" content="动态规划水题:">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-30T06:20:23.154Z">
+<meta property="og:updated_time" content="2019-08-14T02:46:23.977Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="POJ 2516最小费用最大流">
-<meta name="twitter:description" content="提意：M个商店，N个供应商，K种商品，每个供应商向每个商店提供一种商品有他相应的代价，我们需要将这个代价最小化，并且满足各个商店的需求。">
+<meta name="twitter:title" content="P1387 最大正方形">
+<meta name="twitter:description" content="动态规划水题:">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/07/30/2019-07-30-POJ-2516最小费用最大流/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/08/10/P1387 最大正方形/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>POJ 2516最小费用最大流 | Cai's blogs</title>
+  <title>P1387 最大正方形 | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/07/30/2019-07-30-POJ-2516最小费用最大流/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/10/P1387 最大正方形/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">POJ 2516最小费用最大流
+          <h1 class="post-title" itemprop="name headline">P1387 最大正方形
 
               
             
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2019-07-30 00:00:00 / 修改时间：14:20:23" itemprop="dateCreated datePublished" datetime="2019-07-30T00:00:00+08:00">2019-07-30</time>
+              <time title="创建时间：2019-08-10 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-10T00:00:00+08:00">2019-08-10</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-14 10:46:23" itemprop="dateModified" datetime="2019-08-14T10:46:23+08:00">2019-08-14</time>
               
             
           </span>
@@ -440,7 +452,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/ACM/" itemprop="url" rel="index"><span itemprop="name">ACM</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
 
                 
                 
@@ -459,8 +471,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/07/30/2019-07-30-POJ-2516最小费用最大流/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/07/30/2019-07-30-POJ-2516最小费用最大流/" itemprop="commentCount"></span>
+                <a href="/2019/08/10/P1387 最大正方形/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/10/P1387 最大正方形/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,10 +507,9 @@
       
 
       
-        <h4 id="提意："><a href="#提意：" class="headerlink" title="提意："></a>提意：</h4><p><strong><em>M个商店，N个供应商，K种商品，每个供应商向每个商店提供一种商品有他相应的代价，我们需要将这个代价最小化，并且满足各个商店的需求。</em></strong></p>
-<a id="more"></a>
-<h4 id="题解："><a href="#题解：" class="headerlink" title="题解："></a>题解：</h4><p><strong><em>建立源点与各个供应商的边，代价边为0，容量边为各个供应商拥有各个商品对应的商品数量。供应商和商店建立代价边为对应的代价，容量边为自己这种商品所拥有的数量，也可以是无限大，商店和汇点建立边，代价边为0，容量边为自己所需要的商品数量。</em></strong></p>
-<h6 id="因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。"><a href="#因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。" class="headerlink" title="因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。"></a>因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;cstdio&gt;</span><br><span class="line">#include &lt;cmath&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;cstring&gt;</span><br><span class="line">#include &lt;algorithm&gt;</span><br><span class="line">#include &lt;limits&gt;</span><br><span class="line">#include &lt;vector&gt;</span><br><span class="line">#include &lt;stack&gt;</span><br><span class="line">#include &lt;queue&gt;</span><br><span class="line">#include &lt;set&gt;</span><br><span class="line">#include &lt;map&gt;</span><br><span class="line">#define lowbit(x) ( x&amp;(-x) )</span><br><span class="line">#define pi 3.141592653589793</span><br><span class="line">#define e 2.718281828459045</span><br><span class="line">#define INF 0x3f3f3f3f</span><br><span class="line">#define HalF (l + r)&gt;&gt;1</span><br><span class="line">#define lsn rt&lt;&lt;1</span><br><span class="line">#define rsn rt&lt;&lt;1|1</span><br><span class="line">#define Lson lsn, l, mid</span><br><span class="line">#define Rson rsn, mid+1, r</span><br><span class="line">#define QL Lson, ql, qr</span><br><span class="line">#define QR Rson, ql, qr</span><br><span class="line">#define myself rt, l, r</span><br><span class="line">using namespace std;</span><br><span class="line">typedef unsigned long long ull;</span><br><span class="line">typedef long long ll;</span><br><span class="line">const int S = 0;</span><br><span class="line">const int maxN = 107;</span><br><span class="line">int N, M, K, T, r[maxN][maxN], cost[maxN][maxN];</span><br><span class="line">struct node </span><br><span class="line">&#123;</span><br><span class="line">    int thing[maxN];</span><br><span class="line">&#125;a[maxN&lt;&lt;1];</span><br><span class="line">int pre[maxN], dist[maxN], Flow[maxN];  bool inque[maxN];</span><br><span class="line">queue&lt;int&gt; Q;</span><br><span class="line">int spfa()</span><br><span class="line">&#123;</span><br><span class="line">    while(!Q.empty())</span><br><span class="line">        Q.pop();</span><br><span class="line">    memset(pre, -1, sizeof pre);</span><br><span class="line">    memset(dist, INF, sizeof dist);</span><br><span class="line">    memset(inque, 0, sizeof inque);</span><br><span class="line">    memset(Flow, 0, sizeof Flow);</span><br><span class="line">    Flow[S] = INF;</span><br><span class="line">    dist[S] = 0;</span><br><span class="line">    Q.push(S);</span><br><span class="line">    inque[S] = 1;</span><br><span class="line">    while(!Q.empty())</span><br><span class="line">    &#123;</span><br><span class="line">        int u = Q.front();</span><br><span class="line">        Q.pop();</span><br><span class="line">        inque[u] = 0;</span><br><span class="line">        for (int i = 1; i &lt;= T;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            if(r[u][i]&amp;&amp;dist[i]&gt;dist[u]+cost[u][i])</span><br><span class="line">            &#123;</span><br><span class="line">                pre[i] = u;</span><br><span class="line">                dist[i] = cost[u][i] + dist[u];</span><br><span class="line">                Flow[i] = min(Flow[u], r[u][i]);</span><br><span class="line">                if(!inque[i])</span><br><span class="line">                &#123;</span><br><span class="line">                	Q.push(i);</span><br><span class="line">                	inque[i] = 1;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return pre[T] != -1;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    while(~scanf(&quot;%d%d%d&quot;,&amp;N,&amp;M,&amp;K),M,N,K)</span><br><span class="line">    &#123;</span><br><span class="line">        T = N + M + 1;</span><br><span class="line">        for (int i = 1; i &lt;= N;i++)&#123;</span><br><span class="line">            for (int j = 1; j &lt;= K;j++)&#123;</span><br><span class="line">                scanf(&quot;%d&quot;, &amp;a[i].thing[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        for (int i = 1; i &lt;= M;i++)&#123;</span><br><span class="line">            for (int j = 1; j &lt;= K;j++)&#123;</span><br><span class="line">                scanf(&quot;%d&quot;, &amp;a[i + N].thing[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        bool flag = 0;</span><br><span class="line">        for (int i = 1; i &lt;= K;i++)&#123;</span><br><span class="line">            int sum1 = 0, sum2 = 0;</span><br><span class="line">            for (int j = 1; j &lt;= N;j++)&#123;</span><br><span class="line">                sum1 += a[j].thing[i];</span><br><span class="line">            &#125;</span><br><span class="line">            for (int j = 1; j &lt;= M;j++)&#123;</span><br><span class="line">                sum2 += a[j + N].thing[i];</span><br><span class="line">            &#125;</span><br><span class="line">            if(sum1&gt;sum2)&#123;</span><br><span class="line">                flag = 1;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        int ans = 0;</span><br><span class="line">        for (int k = 1; k &lt;= K;k++)&#123;</span><br><span class="line">            memset(r, 0, sizeof r);</span><br><span class="line">            memset(cost, INF, sizeof cost);</span><br><span class="line">            for (int  i= 1; i &lt;= N;i++)</span><br><span class="line">            &#123;</span><br><span class="line">                r[i][T] = a[i].thing[k];</span><br><span class="line">                r[T][i] = 0;</span><br><span class="line">                cost[i][T] = 0;</span><br><span class="line">                for (int j = 1; j &lt;= M;j++)&#123;</span><br><span class="line">                    scanf(&quot;%d&quot;, &amp;cost[N + j][i]);</span><br><span class="line">                    cost[i][j + N] = -cost[N + j][i];</span><br><span class="line">                    r[j+N][i]=a[j+N].thing[k];</span><br><span class="line">                    r[S][j + N] = a[j + N].thing[k];</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if(flag)</span><br><span class="line">                continue;</span><br><span class="line">            for (int i = 1; i &lt;= M;i++)&#123;</span><br><span class="line">                r[S][i + N] = a[i + N].thing[k];</span><br><span class="line">                cost[S][i + N] = 0;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            while(spfa())</span><br><span class="line">            &#123;</span><br><span class="line">                int now = T;</span><br><span class="line">                int last;</span><br><span class="line">                while(now)</span><br><span class="line">                &#123;</span><br><span class="line">                    last = pre[now];</span><br><span class="line">                    r[last][now] -= Flow[T];</span><br><span class="line">                    r[now][last] += Flow[T];</span><br><span class="line">                    now = last;</span><br><span class="line">                &#125;</span><br><span class="line">                ans += dist[T] * Flow[T];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        printf(&quot;%d\n&quot;,flag==1?-1:ans);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="动态规划水题"><a href="#动态规划水题" class="headerlink" title="动态规划水题:"></a>动态规划水题:</h4><a id="more"></a>
+<p><strong>状态转移方程为f[i][j]=min(min(f[i-1][j],f[i][j-1]),f[i-1][j-1])),很显然，因为如果左边上边和左上都不为0，则上一个状态就可以转移过来。而f的意义是以i，j为右下顶点的能形成的正方形最大边长。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> N 6001</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll ;</span><br><span class="line"><span class="keyword">int</span> dp[N][N];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, n;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; n;</span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n;j++)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> a;</span><br><span class="line">            <span class="built_in">cin</span> &gt;&gt; a;</span><br><span class="line">            <span class="keyword">if</span>(!a)</span><br><span class="line">                <span class="keyword">continue</span>;</span><br><span class="line">            dp[i][j]=min(min(dp[i<span class="number">-1</span>][j],dp[i][j<span class="number">-1</span>]),dp[i<span class="number">-1</span>][j<span class="number">-1</span>])+<span class="number">1</span>;</span><br><span class="line">            <span class="comment">//cout &lt;&lt; dp[i][j] &lt;&lt; endl;</span></span><br><span class="line">            ans = max(ans, dp[i][j]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -525,7 +536,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/网络流/" rel="tag"># 网络流</a>
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
           
         </div>
       
@@ -538,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/30/2019-07-30-CodeForces-546E-网络流好题/" rel="next" title="CodeForces 546E 网络流好题">
-                <i class="fa fa-chevron-left"></i> CodeForces 546E 网络流好题
+              <a href="/2019/08/10/2019-08-10-动态规划-区间DP-P4170-[CQOI2007]涂色/" rel="next" title="动态规划-区间DP-P4170 [CQOI2007]涂色">
+                <i class="fa fa-chevron-left"></i> 动态规划-区间DP-P4170 [CQOI2007]涂色
               </a>
             
           </div>
@@ -548,8 +559,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/07/30/2019-07-30-hdu-1532-网络流入门/" rel="prev" title="hdu 1532 网络流入门">
-                hdu 1532 网络流入门 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/08/11/2019-08-11-ak/" rel="prev" title="ak的一天">
+                ak的一天 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -736,7 +747,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#提意："><span class="nav-number">1.</span> <span class="nav-text">提意：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#题解："><span class="nav-number">2.</span> <span class="nav-text">题解：</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。"><span class="nav-number">2.0.1.</span> <span class="nav-text">因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#动态规划水题"><span class="nav-number">1.</span> <span class="nav-text">动态规划水题:</span></a></li></ol></div>
             
 
           </div>
@@ -1024,7 +1035,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/07/30/2019-07-30-POJ-2516最小费用最大流/'
+    refer: '2019/08/10/P1387 最大正方形/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
