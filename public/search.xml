@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[P2678 跳石头]]></title>
-    <url>%2F2019%2F08%2F13%2FP2678%20%E8%B7%B3%E7%9F%B3%E5%A4%B4%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;long long L,M,N;long long arr[manx];long long dis[manx];bool check(int x)&#123; long long now=0,last,sum,ans=0; for (int i = 1; i &lt;= M;i++) &#123; if(arr[i]-now&lt;=x) &#123; ans++; &#125; else &#123; now=arr[i]; &#125; &#125; if(ans&lt;=N) return 0; else return 1;&#125;int main()&#123; cin &gt;&gt; L &gt;&gt; M &gt;&gt; N; dis[M]=L; for (int i = 1; i &lt;= M;i++) &#123; cin &gt;&gt; arr[i]; &#125; arr[M+1]=L; for (int i = 2; i &lt;= M+1;i++) &#123; dis[i] = arr[i] - arr[i - 1]; &#125; long long l = 0, r = L; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[P3387 【模板】缩点]]></title>
+    <url>%2F2019%2F08%2F15%2FP3387%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E7%BC%A9%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[板子题，入门Tarjan的第一题，这道题Tarjan+拓扑。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std; const int N = 1e4+10, M = 1e5+10;struct edge &#123; int v, next;&#125; e[M];int n, m, p[N], dp[N], ans;int cnt, head[N];int top, stack[N];int indexx, num, dfn[N], low[N], color[N], sum[N];int heads = 1, tail, indegree[N], que[N];bool instack[N];void init()&#123; memset(head, -1, sizeof head);&#125;void add(int u,int v)&#123; e[++cnt].next = head[u]; e[cnt].v = v; head[u] = cnt; return;&#125;void tarjan(int u)&#123; int i; low[u]=dfn[u]=indexx++; stack[++top]=u; for(int i=head[u];i+1;i=e[i].next) &#123; int v=e[i].v; if(!dfn[v]) &#123; tarjan(v); low[v]=min(low[u],low[v]); &#125; else if(!instack[v]) low[u]=min(low[u],low[v]); &#125; if(low[u]==dfn[u]) &#123; num++; do &#123; color[stack[top]]=num; sum[num]+=p[stack[top]]; instack[stack[top]]=false; &#125;while(stack[top--]!=u); &#125;&#125;void clear() &#123; memset(e, 0, sizeof(e)); init(); cnt = 0; return ;&#125;int topo()&#123; int i; for(int i=1;i&lt;=num;i++) &#123; if(!indegree[i]) &#123; que[++tail]=i; dp[i]=sum[i]; &#125; &#125; while(tail&gt;=heads) &#123; int u=que[heads]; heads++; for(int i=head[u];i+1;i=e[i].next) &#123; int v=e[i].v; dp[v]=max(dp[v],dp[u]+sum[v]); indegree[v]--; if(!indegree[v]) &#123; que[++tail]=v; &#125; &#125; &#125;&#125;int main()&#123; init(); int i, a[M], b[M]; cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= n;i++) cin &gt;&gt; p[i]; for (int i = 1; i &lt;= m;i++) &#123; cin &gt;&gt; a[i] &gt;&gt; b[i]; add(a[i], b[i]); &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!dfn[i]) tarjan(i); &#125; clear(); for (int i = 1; i &lt;= m;i++) &#123; if(color[a[i]]!=color[b[i]]) &#123; add(color[a[i]], color[b[i]]); indegree[color[b[i]]]++; &#125; &#125; cout &lt;&lt; topo() &lt;&lt; endl;&#125;]]></content>
       <categories>
-        <category>ACM</category>
+        <category>学习</category>
       </categories>
       <tags>
-        <tag>二分</tag>
+        <tag>Tarjan</tag>
       </tags>
   </entry>
   <entry>
@@ -23,11 +23,44 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[CF460C Present]]></title>
+    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
+    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>差分数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[洛谷海底地铁：差分数组+单调栈]]></title>
+    <url>%2F2019%2F08%2F13%2F%E6%B4%9B%E8%B0%B7%E6%B5%B7%E5%BA%95%E5%9C%B0%E9%93%81%2F</url>
+    <content type="text"><![CDATA[差分数组简化思维量。 开始WA在cf[y+1]—这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem:洛谷海底地铁 * 开始WA在cf[y+1]--这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;long long a[100001];long long cf[100001];long long A[100001];long long B[100001];long long C[100001];long long day[100001];int m,n;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;=n;i++) &#123; cin &gt;&gt; a[i]; &#125; for (int i = 1; i &lt;n;i++) &#123; int x = a[i]; int y = a[i + 1]; if(x&gt;y) swap(x, y); cf[x]++; cf[y]--; &#125; for (int i = 1; i &lt; m ;i++) &#123; cin &gt;&gt; A[i] &gt;&gt; B[i] &gt;&gt; C[i]; &#125; day[0]=0; for (int i = 1; i &lt;= m;i++) &#123; cf[i]+=cf[i-1]; &#125; long long sum = 0; for (int i = 1; i &lt; m;i++) &#123; sum += min(A[i] * cf[i], B[i] * cf[i] + C[i]); &#125; cout &lt;&lt; sum &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>差分数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[P1072 Hankson 的趣味题]]></title>
     <url>%2F2019%2F08%2F13%2FP1072%20Hankson%20%E7%9A%84%E8%B6%A3%E5%91%B3%E9%A2%98%2F</url>
     <content type="text"><![CDATA[gcd(x,a_0)=a_1 x=k1*a_1 a_0=k_2*a_1得到 gcd(k_1,k_2)=1省略证明得到结论： $$ gcd(a,b)=c \\ gcd(a/c,b/c)=1 整理一下有：gcd(x/a_1,a_0/a_1)=1\\gcd(b_1/b_0,b_1/x)=1$$ 用心体会这两个式子，你会发现 xx 是 a_1a1​ 的整数倍而且是 b_1b1​ 的因子b​1​ 枚举 b_1b1​ 的因子(也就是 xx )，如果这个数是 a_1a1​ 的整数倍并且满足那两个式子，则 ans++ans++ 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;string.h&gt;#define N 6001using namespace std;long long p;typedef long long ll ;ll gcd(ll a,ll b)&#123; return b==0?a:gcd(b,a%b);&#125;int main()&#123; int t; cin&gt;&gt;t; while(t--) &#123; ll a0,a1,b0,b1; cin&gt;&gt;a0&gt;&gt;a1&gt;&gt;b0&gt;&gt;b1; ll p=b1/b0; ll x=a0/a1; ll ans=0; for(int i=1;i*i&lt;=b1;i++) &#123; if(b1%i==0) &#123; if(i%a1==0&amp;&amp;gcd(p,b1/i)==1&amp;&amp;gcd(x,i/a1)==1) ans++; ll tem=b1/i; if(tem==i) continue; if(tem%a1==0&amp;&amp;gcd(p,b1/tem)==1&amp;&amp;gcd(tem/a1,x)==1) ans++; &#125; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125;&#125;]]></content>
       <categories>
         <category>学习</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[P1082同余方程（拓展欧几里得）]]></title>
+    <url>%2F2019%2F08%2F13%2FP1082%20%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%2F</url>
+    <content type="text"><![CDATA[拓展欧几里得入门题。欧几里得证明就不多赘述。 1234567891011121314151617181920212223242526272829#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;int a,b,x,y;void exgcd(int a,int b)&#123; if(!b) &#123; x = 1, y = 0; return; &#125; exgcd(b, a % b); int k = x; x = y; y = k - a / b * y;&#125;int main()&#123; cin &gt;&gt; a &gt;&gt; b; exgcd(a, b); cout &lt;&lt; (x + b) % b &lt;&lt; endl;&#125;//a*x%b==1%b//(a*x-1)%b==0//a*x-k*b==1]]></content>
+      <categories>
+        <category>ACM</category>
       </categories>
       <tags>
         <tag>数论</tag>
@@ -67,14 +100,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[洛谷海底地铁：差分数组+单调栈]]></title>
-    <url>%2F2019%2F08%2F13%2F%E6%B4%9B%E8%B0%B7%E6%B5%B7%E5%BA%95%E5%9C%B0%E9%93%81%2F</url>
-    <content type="text"><![CDATA[差分数组简化思维量。 开始WA在cf[y+1]—这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem:洛谷海底地铁 * 开始WA在cf[y+1]--这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;long long a[100001];long long cf[100001];long long A[100001];long long B[100001];long long C[100001];long long day[100001];int m,n;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;=n;i++) &#123; cin &gt;&gt; a[i]; &#125; for (int i = 1; i &lt;n;i++) &#123; int x = a[i]; int y = a[i + 1]; if(x&gt;y) swap(x, y); cf[x]++; cf[y]--; &#125; for (int i = 1; i &lt; m ;i++) &#123; cin &gt;&gt; A[i] &gt;&gt; B[i] &gt;&gt; C[i]; &#125; day[0]=0; for (int i = 1; i &lt;= m;i++) &#123; cf[i]+=cf[i-1]; &#125; long long sum = 0; for (int i = 1; i &lt; m;i++) &#123; sum += min(A[i] * cf[i], B[i] * cf[i] + C[i]); &#125; cout &lt;&lt; sum &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[P2678 跳石头]]></title>
+    <url>%2F2019%2F08%2F13%2FP2678%20%E8%B7%B3%E7%9F%B3%E5%A4%B4%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;long long L,M,N;long long arr[manx];long long dis[manx];bool check(int x)&#123; long long now=0,last,sum,ans=0; for (int i = 1; i &lt;= M;i++) &#123; if(arr[i]-now&lt;=x) &#123; ans++; &#125; else &#123; now=arr[i]; &#125; &#125; if(ans&lt;=N) return 0; else return 1;&#125;int main()&#123; cin &gt;&gt; L &gt;&gt; M &gt;&gt; N; dis[M]=L; for (int i = 1; i &lt;= M;i++) &#123; cin &gt;&gt; arr[i]; &#125; arr[M+1]=L; for (int i = 2; i &lt;= M+1;i++) &#123; dis[i] = arr[i] - arr[i - 1]; &#125; long long l = 0, r = L; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
       <tags>
-        <tag>差分数组</tag>
+        <tag>二分</tag>
       </tags>
   </entry>
   <entry>
@@ -100,25 +133,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P1082同余方程（拓展欧几里得）]]></title>
-    <url>%2F2019%2F08%2F13%2FP1082%20%E5%90%8C%E4%BD%99%E6%96%B9%E7%A8%8B%2F</url>
-    <content type="text"><![CDATA[拓展欧几里得入门题。欧几里得证明就不多赘述。 1234567891011121314151617181920212223242526272829#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;int a,b,x,y;void exgcd(int a,int b)&#123; if(!b) &#123; x = 1, y = 0; return; &#125; exgcd(b, a % b); int k = x; x = y; y = k - a / b * y;&#125;int main()&#123; cin &gt;&gt; a &gt;&gt; b; exgcd(a, b); cout &lt;&lt; (x + b) % b &lt;&lt; endl;&#125;//a*x%b==1%b//(a*x-1)%b==0//a*x-k*b==1]]></content>
+    <title><![CDATA[P1056 排座椅]]></title>
+    <url>%2F2019%2F08%2F13%2FP1056%20%E6%8E%92%E5%BA%A7%E6%A4%85%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#include&lt;cstring&gt;#define maxn 1005using namespace std;int M,N,K,L,D;vector&lt;int&gt;a1,a2;struct data&#123; int id,cnt; friend bool operator &lt; (data a,data b) &#123; return a.cnt&gt;b.cnt; &#125;&#125;;data a[maxn],b[maxn];int main()&#123; //freopen("seat.in","r",stdin); //freopen("seat.out","w",stdout); scanf("%d%d%d%d%d",&amp;M,&amp;N,&amp;K,&amp;L,&amp;D); for(int i=1;i&lt;=D;i++) &#123; int x,y,p,q; scanf("%d%d%d%d",&amp;x,&amp;y,&amp;p,&amp;q); if(x==p)&#123;b[min(y,q)].cnt++;b[min(y,q)].id=min(y,q);&#125; if(y==q)&#123;a[min(x,p)].cnt++;a[min(x,p)].id=min(x,p);&#125; &#125; sort(a+1,a+maxn); sort(b+1,b+maxn); for(int i=1;i&lt;=K;i++) &#123; if(a[i].id&gt;0)a1.push_back(a[i].id); &#125; sort(a1.begin(),a1.end()); for(int i=0;i&lt;a1.size();i++) printf("%d ",a1[i]); printf("\n"); for(int i=1;i&lt;=L;i++) &#123; if(b[i].id&gt;0)a2.push_back(b[i].id); &#125; sort(a2.begin(),a2.end()); for(int i=0;i&lt;a2.size();i++) printf("%d ",a2[i]); return 0;&#125;]]></content>
       <categories>
-        <category>ACM</category>
+        <category>学习</category>
       </categories>
       <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[CF460C Present]]></title>
-    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
-    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>差分数组</tag>
+        <tag>模拟</tag>
       </tags>
   </entry>
   <entry>
@@ -177,17 +199,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CF11B Jumping Jack]]></title>
-    <url>%2F2019%2F08%2F09%2F2019-08-09-CF11B-Jumping-Jack%2F</url>
-    <content type="text"><![CDATA[题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)； 思路：考虑一直向右，若恰好到达则为最小步数； ​ 若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n; ​ 要向左移动距离n，只需在第n/2步向左走；步数不变； ​ 若(路程-x)为奇数，一直走到偶数的情况； n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。 123456789101112131415161718192021#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;int n,m,sum;int main()&#123; int i,j,k; while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123; if(n&lt;0) n=-n; //printf(&quot;%d\n&quot;,n); sum=0; for(i=0;;i++)&#123; sum+=i; if(sum==n) break; if(sum&gt;n&amp;&amp;(sum-n)%2==0) break; &#125; printf(&quot;%d\n&quot;,i); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>CodeFoeces</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[动态规划-区间DP-P1220 关路灯]]></title>
     <url>%2F2019%2F08%2F09%2F2019-08-09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8C%BA%E9%97%B4DP-P1220-%E5%85%B3%E8%B7%AF%E7%81%AF%2F</url>
     <content type="text"><![CDATA[理解一下题目大意： 关灯不需要额外的时间，经过了灯就关了。但是可能折返回去关某一个大灯会比继续往下走关接下来的一个小灯更优， 那么可以得到两种状态（沿着当前方向继续往下走，改变方向回去关灯）。 f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) ( sum[i]+sum[n]-sum[j]) ); f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) ( sum[i-1] + sum[n] - sum[j-1] ) ); f函数代表i到j区间中关闭完路灯停留在在左0/右1位置的最小消耗功率。 我们画图可以知道我们有两种转移状态一种事i+1-&gt;i和j-1-&gt;j。但是因为关完灯在的位置不同我们又分了两种。所以我们可以得到上述的状态转移方程。 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;long long l[55],sum[55],power[55];long long dp[55][55][2];const long long INF=0x3f3f3f3f3f3f3f3fll;int main()&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;l[i]&gt;&gt;power[i]; sum[i]=sum[i-1]+power[i]; &#125; for(int k=1;k&lt;=n;k++) &#123; for(int i=1,j;(j=i+k-1)&lt;=n;++i) &#123; if(i&lt;=m&amp;&amp;m&lt;=j) &#123; dp[i][j][0]=min(dp[i+1][j][0]+(l[i+1]-l[i])*(sum[n]-sum[j]+sum[i]), dp[i+1][j][1]+(l[j]-l[i])*(sum[n]-sum[j]+sum[i])); dp[i][j][1]=min(dp[i][j-1][1]+(l[j]-l[j-1])*(sum[n]-sum[j-1]+sum[i-1]), dp[i][j-1][0]+(l[j]-l[i])*(sum[n]+sum[i-1]-sum[j-1])); &#125; else&#123; dp[i][j][0] = dp[i][j][1] = INF; &#125; &#125; &#125; cout&lt;&lt;min(dp[1][n][0],dp[1][n][1])&lt;&lt;endl; &#125;]]></content>
@@ -196,6 +207,17 @@
       </categories>
       <tags>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CF11B Jumping Jack]]></title>
+    <url>%2F2019%2F08%2F09%2F2019-08-09-CF11B-Jumping-Jack%2F</url>
+    <content type="text"><![CDATA[题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)； 思路：考虑一直向右，若恰好到达则为最小步数； ​ 若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n; ​ 要向左移动距离n，只需在第n/2步向左走；步数不变； ​ 若(路程-x)为奇数，一直走到偶数的情况； n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。 123456789101112131415161718192021#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;int n,m,sum;int main()&#123; int i,j,k; while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123; if(n&lt;0) n=-n; //printf(&quot;%d\n&quot;,n); sum=0; for(i=0;;i++)&#123; sum+=i; if(sum==n) break; if(sum&gt;n&amp;&amp;(sum-n)%2==0) break; &#125; printf(&quot;%d\n&quot;,i); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>CodeFoeces</tag>
       </tags>
   </entry>
   <entry>
@@ -221,17 +243,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CF978D Almost Arithmetic Progression]]></title>
-    <url>%2F2019%2F08%2F08%2F2019-08-08-CF978D-Almost-Arithmetic-Progression%2F</url>
-    <content type="text"><![CDATA[思维好题：题意给出长为n的数列，你可以对每一个数进行+1，-1操作，也可以不进行操作，问，最少需要几次操作才能使这个数列变成等差数列。如果不能变为等差数列，则输出-1.思路：暴力枚举前两项的所有情况=3*3=9种。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cmath&gt;#define INF 0x3f3f3f3fusing namespace std;int n;long long arr[100005];long long b[100005];int main()&#123; cin&gt;&gt;n; long ans=0; for(int i=1;i&lt;=n;i++) cin&gt;&gt;arr[i]; int MIN=INF; for(int i=-1;i&lt;=1;i++) &#123; for(int j=-1;j&lt;=1;j++) &#123; int flag=1; int ans=abs(i)+abs(j); b[1]=arr[1]+i; b[2]=arr[2]+j; int d=b[2]-b[1]; for(int k=3;k&lt;=n;k++) &#123; if(abs(b[k-1]+d-arr[k])&lt;=1) &#123; b[k]=b[k-1]+d; ans+=abs(b[k]-arr[k]); &#125; else &#123; flag=0; break; &#125; &#125; if(flag) &#123; MIN=min(MIN,ans); &#125; &#125; &#125; if(MIN==INF) cout&lt;&lt;-1&lt;&lt;endl; else cout&lt;&lt;MIN&lt;&lt;endl;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>暴力枚举+思维</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[P3197 [HNOI2008]越狱]]></title>
     <url>%2F2019%2F08%2F08%2F2019-08-08-P3197-%5BHNOI2008%5D%E8%B6%8A%E7%8B%B1%2F</url>
     <content type="text"><![CDATA[计数原理。 一个犯人有m种状态，在不考虑其它条件的情况下，两个犯人有m的平方种状态 =&gt;=&gt; n个犯人有m^{n}m**n种总状态。 我们你想思维，总状态数-不越狱的数=越狱的数。由于每一个房间的人的宗教有mm种可能，且有nn个房间，所以所有的方案数等于m^nm**n。由于当相邻的两个房间所关押的罪犯当宗教相同时就有可能会越狱，所以不可能会越狱的方案数为m \times (m-1)^{n-1}m×(m−1)n−1，这是因为第一个房间的最烦的宗教有mm种选择，而第二个房间的罪犯的宗教有m-1m−1种选择，第三个房间的罪犯的宗教有m-2m−2种选择，以此类推。因此越狱的方案数就有m^n-m \times (m-1)^{n-1}m**n−m×(m−1)n−1种。由于nn很大，所以我们用快速幂来解这道题。 1234567891011121314151617181920#include&lt;iostream&gt;int MOD=100003;using namespace std;long long qpow(long long m,long long n)&#123; long long ans=1; while(n) &#123; if(n&amp;1) ans=(ans%MOD*m%MOD)%MOD; m=(m%MOD*m%MOD)%MOD; n&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; long long m,n; cin&gt;&gt;m&gt;&gt;n; cout&lt;&lt;(((qpow(m,n)-m*qpow(m-1,n-1))%MOD+MOD)%MOD)&lt;&lt;endl;&#125;]]></content>
@@ -240,6 +251,17 @@
       </categories>
       <tags>
         <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CF978D Almost Arithmetic Progression]]></title>
+    <url>%2F2019%2F08%2F08%2F2019-08-08-CF978D-Almost-Arithmetic-Progression%2F</url>
+    <content type="text"><![CDATA[思维好题：题意给出长为n的数列，你可以对每一个数进行+1，-1操作，也可以不进行操作，问，最少需要几次操作才能使这个数列变成等差数列。如果不能变为等差数列，则输出-1.思路：暴力枚举前两项的所有情况=3*3=9种。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647#include&lt;iostream&gt;#include&lt;cmath&gt;#define INF 0x3f3f3f3fusing namespace std;int n;long long arr[100005];long long b[100005];int main()&#123; cin&gt;&gt;n; long ans=0; for(int i=1;i&lt;=n;i++) cin&gt;&gt;arr[i]; int MIN=INF; for(int i=-1;i&lt;=1;i++) &#123; for(int j=-1;j&lt;=1;j++) &#123; int flag=1; int ans=abs(i)+abs(j); b[1]=arr[1]+i; b[2]=arr[2]+j; int d=b[2]-b[1]; for(int k=3;k&lt;=n;k++) &#123; if(abs(b[k-1]+d-arr[k])&lt;=1) &#123; b[k]=b[k-1]+d; ans+=abs(b[k]-arr[k]); &#125; else &#123; flag=0; break; &#125; &#125; if(flag) &#123; MIN=min(MIN,ans); &#125; &#125; &#125; if(MIN==INF) cout&lt;&lt;-1&lt;&lt;endl; else cout&lt;&lt;MIN&lt;&lt;endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>暴力枚举+思维</tag>
       </tags>
   </entry>
   <entry>
@@ -342,28 +364,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[动态规划入门-洛谷R21862874]]></title>
-    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-%E6%B4%9B%E8%B0%B7R21862874%2F</url>
-    <content type="text"><![CDATA[存在依赖关系的背包DP：这道题的思维真的很不错，如果存在附件，那么我们就只看主件，至于如何只看主件，我在注释中已经说了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253/* preblem:R21862874 * 很好的一道存在依赖关系的01背包问题，如何解决依赖关系，博主是用了二维数组来记录的。 * 并且循环的时候只循环主键，在扫描过程中自动把附件的价值进行了讨论。 * 总之这道题是很好的一道入门题。*/#include&lt;iostream&gt; #include&lt;algorithm&gt;using namespace std;int m_v[32005];int m_w[32005];int p_v[32005][3];int p_w[32005][3];int dp[32005]=&#123;0&#125;;int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a, b, c; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c; if(!c) &#123; m_w[i] = a; m_v[i] = a * b; //cout&lt;&lt;m_w[1]&lt;&lt;endl; &#125; else &#123; p_w[c][0]++; p_w[c][p_w[c][0]] = a; p_v[c][p_w[c][0]] = a * b; &#125; &#125; for (int i = 1; i &lt;= n;i++) for (int j = m ; m_v[i]&gt;0&amp;&amp;j &gt;= m_w[i]; j--) &#123; dp[j] = max(dp[j], dp[j - m_w[i]] + m_v[i]); //cout&lt;&lt;m_v[i]&lt;&lt;endl; //cout&lt;&lt;dp[j]&lt;&lt;endl; if(j&gt;=m_w[i]+p_w[i][1]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1]] + m_v[i] + p_v[i][1]); if(j&gt;=m_w[i]+p_w[i][2]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][2]] + m_v[i] + p_v[i][2]); if(j&gt;=m_w[i]+p_w[i][1]+p_w[i][2]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1] - p_w[i][2]] + p_v[i][1] + m_v[i] + p_v[i][2]); &#125; //for(int i=0;i&lt;=m;i++) //cout&lt;&lt;dp[i]&lt;&lt;endl; cout &lt;&lt; dp[m] &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[动态规划入门-洛谷P1616]]></title>
-    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-%E6%B4%9B%E8%B0%B7P1616%2F</url>
-    <content type="text"><![CDATA[完全背包： 123456789101112131415161718192021222324252627/* preblem:P1616 * 完全背包板子题 * * */#include&lt;iostream&gt; #include&lt;algorithm&gt;using namespace std;int dp[100000]=&#123;0&#125;;int arr[100000];int v[100000];int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++)&#123; cin &gt;&gt; arr[i] &gt;&gt; v[i]; &#125; for (int i = 1; i &lt;= n;i++) &#123; for (int j = arr[i]; j &lt;= m;j++) &#123; dp[j] = max(dp[j], dp[j - arr[i]]+v[i]); &#125; &#125; cout &lt;&lt; dp[m] &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[动态规划入门-HDU1159]]></title>
     <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-HDU1159%2F</url>
     <content type="text"><![CDATA[最长公共子序列：大家都知道递推公式也不多说了。 1234567891011121314151617181920212223242526272829303132333435/* preblem:HDU1159 * 题解：最长公共子序列。 * 公式大家都知道，就不多赘述了。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;string.h&gt;#include&lt;cstring&gt;#include &lt;algorithm&gt;using namespace std;string a,b;int len_a,len_b;int dp[1001][1001];int main()&#123; string a, b; while(cin&gt;&gt;a&gt;&gt;b) &#123; memset(dp, 0, sizeof dp); for (int i = 1;i&lt;=a.length();i++)&#123; for (int j = 1; j &lt;= b.length();j++)&#123; if(a[i-1]==b[j-1]) &#123; dp[i][j] = dp[i - 1][j - 1] + 1; &#125; else &#123; dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); &#125; &#125; &#125; cout &lt;&lt; dp[a.length()][b.length()] &lt;&lt; endl; &#125;&#125;]]></content>
@@ -386,6 +386,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[动态规划入门-洛谷P1616]]></title>
+    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-%E6%B4%9B%E8%B0%B7P1616%2F</url>
+    <content type="text"><![CDATA[完全背包： 123456789101112131415161718192021222324252627/* preblem:P1616 * 完全背包板子题 * * */#include&lt;iostream&gt; #include&lt;algorithm&gt;using namespace std;int dp[100000]=&#123;0&#125;;int arr[100000];int v[100000];int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++)&#123; cin &gt;&gt; arr[i] &gt;&gt; v[i]; &#125; for (int i = 1; i &lt;= n;i++) &#123; for (int j = arr[i]; j &lt;= m;j++) &#123; dp[j] = max(dp[j], dp[j - arr[i]]+v[i]); &#125; &#125; cout &lt;&lt; dp[m] &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[线性动态规划-导弹拦截系统-P1020]]></title>
     <url>%2F2019%2F07%2F31%2F2019-07-31-%E7%BA%BF%E6%80%A7%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA%E7%B3%BB%E7%BB%9F-P1020%2F</url>
     <content type="text"><![CDATA[线性动态规划入门：这是一道对于我来说很好的题。 非递增序列那么等于也可以，我们的思路就是扫描来找，如果尾部元素大于扫描的元素那么我们可以直接把元素放进去，如果大于则，我们在序的非递增序列中照样给第一个比这个大的元素，然后用扫描元素替代他，为什么？我们这样想如果被替代的元素在尾部，那么我们替换他过后是不是我们递减序列会更长（因为尾部元素变大了），那么我们如果替代的元素在中间也不影响，为什么呐？因为我们比较的时候只看尾部元素，中间的元素我们说白了这辈子都不会再用他了。 证明下序列有序：原序列中y1&gt;y&gt;y2，我们替换过后因为a[i]&gt;y，所以我们一定是有序的。 再看看我们的递增序列，如上同样的解释。 结论：最后len（递增序列长度）就是要求的最大不上升子序列长度 但要注意的是，d中存储的并不是最大不上升子序列！ 123456789101112131415161718192021#include&lt;bits/stdc++.h&gt;using namespace std;int a[100005],f[100005],l[100005];struct cmp&#123;bool operator()(int a,int b)&#123;return a&gt;b;&#125;&#125;;int main()&#123; int n=1; while(cin&gt;&gt;a[n])n++; n--; int con=1,cont=1; l[1]=f[1]=a[1]; for(int i=2;i&lt;=n;i++) &#123; if(l[cont]&gt;=a[i])l[++cont]=a[i]; else l[upper_bound(l+1,l+cont+1,a[i],greater&lt;int&gt;()) -l]=a[i]; if(f[con]&lt;a[i])f[++con]=a[i]; else f[lower_bound(f+1,f+con+1,a[i])-f]=a[i]; &#125; cout&lt;&lt;cont&lt;&lt;&quot; &quot;&lt;&lt;con; return 0;&#125;]]></content>
@@ -397,9 +408,20 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[poj 2756 二分图问题]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-poj-2756-%E4%BA%8C%E5%88%86%E5%9B%BE%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[这道题是一个二分 图的问题，但是博主最近学习了网络流，就用了网络流写了。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=50000;const int maxN=205;int N,M; //N个英飞，M个外飞int dis[maxN], r[maxN][maxN], cot=0, tot;int bfs()&#123; memset(dis, -1, sizeof dis); queue&lt;int&gt;q; while(!q.empty()) q.pop(); dis[0] = 1; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u]+1; q.push(i); &#125; &#125; &#125; return dis[tot] &gt; 0 ? 1 : 0;&#125;int dfs(int x,int remain)&#123; if(x==tot) return remain; int k; for (int i = 1; i &lt;= tot;i++) &#123; if (r[x][i] &gt; 0 &amp;&amp; dis[i] == dis[x] + 1&amp;&amp;(k=dfs(i,min(r[x][i],remain)))) &#123; r[x][i] -= k; r[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;M,&amp;N)) &#123; tot=N+1; memset(r, -1, sizeof(r)); memset(dis, -1, sizeof(dis)); int e1,e2; while (~scanf(&quot;%d%d&quot;,&amp;e1,&amp;e2)) &#123; if(e1==-1&amp;&amp;e2==-1) break; r[e1][e2] = 1; r[e2][e1] = 0; r[0][e1] = 1; r[e2][tot] = 1; &#125; int res=0; int ans = 0; while(bfs()) &#123; res = dfs(0, INF); ans += res; &#125; printf(&quot;%d\n&quot;, ans); for(int i=1; i&lt;=M; i++) &#123; for(int j=M+1; j&lt;tot; j++) &#123; if(r[i][j]==0) printf(&quot;%d %d\n&quot;,i,j); &#125; &#125; &#125;&#125;]]></content>
+    <title><![CDATA[动态规划入门-洛谷R21862874]]></title>
+    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-%E6%B4%9B%E8%B0%B7R21862874%2F</url>
+    <content type="text"><![CDATA[存在依赖关系的背包DP：这道题的思维真的很不错，如果存在附件，那么我们就只看主件，至于如何只看主件，我在注释中已经说了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253/* preblem:R21862874 * 很好的一道存在依赖关系的01背包问题，如何解决依赖关系，博主是用了二维数组来记录的。 * 并且循环的时候只循环主键，在扫描过程中自动把附件的价值进行了讨论。 * 总之这道题是很好的一道入门题。*/#include&lt;iostream&gt; #include&lt;algorithm&gt;using namespace std;int m_v[32005];int m_w[32005];int p_v[32005][3];int p_w[32005][3];int dp[32005]=&#123;0&#125;;int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a, b, c; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c; if(!c) &#123; m_w[i] = a; m_v[i] = a * b; //cout&lt;&lt;m_w[1]&lt;&lt;endl; &#125; else &#123; p_w[c][0]++; p_w[c][p_w[c][0]] = a; p_v[c][p_w[c][0]] = a * b; &#125; &#125; for (int i = 1; i &lt;= n;i++) for (int j = m ; m_v[i]&gt;0&amp;&amp;j &gt;= m_w[i]; j--) &#123; dp[j] = max(dp[j], dp[j - m_w[i]] + m_v[i]); //cout&lt;&lt;m_v[i]&lt;&lt;endl; //cout&lt;&lt;dp[j]&lt;&lt;endl; if(j&gt;=m_w[i]+p_w[i][1]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1]] + m_v[i] + p_v[i][1]); if(j&gt;=m_w[i]+p_w[i][2]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][2]] + m_v[i] + p_v[i][2]); if(j&gt;=m_w[i]+p_w[i][1]+p_w[i][2]) dp[j] = max(dp[j], dp[j - m_w[i] - p_w[i][1] - p_w[i][2]] + p_v[i][1] + m_v[i] + p_v[i][2]); &#125; //for(int i=0;i&lt;=m;i++) //cout&lt;&lt;dp[i]&lt;&lt;endl; cout &lt;&lt; dp[m] &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[hdu 3549 网络流Dinic板子题]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-hdu-3549-%E7%BD%91%E7%BB%9C%E6%B5%81Dinic%E6%9D%BF%E5%AD%90%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[网络流Dinic板子题 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define INF 1e9+7#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int maxN=1005;int N,M;int r[maxN][maxN], pre[maxN], flow[maxN][maxN];int dis[maxN];queue&lt;int&gt; q;int bfs()&#123; while(!q.empty()) q.pop(); memset(dis, -1, sizeof dis); dis[1] = 0; q.push(1); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= N;i++) &#123; if(flow[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u] + 1; q.push(i); &#125; &#125; &#125; return dis[N] != -1;&#125;int dfs(int x,int remain)&#123; if(remain==0||x==N) return remain; int k; for (int i = 1; i &lt;= N;i++) &#123; if(flow[x][i]&gt;0&amp;&amp;dis[i]==dis[x]+1&amp;&amp;(k=dfs(i,min(remain,flow[x][i])))) &#123; flow[x][i] -= k; flow[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; int t; scanf(&quot;%d&quot;, &amp;t); int cnt=1; while(t--) &#123; memset(flow, 0, sizeof flow); scanf(&quot;%d%d&quot;, &amp;N, &amp;M); for (int i = 0; i &lt; M;i++) &#123; int a, b, c; scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c); flow[a][b] += c; &#125; int ans = 0; int res; while(bfs()) &#123; while(res=dfs(1,INF)) ans += res; &#125; printf(&quot;Case %d: %d\n&quot;,cnt++, ans); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -408,9 +430,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[hdu 2063 过山车]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-hdu-2063-%E8%BF%87%E5%B1%B1%E8%BD%A6%2F</url>
-    <content type="text"><![CDATA[二分图问题用网络流跑 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697/* problem: HDU2063 * Auther:CaiCai * 第二次用EK跑二分图，没什么好说的，建好图就一定可以做 * 建图就是女生一边，男生一边，再把源点和束点找到，权值分别是1这样就可以把图建完了。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=505;int m, n;int temp;int r[maxN&lt;&lt;1][maxN&lt;&lt;1], flow[maxN&lt;&lt;1], pre[maxN&lt;&lt;1];int sum1 = 0;int sum2 = 0;int K, M, N;int tot;int bfs(int st,int en)&#123; queue&lt;int&gt; q; while(!q.empty()) q.pop(); memset(pre, -1, sizeof pre); pre[0] = 0; flow[0]=INF; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;pre[i]==-1) &#123; pre[i] = u; flow[i] = min(flow[u], r[u][i]); q.push(i); &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int maxflow(int st,int en)&#123; int icr = 0; int ans = 0; while((icr=bfs(st,en))!=-1) &#123; int k = en; while(k!=st) &#123; int last = pre[k]; r[last][k] -= icr; r[k][last] += icr; k = last; &#125; ans += icr; &#125; return ans;&#125;int main()&#123; while (~scanf(&quot;%d&quot;,&amp;K)) &#123; if(K==0) break; scanf(&quot;%d%d&quot;,&amp;M,&amp;N); memset(r, 0, sizeof r); tot = M + N+1; for (int i = 1; i &lt;= M;i++) r[0][i] = 1; for (int i = M + 1; i &lt;= M + N;i++) r[i][tot] = 1; for (int i = 0; i &lt; K; i++) &#123; int a, b; scanf(&quot;%d&quot;, &amp;a); scanf(&quot;%d&quot;, &amp;b); r[a][b + M] = 1; &#125; int ans = maxflow(0, tot); printf(&quot;%d\n&quot;, ans); &#125; &#125;]]></content>
+    <title><![CDATA[poj 2756 二分图问题]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-poj-2756-%E4%BA%8C%E5%88%86%E5%9B%BE%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[这道题是一个二分 图的问题，但是博主最近学习了网络流，就用了网络流写了。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=50000;const int maxN=205;int N,M; //N个英飞，M个外飞int dis[maxN], r[maxN][maxN], cot=0, tot;int bfs()&#123; memset(dis, -1, sizeof dis); queue&lt;int&gt;q; while(!q.empty()) q.pop(); dis[0] = 1; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u]+1; q.push(i); &#125; &#125; &#125; return dis[tot] &gt; 0 ? 1 : 0;&#125;int dfs(int x,int remain)&#123; if(x==tot) return remain; int k; for (int i = 1; i &lt;= tot;i++) &#123; if (r[x][i] &gt; 0 &amp;&amp; dis[i] == dis[x] + 1&amp;&amp;(k=dfs(i,min(r[x][i],remain)))) &#123; r[x][i] -= k; r[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;M,&amp;N)) &#123; tot=N+1; memset(r, -1, sizeof(r)); memset(dis, -1, sizeof(dis)); int e1,e2; while (~scanf(&quot;%d%d&quot;,&amp;e1,&amp;e2)) &#123; if(e1==-1&amp;&amp;e2==-1) break; r[e1][e2] = 1; r[e2][e1] = 0; r[0][e1] = 1; r[e2][tot] = 1; &#125; int res=0; int ans = 0; while(bfs()) &#123; res = dfs(0, INF); ans += res; &#125; printf(&quot;%d\n&quot;, ans); for(int i=1; i&lt;=M; i++) &#123; for(int j=M+1; j&lt;tot; j++) &#123; if(r[i][j]==0) printf(&quot;%d %d\n&quot;,i,j); &#125; &#125; &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -463,9 +485,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[hdu 3549 网络流Dinic板子题]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-hdu-3549-%E7%BD%91%E7%BB%9C%E6%B5%81Dinic%E6%9D%BF%E5%AD%90%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[网络流Dinic板子题 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define INF 1e9+7#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int maxN=1005;int N,M;int r[maxN][maxN], pre[maxN], flow[maxN][maxN];int dis[maxN];queue&lt;int&gt; q;int bfs()&#123; while(!q.empty()) q.pop(); memset(dis, -1, sizeof dis); dis[1] = 0; q.push(1); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= N;i++) &#123; if(flow[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u] + 1; q.push(i); &#125; &#125; &#125; return dis[N] != -1;&#125;int dfs(int x,int remain)&#123; if(remain==0||x==N) return remain; int k; for (int i = 1; i &lt;= N;i++) &#123; if(flow[x][i]&gt;0&amp;&amp;dis[i]==dis[x]+1&amp;&amp;(k=dfs(i,min(remain,flow[x][i])))) &#123; flow[x][i] -= k; flow[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; int t; scanf(&quot;%d&quot;, &amp;t); int cnt=1; while(t--) &#123; memset(flow, 0, sizeof flow); scanf(&quot;%d%d&quot;, &amp;N, &amp;M); for (int i = 0; i &lt; M;i++) &#123; int a, b, c; scanf(&quot;%d%d%d&quot;, &amp;a, &amp;b, &amp;c); flow[a][b] += c; &#125; int ans = 0; int res; while(bfs()) &#123; while(res=dfs(1,INF)) ans += res; &#125; printf(&quot;Case %d: %d\n&quot;,cnt++, ans); &#125;&#125;]]></content>
+    <title><![CDATA[hdu 2063 过山车]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-hdu-2063-%E8%BF%87%E5%B1%B1%E8%BD%A6%2F</url>
+    <content type="text"><![CDATA[二分图问题用网络流跑 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697/* problem: HDU2063 * Auther:CaiCai * 第二次用EK跑二分图，没什么好说的，建好图就一定可以做 * 建图就是女生一边，男生一边，再把源点和束点找到，权值分别是1这样就可以把图建完了。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=505;int m, n;int temp;int r[maxN&lt;&lt;1][maxN&lt;&lt;1], flow[maxN&lt;&lt;1], pre[maxN&lt;&lt;1];int sum1 = 0;int sum2 = 0;int K, M, N;int tot;int bfs(int st,int en)&#123; queue&lt;int&gt; q; while(!q.empty()) q.pop(); memset(pre, -1, sizeof pre); pre[0] = 0; flow[0]=INF; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;pre[i]==-1) &#123; pre[i] = u; flow[i] = min(flow[u], r[u][i]); q.push(i); &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int maxflow(int st,int en)&#123; int icr = 0; int ans = 0; while((icr=bfs(st,en))!=-1) &#123; int k = en; while(k!=st) &#123; int last = pre[k]; r[last][k] -= icr; r[k][last] += icr; k = last; &#125; ans += icr; &#125; return ans;&#125;int main()&#123; while (~scanf(&quot;%d&quot;,&amp;K)) &#123; if(K==0) break; scanf(&quot;%d%d&quot;,&amp;M,&amp;N); memset(r, 0, sizeof r); tot = M + N+1; for (int i = 1; i &lt;= M;i++) r[0][i] = 1; for (int i = M + 1; i &lt;= M + N;i++) r[i][tot] = 1; for (int i = 0; i &lt; K; i++) &#123; int a, b; scanf(&quot;%d&quot;, &amp;a); scanf(&quot;%d&quot;, &amp;b); r[a][b + M] = 1; &#125; int ans = maxflow(0, tot); printf(&quot;%d\n&quot;, ans); &#125; &#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -477,6 +499,17 @@
     <title><![CDATA[网络流入门裸题]]></title>
     <url>%2F2019%2F07%2F27%2F2019-07-27-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%85%A5%E9%97%A8%E8%A3%B8%E9%A2%98%2F</url>
     <content type="text"><![CDATA[网络流板子题 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122#include &lt;iostream&gt;#include &lt;cstdlib&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;algorithm&gt;#include &lt;ctime&gt;#include &lt;vector&gt;#include &lt;queue&gt;#include &lt;map&gt;using namespace std;typedef long long LL;const int MAXM = 6000011;const int MAXN = 1000011;int inf;int n,m;int first[MAXN];int ecnt;int s,t;int dis[MAXN];int ans;struct edge&#123; int v,f; int next; &#125;e[MAXM];inline int getint()&#123; int w=0,q=0; char c=getchar(); while(c&lt;&apos;0&apos;||c&gt;&apos;9&apos;&amp;&amp;c!=&apos;-&apos;) c=getchar(); if(c==&apos;-&apos;) q=1,c=getchar(); while(c&gt;=&apos;0&apos;&amp;&amp;c&lt;=&apos;9&apos;) w=w*10+c-&apos;0&apos;,c=getchar(); return q?-w:w; &#125;inline bool link(int x,int y,int z)&#123; e[++ecnt].next=first[x];first[x]=ecnt;e[ecnt].v=y;e[ecnt].f=z; e[++ecnt].next=first[y];first[y]=ecnt;e[ecnt].v=x;e[ecnt].f=z; &#125;inline bool bfs()&#123; memset(dis,127/3,sizeof dis); int ceng=dis[t]; queue&lt;int&gt;q; while(!q.empty()) q.pop(); dis[1]=1;q.push(1);//dis存层; while(!q.empty()) &#123; int u=q.front(); q.pop(); for(int i=first[u];i;i=e[i].next) &#123; if(e[i].f&amp;&amp;dis[e[i].v]==ceng) &#123; dis[e[i].v]=dis[u]+1; q.push(e[i].v); &#125; &#125; if(dis[t]!=ceng) return 1; &#125; return 0; &#125;inline int maxflow(int now,int remain)&#123; if(remain==0||now==t) return remain; int flow=0; for(int i=first[now];i;i=e[i].next) &#123; if(dis[e[i].v]==dis[now]+1&amp;&amp;e[i].f) &#123; int f=maxflow(e[i].v,min(remain,e[i].f)); if(f) &#123; e[i].f-=f;e[i^1].f+=f; flow+=f ; remain-=f; if(remain==0) return flow; &#125; else dis[e[i].v]=-1; &#125; &#125; return flow;&#125;inline void solve()&#123; s=1,t=n*m;inf=1&lt;&lt;30; while(bfs()) &#123; ans+=maxflow(s,inf); &#125; printf(&quot;%d&quot;,ans);&#125;int main()&#123; n=getint(); m=getint(); int x; ecnt=1; int nowx,nownex; for(int i=1;i&lt;=n;i++) for(int j=1;j&lt;m;j++)&#123; nowx=(i-1)*m+j,nownex=nowx+1; x=getint(); link(nowx,nownex,x); &#125; for(int i=1;i&lt;n;i++) for(int j=1;j&lt;=m;j++) &#123; nowx=(i-1)*m+j,nownex=nowx+m; x=getint(); link(nowx,nownex,x); &#125; for(int i=1;i&lt;n;i++) for(int j=1;j&lt;m;j++) &#123; nowx=(i-1)*m+j,nownex=nowx+m+1; x=getint(); link(nowx,nownex,x); &#125; solve(); return 0;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj 3281 拆点]]></title>
+    <url>%2F2019%2F07%2F27%2F2019-07-27-poj-3281-%E6%8B%86%E7%82%B9%2F</url>
+    <content type="text"><![CDATA[网络流最大流问题： 很好的一道题，注释讲的很清楚，直接上代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104/* Auther :CaiCai * poj 3281 网络流建图好题。 * 网络流入门，开始建图难在我们的源点和终点的建立，在接触几道网络流的题后大概有了一点建图概念。 * 这道题的建图难在拆点，如果不拆点跑出来的最大流应该是2，因为一头牛的流量承受了食物和饮料。（博主拙见）。 * 精髓就在这里，牛拆点，确保一头牛就选一套food和drink的搭配 * 加个源点和汇点。源点与食物、饮料和汇点的边容量都是1，表示每种食物和饮料只有一个。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=205;int n, f, d;int tot;int r[maxN&lt;&lt;2][maxN&lt;&lt;2], flow[maxN&lt;&lt;2], pre[maxN&lt;&lt;2], food[maxN], drink[maxN];void init()&#123; memset(r, 0, sizeof r); tot = n * 2 + d + f + 1; return ;&#125;int bfs(int st,int en)&#123; memset(pre, -1, sizeof pre); queue&lt;int&gt; q; while(!q.empty()) q.pop(); pre[st] = 0; flow[st]=INF; q.push(st); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;pre[i]==-1) &#123; flow[i] = min(r[u][i], flow[u]); q.push(i); pre[i] = u; &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int dfs(int st,int en)&#123; int k; int flowmax = 0; while((k=bfs(st, en))!=-1) &#123; int par = en, last; while(par!=st) &#123; last = pre[par]; r[last][par] -= k; r[par][last] += k; par = last; &#125; flowmax += k; &#125; return flowmax;&#125;int main()&#123; while(~scanf(&quot;%d%d%d&quot;,&amp;n,&amp;f,&amp;d)) &#123; init(); int F=0,D=0; for (int i = 1; i &lt;= n;i++) &#123; scanf(&quot;%d%d&quot;,&amp;F,&amp;D); for (int j = 1; j &lt;= F;j++) &#123; scanf(&quot;%d&quot;, &amp;food[j]); r[0][food[j]] = 1; r[food[j]][f + i * 2 - 1] = 1; &#125; for (int j = 1; j &lt;= D;j++) &#123; scanf(&quot;%d&quot;, &amp;drink[j]); r[f + i * 2][f + 2 * n + drink[j]] = 1; r[f + 2 * n + drink[j]][tot] = 1; &#125; r[f + i * 2 - 1][f + i * 2] = 1; &#125; printf(&quot;%d\n&quot;, dfs(0, tot)); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -504,17 +537,6 @@
       </categories>
       <tags>
         <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[poj 3281 拆点]]></title>
-    <url>%2F2019%2F07%2F27%2F2019-07-27-poj-3281-%E6%8B%86%E7%82%B9%2F</url>
-    <content type="text"><![CDATA[网络流最大流问题： 很好的一道题，注释讲的很清楚，直接上代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104/* Auther :CaiCai * poj 3281 网络流建图好题。 * 网络流入门，开始建图难在我们的源点和终点的建立，在接触几道网络流的题后大概有了一点建图概念。 * 这道题的建图难在拆点，如果不拆点跑出来的最大流应该是2，因为一头牛的流量承受了食物和饮料。（博主拙见）。 * 精髓就在这里，牛拆点，确保一头牛就选一套food和drink的搭配 * 加个源点和汇点。源点与食物、饮料和汇点的边容量都是1，表示每种食物和饮料只有一个。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=205;int n, f, d;int tot;int r[maxN&lt;&lt;2][maxN&lt;&lt;2], flow[maxN&lt;&lt;2], pre[maxN&lt;&lt;2], food[maxN], drink[maxN];void init()&#123; memset(r, 0, sizeof r); tot = n * 2 + d + f + 1; return ;&#125;int bfs(int st,int en)&#123; memset(pre, -1, sizeof pre); queue&lt;int&gt; q; while(!q.empty()) q.pop(); pre[st] = 0; flow[st]=INF; q.push(st); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;pre[i]==-1) &#123; flow[i] = min(r[u][i], flow[u]); q.push(i); pre[i] = u; &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int dfs(int st,int en)&#123; int k; int flowmax = 0; while((k=bfs(st, en))!=-1) &#123; int par = en, last; while(par!=st) &#123; last = pre[par]; r[last][par] -= k; r[par][last] += k; par = last; &#125; flowmax += k; &#125; return flowmax;&#125;int main()&#123; while(~scanf(&quot;%d%d%d&quot;,&amp;n,&amp;f,&amp;d)) &#123; init(); int F=0,D=0; for (int i = 1; i &lt;= n;i++) &#123; scanf(&quot;%d%d&quot;,&amp;F,&amp;D); for (int j = 1; j &lt;= F;j++) &#123; scanf(&quot;%d&quot;, &amp;food[j]); r[0][food[j]] = 1; r[food[j]][f + i * 2 - 1] = 1; &#125; for (int j = 1; j &lt;= D;j++) &#123; scanf(&quot;%d&quot;, &amp;drink[j]); r[f + i * 2][f + 2 * n + drink[j]] = 1; r[f + 2 * n + drink[j]][tot] = 1; &#125; r[f + i * 2 - 1][f + i * 2] = 1; &#125; printf(&quot;%d\n&quot;, dfs(0, tot)); &#125;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>网络流</tag>
       </tags>
   </entry>
   <entry>
@@ -573,17 +595,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[572 Div2 B]]></title>
-    <url>%2F2019%2F07%2F13%2F2019-06-26-572-Div2-B%2F</url>
-    <content type="text"><![CDATA[B. Number Circle time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output You are given nn numbers a1,a2,…,ana1,a2,…,an. Is it possible to arrange them in a circle in such a way that every number is strictly less than the sum of its neighbors? For example, for the array [1,4,5,6,7,8][1,4,5,6,7,8], the arrangement on the left is valid, while arrangement on the right is not, as 5≥4+15≥4+1 and 8&gt;1+68&gt;1+6. Input The first line contains a single integer nn (3≤n≤1053≤n≤105) — the number of numbers. The second line contains nn integers a1,a2,…,ana1,a2,…,an (1≤ai≤1091≤ai≤109) — the numbers. The given numbers are not necessarily distinct (i.e. duplicates are allowed). Output If there is no solution, output “NO” in the first line. If there is a solution, output “YES” in the first line. In the second line output nn numbers — elements of the array in the order they will stay in the circle. The first and the last element you output are considered neighbors in the circle. If there are multiple solutions, output any of them. You can print the circle starting with any element. 思路：先排序，如果最大的比第二第三的和还要大，则不可能有方案，否则可以先把最大的放在第一个第二大的放在第二个，第三大的放在最后一个，最后中间以此填补。 1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int arr[100005];int brr[100005];int cmp(int x,int y)&#123; return x&gt;y;&#125;int main()&#123; int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; sort(arr+1,arr+1+n,cmp); if(arr[1]&gt;=arr[2]+arr[3]) cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; else &#123; brr[1]=arr[1]; cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; for(int i=2,j=2,k=n;j&lt;=k;) &#123; //cout&lt;&lt;i&lt;&lt;endl; brr[j++]=arr[i++]; if(j&lt;=k)brr[k--]=arr[i++]; &#125; for(int i=1;i&lt;=n;i++) cout&lt;&lt;brr[i]&lt;&lt;&apos; &apos;; cout&lt;&lt;endl; &#125;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[572 Div2 C]]></title>
     <url>%2F2019%2F07%2F13%2F2019-06-26-572-Div2-C%2F</url>
     <content type="text"><![CDATA[C. Candies! time limit per test 2 seconds memory limit per test 256 megabytes input standard input output standard output Consider a sequence of digits of length 2k2k [a1,a2,…,a2k][a1,a2,…,a2k]. We perform the following operation with it: replace pairs (a2i+1,a2i+2)(a2i+1,a2i+2) with (a2i+1+a2i+2)mod10(a2i+1+a2i+2)mod10 for 0≤i&lt;2k−10≤i&lt;2k−1. For every ii where a2i+1+a2i+2≥10a2i+1+a2i+2≥10 we get a candy! As a result, we will get a sequence of length 2k−12k−1. Less formally, we partition sequence of length 2k2k into 2k−12k−1 pairs, each consisting of 2 numbers: the first pair consists of the first and second numbers, the second of the third and fourth ……, the last pair consists of the (2k−12k−1)-th and (2k2k)-th numbers. For every pair such that sum of numbers in it is at least 1010, we get a candy. After that, we replace every pair of numbers with a remainder of the division of their sum by 1010 (and don’t change the order of the numbers). Perform this operation with a resulting array until it becomes of length 11. Let f([a1,a2,…,a2k])f([a1,a2,…,a2k]) denote the number of candies we get in this process. For example: if the starting sequence is [8,7,3,1,7,0,9,4][8,7,3,1,7,0,9,4] then: After the first operation the sequence becomes [(8+7)mod10,(3+1)mod10,(7+0)mod10,(9+4)mod10][(8+7)mod10,(3+1)mod10,(7+0)mod10,(9+4)mod10] == [5,4,7,3][5,4,7,3], and we get 22 candies as 8+7≥108+7≥10 and 9+4≥109+4≥10. After the second operation the sequence becomes [(5+4)mod10,(7+3)mod10][(5+4)mod10,(7+3)mod10] == [9,0][9,0], and we get one more candy as 7+3≥107+3≥10. After the final operation sequence becomes [(9+0)mod10][(9+0)mod10] == [9][9]. Therefore, f([8,7,3,1,7,0,9,4])=3f([8,7,3,1,7,0,9,4])=3 as we got 33 candies in total. You are given a sequence of digits of length nn s1,s2,…sns1,s2,…sn. You have to answer qq queries of the form (li,ri)(li,ri), where for ii-th query you have to output f([sli,sli+1,…,sri])f([sli,sli+1,…,sri]). It is guaranteed that ri−li+1ri−li+1 is of form 2k2k for some nonnegative integer kk. Input The first line contains a single integer nn (1≤n≤1051≤n≤105) — the length of the sequence. The second line contains nn digits s1,s2,…,sns1,s2,…,sn (0≤si≤90≤si≤9). The third line contains a single integer qq (1≤q≤1051≤q≤105) — the number of queries. Each of the next qq lines contains two integers lili, riri (1≤li≤ri≤n1≤li≤ri≤n) — ii-th query. It is guaranteed that ri−li+1ri−li+1 is a nonnegative integer power of 22. Output Output qq lines, in ii-th line output single integer — f([sli,sli+1,…,sri])f([sli,sli+1,…,sri]), answer to the ii-th query.Examples input Copy 12345688 7 3 1 7 0 9 431 82 57 7 output Copy 123310 input Copy 12345660 1 2 3 3 531 21 43 6 output Copy 123001 Note The first example illustrates an example from the statement. f([7,3,1,7])=1f([7,3,1,7])=1: sequence of operations is [7,3,1,7]→[(7+3)mod10,(1+7)mod10][7,3,1,7]→[(7+3)mod10,(1+7)mod10] == [0,8][0,8] and one candy as 7+3≥107+3≥10 →→ [(0+8)mod10][(0+8)mod10] == [8][8], so we get only 11 candy. f([9])=0f([9])=0 as we don’t perform operations with it. 我的思路是直接除以10就完了 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;int arr[100005];long sum[100005];int main()&#123; int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; sum[i]=sum[i-1]+arr[i]; &#125; int temp; cin&gt;&gt;temp; while(temp--) &#123; int a,b,ans; cin&gt;&gt;a&gt;&gt;b; if(a!=b) ans=sum[b]-sum[a-1]; else ans=arr[a]; //cout&lt;&lt;ans&lt;&lt;endl; cout&lt;&lt;ans/10&lt;&lt;endl; &#125;&#125; 附上大佬DP代码后面研究 123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;#define N 500500using namespace std;int n,m,l,r,lg[N],mi[20],a[N],f[N][20],g[N][20];int main()&#123; //freopen(&quot;1.in&quot;,&quot;r&quot;,stdin); scanf(&quot;%d&quot;,&amp;n); lg[1]=0;mi[0]=1; for(int i=1;(1&lt;&lt;(i-1))&lt;=n;i++)&#123; lg[1&lt;&lt;i]=i; mi[i]=1&lt;&lt;i; &#125; for(int i=1;i&lt;=n;i++)&#123; scanf(&quot;%d&quot;,&amp;a[i]); g[i][0]=a[i]; &#125; for(int j=1;mi[j]&lt;=n;j++) for(int i=1;i+mi[j]-1&lt;=n;i++)&#123; f[i][j]=f[i][j-1]+f[i+mi[j-1]][j-1]+(g[i][j-1]+g[i+mi[j-1]][j-1]&gt;=10); g[i][j]=(g[i][j-1]+g[i+mi[j-1]][j-1])%10; &#125; scanf(&quot;%d&quot;,&amp;m); while(m--)&#123; scanf(&quot;%d%d&quot;,&amp;l,&amp;r); printf(&quot;%d\n&quot;,f[l][lg[r-l+1]]); &#125;&#125;]]></content>
@@ -598,6 +609,17 @@
     <title><![CDATA[573 Div2 C]]></title>
     <url>%2F2019%2F07%2F13%2F2019-07-13-573-Div2-C%2F</url>
     <content type="text"><![CDATA[C. Tokitsukaze and Discard Items time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output Recently, Tokitsukaze found an interesting game. Tokitsukaze had nn items at the beginning of this game. However, she thought there were too many items, so now she wants to discard mm (1≤m≤n1≤m≤n) special items of them. These nn items are marked with indices from 11 to nn. In the beginning, the item with index ii is placed on the ii-th position. Items are divided into several pages orderly, such that each page contains exactly kk positions and the last positions on the last page may be left empty. Tokitsukaze would do the following operation: focus on the first special page that contains at least one special item, and at one time, Tokitsukaze would discard all special items on this page. After an item is discarded or moved, its old position would be empty, and then the item below it, if exists, would move up to this empty position. The movement may bring many items forward and even into previous pages, so Tokitsukaze would keep waiting until all the items stop moving, and then do the operation (i.e. check the special page and discard the special items) repeatedly until there is no item need to be discarded. Consider the first example from the statement: n=10n=10, m=4m=4, k=5k=5, p=[3,5,7,10]p=[3,5,7,10]. The are two pages. Initially, the first page is special (since it is the first page containing a special item). So Tokitsukaze discards the special items with indices 33 and 55. After, the first page remains to be special. It contains [1,2,4,6,7][1,2,4,6,7], Tokitsukaze discards the special item with index 77. After, the second page is special (since it is the first page containing a special item). It contains [9,10][9,10], Tokitsukaze discards the special item with index 1010. Tokitsukaze wants to know the number of operations she would do in total. Input The first line contains three integers nn, mm and kk (1≤n≤10181≤n≤1018, 1≤m≤1051≤m≤105, 1≤m,k≤n1≤m,k≤n) — the number of items, the number of special items to be discarded and the number of positions in each page. The second line contains mm distinct integers p1,p2,…,pmp1,p2,…,pm (1≤p1&lt;p2&lt;…&lt;pm≤n1≤p1&lt;p2&lt;…&lt;pm≤n) — the indices of special items which should be discarded. 思路：模拟题，直接按题意模拟就好了，每次找出需要动的第一页上的所有数，再将记录移动的计数器增加，重新找下一页， 注意找的时候位置要减去移动的计数器move。 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;const int manx=100005;long long arr[manx];int main()&#123; long long m,n,k; cin&gt;&gt;m&gt;&gt;n&gt;&gt;k; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; long long move=0; long long i=1,j=1; long ans=0; while(i&lt;=n) &#123; j=i; long long tag=(arr[i]-move-1)/k;//减1的目的是为了保证边缘也在这一页，比如k=5，如果不-1则5在下一页 while(((arr[j]-move-1)/k==tag)&amp;&amp;j&lt;=m)//找这一页第一个要删除的位置，并且和这个同一页的所有特殊数全部删掉。 j++; move+=j-i; ans++; i=j; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[572 Div2 B]]></title>
+    <url>%2F2019%2F07%2F13%2F2019-06-26-572-Div2-B%2F</url>
+    <content type="text"><![CDATA[B. Number Circle time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output You are given nn numbers a1,a2,…,ana1,a2,…,an. Is it possible to arrange them in a circle in such a way that every number is strictly less than the sum of its neighbors? For example, for the array [1,4,5,6,7,8][1,4,5,6,7,8], the arrangement on the left is valid, while arrangement on the right is not, as 5≥4+15≥4+1 and 8&gt;1+68&gt;1+6. Input The first line contains a single integer nn (3≤n≤1053≤n≤105) — the number of numbers. The second line contains nn integers a1,a2,…,ana1,a2,…,an (1≤ai≤1091≤ai≤109) — the numbers. The given numbers are not necessarily distinct (i.e. duplicates are allowed). Output If there is no solution, output “NO” in the first line. If there is a solution, output “YES” in the first line. In the second line output nn numbers — elements of the array in the order they will stay in the circle. The first and the last element you output are considered neighbors in the circle. If there are multiple solutions, output any of them. You can print the circle starting with any element. 思路：先排序，如果最大的比第二第三的和还要大，则不可能有方案，否则可以先把最大的放在第一个第二大的放在第二个，第三大的放在最后一个，最后中间以此填补。 1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int arr[100005];int brr[100005];int cmp(int x,int y)&#123; return x&gt;y;&#125;int main()&#123; int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; sort(arr+1,arr+1+n,cmp); if(arr[1]&gt;=arr[2]+arr[3]) cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; else &#123; brr[1]=arr[1]; cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; for(int i=2,j=2,k=n;j&lt;=k;) &#123; //cout&lt;&lt;i&lt;&lt;endl; brr[j++]=arr[i++]; if(j&lt;=k)brr[k--]=arr[i++]; &#125; for(int i=1;i&lt;=n;i++) cout&lt;&lt;brr[i]&lt;&lt;&apos; &apos;; cout&lt;&lt;endl; &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -639,9 +661,42 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[除法分块模板&洛谷]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%E6%A8%A1%E6%9D%BF%26%E6%B4%9B%E8%B0%B7%2F</url>
+    <content type="text"><![CDATA[余数求和（数学题）题目描述给出正整数n和k，计算G(n, k)=k mod 1 + k mod 2 + k mod 3 + … + k mod n的值，其中k mod i表示k除以i的余数。例如G(10, 5)=5 mod 1 + 5 mod 2 + 5 mod 3 + 5 mod 4 + 5 mod 5 …… + 5 mod 10=0+1+2+1+0+5+5+5+5+5=29 input 10 5 output 29 12345678910111213141516171819#include&lt;bits/stdc++.h&gt;using namespace std;int main()&#123; long long n, k; cin &gt;&gt; n &gt;&gt; k; long long ans = n * k; for(long long l = 1, r; l &lt;= n; l = r+1) &#123; if(k / l == 0)//如果小于1则直接最后一段等于右端点区间 r = n; else &#123;//不然就讨论右边端点的大小 r = min(n, k/(k/l)); &#125; ans -= (k/l)*(r-l+1)*(l+r) / 2; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0; &#125;]]></content>
+      <categories>
+        <category>除法分块</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[费马小引理]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%BC%95%E7%90%86%2F</url>
+    <content type="text"><![CDATA[本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理 对于费马小定理，我们知道‘+’、‘-’、‘*’的取模都比较的好处理，但是遇到‘/’的取模就比较繁琐了。 公式：对于gcd(a, b)=1，也就是a,b互质的情况下，若b为素数（质数），则有a^(b-1)=1(mod b)。 特别的，可以推导出：由a^(b-1)=1(mod b) 则有啊a^(b-2)=1/a(mod b)，即，a^(-1)=a^(b-2)%b 欧拉函数 欧拉函数：oula(n)表示小于n的且与与n互质的数的个数 oula(n)=n(1-1/p1)(1-1/p2)……(1-1/pk)，其中，pi均为小于n且与n互质的数 那么，就有欧拉的模版了：1234567891011ll oula(ll n)&#123; ll res=n; for(int i=2;i*i&lt;=n;i++) if(n%i==0) &#123; res=res/i*(i-1); while(n%i==0)n/i; &#125; return res;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[哥德巴赫猜想]]></title>
     <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%2F</url>
     <content type="text"><![CDATA[著名的哥德巴赫猜想是这样的。1.“任何一个大于二的偶数都可以分解成两个素数之和”。2.“任何一个大于5的奇数都可以分解成三个素数之和”。现在请你写两个函数验证一下这个著名的猜想。]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[欧拉函数&欧拉筛选的应用]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%26%E6%AC%A7%E6%8B%89%E7%AD%9B%E9%80%89%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
+    <content type="text"><![CDATA[A - Bi-shoe and Phi-shoe (欧拉函数打表) Description Bamboo Pole-vault is a massively popular sport in Xzhiland. And Master Phi-shoe is a very popular coach for his success. He needs some bamboos for his students, so he asked his assistant Bi-Shoe to go to the market and buy them. Plenty of Bamboos of all possible integer lengths (yes!) are available in the market. According to Xzhila tradition, Score of a bamboo = Φ (bamboo’s length) (Xzhilans are really fond of number theory). For your information, Φ (n) = numbers less than n which are relatively prime (having no common divisor other than 1) to n. So, score of a bamboo of length 9 is 6 as 1, 2, 4, 5, 7, 8 are relatively prime to 9. The assistant Bi-shoe has to buy one bamboo for each student. As a twist, each pole-vault student of Phi-shoe has a lucky number. Bi-shoe wants to buy bamboos such that each of them gets a bamboo with a score greater than or equal to his/her lucky number. Bi-shoe wants to minimize the total amount of money spent for buying the bamboos. One unit of bamboo costs 1 Xukha. Help him. Input Input starts with an integer T (**≤ 100)**, denoting the number of test cases. Each case starts with a line containing an integer n (1 ≤ n ≤ 10000) denoting the number of students of Phi-shoe. The next line contains n space separated integers denoting the lucky numbers for the students. Each lucky number will lie in the range [1, 106]. Output For each case, print the case number and the minimum possible money spent for buying the bamboos. See the samples for details. Sample Input 3 5 1 2 3 4 5 6 10 11 12 13 14 15 2 1 1 Sample Output Case 1: 22 Xukha Case 2: 88 Xukha Case 3: 4 Xukha 题目大意就是给定N个数，让我们找出刚好比这个大的欧拉函数值F(N)对应的那个N,最后再求和就完事了，需要注意的是，每次循环的时候应该从幸运数开始循环，不然会T 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;typedef long long ll;#define maxN 1123456ll a[maxN];ll N;ll sum;void ola()&#123; for(int i=1;i&lt;maxN;i++) &#123; a[i]=i; &#125; for(int i=2;i&lt;maxN;i++) &#123; if(a[i]==i) &#123; for(int j=i;j&lt;maxN;j+=i) &#123; a[j]=a[j]/i*(i-1); &#125; &#125; &#125;&#125;int main()&#123; int t; ola(); cin&gt;&gt;t; int tmp=1; while(t--) &#123; int n; cin&gt;&gt;n; long long sum=0; for(int i=0;i&lt;n;i++) &#123; int temp; cin&gt;&gt;temp; for(int j=temp+1;;j++) &#123; if(a[j]&gt;=temp) &#123; sum+=j; break; &#125; &#125; &#125; //cout&lt;&lt;sum&lt;&lt;endl; printf(&quot;Case %lld: %lld Xukha\n&quot;,tmp++,sum); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -672,42 +727,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[除法分块模板&洛谷]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%E6%A8%A1%E6%9D%BF%26%E6%B4%9B%E8%B0%B7%2F</url>
-    <content type="text"><![CDATA[余数求和（数学题）题目描述给出正整数n和k，计算G(n, k)=k mod 1 + k mod 2 + k mod 3 + … + k mod n的值，其中k mod i表示k除以i的余数。例如G(10, 5)=5 mod 1 + 5 mod 2 + 5 mod 3 + 5 mod 4 + 5 mod 5 …… + 5 mod 10=0+1+2+1+0+5+5+5+5+5=29 input 10 5 output 29 12345678910111213141516171819#include&lt;bits/stdc++.h&gt;using namespace std;int main()&#123; long long n, k; cin &gt;&gt; n &gt;&gt; k; long long ans = n * k; for(long long l = 1, r; l &lt;= n; l = r+1) &#123; if(k / l == 0)//如果小于1则直接最后一段等于右端点区间 r = n; else &#123;//不然就讨论右边端点的大小 r = min(n, k/(k/l)); &#125; ans -= (k/l)*(r-l+1)*(l+r) / 2; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0; &#125;]]></content>
-      <categories>
-        <category>除法分块</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[费马小引理]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%BC%95%E7%90%86%2F</url>
-    <content type="text"><![CDATA[本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理 对于费马小定理，我们知道‘+’、‘-’、‘*’的取模都比较的好处理，但是遇到‘/’的取模就比较繁琐了。 公式：对于gcd(a, b)=1，也就是a,b互质的情况下，若b为素数（质数），则有a^(b-1)=1(mod b)。 特别的，可以推导出：由a^(b-1)=1(mod b) 则有啊a^(b-2)=1/a(mod b)，即，a^(-1)=a^(b-2)%b 欧拉函数 欧拉函数：oula(n)表示小于n的且与与n互质的数的个数 oula(n)=n(1-1/p1)(1-1/p2)……(1-1/pk)，其中，pi均为小于n且与n互质的数 那么，就有欧拉的模版了：1234567891011ll oula(ll n)&#123; ll res=n; for(int i=2;i*i&lt;=n;i++) if(n%i==0) &#123; res=res/i*(i-1); while(n%i==0)n/i; &#125; return res;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[唯一分解定理&算术基本定理]]></title>
     <url>%2F2019%2F07%2F07%2F2019-07-07-%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
     <content type="text"><![CDATA[算术基本定理 （1）一个大于1的正整数N，如果它的标准分解式为： ，那么它的正因数个数为 。 （2） 它的全体正因数之和为 。 当 时就称N为完全数。 是否存在奇完全数，是一个至今未解决之想。 （3） 利用算术基本定理可以重新定义整数a和b的最大公因子 和最小公倍数 ， 并证明 。 （4）此外还可证明根号2是无理数等等。 （5）证明素数个数无限。 LightOJ 1341 - Aladdin and the Flying Carpet（算术基本定理 唯一分解定理）题意： 给出整数 a 和 b ，求区间[b, a] 内的 a 的约数对的个数，即：满足c*d == a 且 c&gt;=b，d&gt;=b。a 的约数对（比如[2, 3] 与 [3, 2] 为同一对）。 题解： 先素数打表，然后利用基本算术定理1求出a（面积）以内的所有正因子个数，最后/2等于对数。最后因为要所有因子要大于b所以相减就是答案。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;cmath&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define maxn 1000047#define LL long longLL p[maxn], prim[maxn];int k = 0;void find_prim()&#123; k = 0; for(LL i = 2; i &lt;= maxn; i++) &#123; if(!p[i]) &#123; prim[k++] = i; for(LL j = i+i; j &lt;= maxn; j+=i) &#123; p[j] = 1; &#125; &#125; &#125;&#125;LL cont(LL a)&#123; LL s = 1; if(a == 0) &#123; return 0; &#125; LL tt = 0; LL i = 0; while(prim[i] &lt; a &amp;&amp; i &lt; k) &#123; tt = 0; if(a%prim[i] == 0) &#123; while(a%prim[i] == 0) &#123; a/=prim[i]; tt++; &#125; &#125; s *= tt+1; i++; &#125; if(a &gt; 1) &#123; s *= 1+1;//一次 &#125; return s;&#125;int main()&#123; LL a, b; int t; int cas = 0; find_prim(); scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b); int cnt = 0; LL num = 0, ans; if(b &gt;= sqrt(a)) ans = 0; // b大小限定 else &#123; for(LL i = 1; i &lt; b; i++) //暴力枚举[1, b]中a的约数 &#123; if(a%i == 0) &#123; cnt++; &#125; &#125; num = cont(a)/2; ans = num - cnt; &#125; printf(&quot;Case %d: %lld\n&quot;,++cas,ans); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[欧拉函数&欧拉筛选的应用]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E6%AC%A7%E6%8B%89%E5%87%BD%E6%95%B0%26%E6%AC%A7%E6%8B%89%E7%AD%9B%E9%80%89%E7%9A%84%E5%BA%94%E7%94%A8%2F</url>
-    <content type="text"><![CDATA[A - Bi-shoe and Phi-shoe (欧拉函数打表) Description Bamboo Pole-vault is a massively popular sport in Xzhiland. And Master Phi-shoe is a very popular coach for his success. He needs some bamboos for his students, so he asked his assistant Bi-Shoe to go to the market and buy them. Plenty of Bamboos of all possible integer lengths (yes!) are available in the market. According to Xzhila tradition, Score of a bamboo = Φ (bamboo’s length) (Xzhilans are really fond of number theory). For your information, Φ (n) = numbers less than n which are relatively prime (having no common divisor other than 1) to n. So, score of a bamboo of length 9 is 6 as 1, 2, 4, 5, 7, 8 are relatively prime to 9. The assistant Bi-shoe has to buy one bamboo for each student. As a twist, each pole-vault student of Phi-shoe has a lucky number. Bi-shoe wants to buy bamboos such that each of them gets a bamboo with a score greater than or equal to his/her lucky number. Bi-shoe wants to minimize the total amount of money spent for buying the bamboos. One unit of bamboo costs 1 Xukha. Help him. Input Input starts with an integer T (**≤ 100)**, denoting the number of test cases. Each case starts with a line containing an integer n (1 ≤ n ≤ 10000) denoting the number of students of Phi-shoe. The next line contains n space separated integers denoting the lucky numbers for the students. Each lucky number will lie in the range [1, 106]. Output For each case, print the case number and the minimum possible money spent for buying the bamboos. See the samples for details. Sample Input 3 5 1 2 3 4 5 6 10 11 12 13 14 15 2 1 1 Sample Output Case 1: 22 Xukha Case 2: 88 Xukha Case 3: 4 Xukha 题目大意就是给定N个数，让我们找出刚好比这个大的欧拉函数值F(N)对应的那个N,最后再求和就完事了，需要注意的是，每次循环的时候应该从幸运数开始循环，不然会T 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354#include&lt;iostream&gt;#include&lt;string&gt;using namespace std;typedef long long ll;#define maxN 1123456ll a[maxN];ll N;ll sum;void ola()&#123; for(int i=1;i&lt;maxN;i++) &#123; a[i]=i; &#125; for(int i=2;i&lt;maxN;i++) &#123; if(a[i]==i) &#123; for(int j=i;j&lt;maxN;j+=i) &#123; a[j]=a[j]/i*(i-1); &#125; &#125; &#125;&#125;int main()&#123; int t; ola(); cin&gt;&gt;t; int tmp=1; while(t--) &#123; int n; cin&gt;&gt;n; long long sum=0; for(int i=0;i&lt;n;i++) &#123; int temp; cin&gt;&gt;temp; for(int j=temp+1;;j++) &#123; if(a[j]&gt;=temp) &#123; sum+=j; break; &#125; &#125; &#125; //cout&lt;&lt;sum&lt;&lt;endl; printf(&quot;Case %lld: %lld Xukha\n&quot;,tmp++,sum); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -724,6 +746,17 @@
       </categories>
       <tags>
         <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HDU 1757 A Simple Math Problem（矩阵快速幂）]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-HDU-1757-A-Simple-Math-Problem%EF%BC%88%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[Problem DescriptionLele now is thinking about a simple function f(x). If x &lt; 10 f(x) = x.If x &gt;= 10 f(x) = a0 f(x-1) + a1 f(x-2) + a2 f(x-3) + …… + a9 f(x-10);And ai(0&lt;=i&lt;=9) can only be 0 or 1 . Now, I will give a0 ~ a9 and two positive integers k and m ,and could you help Lele to caculate f(k)%m. InputThe problem contains mutiple test cases.Please process to the end of file.In each case, there will be two lines.In the first line , there are two positive integers k and m. ( k&lt;2*10^9 , m &lt; 10^5 )In the second line , there are ten integers represent a0 ~ a9. OutputFor each case, output f(k) % m in one line. Sample Input10 9999 1 1 1 1 1 1 1 1 1 1 20 500 1 0 1 0 1 0 1 0 1 0 Sample Output45 第一次做矩阵快速幂的题，在矩阵快速幂中，我觉得重要的三个 初始化矩阵就是单位矩阵，初始化矩阵，系数矩阵。考这三个矩阵以及递推式来可以从f(1)推出任意f(n) 题目关键是要构造关系矩阵。f(x) a0 a1 a2 a3 a4 … a9 f(x-1) f(x-1) 1 0 0 0 … 0 f(x-2) f(x-2) = 0 1 0 0 * f(x-3) .. 0 0 1 0 .. f(x-9) 0 0 0 … 1 f(x-10) 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162#include &lt;iostream&gt;#include &lt;cstring&gt;#include &lt;string&gt;using namespace std;typedef long long ll;ll k, mod;struct Maxtri&#123; int a[15][15];&#125;;Maxtri unit, init;void Creat_Maxtri() &#123;//构造矩阵 memset(init.a, 0, sizeof(init.a)); for(int i = 1; i &lt; 10; i++) &#123; init.a[i][i-1] = 1; &#125; memset(unit.a, 0, sizeof(unit.a)); for(int i = 0; i &lt; 10; i++) &#123; unit.a[i][i] = 1; &#125;&#125;Maxtri Multi(Maxtri a, Maxtri b) &#123;//矩阵相乘 Maxtri c; for(int i = 0; i &lt; 10; i++) &#123; for(int j = 0; j &lt; 10; j++) &#123; c.a[i][j] = 0; for(int k = 0; k &lt; 10; k++) &#123; c.a[i][j] += (a.a[i][k] * b.a[k][j]) % mod; c.a[i][j] %= mod; &#125; &#125; &#125; return c;&#125;Maxtri Fast_Pow(Maxtri a, Maxtri b, int x) &#123; //快速乘 while(x) &#123; if(x&amp;1) &#123; b = Multi(a, b); &#125; a = Multi(a, a); x &gt;&gt;= 1; &#125; return b;&#125;int main() &#123; while(scanf(&quot;%lld %lld&quot;, &amp;k, &amp;mod) != EOF) &#123; Creat_Maxtri(); for(int i = 0; i &lt; 10; i++) &#123; scanf(&quot;%d&quot;, &amp;init.a[0][i]); &#125; if(k &lt; 10) &#123; printf(&quot;%d\n&quot;, k%mod); continue; &#125; Maxtri res = Fast_Pow(init, unit, k-9); ll ans = 0; for(int i = 0; i &lt; 10; i++) &#123; ans += (res.a[0][i] * (9-i))%mod; &#125; printf(&quot;%lld\n&quot;, ans%mod); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -760,17 +793,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[HDU 1757 A Simple Math Problem（矩阵快速幂）]]></title>
-    <url>%2F2019%2F06%2F26%2F2019-06-26-HDU-1757-A-Simple-Math-Problem%EF%BC%88%E7%9F%A9%E9%98%B5%E5%BF%AB%E9%80%9F%E5%B9%82%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[Problem DescriptionLele now is thinking about a simple function f(x). If x &lt; 10 f(x) = x.If x &gt;= 10 f(x) = a0 f(x-1) + a1 f(x-2) + a2 f(x-3) + …… + a9 f(x-10);And ai(0&lt;=i&lt;=9) can only be 0 or 1 . Now, I will give a0 ~ a9 and two positive integers k and m ,and could you help Lele to caculate f(k)%m. InputThe problem contains mutiple test cases.Please process to the end of file.In each case, there will be two lines.In the first line , there are two positive integers k and m. ( k&lt;2*10^9 , m &lt; 10^5 )In the second line , there are ten integers represent a0 ~ a9. OutputFor each case, output f(k) % m in one line. Sample Input10 9999 1 1 1 1 1 1 1 1 1 1 20 500 1 0 1 0 1 0 1 0 1 0 Sample Output45 第一次做矩阵快速幂的题，在矩阵快速幂中，我觉得重要的三个 初始化矩阵就是单位矩阵，初始化矩阵，系数矩阵。考这三个矩阵以及递推式来可以从f(1)推出任意f(n) 题目关键是要构造关系矩阵。f(x) a0 a1 a2 a3 a4 … a9 f(x-1) f(x-1) 1 0 0 0 … 0 f(x-2) f(x-2) = 0 1 0 0 * f(x-3) .. 0 0 1 0 .. f(x-9) 0 0 0 … 1 f(x-10) 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162#include &lt;iostream&gt;#include &lt;cstring&gt;#include &lt;string&gt;using namespace std;typedef long long ll;ll k, mod;struct Maxtri&#123; int a[15][15];&#125;;Maxtri unit, init;void Creat_Maxtri() &#123;//构造矩阵 memset(init.a, 0, sizeof(init.a)); for(int i = 1; i &lt; 10; i++) &#123; init.a[i][i-1] = 1; &#125; memset(unit.a, 0, sizeof(unit.a)); for(int i = 0; i &lt; 10; i++) &#123; unit.a[i][i] = 1; &#125;&#125;Maxtri Multi(Maxtri a, Maxtri b) &#123;//矩阵相乘 Maxtri c; for(int i = 0; i &lt; 10; i++) &#123; for(int j = 0; j &lt; 10; j++) &#123; c.a[i][j] = 0; for(int k = 0; k &lt; 10; k++) &#123; c.a[i][j] += (a.a[i][k] * b.a[k][j]) % mod; c.a[i][j] %= mod; &#125; &#125; &#125; return c;&#125;Maxtri Fast_Pow(Maxtri a, Maxtri b, int x) &#123; //快速乘 while(x) &#123; if(x&amp;1) &#123; b = Multi(a, b); &#125; a = Multi(a, a); x &gt;&gt;= 1; &#125; return b;&#125;int main() &#123; while(scanf(&quot;%lld %lld&quot;, &amp;k, &amp;mod) != EOF) &#123; Creat_Maxtri(); for(int i = 0; i &lt; 10; i++) &#123; scanf(&quot;%d&quot;, &amp;init.a[0][i]); &#125; if(k &lt; 10) &#123; printf(&quot;%d\n&quot;, k%mod); continue; &#125; Maxtri res = Fast_Pow(init, unit, k-9); ll ans = 0; for(int i = 0; i &lt; 10; i++) &#123; ans += (res.a[0][i] * (9-i))%mod; &#125; printf(&quot;%lld\n&quot;, ans%mod); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Unity如何导入资源]]></title>
     <url>%2F2019%2F06%2F23%2FUnity%E5%A6%82%E4%BD%95%E5%AF%BC%E5%85%A5%E8%B5%84%E6%BA%90%E3%80%82%2F</url>
     <content type="text"><![CDATA[Unity如何导入资源。要用自己的素材，可以把素材装在一个文件夹里然后放在Assets的文件夹下面噢，再来unity里读取。 就是这个东西啦，右键Assets，选择Import Package 。]]></content>
@@ -783,8 +805,8 @@
   </entry>
   <entry>
     <title><![CDATA[Email from Polycarp]]></title>
-    <url>%2F2019%2F06%2F21%2FExam%20in%20BerSU%20(easy%20version)%2F</url>
-    <content type="text"><![CDATA[Exam in BerSU (easy version)The only difference between easy and hard versions is constraints. A session has begun at Beland State University. Many students are taking exams. Polygraph Poligrafovich is going to examine a group of nn students. Students will take the exam one-by-one in order from 11-th to nn-th. Rules of the exam are following: The ii-th student randomly chooses a ticket. if this ticket is too hard to the student, he doesn’t answer and goes home immediately (this process is so fast that it’s considered no time elapses). This student fails the exam. if the student finds the ticket easy, he spends exactly titi minutes to pass the exam. After it, he immediately gets a mark and goes home. Students take the exam in the fixed order, one-by-one, without any interruption. At any moment of time, Polygraph Poligrafovich takes the answer from one student. The duration of the whole exam for all students is MM minutes (maxti≤Mmaxti≤M), so students at the end of the list have a greater possibility to run out of time to pass the exam. For each student ii, you should count the minimum possible number of students who need to fail the exam so the ii-th student has enough time to pass the exam. For each student ii, find the answer independently. That is, if when finding the answer for the student i1i1 some student jj should leave, then while finding the answer for i2i2 (i2&gt;i1i2&gt;i1) the student jj student does not have to go home. Input The first line of the input contains two integers nn and MM (1≤n≤1001≤n≤100, 1≤M≤1001≤M≤100) — the number of students and the total duration of the exam in minutes, respectively. The second line of the input contains nn integers titi (1≤ti≤1001≤ti≤100) — time in minutes that ii-th student spends to answer to a ticket. It’s guaranteed that all values of titi are not greater than MM. Output Print nn numbers: the ii-th number must be equal to the minimum number of students who have to leave the exam in order to ii-th student has enough time to pass the exam. 思路题目中要求剪掉的数目最少，即每次减少人腾出的时间更多，并且ti&lt;=100，所以我们很容易想到从大到小的进行贪心。然后后每次利用桶来进行每个时间对应的人数的维护就好了。 123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int N=2e5+7;int n,m,a[N],s[N],num[102];int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); for(int i=1;i&lt;=n;i++) &#123; scanf(&quot;%d&quot;,&amp;a[i]); s[i]=s[i-1]+a[i]; &#125; for(int i=1;i&lt;=n;i++) if(s[i]&lt;=m)printf(&quot;0 &quot;),num[a[i]]++; else&#123; int rest=s[i]-m,ans=0; for(int j=100;j;j--) &#123; if(j*num[j]&lt;rest) rest-=j*num[j],ans+=num[j]; else&#123;ans+=(rest+j-1)/j;break;&#125; //这一步理解有点困难，其实小伙伴可以画一条数轴就明白了。 printf(&quot;%d &quot;,ans); num[a[i]]++; &#125; &#125;&#125;]]></content>
+    <url>%2F2019%2F06%2F21%2FEmail%20from%20Polycarp%2F</url>
+    <content type="text"><![CDATA[Email from PolycarpMethodius received an email from his friend Polycarp. However, Polycarp’s keyboard is broken, so pressing a key on it once may cause the corresponding symbol to appear more than once (if you press a key on a regular keyboard, it prints exactly one symbol). For example, as a result of typing the word “hello”, the following words could be printed: “hello”, “hhhhello”, “hheeeellllooo”, but the following could not be printed: “hell”, “helo”, “hhllllooo”. Note, that when you press a key, the corresponding symbol must appear (possibly, more than once). The keyboard is broken in a random manner, it means that pressing the same key you can get the different number of letters in the result. For each word in the letter, Methodius has guessed what word Polycarp actually wanted to write, but he is not sure about it, so he asks you to help him. You are given a list of pairs of words. For each pair, determine if the second word could be printed by typing the first one on Polycarp’s keyboard. Input The first line of the input contains one integer nn (1≤n≤1051≤n≤105) — the number of pairs to check. Further input contains nn descriptions of pairs. The first line of each description contains a single non-empty word ss consisting of lowercase Latin letters. The second line of the description contains a single non-empty word tt consisting of lowercase Latin letters. The lengths of both strings are not greater than 106106. It is guaranteed that the total length of all words ss in the input is not greater than 106106. Also, it is guaranteed that the total length of all words tt in the input is not greater than 106106. Output Output nn lines. In the ii-th line for the ii-th pair of words ss and tt print YES if the word tt could be printed by typing the word ss. Otherwise, print NO. 思路：主串中出现字母的顺序必须在父串中按照相同顺序出现，并且出现的次数必须大于等于父串中字母出现的顺序。 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;string.h&gt;using namespace std;const int maxn = 1e6 +50;string a,b;int Next[maxn];int m,n;bool su;void fun(string a,string b)&#123; int i=0,j=0; int ii=0,jj=0; while(i&lt;a.size()&amp;&amp;j&lt;b.size()) &#123; ii=i; jj=j; while(ii&lt;a.size()&amp;&amp;a[i]==a[ii])ii++; while(jj&lt;b.size()&amp;&amp;b[j]==b[jj])jj++; if(a[i]!=b[j])su=0; if(abs(ii-i)&gt;abs(jj-j))su=0; i=ii; j=jj; &#125; if(i!=a.size()||j!=b.size()) su=0;&#125;int main()&#123; int n; cin&gt;&gt;n; while(n--) &#123; su=1; cin&gt;&gt;a&gt;&gt;b; fun(a,b); if(su==1) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; &#125;&#125;`]]></content>
       <categories>
         <category>codeforces</category>
       </categories>
@@ -805,8 +827,8 @@
   </entry>
   <entry>
     <title><![CDATA[Email from Polycarp]]></title>
-    <url>%2F2019%2F06%2F21%2FEmail%20from%20Polycarp%2F</url>
-    <content type="text"><![CDATA[Email from PolycarpMethodius received an email from his friend Polycarp. However, Polycarp’s keyboard is broken, so pressing a key on it once may cause the corresponding symbol to appear more than once (if you press a key on a regular keyboard, it prints exactly one symbol). For example, as a result of typing the word “hello”, the following words could be printed: “hello”, “hhhhello”, “hheeeellllooo”, but the following could not be printed: “hell”, “helo”, “hhllllooo”. Note, that when you press a key, the corresponding symbol must appear (possibly, more than once). The keyboard is broken in a random manner, it means that pressing the same key you can get the different number of letters in the result. For each word in the letter, Methodius has guessed what word Polycarp actually wanted to write, but he is not sure about it, so he asks you to help him. You are given a list of pairs of words. For each pair, determine if the second word could be printed by typing the first one on Polycarp’s keyboard. Input The first line of the input contains one integer nn (1≤n≤1051≤n≤105) — the number of pairs to check. Further input contains nn descriptions of pairs. The first line of each description contains a single non-empty word ss consisting of lowercase Latin letters. The second line of the description contains a single non-empty word tt consisting of lowercase Latin letters. The lengths of both strings are not greater than 106106. It is guaranteed that the total length of all words ss in the input is not greater than 106106. Also, it is guaranteed that the total length of all words tt in the input is not greater than 106106. Output Output nn lines. In the ii-th line for the ii-th pair of words ss and tt print YES if the word tt could be printed by typing the word ss. Otherwise, print NO. 思路：主串中出现字母的顺序必须在父串中按照相同顺序出现，并且出现的次数必须大于等于父串中字母出现的顺序。 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;string.h&gt;using namespace std;const int maxn = 1e6 +50;string a,b;int Next[maxn];int m,n;bool su;void fun(string a,string b)&#123; int i=0,j=0; int ii=0,jj=0; while(i&lt;a.size()&amp;&amp;j&lt;b.size()) &#123; ii=i; jj=j; while(ii&lt;a.size()&amp;&amp;a[i]==a[ii])ii++; while(jj&lt;b.size()&amp;&amp;b[j]==b[jj])jj++; if(a[i]!=b[j])su=0; if(abs(ii-i)&gt;abs(jj-j))su=0; i=ii; j=jj; &#125; if(i!=a.size()||j!=b.size()) su=0;&#125;int main()&#123; int n; cin&gt;&gt;n; while(n--) &#123; su=1; cin&gt;&gt;a&gt;&gt;b; fun(a,b); if(su==1) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; &#125;&#125;`]]></content>
+    <url>%2F2019%2F06%2F21%2FExam%20in%20BerSU%20(easy%20version)%2F</url>
+    <content type="text"><![CDATA[Exam in BerSU (easy version)The only difference between easy and hard versions is constraints. A session has begun at Beland State University. Many students are taking exams. Polygraph Poligrafovich is going to examine a group of nn students. Students will take the exam one-by-one in order from 11-th to nn-th. Rules of the exam are following: The ii-th student randomly chooses a ticket. if this ticket is too hard to the student, he doesn’t answer and goes home immediately (this process is so fast that it’s considered no time elapses). This student fails the exam. if the student finds the ticket easy, he spends exactly titi minutes to pass the exam. After it, he immediately gets a mark and goes home. Students take the exam in the fixed order, one-by-one, without any interruption. At any moment of time, Polygraph Poligrafovich takes the answer from one student. The duration of the whole exam for all students is MM minutes (maxti≤Mmaxti≤M), so students at the end of the list have a greater possibility to run out of time to pass the exam. For each student ii, you should count the minimum possible number of students who need to fail the exam so the ii-th student has enough time to pass the exam. For each student ii, find the answer independently. That is, if when finding the answer for the student i1i1 some student jj should leave, then while finding the answer for i2i2 (i2&gt;i1i2&gt;i1) the student jj student does not have to go home. Input The first line of the input contains two integers nn and MM (1≤n≤1001≤n≤100, 1≤M≤1001≤M≤100) — the number of students and the total duration of the exam in minutes, respectively. The second line of the input contains nn integers titi (1≤ti≤1001≤ti≤100) — time in minutes that ii-th student spends to answer to a ticket. It’s guaranteed that all values of titi are not greater than MM. Output Print nn numbers: the ii-th number must be equal to the minimum number of students who have to leave the exam in order to ii-th student has enough time to pass the exam. 思路题目中要求剪掉的数目最少，即每次减少人腾出的时间更多，并且ti&lt;=100，所以我们很容易想到从大到小的进行贪心。然后后每次利用桶来进行每个时间对应的人数的维护就好了。 123456789101112131415161718192021222324252627#include&lt;bits/stdc++.h&gt;using namespace std;const int N=2e5+7;int n,m,a[N],s[N],num[102];int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); for(int i=1;i&lt;=n;i++) &#123; scanf(&quot;%d&quot;,&amp;a[i]); s[i]=s[i-1]+a[i]; &#125; for(int i=1;i&lt;=n;i++) if(s[i]&lt;=m)printf(&quot;0 &quot;),num[a[i]]++; else&#123; int rest=s[i]-m,ans=0; for(int j=100;j;j--) &#123; if(j*num[j]&lt;rest) rest-=j*num[j],ans+=num[j]; else&#123;ans+=(rest+j-1)/j;break;&#125; //这一步理解有点困难，其实小伙伴可以画一条数轴就明白了。 printf(&quot;%d &quot;,ans); num[a[i]]++; &#125; &#125;&#125;]]></content>
       <categories>
         <category>codeforces</category>
       </categories>
