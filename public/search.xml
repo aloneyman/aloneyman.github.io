@@ -1,11 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[P2024 [NOI2001]食物链]]></title>
+    <url>%2F2019%2F08%2F15%2FP2024%20%5BNOI2001%5D%E9%A3%9F%E7%89%A9%E9%93%BE%2F</url>
+    <content type="text"><![CDATA[种类并查集。 以前一直对带权并查集有了新的理解，以前一直在合并树上的时候搞不懂向量的方向谁减去谁，现在懂了，我们只需要每次画图就好了。（因为每次合并我都默认祖先节点是fb）。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#include&lt;queue&gt;#include&lt;set&gt;using namespace std;const int N = 500005;int pre[N], ran[N];int m,n;void init()&#123; for (int i = 1; i &lt;= m;i++) &#123; pre[i] = i; ran[i] = 0; &#125;&#125;int find(int x)&#123; if(x==pre[x]) return pre[x]; int f = find(pre[x]); ran[x] = (ran[pre[x]] + ran[x]+3) % 3; return pre[x] = f;&#125;bool pan(int d,int a,int b)&#123; if(a&gt;m||b&gt;m||(d==2&amp;&amp;a==b)) return 0; int fx = find(a); int fy = find(b); if(fx==fy) &#123; if((ran[a]-ran[b]+3)%3==(d-1)) return 1; else return 0; &#125; else return 1;&#125;void un(int d,int a,int b)&#123; int fx = find(a); int fy = find(b); if(fx!=fy) &#123; ran[fx] = (ran[b] - ran[a] + d+3) % 3; pre[fx] = fy; &#125;&#125;int main()&#123; scanf(&quot;%d%d&quot;, &amp;m, &amp;n); for(int i=0; i&lt;=m; i++) &#123; pre[i]=i; ran[i]=0; &#125; int joke=0; int e1, e2, e3; while(n--) &#123; scanf(&quot;%d%d%d&quot;, &amp;e1, &amp;e2, &amp;e3); if( !pan(e1, e2, e3) ) joke++; else un(e1-1, e2, e3); &#125; printf(&quot;%d\n&quot;, joke); return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[P3388 【模板】割点（割顶）]]></title>
     <url>%2F2019%2F08%2F15%2FP3388%20%E3%80%90%E6%A8%A1%E6%9D%BF%E3%80%91%E5%89%B2%E7%82%B9%EF%BC%88%E5%89%B2%E9%A1%B6%2F</url>
     <content type="text"><![CDATA[Tarjan找割点（桥） *判定条件：x == from时：子树个数&gt;1x != from时：low[e[i].to] &gt;= dfn[x] 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std; const int N = 1e4+10, M = 1e5+10;struct edge &#123; int v, next;&#125; e[M&lt;&lt;1];int low[M], que[M], cnt, head[M], stack[M], top, indexx, dfn[M];bool cut[M];bool instack[M];void add(int u,int v)&#123; e[++cnt].next = head[u]; e[cnt].v = v; head[u] = cnt;&#125;void tarjan(int x,int pre)&#123; int child = 0; low[x] = dfn[x] = ++indexx; stack[++top]=x; instack[x]=1; for (int i = head[x]; i;i=e[i].next) &#123; int v = e[i].v; if(!dfn[v]) &#123; tarjan(v, x); low[x] = min(low[x], low[v]); if(x!=pre&amp;&amp;dfn[x]&lt;=low[v]) cut[x] = 1; if(x==pre) child++; &#125; else if(instack[v]) low[x] = min(low[x], dfn[v]); &#125; if(child&gt;1&amp;&amp;x==pre) cut[x] = 1;&#125;void init()&#123; memset(head, 0, sizeof head);&#125;int main()&#123; init(); int n, m; cin &gt;&gt; n &gt;&gt; m; for (int i = 1; i &lt;= m;i++) &#123; int a, b; cin &gt;&gt; a &gt;&gt; b; add(a, b), add(b, a); &#125; for(int i = 1;i &lt;= n;i++) &#123; if(!dfn[i]) tarjan(i,i); &#125; int ans = 0; for(int i = 1;i &lt;= n;i++) ans += cut[i]; printf("%d\n",ans); for(int i = 1;i &lt;= n;i++) &#123; if(cut[i]) printf("%d ",i); &#125; return 0;&#125;]]></content>
       <categories>
         <category>学习</category>
+      </categories>
+      <tags>
+        <tag>Tarjan</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[P2746 [USACO5.3]校园网Network of Schools]]></title>
+    <url>%2F2019%2F08%2F15%2FP2746%20%5BUSACO5.3%5D%E6%A0%A1%E5%9B%AD%E7%BD%91Network%20of%20Schools%2F</url>
+    <content type="text"><![CDATA[Tarjan(缩点） 题意很清楚，A任务就是找入度为0的点有几个，B任务就是找入度为0的和出度为0的个数取一个最大。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;const int N = 10000;int low[N], stack[N],head[N],top,cnt,color[N],dfn[N],num,in[N],out[N],indexx;bool instack[N];struct Node&#123; int next, v;&#125;node[N];void add(int u,int v)&#123; node[++cnt].next = head[u]; node[cnt].v = v; head[u] = cnt; return;&#125;void tarjan(int u)&#123; low[u]=dfn[u]=++indexx; stack[++top] = u; instack[u] = 1; for (int i = head[u]; i;i=node[i].next) &#123; int v = node[i].v; if(!dfn[v]) &#123; tarjan(v); low[u] = min(low[u], low[v]); &#125; else if(instack[v]) low[u] = min(low[u], dfn[v]); &#125; if(dfn[u]==low[u]) &#123; num++; do &#123; color[stack[top]] = num; instack[stack[top]] = false; &#125; while (stack[top--] != u); &#125; return;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a; while(cin&gt;&gt;a&amp;&amp;a) &#123; add(i, a); &#125; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!dfn[i]) tarjan(i); &#125; for (int i = 1; i &lt;= n;i++) &#123; for (int j = head[i]; j;j=node[j].next) &#123; if(color[i]!=color[node[j].v]) &#123; out[color[i]]++; in[color[node[j].v]]++; &#125; &#125; &#125; int inc = 0, outc = 0; for(int i = 1;i &lt;= num;i ++) &#123; inc += in[i] == 0 ? 1 : 0; outc += out[i] == 0 ? 1 : 0; &#125; if(num == 1) cout &lt;&lt; "1\n0" &lt;&lt; endl; else cout &lt;&lt; inc &lt;&lt; endl &lt;&lt; max(inc, outc) &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
       </categories>
       <tags>
         <tag>Tarjan</tag>
@@ -23,20 +45,53 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P2759 奇怪的函数 二分]]></title>
-    <url>%2F2019%2F08%2F13%2FP2759%20%E5%A5%87%E6%80%AA%E7%9A%84%E5%87%BD%E6%95%B0%2F</url>
-    <content type="text"><![CDATA[思维好题+二分答案 注意WA点就是第一个大于N位那么其实是N-1。 1234567891011121314151617181920212223242526272829303132#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;int L, M, N, n;bool check(int x)&#123; if(x*log10(x)&gt;=n-1) return 1; else return 0;&#125;int main()&#123; cin &gt;&gt; n; long long l = 1, r = 2000000001,ans; while(l&lt;=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) &#123; r = mid-1; ans=mid; &#125; else l = mid + 1; &#125; cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
+    <title><![CDATA[A Bug's Life]]></title>
+    <url>%2F2019%2F08%2F15%2FA%20Bug's%20Life(%E7%A7%8D%E7%B1%BB%E5%B9%B6%E6%9F%A5%E9%9B%86)%2F</url>
+    <content type="text"><![CDATA[种类并查集的复习。 再次复习了rank数组代表的是指向父节点。rank[a]= a-&gt;fa. 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;#include&lt;queue&gt;#include&lt;set&gt;using namespace std;const int N = 10005;int pre[N], ran[N];int a, b;void init()&#123; for (int i = 1; i &lt;= a;i++) &#123; pre[i] = i; ran[i] = 0; &#125;&#125;int find(int x)&#123; if(x==pre[x]) &#123; return pre[x]; &#125; else &#123; int f = find(pre[x]); ran[x] = (ran[pre[x]] + ran[x]) % 2; pre[x]=f; return f; &#125;&#125;int flag;void un(int x,int y)&#123; int fx=find(x); int fy=find(y); if(fx==fy) if(ran[x]%2==ran[y]%2) &#123; flag = 1; return; &#125; ran[fx] = (-ran[x] + ran[y] + 1) % 2; pre[fx] = fy; return;&#125;int main()&#123; int t; cin &gt;&gt; t; int cas = 1; while(t--) &#123; flag = 0; cin &gt;&gt; a &gt;&gt; b; init(); for (int i = 1; i &lt;= b;i++) &#123; int m, n; cin &gt;&gt; m &gt;&gt; n; if(flag) continue; un(m,n); &#125; printf("Scenario #%d:\n",cas++); if(flag)printf("Suspicious bugs found!\n"); else printf("No suspicious bugs found!\n"); printf("\n"); &#125;&#125;]]></content>
       <categories>
-        <category>ACM</category>
+        <category>学习</category>
       </categories>
       <tags>
-        <tag>二分</tag>
+        <tag>并查集</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[P1056 排座椅]]></title>
+    <url>%2F2019%2F08%2F13%2FP1056%20%E6%8E%92%E5%BA%A7%E6%A4%85%2F</url>
+    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#include&lt;cstring&gt;#define maxn 1005using namespace std;int M,N,K,L,D;vector&lt;int&gt;a1,a2;struct data&#123; int id,cnt; friend bool operator &lt; (data a,data b) &#123; return a.cnt&gt;b.cnt; &#125;&#125;;data a[maxn],b[maxn];int main()&#123; //freopen("seat.in","r",stdin); //freopen("seat.out","w",stdout); scanf("%d%d%d%d%d",&amp;M,&amp;N,&amp;K,&amp;L,&amp;D); for(int i=1;i&lt;=D;i++) &#123; int x,y,p,q; scanf("%d%d%d%d",&amp;x,&amp;y,&amp;p,&amp;q); if(x==p)&#123;b[min(y,q)].cnt++;b[min(y,q)].id=min(y,q);&#125; if(y==q)&#123;a[min(x,p)].cnt++;a[min(x,p)].id=min(x,p);&#125; &#125; sort(a+1,a+maxn); sort(b+1,b+maxn); for(int i=1;i&lt;=K;i++) &#123; if(a[i].id&gt;0)a1.push_back(a[i].id); &#125; sort(a1.begin(),a1.end()); for(int i=0;i&lt;a1.size();i++) printf("%d ",a1[i]); printf("\n"); for(int i=1;i&lt;=L;i++) &#123; if(b[i].id&gt;0)a2.push_back(b[i].id); &#125; sort(a2.begin(),a2.end()); for(int i=0;i&lt;a2.size();i++) printf("%d ",a2[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>模拟</tag>
       </tags>
   </entry>
   <entry>
     <title><![CDATA[CodeForces 44C]]></title>
     <url>%2F2019%2F08%2F13%2FCodeForces%2044C%2F</url>
     <content type="text"><![CDATA[差分数组水题 123456789101112131415161718192021222324252627282930#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 200005;int l[maxn], r[maxn], ans[maxn], cf[maxn];int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin &gt;&gt; a &gt;&gt; b; cf[a]++; cf[b + 1]--; &#125; int sum = 0; int flag = 0; for (int i = 1; i &lt;= m;i++) &#123; sum += cf[i]; if(sum&gt;1||sum==0) &#123; flag = 1; cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; sum &lt;&lt; endl; break; &#125; &#125; if(!flag) cout &lt;&lt; "OK" &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>差分数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[CF460C Present]]></title>
+    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
+    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>差分数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[洛谷海底地铁：差分数组+单调栈]]></title>
+    <url>%2F2019%2F08%2F13%2F%E6%B4%9B%E8%B0%B7%E6%B5%B7%E5%BA%95%E5%9C%B0%E9%93%81%2F</url>
+    <content type="text"><![CDATA[差分数组简化思维量。 开始WA在cf[y+1]—这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem:洛谷海底地铁 * 开始WA在cf[y+1]--这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;long long a[100001];long long cf[100001];long long A[100001];long long B[100001];long long C[100001];long long day[100001];int m,n;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;=n;i++) &#123; cin &gt;&gt; a[i]; &#125; for (int i = 1; i &lt;n;i++) &#123; int x = a[i]; int y = a[i + 1]; if(x&gt;y) swap(x, y); cf[x]++; cf[y]--; &#125; for (int i = 1; i &lt; m ;i++) &#123; cin &gt;&gt; A[i] &gt;&gt; B[i] &gt;&gt; C[i]; &#125; day[0]=0; for (int i = 1; i &lt;= m;i++) &#123; cf[i]+=cf[i-1]; &#125; long long sum = 0; for (int i = 1; i &lt; m;i++) &#123; sum += min(A[i] * cf[i], B[i] * cf[i] + C[i]); &#125; cout &lt;&lt; sum &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -111,14 +166,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[洛谷海底地铁：差分数组+单调栈]]></title>
-    <url>%2F2019%2F08%2F13%2F%E6%B4%9B%E8%B0%B7%E6%B5%B7%E5%BA%95%E5%9C%B0%E9%93%81%2F</url>
-    <content type="text"><![CDATA[差分数组简化思维量。 开始WA在cf[y+1]—这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem:洛谷海底地铁 * 开始WA在cf[y+1]--这个地方，后来反应过来坐地铁到y这个点我们不需要减去这个点的费用，因为并没有去下一个地点*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;long long a[100001];long long cf[100001];long long A[100001];long long B[100001];long long C[100001];long long day[100001];int m,n;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;=n;i++) &#123; cin &gt;&gt; a[i]; &#125; for (int i = 1; i &lt;n;i++) &#123; int x = a[i]; int y = a[i + 1]; if(x&gt;y) swap(x, y); cf[x]++; cf[y]--; &#125; for (int i = 1; i &lt; m ;i++) &#123; cin &gt;&gt; A[i] &gt;&gt; B[i] &gt;&gt; C[i]; &#125; day[0]=0; for (int i = 1; i &lt;= m;i++) &#123; cf[i]+=cf[i-1]; &#125; long long sum = 0; for (int i = 1; i &lt; m;i++) &#123; sum += min(A[i] * cf[i], B[i] * cf[i] + C[i]); &#125; cout &lt;&lt; sum &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[P2759 奇怪的函数 二分]]></title>
+    <url>%2F2019%2F08%2F13%2FP2759%20%E5%A5%87%E6%80%AA%E7%9A%84%E5%87%BD%E6%95%B0%2F</url>
+    <content type="text"><![CDATA[思维好题+二分答案 注意WA点就是第一个大于N位那么其实是N-1。 1234567891011121314151617181920212223242526272829303132#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;int L, M, N, n;bool check(int x)&#123; if(x*log10(x)&gt;=n-1) return 1; else return 0;&#125;int main()&#123; cin &gt;&gt; n; long long l = 1, r = 2000000001,ans; while(l&lt;=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) &#123; r = mid-1; ans=mid; &#125; else l = mid + 1; &#125; cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
       <tags>
-        <tag>差分数组</tag>
+        <tag>二分</tag>
       </tags>
   </entry>
   <entry>
@@ -133,31 +188,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P1056 排座椅]]></title>
-    <url>%2F2019%2F08%2F13%2FP1056%20%E6%8E%92%E5%BA%A7%E6%A4%85%2F</url>
-    <content type="text"><![CDATA[1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;queue&gt;#include&lt;algorithm&gt;#include&lt;cstring&gt;#define maxn 1005using namespace std;int M,N,K,L,D;vector&lt;int&gt;a1,a2;struct data&#123; int id,cnt; friend bool operator &lt; (data a,data b) &#123; return a.cnt&gt;b.cnt; &#125;&#125;;data a[maxn],b[maxn];int main()&#123; //freopen("seat.in","r",stdin); //freopen("seat.out","w",stdout); scanf("%d%d%d%d%d",&amp;M,&amp;N,&amp;K,&amp;L,&amp;D); for(int i=1;i&lt;=D;i++) &#123; int x,y,p,q; scanf("%d%d%d%d",&amp;x,&amp;y,&amp;p,&amp;q); if(x==p)&#123;b[min(y,q)].cnt++;b[min(y,q)].id=min(y,q);&#125; if(y==q)&#123;a[min(x,p)].cnt++;a[min(x,p)].id=min(x,p);&#125; &#125; sort(a+1,a+maxn); sort(b+1,b+maxn); for(int i=1;i&lt;=K;i++) &#123; if(a[i].id&gt;0)a1.push_back(a[i].id); &#125; sort(a1.begin(),a1.end()); for(int i=0;i&lt;a1.size();i++) printf("%d ",a1[i]); printf("\n"); for(int i=1;i&lt;=L;i++) &#123; if(b[i].id&gt;0)a2.push_back(b[i].id); &#125; sort(a2.begin(),a2.end()); for(int i=0;i&lt;a2.size();i++) printf("%d ",a2[i]); return 0;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>模拟</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[CF460C Present]]></title>
-    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
-    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>差分数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[动态规划-区间DP-上司舞会]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%8C%BA%E9%97%B4DP%E6%8E%92%E9%98%9F%2F</url>
-    <content type="text"><![CDATA[区间DP。 思维：dp[i][j][0/1]代表i到j遇见最后一个人是从 左边/右边上车的。则状态转移方程如下。 12345678910111213141516171819202122232425262728#include&lt;iostream&gt;using namespace std;int n;int dp[1005][1005][2];int num[1005];const int p = 19650827;int main()&#123; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; num[i]; &#125; for (int i = 1; i &lt;= n;i++) &#123; dp[i][i][0] = 1; &#125; for (int l = 1; l &lt;= n; l++) &#123; for (int i = 1, j; (j=i+l) &lt;= n; i++) &#123; dp[i][j][0] = (dp[i + 1][j][1] * (num[j] &gt; num[i]) + dp[i + 1][j][0] * (num[i + 1] &gt; num[i])) % p; dp[i][j][1] = (dp[i][j - 1][1] * (num[j] &gt; num[j - 1]) + dp[i][j-1][0] * (num[j] &gt; num[i])) % p; &#125; &#125; cout &lt;&lt; (dp[1][n][0] + dp[1][n][1]) % p &lt;&lt; endl;&#125;//Stay foolish,stay hungry,stay young,stay simple]]></content>
+    <title><![CDATA[动态规划-树形DP-上司舞会]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP-%E4%B8%8A%E5%8F%B8%E8%88%9E%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[dp[][0]代表这个节点可以压缩（儿子节点不来）反之相反。 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;vector&lt;int&gt; g[N];int dp[N][2], root, flag[N];void dfs(int x)&#123; for (int i = 0; i &lt; g[x].size();i++) &#123; int son=g[x][i]; dfs(son); dp[x][1] = max(max(dp[x][1], dp[x][1] + dp[son][0]), dp[son][0]); dp[x][0] = max(max(dp[x][0], dp[x][0] + dp[son][1]), max(dp[son][1], dp[son][0])); &#125;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; dp[i][1]; &#125; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin&gt;&gt;a&gt;&gt;b; g[b].push_back(a); flag[a] = 1; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!flag[i]) &#123; root = i; break; &#125; &#125; dfs(root); cout &lt;&lt; max(dp[root][0], dp[root][1]) &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -166,9 +199,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[动态规划-树形DP-上司舞会]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP-%E4%B8%8A%E5%8F%B8%E8%88%9E%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[dp[][0]代表这个节点可以压缩（儿子节点不来）反之相反。 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;vector&lt;int&gt; g[N];int dp[N][2], root, flag[N];void dfs(int x)&#123; for (int i = 0; i &lt; g[x].size();i++) &#123; int son=g[x][i]; dfs(son); dp[x][1] = max(max(dp[x][1], dp[x][1] + dp[son][0]), dp[son][0]); dp[x][0] = max(max(dp[x][0], dp[x][0] + dp[son][1]), max(dp[son][1], dp[son][0])); &#125;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; dp[i][1]; &#125; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin&gt;&gt;a&gt;&gt;b; g[b].push_back(a); flag[a] = 1; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!flag[i]) &#123; root = i; break; &#125; &#125; dfs(root); cout &lt;&lt; max(dp[root][0], dp[root][1]) &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[动态规划-区间DP-上司舞会]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%8C%BA%E9%97%B4DP%E6%8E%92%E9%98%9F%2F</url>
+    <content type="text"><![CDATA[区间DP。 思维：dp[i][j][0/1]代表i到j遇见最后一个人是从 左边/右边上车的。则状态转移方程如下。 12345678910111213141516171819202122232425262728#include&lt;iostream&gt;using namespace std;int n;int dp[1005][1005][2];int num[1005];const int p = 19650827;int main()&#123; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; num[i]; &#125; for (int i = 1; i &lt;= n;i++) &#123; dp[i][i][0] = 1; &#125; for (int l = 1; l &lt;= n; l++) &#123; for (int i = 1, j; (j=i+l) &lt;= n; i++) &#123; dp[i][j][0] = (dp[i + 1][j][1] * (num[j] &gt; num[i]) + dp[i + 1][j][0] * (num[i + 1] &gt; num[i])) % p; dp[i][j][1] = (dp[i][j - 1][1] * (num[j] &gt; num[j - 1]) + dp[i][j-1][0] * (num[j] &gt; num[i])) % p; &#125; &#125; cout &lt;&lt; (dp[1][n][0] + dp[1][n][1]) % p &lt;&lt; endl;&#125;//Stay foolish,stay hungry,stay young,stay simple]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -210,6 +243,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[CF11B Jumping Jack]]></title>
+    <url>%2F2019%2F08%2F09%2F2019-08-09-CF11B-Jumping-Jack%2F</url>
+    <content type="text"><![CDATA[题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)； 思路：考虑一直向右，若恰好到达则为最小步数； ​ 若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n; ​ 要向左移动距离n，只需在第n/2步向左走；步数不变； ​ 若(路程-x)为奇数，一直走到偶数的情况； n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。 123456789101112131415161718192021#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;int n,m,sum;int main()&#123; int i,j,k; while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123; if(n&lt;0) n=-n; //printf(&quot;%d\n&quot;,n); sum=0; for(i=0;;i++)&#123; sum+=i; if(sum==n) break; if(sum&gt;n&amp;&amp;(sum-n)%2==0) break; &#125; printf(&quot;%d\n&quot;,i); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>CodeFoeces</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[动态规划-区间DP-P1220 关路灯]]></title>
     <url>%2F2019%2F08%2F09%2F2019-08-09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8C%BA%E9%97%B4DP-P1220-%E5%85%B3%E8%B7%AF%E7%81%AF%2F</url>
     <content type="text"><![CDATA[理解一下题目大意： 关灯不需要额外的时间，经过了灯就关了。但是可能折返回去关某一个大灯会比继续往下走关接下来的一个小灯更优， 那么可以得到两种状态（沿着当前方向继续往下走，改变方向回去关灯）。 f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) ( sum[i]+sum[n]-sum[j]) ); f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) ( sum[i-1] + sum[n] - sum[j-1] ) ); f函数代表i到j区间中关闭完路灯停留在在左0/右1位置的最小消耗功率。 我们画图可以知道我们有两种转移状态一种事i+1-&gt;i和j-1-&gt;j。但是因为关完灯在的位置不同我们又分了两种。所以我们可以得到上述的状态转移方程。 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;long long l[55],sum[55],power[55];long long dp[55][55][2];const long long INF=0x3f3f3f3f3f3f3f3fll;int main()&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;l[i]&gt;&gt;power[i]; sum[i]=sum[i-1]+power[i]; &#125; for(int k=1;k&lt;=n;k++) &#123; for(int i=1,j;(j=i+k-1)&lt;=n;++i) &#123; if(i&lt;=m&amp;&amp;m&lt;=j) &#123; dp[i][j][0]=min(dp[i+1][j][0]+(l[i+1]-l[i])*(sum[n]-sum[j]+sum[i]), dp[i+1][j][1]+(l[j]-l[i])*(sum[n]-sum[j]+sum[i])); dp[i][j][1]=min(dp[i][j-1][1]+(l[j]-l[j-1])*(sum[n]-sum[j-1]+sum[i-1]), dp[i][j-1][0]+(l[j]-l[i])*(sum[n]+sum[i-1]-sum[j-1])); &#125; else&#123; dp[i][j][0] = dp[i][j][1] = INF; &#125; &#125; &#125; cout&lt;&lt;min(dp[1][n][0],dp[1][n][1])&lt;&lt;endl; &#125;]]></content>
@@ -221,14 +265,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CF11B Jumping Jack]]></title>
-    <url>%2F2019%2F08%2F09%2F2019-08-09-CF11B-Jumping-Jack%2F</url>
-    <content type="text"><![CDATA[题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)； 思路：考虑一直向右，若恰好到达则为最小步数； ​ 若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n; ​ 要向左移动距离n，只需在第n/2步向左走；步数不变； ​ 若(路程-x)为奇数，一直走到偶数的情况； n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。 123456789101112131415161718192021#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;int n,m,sum;int main()&#123; int i,j,k; while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123; if(n&lt;0) n=-n; //printf(&quot;%d\n&quot;,n); sum=0; for(i=0;;i++)&#123; sum+=i; if(sum==n) break; if(sum&gt;n&amp;&amp;(sum-n)%2==0) break; &#125; printf(&quot;%d\n&quot;,i); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[P3197 [HNOI2008]越狱]]></title>
+    <url>%2F2019%2F08%2F08%2F2019-08-08-P3197-%5BHNOI2008%5D%E8%B6%8A%E7%8B%B1%2F</url>
+    <content type="text"><![CDATA[计数原理。 一个犯人有m种状态，在不考虑其它条件的情况下，两个犯人有m的平方种状态 =&gt;=&gt; n个犯人有m^{n}m**n种总状态。 我们你想思维，总状态数-不越狱的数=越狱的数。由于每一个房间的人的宗教有mm种可能，且有nn个房间，所以所有的方案数等于m^nm**n。由于当相邻的两个房间所关押的罪犯当宗教相同时就有可能会越狱，所以不可能会越狱的方案数为m \times (m-1)^{n-1}m×(m−1)n−1，这是因为第一个房间的最烦的宗教有mm种选择，而第二个房间的罪犯的宗教有m-1m−1种选择，第三个房间的罪犯的宗教有m-2m−2种选择，以此类推。因此越狱的方案数就有m^n-m \times (m-1)^{n-1}m**n−m×(m−1)n−1种。由于nn很大，所以我们用快速幂来解这道题。 1234567891011121314151617181920#include&lt;iostream&gt;int MOD=100003;using namespace std;long long qpow(long long m,long long n)&#123; long long ans=1; while(n) &#123; if(n&amp;1) ans=(ans%MOD*m%MOD)%MOD; m=(m%MOD*m%MOD)%MOD; n&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; long long m,n; cin&gt;&gt;m&gt;&gt;n; cout&lt;&lt;(((qpow(m,n)-m*qpow(m-1,n-1))%MOD+MOD)%MOD)&lt;&lt;endl;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
       <tags>
-        <tag>CodeFoeces</tag>
+        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -243,9 +287,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P3197 [HNOI2008]越狱]]></title>
-    <url>%2F2019%2F08%2F08%2F2019-08-08-P3197-%5BHNOI2008%5D%E8%B6%8A%E7%8B%B1%2F</url>
-    <content type="text"><![CDATA[计数原理。 一个犯人有m种状态，在不考虑其它条件的情况下，两个犯人有m的平方种状态 =&gt;=&gt; n个犯人有m^{n}m**n种总状态。 我们你想思维，总状态数-不越狱的数=越狱的数。由于每一个房间的人的宗教有mm种可能，且有nn个房间，所以所有的方案数等于m^nm**n。由于当相邻的两个房间所关押的罪犯当宗教相同时就有可能会越狱，所以不可能会越狱的方案数为m \times (m-1)^{n-1}m×(m−1)n−1，这是因为第一个房间的最烦的宗教有mm种选择，而第二个房间的罪犯的宗教有m-1m−1种选择，第三个房间的罪犯的宗教有m-2m−2种选择，以此类推。因此越狱的方案数就有m^n-m \times (m-1)^{n-1}m**n−m×(m−1)n−1种。由于nn很大，所以我们用快速幂来解这道题。 1234567891011121314151617181920#include&lt;iostream&gt;int MOD=100003;using namespace std;long long qpow(long long m,long long n)&#123; long long ans=1; while(n) &#123; if(n&amp;1) ans=(ans%MOD*m%MOD)%MOD; m=(m%MOD*m%MOD)%MOD; n&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; long long m,n; cin&gt;&gt;m&gt;&gt;n; cout&lt;&lt;(((qpow(m,n)-m*qpow(m-1,n-1))%MOD+MOD)%MOD)&lt;&lt;endl;&#125;]]></content>
+    <title><![CDATA[P2822 组合数问题]]></title>
+    <url>%2F2019%2F08%2F08%2F2019-08-08-P2822-%E7%BB%84%E5%90%88%E6%95%B0%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[新技能：组合数学和杨辉三角的关系+矩阵和。 所谓的C(m,n)其实就是m行n列（在杨辉三角中的元素大小）有延伸矩阵+下延伸矩阵-重复部分就是他们的矩阵和。（前缀和思想）。 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;#define int long longusing namespace std;const int N=2010;int t,k,C[N][N],s[N][N];signed main()&#123; cin&gt;&gt;t&gt;&gt;k; C[0][0]=1; for(int i=1;i&lt;=2000;i++) C[i][1]=i,C[i][0]=1; for(int i=2;i&lt;=2000;i++)&#123; for(int j=2;j&lt;=i;j++) C[i][j]=(C[i-1][j]+C[i-1][j-1])%k; &#125; for(int i=0;i&lt;=2000;i++)&#123; for(int j=0;j&lt;=i;j++) s[i][j]=(C[i][j]%k==0); &#125; for(int i=1;i&lt;=2000;i++) s[i][1]+=s[i-1][1],s[1][i]+=s[1][i-1]; for(int i=2;i&lt;=2000;i++)&#123; for(int j=2;j&lt;=2000;j++) s[i][j]+=s[i-1][j]+s[i][j-1]-s[i-1][j-1]; &#125; while(t--)&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; cout&lt;&lt;s[n][m]&lt;&lt;endl; &#125; return 0;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -262,17 +306,6 @@
       </categories>
       <tags>
         <tag>暴力枚举+思维</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[P2822 组合数问题]]></title>
-    <url>%2F2019%2F08%2F08%2F2019-08-08-P2822-%E7%BB%84%E5%90%88%E6%95%B0%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[新技能：组合数学和杨辉三角的关系+矩阵和。 所谓的C(m,n)其实就是m行n列（在杨辉三角中的元素大小）有延伸矩阵+下延伸矩阵-重复部分就是他们的矩阵和。（前缀和思想）。 12345678910111213141516171819202122232425#include&lt;bits/stdc++.h&gt;#define int long longusing namespace std;const int N=2010;int t,k,C[N][N],s[N][N];signed main()&#123; cin&gt;&gt;t&gt;&gt;k; C[0][0]=1; for(int i=1;i&lt;=2000;i++) C[i][1]=i,C[i][0]=1; for(int i=2;i&lt;=2000;i++)&#123; for(int j=2;j&lt;=i;j++) C[i][j]=(C[i-1][j]+C[i-1][j-1])%k; &#125; for(int i=0;i&lt;=2000;i++)&#123; for(int j=0;j&lt;=i;j++) s[i][j]=(C[i][j]%k==0); &#125; for(int i=1;i&lt;=2000;i++) s[i][1]+=s[i-1][1],s[1][i]+=s[1][i-1]; for(int i=2;i&lt;=2000;i++)&#123; for(int j=2;j&lt;=2000;j++) s[i][j]+=s[i-1][j]+s[i][j-1]-s[i-1][j-1]; &#125; while(t--)&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; cout&lt;&lt;s[n][m]&lt;&lt;endl; &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -306,6 +339,17 @@
       </categories>
       <tags>
         <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[差分数组-P1083 借教室]]></title>
+    <url>%2F2019%2F08%2F03%2F2019-08-03-%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84-P1083-%E5%80%9F%E6%95%99%E5%AE%A4%2F</url>
+    <content type="text"><![CDATA[初次接触差分：感觉差分的思想还听常用的树状数组也是差分的思想，题解在注释中就不解释了。 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667/* problem:P1083 借教室 * 差分数组+二分 * 这是博主差分数组的第一道题，可能理解有错误，希望各位大牛指出 * 对于这道题，我们差分数组操作的对象是我们每次操作的时间，二分是步骤上的二分。 * 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;int m,n;int a[1000100];int cf[1000100];int l[1000100];int r[1000100];int d[1000100];bool check(int x)&#123; long long sum = 0; memset(cf, 0, sizeof cf); for (int i = 1; i &lt;= x;i++) &#123; cf[l[i]] += d[i]; cf[r[i] + 1] -= d[i]; &#125; for (int i = 1; i &lt;= m; i++) &#123; sum += cf[i]; if (sum &gt; a[i]) return false; &#125; return true;&#125;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= m;i++) cin &gt;&gt; a[i]; for (int i = 1; i &lt;=n ;i++) &#123; cin &gt;&gt; d[i] &gt;&gt; l[i] &gt;&gt; r[i]; &#125; int l = 1, r = m; int ans=0; while(l&lt;=r) &#123; int mid = l + r &gt;&gt; 1; if(!check(mid)) &#123; r = mid - 1; ans = mid; &#125; else &#123; l = mid + 1; &#125; &#125; if(ans==0) &#123; cout &lt;&lt; 0 &lt;&lt; endl; return 0; &#125; cout &lt;&lt; -1 &lt;&lt; endl; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>差分数组</tag>
       </tags>
   </entry>
   <entry>
@@ -364,28 +408,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[差分数组-P1083 借教室]]></title>
-    <url>%2F2019%2F08%2F03%2F2019-08-03-%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84-P1083-%E5%80%9F%E6%95%99%E5%AE%A4%2F</url>
-    <content type="text"><![CDATA[初次接触差分：感觉差分的思想还听常用的树状数组也是差分的思想，题解在注释中就不解释了。 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667/* problem:P1083 借教室 * 差分数组+二分 * 这是博主差分数组的第一道题，可能理解有错误，希望各位大牛指出 * 对于这道题，我们差分数组操作的对象是我们每次操作的时间，二分是步骤上的二分。 * 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;int m,n;int a[1000100];int cf[1000100];int l[1000100];int r[1000100];int d[1000100];bool check(int x)&#123; long long sum = 0; memset(cf, 0, sizeof cf); for (int i = 1; i &lt;= x;i++) &#123; cf[l[i]] += d[i]; cf[r[i] + 1] -= d[i]; &#125; for (int i = 1; i &lt;= m; i++) &#123; sum += cf[i]; if (sum &gt; a[i]) return false; &#125; return true;&#125;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= m;i++) cin &gt;&gt; a[i]; for (int i = 1; i &lt;=n ;i++) &#123; cin &gt;&gt; d[i] &gt;&gt; l[i] &gt;&gt; r[i]; &#125; int l = 1, r = m; int ans=0; while(l&lt;=r) &#123; int mid = l + r &gt;&gt; 1; if(!check(mid)) &#123; r = mid - 1; ans = mid; &#125; else &#123; l = mid + 1; &#125; &#125; if(ans==0) &#123; cout &lt;&lt; 0 &lt;&lt; endl; return 0; &#125; cout &lt;&lt; -1 &lt;&lt; endl; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>差分数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[动态规划入门-HDU1159]]></title>
-    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-HDU1159%2F</url>
-    <content type="text"><![CDATA[最长公共子序列：大家都知道递推公式也不多说了。 1234567891011121314151617181920212223242526272829303132333435/* preblem:HDU1159 * 题解：最长公共子序列。 * 公式大家都知道，就不多赘述了。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;string.h&gt;#include&lt;cstring&gt;#include &lt;algorithm&gt;using namespace std;string a,b;int len_a,len_b;int dp[1001][1001];int main()&#123; string a, b; while(cin&gt;&gt;a&gt;&gt;b) &#123; memset(dp, 0, sizeof dp); for (int i = 1;i&lt;=a.length();i++)&#123; for (int j = 1; j &lt;= b.length();j++)&#123; if(a[i-1]==b[j-1]) &#123; dp[i][j] = dp[i - 1][j - 1] + 1; &#125; else &#123; dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); &#125; &#125; &#125; cout &lt;&lt; dp[a.length()][b.length()] &lt;&lt; endl; &#125;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[线性动态规划-导弹拦截系统-P1020]]></title>
     <url>%2F2019%2F07%2F31%2F2019-07-31-%E7%BA%BF%E6%80%A7%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%AF%BC%E5%BC%B9%E6%8B%A6%E6%88%AA%E7%B3%BB%E7%BB%9F-P1020%2F</url>
     <content type="text"><![CDATA[线性动态规划入门：这是一道对于我来说很好的题。 非递增序列那么等于也可以，我们的思路就是扫描来找，如果尾部元素大于扫描的元素那么我们可以直接把元素放进去，如果大于则，我们在序的非递增序列中照样给第一个比这个大的元素，然后用扫描元素替代他，为什么？我们这样想如果被替代的元素在尾部，那么我们替换他过后是不是我们递减序列会更长（因为尾部元素变大了），那么我们如果替代的元素在中间也不影响，为什么呐？因为我们比较的时候只看尾部元素，中间的元素我们说白了这辈子都不会再用他了。 证明下序列有序：原序列中y1&gt;y&gt;y2，我们替换过后因为a[i]&gt;y，所以我们一定是有序的。 再看看我们的递增序列，如上同样的解释。 结论：最后len（递增序列长度）就是要求的最大不上升子序列长度 但要注意的是，d中存储的并不是最大不上升子序列！ 123456789101112131415161718192021#include&lt;bits/stdc++.h&gt;using namespace std;int a[100005],f[100005],l[100005];struct cmp&#123;bool operator()(int a,int b)&#123;return a&gt;b;&#125;&#125;;int main()&#123; int n=1; while(cin&gt;&gt;a[n])n++; n--; int con=1,cont=1; l[1]=f[1]=a[1]; for(int i=2;i&lt;=n;i++) &#123; if(l[cont]&gt;=a[i])l[++cont]=a[i]; else l[upper_bound(l+1,l+cont+1,a[i],greater&lt;int&gt;()) -l]=a[i]; if(f[con]&lt;a[i])f[++con]=a[i]; else f[lower_bound(f+1,f+con+1,a[i])-f]=a[i]; &#125; cout&lt;&lt;cont&lt;&lt;&quot; &quot;&lt;&lt;con; return 0;&#125;]]></content>
@@ -411,6 +433,17 @@
     <title><![CDATA[动态规划入门-HDU1089]]></title>
     <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-HDU1089%2F</url>
     <content type="text"><![CDATA[上升子序列最大和 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem :HDU 1089 * 题解：d[n]代表前i个序列中上升子序列之和的最大和 * 思路：两层循环来维护dp，分两种情况来讨论，一个是前面大于后面就比较前面的子序列和+后项的和再取max * 如果是后项比比前项小的话就看当前a[i]的值再和以前的dp值向比较 * 因为是初学dp，博主开始很不理解为什么每次要和dp[i]取最大值，后来明白dp[i]扫描的时候会多次比较然后取最大值。 * 这里状态转移的话博主的理解就是上一个最大子序列之和转移到下一个。*/#include &lt;algorithm&gt;#include &lt;iostream&gt;#include &lt;cstring&gt;#include &lt;cstdlib&gt;#include &lt;cstdio&gt;#include &lt;vector&gt;#include &lt;cmath&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;stack&gt;#define MAX 0x3f3f3f3fusing namespace std;typedef long long ll;long long a[1111],dp[1111];int main()&#123; int n; while(cin&gt;&gt;n&amp;&amp;n) &#123; memset(dp, 0, sizeof dp); for (int i = 1; i &lt;= n;i++) cin &gt;&gt; a[i]; dp[1] = a[1]; for (int i = 2; i &lt;= n;i++) &#123; for (int j = 1; j &lt;= i;j++) &#123; if(a[i]&gt;a[j]) &#123; dp[i] = max(dp[j] + a[i], dp[i]); &#125; else &#123; dp[i] = max(a[i], dp[i]); &#125; &#125; &#125; sort(dp + 1, dp + n + 1); cout &lt;&lt; dp[n] &lt;&lt; endl; &#125;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划入门-HDU1159]]></title>
+    <url>%2F2019%2F07%2F31%2F2019-07-31-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%85%A5%E9%97%A8-HDU1159%2F</url>
+    <content type="text"><![CDATA[最长公共子序列：大家都知道递推公式也不多说了。 1234567891011121314151617181920212223242526272829303132333435/* preblem:HDU1159 * 题解：最长公共子序列。 * 公式大家都知道，就不多赘述了。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;string.h&gt;#include&lt;cstring&gt;#include &lt;algorithm&gt;using namespace std;string a,b;int len_a,len_b;int dp[1001][1001];int main()&#123; string a, b; while(cin&gt;&gt;a&gt;&gt;b) &#123; memset(dp, 0, sizeof dp); for (int i = 1;i&lt;=a.length();i++)&#123; for (int j = 1; j &lt;= b.length();j++)&#123; if(a[i-1]==b[j-1]) &#123; dp[i][j] = dp[i - 1][j - 1] + 1; &#125; else &#123; dp[i][j] = max(dp[i - 1][j], dp[i][j - 1]); &#125; &#125; &#125; cout &lt;&lt; dp[a.length()][b.length()] &lt;&lt; endl; &#125;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -529,17 +562,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[HDU3974 dfs序建树+线段树区间修改]]></title>
-    <url>%2F2019%2F07%2F27%2F2019-07-27-HDU3974-dfs%E5%BA%8F%E5%BB%BA%E6%A0%91%2B%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%8C%BA%E9%97%B4%E4%BF%AE%E6%94%B9%2F</url>
-    <content type="text"><![CDATA[HDU3974线段树+dfs序建树 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;string&gt;#include &lt;map&gt;#include&lt;vector&gt;using namespace std;const int siz = 1e5 + 5;int id = 1;vector&lt;int&gt; G[siz];int ll[siz],rr[siz],vis[siz];struct tree&#123; int l, r; int date;&#125; tree[siz &lt;&lt; 2];void pushDown(int i)&#123; if(tree[i].date==-1) return ; tree[i &lt;&lt; 1].date = tree[i].date; tree[i &lt;&lt; 1 | 1].date=tree[i].date; tree[i].date = -1;&#125;void build_tree(int i,int l,int r)&#123; tree[i].l = l; tree[i].r = r; tree[i].date = -1; int mid = l + r &gt;&gt; 1; if(l==r) return; build_tree(i &lt;&lt; 1, l, mid); build_tree(i &lt;&lt; 1 | 1, mid + 1, r);&#125;void Change(int i,int L,int R,int p)&#123; if(L&lt;=tree[i].l&amp;&amp;tree[i].r&lt;=R)&#123; tree[i].date=p; return; &#125; pushDown(i); int m=(tree[i].l+tree[i].r)&gt;&gt;1; if(L&lt;=m) Change(i&lt;&lt;1,L,R,p); if(R&gt;m) Change(i&lt;&lt;1|1,L,R,p);&#125; int query(int i,int index)&#123; if(tree[i].l==tree[i].r) return tree[i].date; pushDown(i); int m=(tree[i].l+tree[i].r)&gt;&gt;1; if(index&lt;=m) query(i&lt;&lt;1,index); else query(i&lt;&lt;1|1,index);&#125;void dfs(int s)&#123; int i,tmp; ll[s]=id++; for(i=0;i&lt;G[s].size();i++)&#123; tmp=G[s][i]; dfs(tmp); &#125; rr[s]=id++;&#125;int main()&#123; char ch; int t,n,m,u,v,i,cas=1; scanf(&quot;%d&quot;,&amp;t); while(t--)&#123; scanf(&quot;%d&quot;,&amp;n); build_tree(1,1,2*n); for(i=1;i&lt;=n;i++) vis[i]=0,G[i].clear(); for(i=1;i&lt;n;i++)&#123; scanf(&quot;%d%d&quot;,&amp;u,&amp;v); G[v].push_back(u); vis[u]=1; &#125; memset(ll,-1,sizeof(ll)); memset(rr,-1,sizeof(rr)); id=1; for(i=1;i&lt;=n;i++) if(vis[i]==0) dfs(i); scanf(&quot;%d&quot;,&amp;m); printf(&quot;Case #%d:\n&quot;,cas++); while(m--)&#123; cin&gt;&gt;ch; if(ch==&apos;C&apos;)&#123; scanf(&quot;%d&quot;,&amp;u); printf(&quot;%d\n&quot;,query(1,ll[u])); &#125; else&#123; scanf(&quot;%d%d&quot;,&amp;u,&amp;v); Change(1,ll[u],rr[u],v); &#125; &#125; &#125;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[poj 3281 拆点]]></title>
     <url>%2F2019%2F07%2F27%2F2019-07-27-poj-3281-%E6%8B%86%E7%82%B9%2F</url>
     <content type="text"><![CDATA[网络流最大流问题： 很好的一道题，注释讲的很清楚，直接上代码 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104/* Auther :CaiCai * poj 3281 网络流建图好题。 * 网络流入门，开始建图难在我们的源点和终点的建立，在接触几道网络流的题后大概有了一点建图概念。 * 这道题的建图难在拆点，如果不拆点跑出来的最大流应该是2，因为一头牛的流量承受了食物和饮料。（博主拙见）。 * 精髓就在这里，牛拆点，确保一头牛就选一套food和drink的搭配 * 加个源点和汇点。源点与食物、饮料和汇点的边容量都是1，表示每种食物和饮料只有一个。*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=205;int n, f, d;int tot;int r[maxN&lt;&lt;2][maxN&lt;&lt;2], flow[maxN&lt;&lt;2], pre[maxN&lt;&lt;2], food[maxN], drink[maxN];void init()&#123; memset(r, 0, sizeof r); tot = n * 2 + d + f + 1; return ;&#125;int bfs(int st,int en)&#123; memset(pre, -1, sizeof pre); queue&lt;int&gt; q; while(!q.empty()) q.pop(); pre[st] = 0; flow[st]=INF; q.push(st); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;pre[i]==-1) &#123; flow[i] = min(r[u][i], flow[u]); q.push(i); pre[i] = u; &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int dfs(int st,int en)&#123; int k; int flowmax = 0; while((k=bfs(st, en))!=-1) &#123; int par = en, last; while(par!=st) &#123; last = pre[par]; r[last][par] -= k; r[par][last] += k; par = last; &#125; flowmax += k; &#125; return flowmax;&#125;int main()&#123; while(~scanf(&quot;%d%d%d&quot;,&amp;n,&amp;f,&amp;d)) &#123; init(); int F=0,D=0; for (int i = 1; i &lt;= n;i++) &#123; scanf(&quot;%d%d&quot;,&amp;F,&amp;D); for (int j = 1; j &lt;= F;j++) &#123; scanf(&quot;%d&quot;, &amp;food[j]); r[0][food[j]] = 1; r[food[j]][f + i * 2 - 1] = 1; &#125; for (int j = 1; j &lt;= D;j++) &#123; scanf(&quot;%d&quot;, &amp;drink[j]); r[f + i * 2][f + 2 * n + drink[j]] = 1; r[f + 2 * n + drink[j]][tot] = 1; &#125; r[f + i * 2 - 1][f + i * 2] = 1; &#125; printf(&quot;%d\n&quot;, dfs(0, tot)); &#125;&#125;]]></content>
@@ -548,6 +570,17 @@
       </categories>
       <tags>
         <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[HDU3974 dfs序建树+线段树区间修改]]></title>
+    <url>%2F2019%2F07%2F27%2F2019-07-27-HDU3974-dfs%E5%BA%8F%E5%BB%BA%E6%A0%91%2B%E7%BA%BF%E6%AE%B5%E6%A0%91%E5%8C%BA%E9%97%B4%E4%BF%AE%E6%94%B9%2F</url>
+    <content type="text"><![CDATA[HDU3974线段树+dfs序建树 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104#include &lt;iostream&gt;#include &lt;algorithm&gt;#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;string&gt;#include &lt;map&gt;#include&lt;vector&gt;using namespace std;const int siz = 1e5 + 5;int id = 1;vector&lt;int&gt; G[siz];int ll[siz],rr[siz],vis[siz];struct tree&#123; int l, r; int date;&#125; tree[siz &lt;&lt; 2];void pushDown(int i)&#123; if(tree[i].date==-1) return ; tree[i &lt;&lt; 1].date = tree[i].date; tree[i &lt;&lt; 1 | 1].date=tree[i].date; tree[i].date = -1;&#125;void build_tree(int i,int l,int r)&#123; tree[i].l = l; tree[i].r = r; tree[i].date = -1; int mid = l + r &gt;&gt; 1; if(l==r) return; build_tree(i &lt;&lt; 1, l, mid); build_tree(i &lt;&lt; 1 | 1, mid + 1, r);&#125;void Change(int i,int L,int R,int p)&#123; if(L&lt;=tree[i].l&amp;&amp;tree[i].r&lt;=R)&#123; tree[i].date=p; return; &#125; pushDown(i); int m=(tree[i].l+tree[i].r)&gt;&gt;1; if(L&lt;=m) Change(i&lt;&lt;1,L,R,p); if(R&gt;m) Change(i&lt;&lt;1|1,L,R,p);&#125; int query(int i,int index)&#123; if(tree[i].l==tree[i].r) return tree[i].date; pushDown(i); int m=(tree[i].l+tree[i].r)&gt;&gt;1; if(index&lt;=m) query(i&lt;&lt;1,index); else query(i&lt;&lt;1|1,index);&#125;void dfs(int s)&#123; int i,tmp; ll[s]=id++; for(i=0;i&lt;G[s].size();i++)&#123; tmp=G[s][i]; dfs(tmp); &#125; rr[s]=id++;&#125;int main()&#123; char ch; int t,n,m,u,v,i,cas=1; scanf(&quot;%d&quot;,&amp;t); while(t--)&#123; scanf(&quot;%d&quot;,&amp;n); build_tree(1,1,2*n); for(i=1;i&lt;=n;i++) vis[i]=0,G[i].clear(); for(i=1;i&lt;n;i++)&#123; scanf(&quot;%d%d&quot;,&amp;u,&amp;v); G[v].push_back(u); vis[u]=1; &#125; memset(ll,-1,sizeof(ll)); memset(rr,-1,sizeof(rr)); id=1; for(i=1;i&lt;=n;i++) if(vis[i]==0) dfs(i); scanf(&quot;%d&quot;,&amp;m); printf(&quot;Case #%d:\n&quot;,cas++); while(m--)&#123; cin&gt;&gt;ch; if(ch==&apos;C&apos;)&#123; scanf(&quot;%d&quot;,&amp;u); printf(&quot;%d\n&quot;,query(1,ll[u])); &#125; else&#123; scanf(&quot;%d%d&quot;,&amp;u,&amp;v); Change(1,ll[u],rr[u],v); &#125; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -672,9 +705,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[费马小引理]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%BC%95%E7%90%86%2F</url>
-    <content type="text"><![CDATA[本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理 对于费马小定理，我们知道‘+’、‘-’、‘*’的取模都比较的好处理，但是遇到‘/’的取模就比较繁琐了。 公式：对于gcd(a, b)=1，也就是a,b互质的情况下，若b为素数（质数），则有a^(b-1)=1(mod b)。 特别的，可以推导出：由a^(b-1)=1(mod b) 则有啊a^(b-2)=1/a(mod b)，即，a^(-1)=a^(b-2)%b 欧拉函数 欧拉函数：oula(n)表示小于n的且与与n互质的数的个数 oula(n)=n(1-1/p1)(1-1/p2)……(1-1/pk)，其中，pi均为小于n且与n互质的数 那么，就有欧拉的模版了：1234567891011ll oula(ll n)&#123; ll res=n; for(int i=2;i*i&lt;=n;i++) if(n%i==0) &#123; res=res/i*(i-1); while(n%i==0)n/i; &#125; return res;&#125;]]></content>
+    <title><![CDATA[哥德巴赫猜想]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%2F</url>
+    <content type="text"><![CDATA[著名的哥德巴赫猜想是这样的。1.“任何一个大于二的偶数都可以分解成两个素数之和”。2.“任何一个大于5的奇数都可以分解成三个素数之和”。现在请你写两个函数验证一下这个著名的猜想。]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -683,11 +716,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[哥德巴赫猜想]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%2F</url>
-    <content type="text"><![CDATA[著名的哥德巴赫猜想是这样的。1.“任何一个大于二的偶数都可以分解成两个素数之和”。2.“任何一个大于5的奇数都可以分解成三个素数之和”。现在请你写两个函数验证一下这个著名的猜想。]]></content>
+    <title><![CDATA[除法分块模板&洛谷]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%E6%A8%A1%E6%9D%BF%26%E6%B4%9B%E8%B0%B7%2F</url>
+    <content type="text"><![CDATA[余数求和（数学题）题目描述给出正整数n和k，计算G(n, k)=k mod 1 + k mod 2 + k mod 3 + … + k mod n的值，其中k mod i表示k除以i的余数。例如G(10, 5)=5 mod 1 + 5 mod 2 + 5 mod 3 + 5 mod 4 + 5 mod 5 …… + 5 mod 10=0+1+2+1+0+5+5+5+5+5=29 input 10 5 output 29 12345678910111213141516171819#include&lt;bits/stdc++.h&gt;using namespace std;int main()&#123; long long n, k; cin &gt;&gt; n &gt;&gt; k; long long ans = n * k; for(long long l = 1, r; l &lt;= n; l = r+1) &#123; if(k / l == 0)//如果小于1则直接最后一段等于右端点区间 r = n; else &#123;//不然就讨论右边端点的大小 r = min(n, k/(k/l)); &#125; ans -= (k/l)*(r-l+1)*(l+r) / 2; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0; &#125;]]></content>
       <categories>
-        <category>ACM</category>
+        <category>除法分块</category>
       </categories>
       <tags>
         <tag>数论</tag>
@@ -705,11 +738,11 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[除法分块模板&洛谷]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%E6%A8%A1%E6%9D%BF%26%E6%B4%9B%E8%B0%B7%2F</url>
-    <content type="text"><![CDATA[余数求和（数学题）题目描述给出正整数n和k，计算G(n, k)=k mod 1 + k mod 2 + k mod 3 + … + k mod n的值，其中k mod i表示k除以i的余数。例如G(10, 5)=5 mod 1 + 5 mod 2 + 5 mod 3 + 5 mod 4 + 5 mod 5 …… + 5 mod 10=0+1+2+1+0+5+5+5+5+5=29 input 10 5 output 29 12345678910111213141516171819#include&lt;bits/stdc++.h&gt;using namespace std;int main()&#123; long long n, k; cin &gt;&gt; n &gt;&gt; k; long long ans = n * k; for(long long l = 1, r; l &lt;= n; l = r+1) &#123; if(k / l == 0)//如果小于1则直接最后一段等于右端点区间 r = n; else &#123;//不然就讨论右边端点的大小 r = min(n, k/(k/l)); &#125; ans -= (k/l)*(r-l+1)*(l+r) / 2; &#125; cout &lt;&lt; ans &lt;&lt; endl; return 0; &#125;]]></content>
+    <title><![CDATA[唯一分解定理&算术基本定理]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
+    <content type="text"><![CDATA[算术基本定理 （1）一个大于1的正整数N，如果它的标准分解式为： ，那么它的正因数个数为 。 （2） 它的全体正因数之和为 。 当 时就称N为完全数。 是否存在奇完全数，是一个至今未解决之想。 （3） 利用算术基本定理可以重新定义整数a和b的最大公因子 和最小公倍数 ， 并证明 。 （4）此外还可证明根号2是无理数等等。 （5）证明素数个数无限。 LightOJ 1341 - Aladdin and the Flying Carpet（算术基本定理 唯一分解定理）题意： 给出整数 a 和 b ，求区间[b, a] 内的 a 的约数对的个数，即：满足c*d == a 且 c&gt;=b，d&gt;=b。a 的约数对（比如[2, 3] 与 [3, 2] 为同一对）。 题解： 先素数打表，然后利用基本算术定理1求出a（面积）以内的所有正因子个数，最后/2等于对数。最后因为要所有因子要大于b所以相减就是答案。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;cmath&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define maxn 1000047#define LL long longLL p[maxn], prim[maxn];int k = 0;void find_prim()&#123; k = 0; for(LL i = 2; i &lt;= maxn; i++) &#123; if(!p[i]) &#123; prim[k++] = i; for(LL j = i+i; j &lt;= maxn; j+=i) &#123; p[j] = 1; &#125; &#125; &#125;&#125;LL cont(LL a)&#123; LL s = 1; if(a == 0) &#123; return 0; &#125; LL tt = 0; LL i = 0; while(prim[i] &lt; a &amp;&amp; i &lt; k) &#123; tt = 0; if(a%prim[i] == 0) &#123; while(a%prim[i] == 0) &#123; a/=prim[i]; tt++; &#125; &#125; s *= tt+1; i++; &#125; if(a &gt; 1) &#123; s *= 1+1;//一次 &#125; return s;&#125;int main()&#123; LL a, b; int t; int cas = 0; find_prim(); scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b); int cnt = 0; LL num = 0, ans; if(b &gt;= sqrt(a)) ans = 0; // b大小限定 else &#123; for(LL i = 1; i &lt; b; i++) //暴力枚举[1, b]中a的约数 &#123; if(a%i == 0) &#123; cnt++; &#125; &#125; num = cont(a)/2; ans = num - cnt; &#125; printf(&quot;Case %d: %lld\n&quot;,++cas,ans); &#125; return 0;&#125;]]></content>
       <categories>
-        <category>除法分块</category>
+        <category>ACM</category>
       </categories>
       <tags>
         <tag>数论</tag>
@@ -738,9 +771,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[唯一分解定理&算术基本定理]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
-    <content type="text"><![CDATA[算术基本定理 （1）一个大于1的正整数N，如果它的标准分解式为： ，那么它的正因数个数为 。 （2） 它的全体正因数之和为 。 当 时就称N为完全数。 是否存在奇完全数，是一个至今未解决之想。 （3） 利用算术基本定理可以重新定义整数a和b的最大公因子 和最小公倍数 ， 并证明 。 （4）此外还可证明根号2是无理数等等。 （5）证明素数个数无限。 LightOJ 1341 - Aladdin and the Flying Carpet（算术基本定理 唯一分解定理）题意： 给出整数 a 和 b ，求区间[b, a] 内的 a 的约数对的个数，即：满足c*d == a 且 c&gt;=b，d&gt;=b。a 的约数对（比如[2, 3] 与 [3, 2] 为同一对）。 题解： 先素数打表，然后利用基本算术定理1求出a（面积）以内的所有正因子个数，最后/2等于对数。最后因为要所有因子要大于b所以相减就是答案。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;cmath&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define maxn 1000047#define LL long longLL p[maxn], prim[maxn];int k = 0;void find_prim()&#123; k = 0; for(LL i = 2; i &lt;= maxn; i++) &#123; if(!p[i]) &#123; prim[k++] = i; for(LL j = i+i; j &lt;= maxn; j+=i) &#123; p[j] = 1; &#125; &#125; &#125;&#125;LL cont(LL a)&#123; LL s = 1; if(a == 0) &#123; return 0; &#125; LL tt = 0; LL i = 0; while(prim[i] &lt; a &amp;&amp; i &lt; k) &#123; tt = 0; if(a%prim[i] == 0) &#123; while(a%prim[i] == 0) &#123; a/=prim[i]; tt++; &#125; &#125; s *= tt+1; i++; &#125; if(a &gt; 1) &#123; s *= 1+1;//一次 &#125; return s;&#125;int main()&#123; LL a, b; int t; int cas = 0; find_prim(); scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b); int cnt = 0; LL num = 0, ans; if(b &gt;= sqrt(a)) ans = 0; // b大小限定 else &#123; for(LL i = 1; i &lt; b; i++) //暴力枚举[1, b]中a的约数 &#123; if(a%i == 0) &#123; cnt++; &#125; &#125; num = cont(a)/2; ans = num - cnt; &#125; printf(&quot;Case %d: %lld\n&quot;,++cas,ans); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[费马小引理]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E8%B4%B9%E9%A9%AC%E5%B0%8F%E5%BC%95%E7%90%86%2F</url>
+    <content type="text"><![CDATA[本来这些东西想用一天写完的，结果脱了几天，现在决定整理一下 费马小定理 对于费马小定理，我们知道‘+’、‘-’、‘*’的取模都比较的好处理，但是遇到‘/’的取模就比较繁琐了。 公式：对于gcd(a, b)=1，也就是a,b互质的情况下，若b为素数（质数），则有a^(b-1)=1(mod b)。 特别的，可以推导出：由a^(b-1)=1(mod b) 则有啊a^(b-2)=1/a(mod b)，即，a^(-1)=a^(b-2)%b 欧拉函数 欧拉函数：oula(n)表示小于n的且与与n互质的数的个数 oula(n)=n(1-1/p1)(1-1/p2)……(1-1/pk)，其中，pi均为小于n且与n互质的数 那么，就有欧拉的模版了：1234567891011ll oula(ll n)&#123; ll res=n; for(int i=2;i*i&lt;=n;i++) if(n%i==0) &#123; res=res/i*(i-1); while(n%i==0)n/i; &#125; return res;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -782,17 +815,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Unity常用函数和变量汇总]]></title>
-    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB%2F</url>
-    <content type="text"><![CDATA[1，代码。 1234567891011121314151617float3 WorldSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向 float3 ObjSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向 float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化 float3 UnityWorldSpaceLightDir(float4 v) //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化 float3 ObjSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化 float3 UnityObjectToWorldNormal(float3 norm) //把法线从模型空间转换到世界空间中 float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中 float3 UnityWorldToObjectDir(float3 dir) //把方向矢量从世界空间转换到模型空间中 float3 Shade4PointLights(...) //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照 2，语义。1234567891011121314151617181920POSITION //模型空间中的顶点位置，通常是float4类型 NORMAL //顶点法线，通常是float3类型 TANGENT //顶点法线，通常是float4类型 TEXCOORDn //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型 COLOR //顶点颜色，通常是fixed4或float4类型 SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的POSITION，但是最好是使用SV_POSITION COLOR0 //输出第一组顶点颜色 COLOR1 //输出第二组顶点颜色 TEXCOORD0~TEXCOORD7 //输出纹理坐标 SV_Target //输出值将会存储到渲染目标（render target）中 3，变量。1234567891011121314151617UNITY_MATRIX_MVP //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间 UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间 UNITY_MATRIX_V //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间 UNITY_MATRIX_P //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间 UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间 UNITY_MATRIX_T_MV //UNITY_MATRIX_MV的转置矩阵 UNITY_MATRIX_IT_MV //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵 unity_ObjectToWorld(_Object2World) //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间 unity_WorldToObject(_World2Object) //用于将顶点/方向矢量从世界空间转换到模型空间 4，摄像机和屏幕参数。123456789101112131415float3 _WorldSpaceCameraPos //该摄像机在世界空间中的位置 float4 _ProjectionParams //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离 float4 _ScreenParams //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度 float4 _ZBufferParams //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值 float4 unity_OrthoParams //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度 float4x4 unity_CameraProjection //该摄像机的投影矩阵 float4x4 unity_CameraInvProjection //该摄像机的投影矩阵的逆矩阵 float4 unity_CameraWorldClipPlanes[6] //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面 5,内置的光照变量。1234567891011_LightColor0 float4 //该Pass处理的逐像素光源的颜色 _WorldSpaceLightPos0 float4 //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1 _LightMatrix0 float4x4 //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理 unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0 float4 //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置 unity_4LightAtten() float4 //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子 unity_LightColor half4[4] //仅用于Base Pass，存储了前4个非重要的点光源的颜色 6，LightMode标签支持的渲染路径设置选项。12345678Always //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和LightmapsForwardAdd //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源Deferred //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）ShadowCaster //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分PrepassFinal //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色Vertex,VertexLMRGBM和VertexLM //用于遗留的顶点照明渲染 7，顶点照明渲染路径中可以使用的内置变量。1234567unity_LightColor half4[8] //光源颜色 unity_LightPosition float4[8] //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1 unity_LightAtten half4[8] //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果 unity_SpotDirection float4[8] //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0） 8，顶点照明渲染路径中可以使用的内置函数。123float3 ShadeVertexLights(float4 vertex,float normal) //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光 float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight) //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>Unity</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Unity中的一些鼠标事件]]></title>
     <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[Unity中的一些鼠标事件 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。 GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下 GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下 GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。]]></content>
@@ -804,14 +826,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P2746 [USACO5.3]校园网Network of Schools]]></title>
-    <url>%2F2019%2F06%2F26%2FP2746%20%5BUSACO5.3%5D%E6%A0%A1%E5%9B%AD%E7%BD%91Network%20of%20Schools%2F</url>
-    <content type="text"><![CDATA[Tarjan(缩点） 题意很清楚，A任务就是找入度为0的点有几个，B任务就是找入度为0的和出度为0的个数取一个最大。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;const int N = 10000;int low[N], stack[N],head[N],top,cnt,color[N],dfn[N],num,in[N],out[N],indexx;bool instack[N];struct Node&#123; int next, v;&#125;node[N];void add(int u,int v)&#123; node[++cnt].next = head[u]; node[cnt].v = v; head[u] = cnt; return;&#125;void tarjan(int u)&#123; low[u]=dfn[u]=++indexx; stack[++top] = u; instack[u] = 1; for (int i = head[u]; i;i=node[i].next) &#123; int v = node[i].v; if(!dfn[v]) &#123; tarjan(v); low[u] = min(low[u], low[v]); &#125; else if(instack[v]) low[u] = min(low[u], dfn[v]); &#125; if(dfn[u]==low[u]) &#123; num++; do &#123; color[stack[top]] = num; instack[stack[top]] = false; &#125; while (stack[top--] != u); &#125; return;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a; while(cin&gt;&gt;a&amp;&amp;a) &#123; add(i, a); &#125; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!dfn[i]) tarjan(i); &#125; for (int i = 1; i &lt;= n;i++) &#123; for (int j = head[i]; j;j=node[j].next) &#123; if(color[i]!=color[node[j].v]) &#123; out[color[i]]++; in[color[node[j].v]]++; &#125; &#125; &#125; int inc = 0, outc = 0; for(int i = 1;i &lt;= num;i ++) &#123; inc += in[i] == 0 ? 1 : 0; outc += out[i] == 0 ? 1 : 0; &#125; if(num == 1) cout &lt;&lt; "1\n0" &lt;&lt; endl; else cout &lt;&lt; inc &lt;&lt; endl &lt;&lt; max(inc, outc) &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[Unity常用函数和变量汇总]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB%2F</url>
+    <content type="text"><![CDATA[1，代码。 1234567891011121314151617float3 WorldSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向 float3 ObjSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向 float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化 float3 UnityWorldSpaceLightDir(float4 v) //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化 float3 ObjSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化 float3 UnityObjectToWorldNormal(float3 norm) //把法线从模型空间转换到世界空间中 float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中 float3 UnityWorldToObjectDir(float3 dir) //把方向矢量从世界空间转换到模型空间中 float3 Shade4PointLights(...) //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照 2，语义。1234567891011121314151617181920POSITION //模型空间中的顶点位置，通常是float4类型 NORMAL //顶点法线，通常是float3类型 TANGENT //顶点法线，通常是float4类型 TEXCOORDn //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型 COLOR //顶点颜色，通常是fixed4或float4类型 SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的POSITION，但是最好是使用SV_POSITION COLOR0 //输出第一组顶点颜色 COLOR1 //输出第二组顶点颜色 TEXCOORD0~TEXCOORD7 //输出纹理坐标 SV_Target //输出值将会存储到渲染目标（render target）中 3，变量。1234567891011121314151617UNITY_MATRIX_MVP //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间 UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间 UNITY_MATRIX_V //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间 UNITY_MATRIX_P //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间 UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间 UNITY_MATRIX_T_MV //UNITY_MATRIX_MV的转置矩阵 UNITY_MATRIX_IT_MV //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵 unity_ObjectToWorld(_Object2World) //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间 unity_WorldToObject(_World2Object) //用于将顶点/方向矢量从世界空间转换到模型空间 4，摄像机和屏幕参数。123456789101112131415float3 _WorldSpaceCameraPos //该摄像机在世界空间中的位置 float4 _ProjectionParams //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离 float4 _ScreenParams //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度 float4 _ZBufferParams //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值 float4 unity_OrthoParams //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度 float4x4 unity_CameraProjection //该摄像机的投影矩阵 float4x4 unity_CameraInvProjection //该摄像机的投影矩阵的逆矩阵 float4 unity_CameraWorldClipPlanes[6] //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面 5,内置的光照变量。1234567891011_LightColor0 float4 //该Pass处理的逐像素光源的颜色 _WorldSpaceLightPos0 float4 //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1 _LightMatrix0 float4x4 //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理 unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0 float4 //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置 unity_4LightAtten() float4 //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子 unity_LightColor half4[4] //仅用于Base Pass，存储了前4个非重要的点光源的颜色 6，LightMode标签支持的渲染路径设置选项。12345678Always //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和LightmapsForwardAdd //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源Deferred //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）ShadowCaster //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分PrepassFinal //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色Vertex,VertexLMRGBM和VertexLM //用于遗留的顶点照明渲染 7，顶点照明渲染路径中可以使用的内置变量。1234567unity_LightColor half4[8] //光源颜色 unity_LightPosition float4[8] //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1 unity_LightAtten half4[8] //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果 unity_SpotDirection float4[8] //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0） 8，顶点照明渲染路径中可以使用的内置函数。123float3 ShadeVertexLights(float4 vertex,float normal) //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光 float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight) //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理]]></content>
       <categories>
-        <category>ACM</category>
+        <category>学习</category>
       </categories>
       <tags>
-        <tag>Tarjan</tag>
+        <tag>Unity</tag>
       </tags>
   </entry>
   <entry>
@@ -823,6 +845,17 @@
       </categories>
       <tags>
         <tag>Unity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Ropewalkers]]></title>
+    <url>%2F2019%2F06%2F21%2FRopewalkers%2F</url>
+    <content type="text"><![CDATA[RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad. The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was at least dd. Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad can not move at the same time (Only one of them can move at each moment). Ropewalkers can be at the same positions at the same time and can “walk past each other”. You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd. Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides. Input The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance. Output Output one integer — the minimum duration (in seconds) of the performance. `` 123456789101112131415161718#include &lt;bits/stdc++.h&gt;using namespace std;using ll = long long;int main()&#123; int a, b, c, d; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d; int x[]=&#123;a,b,c&#125;; sort(x,x+3); cout&lt;&lt;max(0,d-abs(x[0]-x[1]))+max(0,d-abs(x[1]-x[2]))&lt;&lt;'\n'; return 0;&#125;]]></content>
+      <categories>
+        <category>codeforces</category>
+      </categories>
+      <tags>
+        <tag>codeforces</tag>
       </tags>
   </entry>
   <entry>
@@ -840,17 +873,6 @@
     <title><![CDATA[Email from Polycarp]]></title>
     <url>%2F2019%2F06%2F21%2FEmail%20from%20Polycarp%2F</url>
     <content type="text"><![CDATA[Email from PolycarpMethodius received an email from his friend Polycarp. However, Polycarp’s keyboard is broken, so pressing a key on it once may cause the corresponding symbol to appear more than once (if you press a key on a regular keyboard, it prints exactly one symbol). For example, as a result of typing the word “hello”, the following words could be printed: “hello”, “hhhhello”, “hheeeellllooo”, but the following could not be printed: “hell”, “helo”, “hhllllooo”. Note, that when you press a key, the corresponding symbol must appear (possibly, more than once). The keyboard is broken in a random manner, it means that pressing the same key you can get the different number of letters in the result. For each word in the letter, Methodius has guessed what word Polycarp actually wanted to write, but he is not sure about it, so he asks you to help him. You are given a list of pairs of words. For each pair, determine if the second word could be printed by typing the first one on Polycarp’s keyboard. Input The first line of the input contains one integer nn (1≤n≤1051≤n≤105) — the number of pairs to check. Further input contains nn descriptions of pairs. The first line of each description contains a single non-empty word ss consisting of lowercase Latin letters. The second line of the description contains a single non-empty word tt consisting of lowercase Latin letters. The lengths of both strings are not greater than 106106. It is guaranteed that the total length of all words ss in the input is not greater than 106106. Also, it is guaranteed that the total length of all words tt in the input is not greater than 106106. Output Output nn lines. In the ii-th line for the ii-th pair of words ss and tt print YES if the word tt could be printed by typing the word ss. Otherwise, print NO. 思路：主串中出现字母的顺序必须在父串中按照相同顺序出现，并且出现的次数必须大于等于父串中字母出现的顺序。 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;iostream&gt;#include&lt;string.h&gt;using namespace std;const int maxn = 1e6 +50;string a,b;int Next[maxn];int m,n;bool su;void fun(string a,string b)&#123; int i=0,j=0; int ii=0,jj=0; while(i&lt;a.size()&amp;&amp;j&lt;b.size()) &#123; ii=i; jj=j; while(ii&lt;a.size()&amp;&amp;a[i]==a[ii])ii++; while(jj&lt;b.size()&amp;&amp;b[j]==b[jj])jj++; if(a[i]!=b[j])su=0; if(abs(ii-i)&gt;abs(jj-j))su=0; i=ii; j=jj; &#125; if(i!=a.size()||j!=b.size()) su=0;&#125;int main()&#123; int n; cin&gt;&gt;n; while(n--) &#123; su=1; cin&gt;&gt;a&gt;&gt;b; fun(a,b); if(su==1) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; &#125;&#125;`]]></content>
-      <categories>
-        <category>codeforces</category>
-      </categories>
-      <tags>
-        <tag>codeforces</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Ropewalkers]]></title>
-    <url>%2F2019%2F06%2F21%2FRopewalkers%2F</url>
-    <content type="text"><![CDATA[RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad. The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was at least dd. Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad can not move at the same time (Only one of them can move at each moment). Ropewalkers can be at the same positions at the same time and can “walk past each other”. You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd. Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides. Input The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance. Output Output one integer — the minimum duration (in seconds) of the performance. `` 123456789101112131415161718#include &lt;bits/stdc++.h&gt;using namespace std;using ll = long long;int main()&#123; int a, b, c, d; cin &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d; int x[]=&#123;a,b,c&#125;; sort(x,x+3); cout&lt;&lt;max(0,d-abs(x[0]-x[1]))+max(0,d-abs(x[1]-x[2]))&lt;&lt;'\n'; return 0;&#125;]]></content>
       <categories>
         <category>codeforces</category>
       </categories>
