@@ -5,10 +5,10 @@
     <url>%2F2019%2F09%2F10%2FFire-Fighting%20Hero%2F</url>
     <content type="text"><![CDATA[多源最短路。 消防员的营地可以看成一个点，所以我们用一个超级源点与他们相连接距离是0，然后我们跑两次dij，再根据题意来比较答案就行了。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include&lt;bits/stdc++.h&gt;using namespace std;const int inf=0x3f3f3f3f;const int N=1e6+5;bool vis[N];int cnt,dis[N],head[N],v,e,s,k,c;struct Node&#123; int nex,v,cost;&#125;node[N];struct nod&#123; int v,val; friend bool operator &lt;(nod a,nod b)&#123; return a.val&gt;b.val; &#125;&#125;;priority_queue&lt;nod&gt;q;void add(int u,int v,int cost)&#123; node[++cnt].nex=head[u]; node[cnt].v=v; node[cnt].cost=cost; head[u]=cnt;&#125;void init()&#123; while(!q.empty()) q.pop(); memset(vis,false,sizeof vis); memset(head,0,sizeof head); cnt=0;&#125;int dij(int s,int v)&#123; for(int i=1;i&lt;=v;i++) dis[i]=inf; dis[s]=0; nod temp; temp.v=s,temp.val=0; q.push(temp); while(!q.empty()) &#123; nod u=q.top(); q.pop(); for(int i=head[u.v];i;i=node[i].nex)&#123; int val=node[i].cost; int v=node[i].v; if(dis[v]&gt;dis[u.v]+val)&#123; dis[v]=dis[u.v]+val; nod next; next.v=v,next.val=dis[v];// cout&lt;&lt;&quot;s &quot;&lt;&lt;s&lt;&lt;&quot;dis :&quot;&lt;&lt;dis[v]&lt;&lt;endl; q.push(next); &#125; &#125; &#125; int ans=-1; for(int i=1;i&lt;=v;i++) &#123; ans=max(ans,dis[i]);// cout&lt;&lt;&quot;-----&quot;&lt;&lt;ans&lt;&lt;endl; &#125;// cout&lt;&lt;&quot;-------&quot;&lt;&lt;ans&lt;&lt;endl; return ans;&#125;int main()&#123; int t; cin&gt;&gt;t; while(t--)&#123; init(); cin&gt;&gt;v&gt;&gt;e&gt;&gt;s&gt;&gt;k&gt;&gt;c; for(int i=1;i&lt;=k;i++)&#123; int temp; cin&gt;&gt;temp; add(0,temp,0); add(temp,0,0); &#125; for(int i=1;i&lt;=e;i++)&#123; int a,b,c; cin&gt;&gt;a&gt;&gt;b&gt;&gt;c; add(a,b,c); add(b,a,c); &#125; int ans1=dij(0,v); int ans2=dij(s,v);// cout&lt;&lt;&quot;ans1 :&quot;&lt;&lt;ans1&lt;&lt;&quot;ans2 :&quot;&lt;&lt;ans2&lt;&lt;endl; if(ans1*c&lt;ans2) printf(&quot;%d\n&quot;,ans1); else printf(&quot;%d\n&quot;,ans2); &#125;&#125;]]></content>
       <categories>
-        <category>学习</category>
+        <category>2019南昌网络赛</category>
       </categories>
       <tags>
-        <tag>2019徐州网络赛</tag>
+        <tag>2019南昌网络赛</tag>
       </tags>
   </entry>
   <entry>
@@ -16,7 +16,7 @@
     <url>%2F2019%2F09%2F09%2FCenter%2F</url>
     <content type="text"><![CDATA[map和pair的巧用 map来存中心点，加加操作可以理解为中心点把两个断点往中心拉往中心点(这样就可以解释代码中一个中心点的两个端点循环了了两次，并且i==j不能continue，因为可能加入的那个点刚好是中心点。我们计算的是一个中心点拉到了点的个数，所以再取一个max。就是拥有最多点数量的中心点。再用总点数-这个中心点的数量就是没有被这个中心点拉过去的点的数量。也就是答案。 1234567891011121314151617181920212223242526#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; Pa;typedef map&lt;Pa,int&gt; mp;const int N=10005;Pa pi[N];mp m;int main()&#123; int t; cin&gt;&gt;t; for(int i=1;i&lt;=t;i++)&#123; cin&gt;&gt;pi[i].first&gt;&gt;pi[i].second; &#125; int ans=0; for(int i=1;i&lt;=t;i++)&#123; for(int j=1;j&lt;=t;j++)&#123;// if(i==j) continue; int fx=pi[i].first+pi[j].first; int fy=pi[i].second+pi[j].second; m[&#123;fx,fy&#125;]++; ans=max(ans,m[&#123;fx,fy&#125;]); &#125; &#125; cout&lt;&lt;t-ans&lt;&lt;endl;&#125;]]></content>
       <categories>
-        <category>学习</category>
+        <category>2019徐州网络赛</category>
       </categories>
       <tags>
         <tag>2019徐州网络赛</tag>
@@ -27,7 +27,7 @@
     <url>%2F2019%2F09%2F09%2FLongest%20subsequence%2F</url>
     <content type="text"><![CDATA[序列自动机 第一次遇见序列自动机，大概就是一个nxt数组nx(a)(b)，里面的意义就是,在a位置后面b字母出现的位置。这道题我们还需要考虑，如果我们最后找的位置仍然小于父串长度的话，我们可能存在父串包含子串的情况，所以要再取一个max（m+n-cur). 1234567891011121314151617181920212223242526272829303132333435#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e6+7;char s[maxn],t[maxn];int nx[maxn][26];int n,m;int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); scanf(&quot;%s%s&quot;,s+1,t+1); for(register int i=0;i&lt;26;++i)&#123; nx[n][i]=nx[n+1][i]=n+1; &#125; for(register int i=n-1;i&gt;=0;--i)&#123; for(register int j=0;j&lt;26;++j)&#123; nx[i][j]=nx[i+1][j]; &#125; int to=s[i+1]-&apos;a&apos;; nx[i][to]=i+1; &#125; int cur=0,ans=-1; for(int i=1;t[i];i++)&#123; int pos=t[i]-&apos;a&apos;; for(int j=pos+1;j&lt;26;j++)&#123; int id=nx[cur][j]; if(id&lt;=n)&#123; ans=max(ans,n-id+i); &#125; &#125; cur=nx[cur][pos]; if(cur&gt;n) break; &#125; if(cur&lt;n) ans=max(ans,m+n-cur); cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
       <categories>
-        <category>学习</category>
+        <category>2019徐州网络赛</category>
       </categories>
       <tags>
         <tag>2019徐州网络赛</tag>
@@ -38,7 +38,7 @@
     <url>%2F2019%2F09%2F07%2FHDU6581%2F</url>
     <content type="text"><![CDATA[思维题：**线性扫一遍记录最大值。注意以车头为准。** 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;using namespace std;long long len;const int N=200005;double l[N],s[N],v[N];double max(double a,double b)&#123; if(a&gt;b) return a; return b;&#125;int main()&#123; int n; while(~scanf("%d",&amp;n)) &#123; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;l[i]);//车身长度 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;s[i]);//距离终点距离 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;v[i]); &#125; double ans=-1; double len=0; for(int i=0;i&lt;=n;i++) &#123; if(i&gt;0) len+=l[i]; ans=max(ans,(len+s[i])/v[i]); // cout&lt;&lt;"l :"&lt;&lt;l[i]&lt;&lt;" s: "&lt;&lt;s[i]&lt;&lt;" v "&lt;&lt;v[i]&lt;&lt;endl; // cout&lt;&lt;"ans: "&lt;&lt;ans&lt;&lt;endl; &#125; printf("%.10lf\n",ans); &#125; &#125;]]></content>
       <categories>
-        <category>学习</category>
+        <category>2019航电多校</category>
       </categories>
       <tags>
         <tag>2019航电多校</tag>
@@ -49,7 +49,7 @@
     <url>%2F2019%2F09%2F07%2Fso%20easy%2F</url>
     <content type="text"><![CDATA[并查集+离散化用unordered_map来模拟pre数组，用并查集来模拟一个链表关系。 123456789101112131415161718192021222324252627282930#include&lt;bits/stdc++.h&gt;using namespace std;unordered_map&lt;int,int&gt; mp;int find(int x)&#123; if(!mp.count(x)) return x; return mp[x]=find(mp[x]);&#125;int main()&#123; int n,m; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); while(m--)&#123; int a,b; scanf(&quot;%d%d&quot;,&amp;a,&amp;b); if(a==1) &#123; mp[b]=find(b+1); &#125; else &#123; int ans=find(b); if(ans&lt;=n) printf(&quot;%d\n&quot;,ans); else printf(&quot;-1\n&quot;); &#125; &#125; return 0;&#125;]]></content>
       <categories>
-        <category>学习</category>
+        <category>2019徐州网络赛</category>
       </categories>
       <tags>
         <tag>2019徐州网络赛</tag>
