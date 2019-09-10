@@ -371,6 +371,558 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod1298 圆与三角形/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="深海的鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/21/51nod1298 圆与三角形/" class="post-title-link" itemprop="url">1298 圆与三角形</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-21 00:00:00 / 修改时间：23:03:34" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/21/51nod1298 圆与三角形/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/51nod1298 圆与三角形/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p><strong>把三角形看成三条边去换算。因为要计算点到直线的距离公式，所以我们写成直线的一般形式。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="comment">//点 </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span>&#123;</span></span><br><span class="line">	<span class="keyword">double</span> x,y;</span><br><span class="line">	Point()&#123;&#125;</span><br><span class="line">	Point(<span class="keyword">int</span> x,<span class="keyword">int</span> y):x(x),y(y)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//圆 </span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Circle</span>&#123;</span></span><br><span class="line">	<span class="keyword">double</span> r,x,y;</span><br><span class="line">	Circle()&#123;&#125;;</span><br><span class="line">	Circle(<span class="keyword">double</span> r,<span class="keyword">double</span> x,<span class="keyword">double</span> y):r(r),x(x),y(y)&#123;&#125; </span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line"><span class="comment">//判断直线p1p2与圆c是否相交，相交返回true，否则返回false </span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">judge</span><span class="params">(Point p1,Point p2,Circle c)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">bool</span> flag1=(p1.x-c.x)*(p1.x-c.x)+(p1.y-c.y)*(p1.y-c.y)&lt;=c.r*c.r;</span><br><span class="line">	<span class="keyword">bool</span> flag2=(p2.x-c.x)*(p2.x-c.x)+(p2.y-c.y)*(p2.y-c.y)&lt;=c.r*c.r;</span><br><span class="line">	<span class="keyword">if</span>(flag1&amp;&amp;flag2)	<span class="comment">//情况一、两点都在圆内 :一定不相交 </span></span><br><span class="line">	  <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">	<span class="keyword">else</span> <span class="keyword">if</span>(flag1||flag2) <span class="comment">//情况二、一个点在圆内，一个点在圆外：一定相交 </span></span><br><span class="line">	  <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">	<span class="keyword">else</span> <span class="comment">//情况三、两个点都在圆外 </span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">double</span> A,B,C,dist1,dist2,angle1,angle2;</span><br><span class="line">		<span class="comment">//将直线p1p2化为一般式：Ax+By+C=0的形式。先化为两点式，然后由两点式得出一般式 </span></span><br><span class="line">		A=p1.y-p2.y;</span><br><span class="line">		B=p2.x-p1.x;</span><br><span class="line">		C=p1.x*p2.y-p2.x*p1.y;</span><br><span class="line">		<span class="comment">//使用距离公式判断圆心到直线ax+by+c=0的距离是否大于半径 </span></span><br><span class="line">		dist1=A*c.x+B*c.y+C;</span><br><span class="line">		dist1*=dist1;</span><br><span class="line">		dist2=(A*A+B*B)*c.r*c.r;</span><br><span class="line">		<span class="keyword">if</span>(dist1&gt;dist2)<span class="comment">//圆心到直线p1p2的距离大于半径，不相交 </span></span><br><span class="line">		  <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">		angle1=(c.x-p1.x)*(p2.x-p1.x)+(c.y-p1.y)*(p2.y-p1.y);</span><br><span class="line">		angle2=(c.x-p2.x)*(p1.x-p2.x)+(c.y-p2.y)*(p1.y-p2.y);</span><br><span class="line">		<span class="keyword">if</span>(angle1&gt;<span class="number">0</span>&amp;&amp;angle2&gt;<span class="number">0</span>)<span class="comment">//余弦为正，则是锐角，一定相交 </span></span><br><span class="line">		  <span class="keyword">return</span> <span class="literal">true</span>; </span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  <span class="keyword">return</span> <span class="literal">false</span>; </span><br><span class="line">	&#125; </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> t;</span><br><span class="line">	Circle c;<span class="comment">//圆 </span></span><br><span class="line">	Point p[<span class="number">3</span>];<span class="comment">//三角形的三个顶点 </span></span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">	<span class="keyword">while</span>(t--)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf"</span>,&amp;c.x,&amp;c.y,&amp;c.r);<span class="comment">//读入圆的圆心和半径 </span></span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)<span class="comment">//读入三角形的三个顶点 </span></span><br><span class="line">		  <span class="built_in">scanf</span>(<span class="string">"%lf%lf"</span>,&amp;p[i].x,&amp;p[i].y);</span><br><span class="line">		<span class="comment">//判断3条边是否与圆相交 </span></span><br><span class="line">		<span class="keyword">bool</span> flag1=judge(p[<span class="number">0</span>],p[<span class="number">1</span>],c);</span><br><span class="line">		<span class="keyword">bool</span> flag2=judge(p[<span class="number">1</span>],p[<span class="number">2</span>],c);</span><br><span class="line">		<span class="keyword">bool</span> flag3=judge(p[<span class="number">0</span>],p[<span class="number">2</span>],c);</span><br><span class="line">		<span class="keyword">if</span>(flag1||flag2||flag3)</span><br><span class="line">		  <span class="built_in">printf</span>(<span class="string">"Yes\n"</span>);</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		  <span class="built_in">printf</span>(<span class="string">"No\n"</span>); </span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod四点共圆/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="深海的鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/21/51nod四点共圆/" class="post-title-link" itemprop="url">四点共圆</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-22 11:06:37" itemprop="dateModified" datetime="2019-08-22T11:06:37+08:00">2019-08-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/21/51nod四点共圆/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/51nod四点共圆/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p><strong>四个点，任意组成三个不同的向量，然后组成一个行列式。如果行列式为0则在同一平面反之不成立。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y,z;</span><br><span class="line">&#125; p[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;p[i].x,&amp;p[i].y,&amp;p[i].z);</span><br><span class="line">        Point s1,s2,s3;</span><br><span class="line">        s1.x=p[<span class="number">1</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s1.y=p[<span class="number">1</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s1.z=p[<span class="number">1</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        s2.x=p[<span class="number">2</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s2.y=p[<span class="number">2</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s2.z=p[<span class="number">2</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        s3.x=p[<span class="number">3</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s3.y=p[<span class="number">3</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s3.z=p[<span class="number">3</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        <span class="keyword">int</span> ans;</span><br><span class="line">        ans=s1.x*s2.y*s3.z+s1.y*s2.z*s3.x+s1.z*s2.x*s3.y-s1.z*s2.y*s3.x-s1.x*s2.z*s3.y-s1.y*s2.x*s3.z;</span><br><span class="line">        <span class="keyword">if</span>(ans==<span class="number">0</span>)</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/Maximum Median/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="深海的鱼">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/head.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cai's blogs">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/08/21/Maximum Median/" class="post-title-link" itemprop="url">Maximum Median</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-22 18:22:36" itemprop="dateModified" datetime="2019-08-22T18:22:36+08:00">2019-08-22</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/08/21/Maximum Median/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/Maximum Median/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <a id="more"></a>
+<p><strong>思维题，从中间往后面扫。因为没有考虑K特别大的情况WA了。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> A[<span class="number">200005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> N, K;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; K;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N;i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; A[i];</span><br><span class="line"></span><br><span class="line">		sort(A+<span class="number">1</span>,A+<span class="number">1</span>+N);</span><br><span class="line">    <span class="keyword">int</span> mid = (N+<span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> current = A[mid];</span><br><span class="line"><span class="comment">//	 cout &lt;&lt; current &lt;&lt; endl;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = mid + <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> dis = A[i] - A[mid];</span><br><span class="line">		<span class="keyword">if</span>(K&gt;=(i - mid) * dis)</span><br><span class="line">		&#123;</span><br><span class="line">			K -= (i - mid) * dis;</span><br><span class="line">			current += dis;</span><br><span class="line"><span class="comment">//			cout&lt;&lt;"------------"&lt;&lt;current&lt;&lt;endl; </span></span><br><span class="line">			A[mid] += dis;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current += K / (i-mid);</span><br><span class="line">			K %= (i-mid);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">if</span>(K) current += K/(N-mid+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; current &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod2678凌波微步/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -724,7 +1276,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/Maximum Median/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod2673最短路径/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -744,7 +1296,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/21/Maximum Median/" class="post-title-link" itemprop="url">Maximum Median</a>
+                <a href="/2019/08/21/51nod2673最短路径/" class="post-title-link" itemprop="url">2673-最短路径</a>
               
             
           </h1>
@@ -769,24 +1321,12 @@
                 
               
 
-              <time title="创建时间：2019-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+              <time title="创建时间：2019-08-21 00:00:00 / 修改时间：09:41:49" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-22 18:22:36" itemprop="dateModified" datetime="2019-08-22T18:22:36+08:00">2019-08-22</time>
               
             
           </span>
@@ -822,8 +1362,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/21/Maximum Median/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/Maximum Median/" itemprop="commentCount"></span>
+                <a href="/2019/08/21/51nod2673最短路径/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/51nod2673最短路径/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -854,378 +1394,9 @@
         
           
             <a id="more"></a>
-<p><strong>思维题，从中间往后面扫。因为没有考虑K特别大的情况WA了。</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cassert&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> A[<span class="number">200005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> N, K;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; K;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N;i++)</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; A[i];</span><br><span class="line"></span><br><span class="line">		sort(A+<span class="number">1</span>,A+<span class="number">1</span>+N);</span><br><span class="line">    <span class="keyword">int</span> mid = (N+<span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> current = A[mid];</span><br><span class="line"><span class="comment">//	 cout &lt;&lt; current &lt;&lt; endl;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = mid + <span class="number">1</span>; i &lt;= N; i++) &#123;</span><br><span class="line">		<span class="keyword">long</span> <span class="keyword">long</span> dis = A[i] - A[mid];</span><br><span class="line">		<span class="keyword">if</span>(K&gt;=(i - mid) * dis)</span><br><span class="line">		&#123;</span><br><span class="line">			K -= (i - mid) * dis;</span><br><span class="line">			current += dis;</span><br><span class="line"><span class="comment">//			cout&lt;&lt;"------------"&lt;&lt;current&lt;&lt;endl; </span></span><br><span class="line">			A[mid] += dis;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			current += K / (i-mid);</span><br><span class="line">			K %= (i-mid);</span><br><span class="line">			<span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"> 	<span class="keyword">if</span>(K) current += K/(N-mid+<span class="number">1</span>);</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; current &lt;&lt; <span class="string">'\n'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">int</span> n, m;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> inf 0x3f3f3f3f</span></span><br><span class="line"><span class="keyword">int</span> maze[<span class="number">1000</span>][<span class="number">1000</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">floy</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= m;k++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m;i++)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= m;j++)</span><br><span class="line">			&#123;</span><br><span class="line">				maze[i][j] = min(maze[i][j], maze[i][k] + maze[k][j]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;m, &amp;n);</span><br><span class="line">	<span class="built_in">memset</span>(maze,inf,<span class="keyword">sizeof</span> maze);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">int</span> a, b, c;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;a, &amp;b, &amp;c);</span><br><span class="line">		maze[a][b] = c;</span><br><span class="line">		maze[b][a] = c;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> s, t;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;s, &amp;t);</span><br><span class="line">	floy();</span><br><span class="line">	<span class="keyword">if</span>(s==t)</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"0\n"</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d\n"</span>, maze[s][t]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
           
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod四点共圆/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="深海的鱼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/21/51nod四点共圆/" class="post-title-link" itemprop="url">四点共圆</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-08-22 11:06:37" itemprop="dateModified" datetime="2019-08-22T11:06:37+08:00">2019-08-22</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/21/51nod四点共圆/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/51nod四点共圆/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a>
-<p><strong>四个点，任意组成三个不同的向量，然后组成一个行列式。如果行列式为0则在同一平面反之不成立。</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;cstring&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> x,y,z;</span><br><span class="line">&#125; p[<span class="number">5</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;t);</span><br><span class="line">    <span class="keyword">while</span>(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">4</span>; i++)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d %d %d"</span>,&amp;p[i].x,&amp;p[i].y,&amp;p[i].z);</span><br><span class="line">        Point s1,s2,s3;</span><br><span class="line">        s1.x=p[<span class="number">1</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s1.y=p[<span class="number">1</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s1.z=p[<span class="number">1</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        s2.x=p[<span class="number">2</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s2.y=p[<span class="number">2</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s2.z=p[<span class="number">2</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        s3.x=p[<span class="number">3</span>].x-p[<span class="number">0</span>].x;</span><br><span class="line">        s3.y=p[<span class="number">3</span>].y-p[<span class="number">0</span>].y;</span><br><span class="line">        s3.z=p[<span class="number">3</span>].z-p[<span class="number">0</span>].z;</span><br><span class="line">        <span class="keyword">int</span> ans;</span><br><span class="line">        ans=s1.x*s2.y*s3.z+s1.y*s2.z*s3.x+s1.z*s2.x*s3.y-s1.z*s2.y*s3.x-s1.x*s2.z*s3.y-s1.y*s2.x*s3.z;</span><br><span class="line">        <span class="keyword">if</span>(ans==<span class="number">0</span>)</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"Yes"</span>);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"No"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/20/Largest Rectangle in a Histogram/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="深海的鱼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/20/Largest Rectangle in a Histogram/" class="post-title-link" itemprop="url">Largest Rectangle in a Histogram-单调栈</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-20 00:00:00 / 修改时间：22:00:02" itemprop="dateCreated datePublished" datetime="2019-08-20T00:00:00+08:00">2019-08-20</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/20/Largest Rectangle in a Histogram/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/20/Largest Rectangle in a Histogram/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h4 id="单调栈练习："><a href="#单调栈练习：" class="headerlink" title="单调栈练习："></a>单调栈练习：</h4>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/20/Largest Rectangle in a Histogram/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
         
       
     </div>
@@ -1460,7 +1631,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/20/数塔/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/20/Largest Rectangle in a Histogram/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -1480,7 +1651,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/20/数塔/" class="post-title-link" itemprop="url">数塔-DFS</a>
+                <a href="/2019/08/20/Largest Rectangle in a Histogram/" class="post-title-link" itemprop="url">Largest Rectangle in a Histogram-单调栈</a>
               
             
           </h1>
@@ -1505,7 +1676,7 @@
                 
               
 
-              <time title="创建时间：2019-08-20 00:00:00 / 修改时间：14:08:07" itemprop="dateCreated datePublished" datetime="2019-08-20T00:00:00+08:00">2019-08-20</time>
+              <time title="创建时间：2019-08-20 00:00:00 / 修改时间：22:00:02" itemprop="dateCreated datePublished" datetime="2019-08-20T00:00:00+08:00">2019-08-20</time>
             
 
             
@@ -1546,8 +1717,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/20/数塔/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/20/数塔/" itemprop="commentCount"></span>
+                <a href="/2019/08/20/Largest Rectangle in a Histogram/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/20/Largest Rectangle in a Histogram/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1576,11 +1747,11 @@
 
       
         
-          <h4 id="DFS复习"><a href="#DFS复习" class="headerlink" title="DFS复习"></a>DFS复习</h4>
+          <h4 id="单调栈练习："><a href="#单调栈练习：" class="headerlink" title="单调栈练习："></a>单调栈练习：</h4>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/20/数塔/#more" rel="contents">
+              <a class="btn" href="/2019/08/20/Largest Rectangle in a Histogram/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1820,7 +1991,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/19/Sum It Up(dfs)/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/20/数塔/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -1840,7 +2011,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/19/Sum It Up(dfs)/" class="post-title-link" itemprop="url">Sum It Up-DFS</a>
+                <a href="/2019/08/20/数塔/" class="post-title-link" itemprop="url">数塔-DFS</a>
               
             
           </h1>
@@ -1865,7 +2036,7 @@
                 
               
 
-              <time title="创建时间：2019-08-19 00:00:00 / 修改时间：23:21:45" itemprop="dateCreated datePublished" datetime="2019-08-19T00:00:00+08:00">2019-08-19</time>
+              <time title="创建时间：2019-08-20 00:00:00 / 修改时间：14:08:07" itemprop="dateCreated datePublished" datetime="2019-08-20T00:00:00+08:00">2019-08-20</time>
             
 
             
@@ -1906,8 +2077,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/19/Sum It Up(dfs)/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/19/Sum It Up(dfs)/" itemprop="commentCount"></span>
+                <a href="/2019/08/20/数塔/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/20/数塔/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -1936,191 +2107,11 @@
 
       
         
-          <h4 id="深搜复习："><a href="#深搜复习：" class="headerlink" title="深搜复习："></a>深搜复习：</h4>
+          <h4 id="DFS复习"><a href="#DFS复习" class="headerlink" title="DFS复习"></a>DFS复习</h4>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/19/Sum It Up(dfs)/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/18/More is better/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="深海的鱼">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/head.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Cai's blogs">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/08/18/More is better/" class="post-title-link" itemprop="url">More is better</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-08-18 00:00:00 / 修改时间：15:35:40" itemprop="dateCreated datePublished" datetime="2019-08-18T00:00:00+08:00">2019-08-18</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-              
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-            
-                <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/18/More is better/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/18/More is better/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h5 id="最大连通块的元素个数。"><a href="#最大连通块的元素个数。" class="headerlink" title="最大连通块的元素个数。"></a>最大连通块的元素个数。</h5>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/08/18/More is better/#more" rel="contents">
+              <a class="btn" href="/2019/08/20/数塔/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2213,7 +2204,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">106</span>
+                    <span class="site-state-item-count">108</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

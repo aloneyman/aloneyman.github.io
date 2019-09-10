@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="每台机子我们最多使用1次，或者一次都不使用。最后算一下曼哈顿距离就可以了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include &amp;lt;cstdio&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;set&amp;gt;#i">
-<meta name="keywords" content="51NOD">
+  <meta name="description" content="map和pair的巧用">
+<meta name="keywords" content="2019徐州网络赛">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2678-凌波微步">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/08/21/51nod2678凌波微步/index.html">
+<meta property="og:title" content="2019ICPC-徐州网络赛-Center">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/09/09/Center/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="每台机子我们最多使用1次，或者一次都不使用。最后算一下曼哈顿距离就可以了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include &amp;lt;cstdio&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;set&amp;gt;#i">
+<meta property="og:description" content="map和pair的巧用">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-21T01:42:06.233Z">
+<meta property="og:updated_time" content="2019-09-09T03:57:56.515Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2678-凌波微步">
-<meta name="twitter:description" content="每台机子我们最多使用1次，或者一次都不使用。最后算一下曼哈顿距离就可以了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950#include &amp;lt;cstdio&amp;gt;#include &amp;lt;iostream&amp;gt;#include &amp;lt;set&amp;gt;#i">
+<meta name="twitter:title" content="2019ICPC-徐州网络赛-Center">
+<meta name="twitter:description" content="map和pair的巧用">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/08/21/51nod2678凌波微步/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/09/09/Center/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>2678-凌波微步 | Cai's blogs</title>
+  <title>2019ICPC-徐州网络赛-Center | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/21/51nod2678凌波微步/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/09/09/Center/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2678-凌波微步
+          <h1 class="post-title" itemprop="name headline">2019ICPC-徐州网络赛-Center
 
               
             
@@ -418,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-08-21 00:00:00 / 修改时间：09:42:06" itemprop="dateCreated datePublished" datetime="2019-08-21T00:00:00+08:00">2019-08-21</time>
+              <time title="创建时间：2019-09-09 00:00:00 / 修改时间：11:57:56" itemprop="dateCreated datePublished" datetime="2019-09-09T00:00:00+08:00">2019-09-09</time>
             
 
             
@@ -459,8 +459,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/21/51nod2678凌波微步/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/21/51nod2678凌波微步/" itemprop="commentCount"></span>
+                <a href="/2019/09/09/Center/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/09/Center/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,9 +495,9 @@
       
 
       
-        <a id="more"></a>
-<p><strong>每台机子我们最多使用1次，或者一次都不使用。最后算一下曼哈顿距离就可以了。</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;queue&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stack&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ll long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ll x, y, lx, ly;</span><br><span class="line">&#125;node[<span class="number">4</span>];</span><br><span class="line">ll x, y, last_x, last_y;</span><br><span class="line"><span class="keyword">bool</span> vis[<span class="number">4</span>];</span><br><span class="line">ll ans=<span class="number">0x3f3f3f3f3f3f3f3f</span>;</span><br><span class="line"><span class="function">ll <span class="title">dist</span><span class="params">(ll u,ll v,ll mx,ll my)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="built_in">abs</span>(u - mx) + <span class="built_in">abs</span>(v - my);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> k,ll u,ll v,ll time)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(k==<span class="number">3</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		ans = min(ans, time+dist(u, v, last_x, last_y));</span><br><span class="line">		<span class="comment">//cout&lt;&lt;ans&lt;&lt;endl;</span></span><br><span class="line">		<span class="keyword">return</span> ;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(k + <span class="number">1</span>, u, v, time);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">3</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">if</span>(!vis[i])</span><br><span class="line">		&#123;</span><br><span class="line">			vis[i] = <span class="number">1</span>;</span><br><span class="line">			dfs(k + <span class="number">1</span>, node[i].x, node[i].y, time + <span class="number">10</span> + dist(u, v, node[i].lx, node[i].ly));</span><br><span class="line">			dfs(k + <span class="number">1</span>, node[i].lx, node[i].ly, time + <span class="number">10</span> + dist(u, v, node[i].x, node[i].y));</span><br><span class="line">			vis[i] = <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">cin</span> &gt;&gt; x &gt;&gt; y &gt;&gt; last_x &gt;&gt; last_y;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">3</span>;i++)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">cin</span> &gt;&gt; node[i].x &gt;&gt; node[i].y &gt;&gt; node[i].lx &gt;&gt; node[i].ly;</span><br><span class="line">	&#125;</span><br><span class="line">	dfs(<span class="number">0</span>,x,y,<span class="number">0</span>);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="map和pair的巧用"><a href="#map和pair的巧用" class="headerlink" title="map和pair的巧用"></a>map和pair的巧用</h4><a id="more"></a>
+<p><strong>map来存中心点，加加操作可以理解为中心点把两个断点往中心拉往中心点(这样就可以解释代码中一个中心点的两个端点循环了了两次，并且i==j不能continue，因为可能加入的那个点刚好是中心点。我们计算的是一个中心点拉到了点的个数，所以再取一个max。就是拥有最多点数量的中心点。再用总点数-这个中心点的数量就是没有被这个中心点拉过去的点的数量。也就是答案。</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">typedef pair&lt;int,int&gt; Pa;</span><br><span class="line">typedef map&lt;Pa,int&gt; mp;</span><br><span class="line">const int N=10005;</span><br><span class="line">Pa pi[N];</span><br><span class="line">mp m;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int t;</span><br><span class="line">	cin&gt;&gt;t;</span><br><span class="line">	for(int i=1;i&lt;=t;i++)&#123;</span><br><span class="line">		cin&gt;&gt;pi[i].first&gt;&gt;pi[i].second;</span><br><span class="line">	&#125;</span><br><span class="line">	int ans=0;</span><br><span class="line">	for(int i=1;i&lt;=t;i++)&#123;</span><br><span class="line">		for(int j=1;j&lt;=t;j++)&#123;</span><br><span class="line">//			if(i==j) continue;</span><br><span class="line">			int fx=pi[i].first+pi[j].first;</span><br><span class="line">			int fy=pi[i].second+pi[j].second;</span><br><span class="line">			m[&#123;fx,fy&#125;]++;</span><br><span class="line">			ans=max(ans,m[&#123;fx,fy&#125;]);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	cout&lt;&lt;t-ans&lt;&lt;endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -524,7 +524,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/51NOD/" rel="tag"># 51NOD</a>
+            <a href="/tags/2019徐州网络赛/" rel="tag"># 2019徐州网络赛</a>
           
         </div>
       
@@ -537,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/21/51nod1384全排列/" rel="next" title="1384-全排列">
-                <i class="fa fa-chevron-left"></i> 1384-全排列
+              <a href="/2019/09/09/Longest subsequence/" rel="next" title="2019ICPC-徐州网络赛-Longest subsequence">
+                <i class="fa fa-chevron-left"></i> 2019ICPC-徐州网络赛-Longest subsequence
               </a>
             
           </div>
@@ -547,8 +547,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/21/Maximum Median/" rel="prev" title="Maximum Median">
-                Maximum Median <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/10/Fire-Fighting Hero/" rel="prev" title="2019ICPC-南昌网络赛-Fire-Fighting Hero">
+                2019ICPC-南昌网络赛-Fire-Fighting Hero <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -598,8 +598,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -739,6 +748,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#map和pair的巧用"><span class="nav-number">1.</span> <span class="nav-text">map和pair的巧用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1021,7 +1047,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/08/21/51nod2678凌波微步/'
+    refer: '2019/09/09/Center/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
