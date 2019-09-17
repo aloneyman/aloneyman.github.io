@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="今天又AK了..不开心">
-<meta name="keywords" content="动态规划">
+  <meta name="description" content="唯一分解定理">
+<meta name="keywords" content="数论">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ak的一天">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/08/11/2019-08-11-ak/index.html">
+<meta property="og:title" content="Mysterious Bacteria">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/09/07/Mysterious Bacteria-唯一分解定理/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="今天又AK了..不开心">
+<meta property="og:description" content="唯一分解定理">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-11T12:09:41.180Z">
+<meta property="og:updated_time" content="2019-09-16T15:31:19.307Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ak的一天">
-<meta name="twitter:description" content="今天又AK了..不开心">
+<meta name="twitter:title" content="Mysterious Bacteria">
+<meta name="twitter:description" content="唯一分解定理">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/08/11/2019-08-11-ak/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/09/07/Mysterious Bacteria-唯一分解定理/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>ak的一天 | Cai's blogs</title>
+  <title>Mysterious Bacteria | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/11/2019-08-11-ak/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/09/07/Mysterious Bacteria-唯一分解定理/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ak的一天
+          <h1 class="post-title" itemprop="name headline">Mysterious Bacteria
 
               
             
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2019-08-11 00:00:00 / 修改时间：20:09:41" itemprop="dateCreated datePublished" datetime="2019-08-11T00:00:00+08:00">2019-08-11</time>
+              <time title="创建时间：2019-09-07 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-07T00:00:00+08:00">2019-09-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-09-16 23:31:19" itemprop="dateModified" datetime="2019-09-16T23:31:19+08:00">2019-09-16</time>
               
             
           </span>
@@ -459,8 +471,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/11/2019-08-11-ak/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/11/2019-08-11-ak/" itemprop="commentCount"></span>
+                <a href="/2019/09/07/Mysterious Bacteria-唯一分解定理/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/07/Mysterious Bacteria-唯一分解定理/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,7 +507,10 @@
       
 
       
-        <h2 id="今天又AK了-不开心"><a href="#今天又AK了-不开心" class="headerlink" title="今天又AK了..不开心"></a>今天又AK了..不开心</h2>
+        <h4 id="唯一分解定理"><a href="#唯一分解定理" class="headerlink" title="唯一分解定理"></a>唯一分解定理</h4><a id="more"></a>
+<h5 id="题意："><a href="#题意：" class="headerlink" title="题意："></a>题意：</h5><p>给一个X，找出b^p=x，最大的p。<br><strong>有一个坑点如果给一个数是负数，那么应该是奇数次方才行，所以我们要把他们的所有偶数次方都转换为奇数次方。（因为偶数次方只可能是正数。）至于为什么要GCD举一个简单的例子就是，216=2^3*3^3=6^3，当一个次方相同的时候底数可以相乘来合并，所以要找到所有次数满足的最小次数。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N=<span class="number">1e5</span>+<span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> tot,d,a[<span class="number">100</span>];</span><br><span class="line">ll ans[N/<span class="number">10</span>];</span><br><span class="line"><span class="keyword">bool</span> vis[N];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">prime</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(vis,<span class="number">1</span>,<span class="keyword">sizeof</span> vis);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;N;i++)&#123;</span><br><span class="line">		<span class="keyword">if</span>(vis[i]) ans[++tot]=i;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=tot&amp;&amp;i*ans[j]&lt;N;j++)&#123;</span><br><span class="line">			vis[i*ans[j]]=<span class="number">0</span>;</span><br><span class="line">			<span class="keyword">if</span>(i%ans[j]==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> b==<span class="number">0</span>?a:gcd(b,a%b);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sbreak</span><span class="params">(ll x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	d=<span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(a,<span class="number">0</span>,<span class="keyword">sizeof</span> a);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;ans[i]&lt;=<span class="built_in">sqrt</span>(x);i++)&#123;</span><br><span class="line">		<span class="keyword">int</span> cnt=<span class="number">0</span>;</span><br><span class="line">		<span class="keyword">if</span>(x%ans[i]==<span class="number">0</span>) d++;</span><br><span class="line">		<span class="keyword">while</span>(x%ans[i]==<span class="number">0</span>)&#123;</span><br><span class="line">			x/=ans[i];</span><br><span class="line">			a[d]=++cnt;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span>(x&gt;<span class="number">1</span>) &#123;</span><br><span class="line">		d++;a[d]=<span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	prime();</span><br><span class="line">	<span class="keyword">int</span> t,cas=<span class="number">0</span>; <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">	<span class="keyword">while</span>(t--)&#123;</span><br><span class="line">		ll x;</span><br><span class="line">		<span class="keyword">int</span> tag=<span class="number">0</span>;</span><br><span class="line">		<span class="built_in">cin</span>&gt;&gt;x;</span><br><span class="line">		<span class="keyword">if</span>(x&lt;<span class="number">0</span>)&#123;</span><br><span class="line">			x=-x;tag=<span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		sbreak(x);</span><br><span class="line">		<span class="keyword">int</span> t=a[<span class="number">1</span>];</span><br><span class="line">		<span class="keyword">if</span>(tag)&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=d;i++)&#123;</span><br><span class="line">				<span class="keyword">while</span>(a[i]%<span class="number">2</span>==<span class="number">0</span>) a[i]/=<span class="number">2</span>;</span><br><span class="line">				t=gcd(t,a[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=d;i++)&#123;</span><br><span class="line">				t=gcd(t,a[i]);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Case %d: %d\n"</span>,++cas,t);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -521,7 +536,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+            <a href="/tags/数论/" rel="tag"># 数论</a>
           
         </div>
       
@@ -534,8 +549,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/10/2019-08-10-动态规划-区间DP-P4170-[CQOI2007]涂色/" rel="next" title="动态规划-区间DP-P4170 [CQOI2007]涂色">
-                <i class="fa fa-chevron-left"></i> 动态规划-区间DP-P4170 [CQOI2007]涂色
+              <a href="/2019/09/07/HDU6581/" rel="next" title="Vacation">
+                <i class="fa fa-chevron-left"></i> Vacation
               </a>
             
           </div>
@@ -544,8 +559,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/08/12/动态规划区间DP排队/" rel="prev" title="动态规划-区间DP-上司舞会">
-                动态规划-区间DP-上司舞会 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/09/07/so easy/" rel="prev" title="2019ICPC-徐州网络赛-so easy">
+                2019ICPC-徐州网络赛-so easy <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -764,7 +779,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#今天又AK了-不开心"><span class="nav-number">1.</span> <span class="nav-text">今天又AK了..不开心</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#唯一分解定理"><span class="nav-number">1.</span> <span class="nav-text">唯一分解定理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#题意："><span class="nav-number">1.1.</span> <span class="nav-text">题意：</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1052,7 +1067,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/08/11/2019-08-11-ak/'
+    refer: '2019/09/07/Mysterious Bacteria-唯一分解定理/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
