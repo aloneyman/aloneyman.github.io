@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[P2257 YY的GCD]]></title>
+    <title><![CDATA[P3455 [POI2007]ZAP-Queries]]></title>
     <url>%2F2019%2F09%2F20%2FP3455%20%5BPOI2007%5DZAP-Queries%2F</url>
     <content type="text"><![CDATA[莫比乌斯第二题 相比于前一个题，这道题更简单一些。公式大家也会我直接发代码把。 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;bits/stdc++.h&gt;#define N 1000010using namespace std;bool vis[N];long long sum[N];int prim[N];int mu[N],g[N];int cnt,pris;void get_mu(int n)&#123; mu[1]=1; for(int i=2;i&lt;=n;i++) &#123; if(!vis[i])&#123;mu[i]=-1;prim[++cnt]=i;&#125; for(int j=1;j&lt;=cnt&amp;&amp;prim[j]*i&lt;=n;j++) &#123; vis[i*prim[j]]=1; if(i%prim[j]==0)break; else mu[prim[j]*i]=-mu[i]; &#125; &#125; for(int i=1;i&lt;=n;i++) sum[i]=sum[i-1]+(long long)mu[i];//u的前缀和&#125;int n,m;int main()&#123; int t; scanf(&quot;%d&quot;,&amp;t); get_mu(50005); while(t--)&#123; scanf(&quot;%d%d%d&quot;,&amp;n,&amp;m,&amp;pris); long long ans=0; if(n&gt;m) swap(n,m); int r=1; for(int l=1;l&lt;=n;l=r+1)&#123; r=min(n/(n/l),m/(m/l)); ans+=1ll*(n/(l*pris))*(m/(l*pris))*(sum[r]-sum[l-1]); &#125; printf(&quot;%lld\n&quot;,ans); &#125;&#125;]]></content>
       <categories>
