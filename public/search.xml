@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[hdu 4348]]></title>
+    <url>%2F2019%2F10%2F09%2Fhdu%204348%2F</url>
+    <content type="text"><![CDATA[第一个主席树+懒惰标记，先码在这里感悟后面写。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394959697#include&lt;bits/stdc++.h&gt;using namespace std;const int MAXN=1e5+7;const int MAXM=MAXN*30;typedef long long ll;int T[MAXN],lson[MAXM],rson[MAXM],lazy[MAXM],tot;ll sum[MAXM],a[MAXN];void pushUp(int rt,int l,int r)&#123; sum[rt]=sum[lson[rt]]+sum[rson[rt]]+(ll)lazy[rt]*(r-l+1);&#125;int build(int l,int r)&#123; int rt=tot++; lazy[rt]=0; if(l==r)&#123; sum[rt]=a[l]; return rt; &#125; int mid=l+r&gt;&gt;1; lson[rt]=build(l,mid); rson[rt]=build(mid+1,r); pushUp(rt,l,r); return rt;&#125;int update(int rt,int l,int r,int ll,int rr,int v)&#123; int newrt=tot++; lazy[newrt]=lazy[rt]; if(ll&lt;=l&amp;&amp;r&lt;=rr)&#123; lson[newrt]=lson[rt]; rson[newrt]=rson[rt]; lazy[newrt]=lazy[rt]+v; sum[newrt]=sum[rt]+(long long)v*(r-l+1); return newrt; &#125; int mid=l+r&gt;&gt;1; if(rr&lt;=mid)&#123; rson[newrt]=rson[rt]; lson[newrt]=update(lson[rt],l,mid,ll,rr,v); &#125; else if(ll&gt;mid)&#123; lson[newrt]=lson[rt]; rson[newrt]=update(rson[rt],mid+1,r,ll,rr,v); &#125; else&#123; lson[newrt]=update(lson[rt],l,mid,ll,rr,v); rson[newrt]=update(rson[rt],mid+1,r,ll,rr,v); &#125; pushUp(newrt,l,r); return newrt;&#125;ll query(int rt,int l,int r,int ll,int rr,int la)&#123; //cout&lt;&lt;"l : "&lt;&lt;l&lt;&lt;"r: "&lt;&lt;r&lt;&lt;endl; if(ll&lt;=l&amp;&amp;r&lt;=rr)&#123; return sum[rt]+(long long)la*(r-l+1); &#125; la+=lazy[rt]; int mid=l+r&gt;&gt;1; if(rr&lt;=mid) return query(lson[rt],l,mid,ll,rr,la); else if(ll&gt;mid) return query(rson[rt],mid+1,r,ll,rr,la); else return query(lson[rt],l,mid,ll,mid,la)+query(rson[rt],mid+1,r,mid+1,rr,la);&#125;int main()&#123; int n,q; while(cin&gt;&gt;n&gt;&gt;q)&#123; tot=0; for(int i=1;i&lt;=n;i++) cin&gt;&gt;a[i]; T[0]=build(1,n); int tag=0; while(q--)&#123; char a; int l,r; cin&gt;&gt;a&gt;&gt;l; if(a=='B') tag=l; else&#123; int d; cin&gt;&gt;r; if(a=='Q')&#123; ll res=query(T[tag],1,n,l,r,0); cout&lt;&lt;res&lt;&lt;endl; &#125; else if(a=='C')&#123; cin&gt;&gt;d; tag++; T[tag]=update(T[tag-1],1,n,l,r,d); &#125; else&#123; cin&gt;&gt;d; ll res=query(T[d],1,n,l,r,0); cout&lt;&lt;res&lt;&lt;endl; &#125; &#125; &#125; &#125;&#125; 线段树的懒惰操作是为了节约时间，主席树有点像节约内存，不然每次都新开估计会炸掉的。其他的操作就这题而言对一个初学者还是很有意义的，后面仔细学习品味（留坑）]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>主席树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Stas and the Queue at the Buffet]]></title>
     <url>%2F2019%2F10%2F08%2FSuper%20Mario%2F</url>
     <content type="text"><![CDATA[主席树裸题+这段时间做主席树的感悟。12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e6+7;const int maxm=maxn*30;int sum[maxm],lson[maxm],rson[maxm],T[maxm];int a[maxn],b[2*maxn],tot,l[maxn],r[maxn],h[maxn];int N;int build(int l,int r)&#123; int rt=tot++; sum[rt]=0; if(l==r) return rt; int mid=l+r&gt;&gt;1; lson[rt]=build(l,mid); rson[rt]=build(mid+1,r); return rt;&#125;int update(int rt,int pos,int v)&#123; int newrt=tot++; int temp=newrt; sum[newrt]=sum[rt]+v; int l=1,r=N; while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; if(pos&lt;=mid)&#123; lson[newrt]=tot++; rson[newrt]=rson[rt]; newrt=lson[newrt]; rt=lson[rt]; r=mid; &#125; else&#123; rson[newrt]=tot++; lson[newrt]=lson[rt]; newrt=rson[newrt]; rt=rson[rt]; l=mid+1; &#125; sum[newrt]=sum[rt]+v; &#125; return temp;&#125;int query(int lrt,int rrt,int pos)&#123; int ret=0; int l=1,r=N; while(l&lt;r)&#123; int mid=l+r&gt;&gt;1; if(pos&lt;=mid)&#123; lrt=lson[lrt]; rrt=lson[rrt]; r=mid; &#125; else&#123; ret+=sum[lson[rrt]]-sum[lson[lrt]]; lrt=rson[lrt]; rrt=rson[rrt]; l=mid+1; &#125; &#125; ret+=sum[rrt]-sum[lrt]; //cout&lt;&lt;ret&lt;&lt;endl; return ret;&#125;int main()&#123; int t; cin&gt;&gt;t; int cas=1; while(t--)&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=n;i++)&#123; cin&gt;&gt;a[i]; b[i]=a[i]; &#125; for(int i=1;i&lt;=m;i++)&#123; cin&gt;&gt;l[i]&gt;&gt;r[i]&gt;&gt;h[i]; b[n+i]=h[i]; &#125; sort(b+1,b+1+n+m); N=unique(b+1,b+1+n+m)-b; tot=0; T[0]=build(1,N); for(int i=1;i&lt;=n;i++)&#123; int v=lower_bound(b+1,b+1+N,a[i])-b; T[i]=update(T[i-1],v,1); &#125; //for(int i=0;i&lt;=n;i++) cout&lt;&lt;T[i]&lt;&lt;endl; printf("Case %d:\n",cas++); for(int i=1;i&lt;=m;i++)&#123; int v=lower_bound(b+1,b+1+N,h[i])-b; printf("%d\n",query(T[l[i]],T[r[i]+1],v)); &#125; &#125; return 0;&#125; 主席树的一些感悟：主席树都是一种前缀和的思想我向大家都明白，我这里总结一下自己的傻逼问题。为啥询问的时候都是左树去减去，而右树只是起递归的作用。因为我们都是用位置和中间位置比较，所以我们如果位置在左边那么就可以直接用左树的前缀和来计算。如果在右树那么就递归找左边，所以用到的只是左树。再看看我们update的时候的操作 举个更新左树的例子:lson[newrt]=tot++; rson[newrt]=rson[rt]newrt=lson[newrt]; rt=lson[rt];因为此时我们只更新左树，右树依然是以前的那个不需要开新点。T数组就是我们动态开的树。并且update在二分的过程中我们需要有sum[newrt]=sum[rt]+b;不然他们的节点就是0，然而我们这个时候已经开了很多节点了。主函数中的操作大家都能想明白，我就不一一解释了。]]></content>
@@ -56,17 +67,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Primes and Multiplication]]></title>
-    <url>%2F2019%2F09%2F28%2FPrimes%20and%20Multiplication%2F</url>
-    <content type="text"><![CDATA[质因子分解+快速幂 直接计算质因子的贡献度，只要能除以质因数的那么他们的倍数也能除以质因数，所以我们直接找1-n里有多少个数能够除这个质因子，然后这里我们直接把质因数的次幂一起找了（下面代码有个地方可能有点难理解，我的理解是铺地砖一样，举个例子，先铺2的一次幂，有n/2个数，然后能铺2的2次幂的数有n/4个则，累加起来就是2的一共多少次幂了）最后统计，质因数的幂次就行了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;#define rint register intconst int MAXN = 1e7+10;const int MOD = 1e9+7;LL x,cnt=0;LL n;bool vis[MAXN];LL prime[MAXN];vector&lt;LL&gt; v;map&lt;LL,LL&gt; mp;LL quick_pow(LL a,LL b)&#123; LL res = 1; while(b)&#123; if(b&amp;1) res = (res*a)%MOD; a = (a*a)%MOD; b &gt;&gt;= 1; &#125; return res;&#125;void get_prime()&#123; memset(vis,0,sizeof(vis)); for(LL i=2;i&lt;=MAXN-10;i++) &#123; if(!vis[i]) prime[cnt++] = i; for(LL j=0;j&lt;cnt &amp;&amp; i*prime[j]&lt;=MAXN-10;j++) &#123; vis[i*prime[j]]=1; if(i%prime[j]==0) break; &#125; &#125;&#125;void get_x_prime(LL x)&#123; for(LL i=0;i&lt;cnt;i++)&#123; if(x%prime[i]==0)&#123; v.push_back(prime[i]); while(x%prime[i]==0)&#123; x /= prime[i]; &#125; &#125; if(x==1) break; &#125; if(x!=1) v.push_back(x);&#125;int main()&#123; cin&gt;&gt;x&gt;&gt;n; get_prime(); get_x_prime(x); for(LL i=0;i&lt;v.size();i++)&#123; LL tmp = 1LL*v[i]; while(tmp &lt;= n)&#123; mp[v[i]] += n/tmp;//铺地砖 if(tmp*v[i] &gt; tmp) tmp = tmp*v[i]; else break; &#125; &#125; LL ans = 1; for(LL i=0;i&lt;v.size();i++)&#123; ans = (ans*(quick_pow(1LL*v[i],mp[v[i]])%MOD)+MOD)%MOD; &#125; cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Fox And Jumping-裴蜀定理]]></title>
     <url>%2F2019%2F09%2F28%2FFox%20And%20Jumping%2F</url>
     <content type="text"><![CDATA[裴蜀定理 题意： 给你N个数让我们选其中的数字组成来铺满整个数轴。分析该问题，先考虑两个数的情况，发现想要跳到每一个格子上，必须使得这些数通过数次相加或相减得出的绝对值为 1，进而想到了裴蜀定理。 1234567891011121314151617181920212223242526272829303132333435#include&lt;bits/stdc++.h&gt;using namespace std;map&lt;int,int&gt; H;int gcd(int x,int y)&#123; if(y==0)return x; return gcd(y,x%y);&#125;#define maxn 350int a[maxn];int val[maxn];void updata(int x,int val)&#123; if(H[x]==0)H[x]=1e9; H[x]=min(H[x],val);&#125;int main()&#123; int n; scanf(&quot;%d&quot;,&amp;n); map&lt;int,int&gt;::iterator it; for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i]); for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;val[i]); for(int i=1;i&lt;=n;i++) &#123; updata(a[i],val[i]); for(it=H.begin();it!=H.end();it++) updata(gcd(it-&gt;first,a[i]),val[i]+it-&gt;second); &#125; if(H[1]==0)return puts(&quot;-1&quot;); else printf(&quot;%d\n&quot;,H[1]);&#125;]]></content>
@@ -78,9 +78,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Code Feat]]></title>
-    <url>%2F2019%2F09%2F20%2FGCD%20-%20Extreme%20(II)%2F</url>
-    <content type="text"><![CDATA[欧拉函数+打表 在本子上理清楚了欧拉函数和gcd之间 的关系，这道题我们假设gcd(i,j)=d，可以得到gcd(i/d,j/d)=1,所以此时和j/d互质的数为Oula（j/d）个，并且oula(j/d)*d就是i到j所有gcd的和。然后我们就可以通过枚举d来算出来。 12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;using namespace std;typedef long long ll;const int N=4e6+10;long long phi[N],b[N],sum[N];void euler() &#123; for(int i = 2; i &lt; N; i++) &#123; if(!phi[i]) for(int j = i; j &lt; N; j += i) &#123; if(!phi[j]) phi[j] = j; phi[j] = phi[j] / i * (i - 1); &#125; &#125;&#125;int main()&#123; euler(); ll n; for(int i=1;i&lt;=N;i++)&#123; for(int j=i*2;j&lt;=N;j+=i)&#123; b[j]+=phi[j/i]*i; &#125; &#125; for(int i=2;i&lt;=N;i++)&#123; sum[i]=sum[i-1]+b[i]; &#125; while(cin&gt;&gt;n,n)&#123; cout&lt;&lt;sum[n]&lt;&lt;endl; &#125;&#125;]]></content>
+    <title><![CDATA[Primes and Multiplication]]></title>
+    <url>%2F2019%2F09%2F28%2FPrimes%20and%20Multiplication%2F</url>
+    <content type="text"><![CDATA[质因子分解+快速幂 直接计算质因子的贡献度，只要能除以质因数的那么他们的倍数也能除以质因数，所以我们直接找1-n里有多少个数能够除这个质因子，然后这里我们直接把质因数的次幂一起找了（下面代码有个地方可能有点难理解，我的理解是铺地砖一样，举个例子，先铺2的一次幂，有n/2个数，然后能铺2的2次幂的数有n/4个则，累加起来就是2的一共多少次幂了）最后统计，质因数的幂次就行了。 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long LL;#define rint register intconst int MAXN = 1e7+10;const int MOD = 1e9+7;LL x,cnt=0;LL n;bool vis[MAXN];LL prime[MAXN];vector&lt;LL&gt; v;map&lt;LL,LL&gt; mp;LL quick_pow(LL a,LL b)&#123; LL res = 1; while(b)&#123; if(b&amp;1) res = (res*a)%MOD; a = (a*a)%MOD; b &gt;&gt;= 1; &#125; return res;&#125;void get_prime()&#123; memset(vis,0,sizeof(vis)); for(LL i=2;i&lt;=MAXN-10;i++) &#123; if(!vis[i]) prime[cnt++] = i; for(LL j=0;j&lt;cnt &amp;&amp; i*prime[j]&lt;=MAXN-10;j++) &#123; vis[i*prime[j]]=1; if(i%prime[j]==0) break; &#125; &#125;&#125;void get_x_prime(LL x)&#123; for(LL i=0;i&lt;cnt;i++)&#123; if(x%prime[i]==0)&#123; v.push_back(prime[i]); while(x%prime[i]==0)&#123; x /= prime[i]; &#125; &#125; if(x==1) break; &#125; if(x!=1) v.push_back(x);&#125;int main()&#123; cin&gt;&gt;x&gt;&gt;n; get_prime(); get_x_prime(x); for(LL i=0;i&lt;v.size();i++)&#123; LL tmp = 1LL*v[i]; while(tmp &lt;= n)&#123; mp[v[i]] += n/tmp;//铺地砖 if(tmp*v[i] &gt; tmp) tmp = tmp*v[i]; else break; &#125; &#125; LL ans = 1; for(LL i=0;i&lt;v.size();i++)&#123; ans = (ans*(quick_pow(1LL*v[i],mp[v[i]])%MOD)+MOD)%MOD; &#125; cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -92,6 +92,17 @@
     <title><![CDATA[P2257 YY的GCD]]></title>
     <url>%2F2019%2F09%2F20%2FP2257%20YY%E7%9A%84GCD%2F</url>
     <content type="text"><![CDATA[第一道莫比乌斯的题： markdown语言太难写了，不过要纪念下！ 12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;bits/stdc++.h&gt;#define N 10000100using namespace std;bool vis[N];long long sum[N];int prim[N];int mu[N],g[N];int cnt;void get_mu(int n)&#123; mu[1]=1; for(int i=2;i&lt;=n;i++) &#123; if(!vis[i])&#123;mu[i]=-1;prim[++cnt]=i;&#125; for(int j=1;j&lt;=cnt&amp;&amp;prim[j]*i&lt;=n;j++) &#123; vis[i*prim[j]]=1; if(i%prim[j]==0)break; else mu[prim[j]*i]=-mu[i]; &#125; &#125; for(int i=1;i&lt;=cnt;i++) for(int j=1;j*prim[i]&lt;=n;j++) g[j*prim[i]]+=mu[j];//枚举k来枚举所有的T,并对g(T)函数求和 for(int i=1;i&lt;=n;i++) sum[i]=sum[i-1]+(long long)g[i];//u的前缀和&#125;int n,m;int main()&#123; int t; get_mu(10000000); scanf(&quot;%d&quot;,&amp;t); while(t--)&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); long long ans=0; if(n&gt;m) swap(n,m); int r=1; for(int l=1;l&lt;=n;l=r+1)&#123; r=min(n/(n/l),m/(m/l)); ans+=1ll*(n/l)*(m/l)*(sum[r]-sum[l-1]); &#125; printf(&quot;%lld\n&quot;,ans); &#125;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Code Feat]]></title>
+    <url>%2F2019%2F09%2F20%2FGCD%20-%20Extreme%20(II)%2F</url>
+    <content type="text"><![CDATA[欧拉函数+打表 在本子上理清楚了欧拉函数和gcd之间 的关系，这道题我们假设gcd(i,j)=d，可以得到gcd(i/d,j/d)=1,所以此时和j/d互质的数为Oula（j/d）个，并且oula(j/d)*d就是i到j所有gcd的和。然后我们就可以通过枚举d来算出来。 12345678910111213141516171819202122232425262728293031#include&lt;iostream&gt;using namespace std;typedef long long ll;const int N=4e6+10;long long phi[N],b[N],sum[N];void euler() &#123; for(int i = 2; i &lt; N; i++) &#123; if(!phi[i]) for(int j = i; j &lt; N; j += i) &#123; if(!phi[j]) phi[j] = j; phi[j] = phi[j] / i * (i - 1); &#125; &#125;&#125;int main()&#123; euler(); ll n; for(int i=1;i&lt;=N;i++)&#123; for(int j=i*2;j&lt;=N;j+=i)&#123; b[j]+=phi[j/i]*i; &#125; &#125; for(int i=2;i&lt;=N;i++)&#123; sum[i]=sum[i-1]+b[i]; &#125; while(cin&gt;&gt;n,n)&#123; cout&lt;&lt;sum[n]&lt;&lt;endl; &#125;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -133,6 +144,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[Code Feat]]></title>
+    <url>%2F2019%2F09%2F19%2FCode%20Feat%2F</url>
+    <content type="text"><![CDATA[中国剩余定理+枚举 枚举或者CRT。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;stdio.h&gt;#include &lt;string.h&gt;#include &lt;vector&gt;#include &lt;set&gt;#include &lt;algorithm&gt;using namespace std;const int N = 15;const int M = 105;int c, s, x[N], k[N], y[N][M], now;set&lt;int&gt; value[N];vector&lt;long long&gt; ans;long long a[N];void solve_enum()&#123; for (int i = 0; i &lt; c; i++)&#123; if (c == now) continue; value[i].clear(); for (int j = 0; j &lt; k[i]; j++) value[i].insert(y[i][j]); &#125; for (int t = 0; ; t++)&#123; for (int i = 0; i &lt; k[now]; i++)&#123; long long n = (long long)x[now] * t + y[now][i]; if (n == 0) continue; bool ok = true; for (int i = 0; i &lt; c; i++) &#123; if (i == now) continue; if (!value[i].count(n % x[i])) &#123;ok = false; break;&#125; &#125; if (ok) &#123;printf("%lld\n", n); if (--s == 0) return;&#125; &#125; &#125;&#125;long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y)&#123; if (!b) &#123;x = 1; y = 0; return a;&#125; long long d = exgcd(b, a % b, y, x); y -= a / b * x; return d;&#125;long long china()//利用CRT来算出结果。 &#123; long long M = 1, ans = 0; for (int i = 0; i &lt; c; i++) M *= x[i]; for (int i = 0; i &lt; c; i++)&#123; long long w = M / x[i]; long long xx, yy; exgcd(x[i], w, xx, yy); ans = (ans + w * yy * a[i]) % M; &#125; return (ans + M) % M;&#125;void dfs(int d)//把每一列的余数存进a数组 &#123; if (d == c)&#123; ans.push_back(china()); return; &#125; for (int i = 0; i &lt; k[d]; i++)&#123; a[d] = y[d][i]; dfs(d + 1); &#125;&#125;void solve_china()&#123; ans.clear(); dfs(0); sort(ans.begin(), ans.end()); long long M = 1; for (int i = 0; i &lt; c; i++) M *= x[i]; for (int i = 0; ; i++)&#123; for (int j = 0; j &lt; ans.size(); j++)&#123; long long n = M * i + ans[j]; //通解 M*i +x if (n &gt; 0) &#123;printf("%lld\n", n); if (--s == 0) return;&#125; &#125; &#125;&#125;int main() &#123; while (~scanf("%d%d", &amp;c, &amp;s) &amp;&amp; s || c)&#123; now = 0; long long sum = 1; for (int i = 0; i &lt; c; i++)&#123; scanf("%d%d", &amp;x[i], &amp;k[i]); sum *= k[i]; if (k[i]*x[now]&lt;k[now]*x[i]) now = i; for (int j = 0; j &lt; k[i]; j++) scanf("%d", &amp;y[i][j]); sort(y[i], y[i] + k[i]); &#125; if (sum &gt; 10000) solve_enum(); else solve_china(); printf("\n"); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Help Hanzo]]></title>
     <url>%2F2019%2F09%2F19%2FHelp%20Hanzo%2F</url>
     <content type="text"><![CDATA[大区间筛素数。 我们先把一个大区间的素数全部筛出来，然后根据区间的移动来筛取他的的素数。如果左区间是1，则要多减一个。 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;bits/stdc++.h&gt;using namespace std;using namespace std;typedef long long ll;const int mx = 1e6+100;bool vis[mx];bool isprime[mx];int prime[mx];int cnt = 0;void getPrime()&#123; int m = (int)sqrt(mx+0.5); memset(vis,0,sizeof vis); for(int i=2;i&lt;mx;i++)&#123; if(!vis[i])&#123; prime[cnt++]=i; for(int j=i+i;j&lt;mx;j+=i)&#123; vis[j]=1; &#125; &#125; &#125;&#125;int main()&#123; getPrime(); int con=1; int t; scanf("%d",&amp;t); while(t--)&#123; memset(isprime,0,sizeof isprime); ll a,b; scanf("%lld%lld",&amp;a,&amp;b); ll ans=b-a+1; if(a==1) ans--; //筛的时候1的倍数不会筛，如果左区间是1会把他算成素数所以要减去。 for(int i=0;i&lt;cnt&amp;&amp;1LL*prime[i]*prime[i]&lt;=b;i++)&#123; for(int j=a/prime[i]*prime[i];j&lt;=b;j+=prime[i])&#123;//j=a/prime[i]*prime[i]让j最接近a。 if(j&gt;=a&amp;&amp;j&gt;prime[i]) isprime[j-a]=1; &#125; &#125; for(int i=0;i&lt;=b-a;i++) if(isprime[i]) ans--; printf("Case %d: %lld\n",con++,ans); &#125;&#125;]]></content>
@@ -144,9 +166,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Code Feat]]></title>
-    <url>%2F2019%2F09%2F19%2FCode%20Feat%2F</url>
-    <content type="text"><![CDATA[中国剩余定理+枚举 枚举或者CRT。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;stdio.h&gt;#include &lt;string.h&gt;#include &lt;vector&gt;#include &lt;set&gt;#include &lt;algorithm&gt;using namespace std;const int N = 15;const int M = 105;int c, s, x[N], k[N], y[N][M], now;set&lt;int&gt; value[N];vector&lt;long long&gt; ans;long long a[N];void solve_enum()&#123; for (int i = 0; i &lt; c; i++)&#123; if (c == now) continue; value[i].clear(); for (int j = 0; j &lt; k[i]; j++) value[i].insert(y[i][j]); &#125; for (int t = 0; ; t++)&#123; for (int i = 0; i &lt; k[now]; i++)&#123; long long n = (long long)x[now] * t + y[now][i]; if (n == 0) continue; bool ok = true; for (int i = 0; i &lt; c; i++) &#123; if (i == now) continue; if (!value[i].count(n % x[i])) &#123;ok = false; break;&#125; &#125; if (ok) &#123;printf("%lld\n", n); if (--s == 0) return;&#125; &#125; &#125;&#125;long long exgcd(long long a, long long b, long long &amp;x, long long &amp;y)&#123; if (!b) &#123;x = 1; y = 0; return a;&#125; long long d = exgcd(b, a % b, y, x); y -= a / b * x; return d;&#125;long long china()//利用CRT来算出结果。 &#123; long long M = 1, ans = 0; for (int i = 0; i &lt; c; i++) M *= x[i]; for (int i = 0; i &lt; c; i++)&#123; long long w = M / x[i]; long long xx, yy; exgcd(x[i], w, xx, yy); ans = (ans + w * yy * a[i]) % M; &#125; return (ans + M) % M;&#125;void dfs(int d)//把每一列的余数存进a数组 &#123; if (d == c)&#123; ans.push_back(china()); return; &#125; for (int i = 0; i &lt; k[d]; i++)&#123; a[d] = y[d][i]; dfs(d + 1); &#125;&#125;void solve_china()&#123; ans.clear(); dfs(0); sort(ans.begin(), ans.end()); long long M = 1; for (int i = 0; i &lt; c; i++) M *= x[i]; for (int i = 0; ; i++)&#123; for (int j = 0; j &lt; ans.size(); j++)&#123; long long n = M * i + ans[j]; //通解 M*i +x if (n &gt; 0) &#123;printf("%lld\n", n); if (--s == 0) return;&#125; &#125; &#125;&#125;int main() &#123; while (~scanf("%d%d", &amp;c, &amp;s) &amp;&amp; s || c)&#123; now = 0; long long sum = 1; for (int i = 0; i &lt; c; i++)&#123; scanf("%d%d", &amp;x[i], &amp;k[i]); sum *= k[i]; if (k[i]*x[now]&lt;k[now]*x[i]) now = i; for (int j = 0; j &lt; k[i]; j++) scanf("%d", &amp;y[i][j]); sort(y[i], y[i] + k[i]); &#125; if (sum &gt; 10000) solve_enum(); else solve_china(); printf("\n"); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[Fantasy of a Summation]]></title>
+    <url>%2F2019%2F09%2F17%2FFantasy%20of%20a%20Summation%2F</url>
+    <content type="text"><![CDATA[结论+快速幂 我们每次推一层循环进去可以发现每个数出现的次数是 n^{k-1}*k所以每个数都要乘以这个值并且模MOD，所以我们直接相加所有的值。 123456789101112131415161718192021222324252627282930313233#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int arr[1005];ll a,b,mod;ll q_pow(ll a,ll b)&#123; ll ans=1; while(b)&#123; if(b&amp;1) ans=ans*a%mod; a=a*a%mod; b&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; int t; cin&gt;&gt;t; int cnt=1; while(t--)&#123; cin&gt;&gt;a&gt;&gt;b&gt;&gt;mod; ll sum=0; for(int i=1;i&lt;=a;i++)&#123; cin&gt;&gt;arr[i]; sum+=arr[i]%mod; &#125; ll ans=sum; sum=q_pow(a,b-1); ll result=ans*b%mod; result=result*sum%mod; printf("Case %d: %lld\n",cnt++,result);// cout&lt;&lt;result&lt;&lt;endl; &#125;&#125; 快速乘听说也能过后面补。]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -163,17 +185,6 @@
       </categories>
       <tags>
         <tag>线段树</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[Fantasy of a Summation]]></title>
-    <url>%2F2019%2F09%2F17%2FFantasy%20of%20a%20Summation%2F</url>
-    <content type="text"><![CDATA[结论+快速幂 我们每次推一层循环进去可以发现每个数出现的次数是 n^{k-1}*k所以每个数都要乘以这个值并且模MOD，所以我们直接相加所有的值。 123456789101112131415161718192021222324252627282930313233#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int arr[1005];ll a,b,mod;ll q_pow(ll a,ll b)&#123; ll ans=1; while(b)&#123; if(b&amp;1) ans=ans*a%mod; a=a*a%mod; b&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; int t; cin&gt;&gt;t; int cnt=1; while(t--)&#123; cin&gt;&gt;a&gt;&gt;b&gt;&gt;mod; ll sum=0; for(int i=1;i&lt;=a;i++)&#123; cin&gt;&gt;arr[i]; sum+=arr[i]%mod; &#125; ll ans=sum; sum=q_pow(a,b-1); ll result=ans*b%mod; result=result*sum%mod; printf("Case %d: %lld\n",cnt++,result);// cout&lt;&lt;result&lt;&lt;endl; &#125;&#125; 快速乘听说也能过后面补。]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
       </tags>
   </entry>
   <entry>
@@ -199,17 +210,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[2019ICPC-徐州网络赛-Longest subsequence]]></title>
-    <url>%2F2019%2F09%2F09%2FLongest%20subsequence%2F</url>
-    <content type="text"><![CDATA[序列自动机 第一次遇见序列自动机，大概就是一个nxt数组nx(a)(b)，里面的意义就是,在a位置后面b字母出现的位置。这道题我们还需要考虑，如果我们最后找的位置仍然小于父串长度的话，我们可能存在父串包含子串的情况，所以要再取一个max（m+n-cur). 1234567891011121314151617181920212223242526272829303132333435#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e6+7;char s[maxn],t[maxn];int nx[maxn][26];int n,m;int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); scanf(&quot;%s%s&quot;,s+1,t+1); for(register int i=0;i&lt;26;++i)&#123; nx[n][i]=nx[n+1][i]=n+1; &#125; for(register int i=n-1;i&gt;=0;--i)&#123; for(register int j=0;j&lt;26;++j)&#123; nx[i][j]=nx[i+1][j]; &#125; int to=s[i+1]-&apos;a&apos;; nx[i][to]=i+1; &#125; int cur=0,ans=-1; for(int i=1;t[i];i++)&#123; int pos=t[i]-&apos;a&apos;; for(int j=pos+1;j&lt;26;j++)&#123; int id=nx[cur][j]; if(id&lt;=n)&#123; ans=max(ans,n-id+i); &#125; &#125; cur=nx[cur][pos]; if(cur&gt;n) break; &#125; if(cur&lt;n) ans=max(ans,m+n-cur); cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
-      <categories>
-        <category>2019徐州网络赛</category>
-      </categories>
-      <tags>
-        <tag>2019徐州网络赛</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[2019ICPC-徐州网络赛-Center]]></title>
     <url>%2F2019%2F09%2F09%2FCenter%2F</url>
     <content type="text"><![CDATA[map和pair的巧用 map来存中心点，加加操作可以理解为中心点把两个断点往中心拉往中心点(这样就可以解释代码中一个中心点的两个端点循环了了两次，并且i==j不能continue，因为可能加入的那个点刚好是中心点。我们计算的是一个中心点拉到了点的个数，所以再取一个max。就是拥有最多点数量的中心点。再用总点数-这个中心点的数量就是没有被这个中心点拉过去的点的数量。也就是答案。 1234567891011121314151617181920212223242526#include&lt;bits/stdc++.h&gt;using namespace std;typedef pair&lt;int,int&gt; Pa;typedef map&lt;Pa,int&gt; mp;const int N=10005;Pa pi[N];mp m;int main()&#123; int t; cin&gt;&gt;t; for(int i=1;i&lt;=t;i++)&#123; cin&gt;&gt;pi[i].first&gt;&gt;pi[i].second; &#125; int ans=0; for(int i=1;i&lt;=t;i++)&#123; for(int j=1;j&lt;=t;j++)&#123;// if(i==j) continue; int fx=pi[i].first+pi[j].first; int fy=pi[i].second+pi[j].second; m[&#123;fx,fy&#125;]++; ans=max(ans,m[&#123;fx,fy&#125;]); &#125; &#125; cout&lt;&lt;t-ans&lt;&lt;endl;&#125;]]></content>
@@ -221,14 +221,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Vacation]]></title>
-    <url>%2F2019%2F09%2F07%2FHDU6581%2F</url>
-    <content type="text"><![CDATA[思维题：**线性扫一遍记录最大值。注意以车头为准。** 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;using namespace std;long long len;const int N=200005;double l[N],s[N],v[N];double max(double a,double b)&#123; if(a&gt;b) return a; return b;&#125;int main()&#123; int n; while(~scanf("%d",&amp;n)) &#123; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;l[i]);//车身长度 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;s[i]);//距离终点距离 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;v[i]); &#125; double ans=-1; double len=0; for(int i=0;i&lt;=n;i++) &#123; if(i&gt;0) len+=l[i]; ans=max(ans,(len+s[i])/v[i]); // cout&lt;&lt;"l :"&lt;&lt;l[i]&lt;&lt;" s: "&lt;&lt;s[i]&lt;&lt;" v "&lt;&lt;v[i]&lt;&lt;endl; // cout&lt;&lt;"ans: "&lt;&lt;ans&lt;&lt;endl; &#125; printf("%.10lf\n",ans); &#125; &#125;]]></content>
+    <title><![CDATA[2019ICPC-徐州网络赛-Longest subsequence]]></title>
+    <url>%2F2019%2F09%2F09%2FLongest%20subsequence%2F</url>
+    <content type="text"><![CDATA[序列自动机 第一次遇见序列自动机，大概就是一个nxt数组nx(a)(b)，里面的意义就是,在a位置后面b字母出现的位置。这道题我们还需要考虑，如果我们最后找的位置仍然小于父串长度的话，我们可能存在父串包含子串的情况，所以要再取一个max（m+n-cur). 1234567891011121314151617181920212223242526272829303132333435#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn=1e6+7;char s[maxn],t[maxn];int nx[maxn][26];int n,m;int main()&#123; scanf(&quot;%d%d&quot;,&amp;n,&amp;m); scanf(&quot;%s%s&quot;,s+1,t+1); for(register int i=0;i&lt;26;++i)&#123; nx[n][i]=nx[n+1][i]=n+1; &#125; for(register int i=n-1;i&gt;=0;--i)&#123; for(register int j=0;j&lt;26;++j)&#123; nx[i][j]=nx[i+1][j]; &#125; int to=s[i+1]-&apos;a&apos;; nx[i][to]=i+1; &#125; int cur=0,ans=-1; for(int i=1;t[i];i++)&#123; int pos=t[i]-&apos;a&apos;; for(int j=pos+1;j&lt;26;j++)&#123; int id=nx[cur][j]; if(id&lt;=n)&#123; ans=max(ans,n-id+i); &#125; &#125; cur=nx[cur][pos]; if(cur&gt;n) break; &#125; if(cur&lt;n) ans=max(ans,m+n-cur); cout&lt;&lt;ans&lt;&lt;endl;&#125;]]></content>
       <categories>
-        <category>2019航电多校</category>
+        <category>2019徐州网络赛</category>
       </categories>
       <tags>
-        <tag>2019航电多校</tag>
+        <tag>2019徐州网络赛</tag>
       </tags>
   </entry>
   <entry>
@@ -251,6 +251,17 @@
       </categories>
       <tags>
         <tag>2019徐州网络赛</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[Vacation]]></title>
+    <url>%2F2019%2F09%2F07%2FHDU6581%2F</url>
+    <content type="text"><![CDATA[思维题：**线性扫一遍记录最大值。注意以车头为准。** 1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;iostream&gt;using namespace std;long long len;const int N=200005;double l[N],s[N],v[N];double max(double a,double b)&#123; if(a&gt;b) return a; return b;&#125;int main()&#123; int n; while(~scanf("%d",&amp;n)) &#123; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;l[i]);//车身长度 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;s[i]);//距离终点距离 &#125; for(int i=0;i&lt;=n;i++) &#123; scanf("%d",&amp;v[i]); &#125; double ans=-1; double len=0; for(int i=0;i&lt;=n;i++) &#123; if(i&gt;0) len+=l[i]; ans=max(ans,(len+s[i])/v[i]); // cout&lt;&lt;"l :"&lt;&lt;l[i]&lt;&lt;" s: "&lt;&lt;s[i]&lt;&lt;" v "&lt;&lt;v[i]&lt;&lt;endl; // cout&lt;&lt;"ans: "&lt;&lt;ans&lt;&lt;endl; &#125; printf("%.10lf\n",ans); &#125; &#125;]]></content>
+      <categories>
+        <category>2019航电多校</category>
+      </categories>
+      <tags>
+        <tag>2019航电多校</tag>
       </tags>
   </entry>
   <entry>
@@ -342,17 +353,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[1384-全排列]]></title>
-    <url>%2F2019%2F08%2F21%2F51nod1384%E5%85%A8%E6%8E%92%E5%88%97%2F</url>
-    <content type="text"><![CDATA[写的有点憨憨 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;cstdio&gt;#include &lt;iostream&gt;#include &lt;set&gt;#include &lt;algorithm&gt;#include &lt;string.h&gt;#include&lt;queue&gt;#include&lt;map&gt;#define ll long longusing namespace std;map&lt;string,int&gt;mp;int m, n,cnt=1;const int N = 10005;bool vis[N];char ans[N];string str;string temp="";void dfs(int s,int k)&#123; if(s==k) &#123; temp=""; for (int i = 0; i &lt;k;i++) if((int)ans[i]==0) return ; for (int i = 0; i &lt;k;i++) &#123; temp+=ans[i]; &#125; if(mp[temp]) return ; cout &lt;&lt;temp&lt;&lt; endl; mp[temp]++; return ; &#125; for (int i = 0; i &lt;= str.size();i++) &#123; if(vis[i]) continue; vis[i] = 1; ans[s] = str[i];// cout&lt;&lt;"ans :---"&lt;&lt;ans[s]&lt;&lt;"ASCLL "&lt;&lt;(int)ans[s]&lt;&lt;endl; dfs(s + 1, k); vis[i] = 0; &#125;&#125;int main()&#123; cin &gt;&gt; str; sort(str.begin(), str.end()); //cout&lt;&lt;str&lt;&lt;endl; dfs(0,str.size());&#125; 还有一种用函数的写法。123456789101112131415#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;char s[10];int a[10];int main()&#123; int n; scanf("%s",s);n=strlen(s); sort(s,s+n);printf("%s\n",s); //for(int i=0;i&lt;n;i++)a[i]=s[i]-'0'; while(next_permutation(s,s+n))&#123; printf("%s\n",s); &#125;return 0;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>51NOD</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Maximum Median]]></title>
     <url>%2F2019%2F08%2F21%2FMaximum%20Median%2F</url>
     <content type="text"><![CDATA[思维题，从中间往后面扫。因为没有考虑K特别大的情况WA了。 1234567891011121314151617181920212223242526272829303132333435363738#include &lt;algorithm&gt;#include &lt;cassert&gt;#include &lt;iostream&gt;#include &lt;vector&gt;using namespace std; long long A[200005];int main() &#123; long long N, K; cin &gt;&gt; N &gt;&gt; K; for (int i = 1; i &lt;= N;i++) cin &gt;&gt; A[i]; sort(A+1,A+1+N); int mid = (N+1) / 2; long long current = A[mid];// cout &lt;&lt; current &lt;&lt; endl; for (int i = mid + 1; i &lt;= N; i++) &#123; long long dis = A[i] - A[mid]; if(K&gt;=(i - mid) * dis) &#123; K -= (i - mid) * dis; current += dis;// cout&lt;&lt;"------------"&lt;&lt;current&lt;&lt;endl; A[mid] += dis; &#125; else &#123; current += K / (i-mid); K %= (i-mid); break; &#125; &#125; if(K) current += K/(N-mid+1); cout &lt;&lt; current &lt;&lt; '\n';&#125;]]></content>
@@ -367,6 +367,17 @@
     <title><![CDATA[1298 圆与三角形]]></title>
     <url>%2F2019%2F08%2F21%2F51nod1298%20%E5%9C%86%E4%B8%8E%E4%B8%89%E8%A7%92%E5%BD%A2%2F</url>
     <content type="text"><![CDATA[把三角形看成三条边去换算。因为要计算点到直线的距离公式，所以我们写成直线的一般形式。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include&lt;iostream&gt; using namespace std; //点 struct Point&#123; double x,y; Point()&#123;&#125; Point(int x,int y):x(x),y(y)&#123;&#125;&#125;; //圆 struct Circle&#123; double r,x,y; Circle()&#123;&#125;; Circle(double r,double x,double y):r(r),x(x),y(y)&#123;&#125; &#125;; //判断直线p1p2与圆c是否相交，相交返回true，否则返回false bool judge(Point p1,Point p2,Circle c)&#123; bool flag1=(p1.x-c.x)*(p1.x-c.x)+(p1.y-c.y)*(p1.y-c.y)&lt;=c.r*c.r; bool flag2=(p2.x-c.x)*(p2.x-c.x)+(p2.y-c.y)*(p2.y-c.y)&lt;=c.r*c.r; if(flag1&amp;&amp;flag2) //情况一、两点都在圆内 :一定不相交 return false; else if(flag1||flag2) //情况二、一个点在圆内，一个点在圆外：一定相交 return true; else //情况三、两个点都在圆外 &#123; double A,B,C,dist1,dist2,angle1,angle2; //将直线p1p2化为一般式：Ax+By+C=0的形式。先化为两点式，然后由两点式得出一般式 A=p1.y-p2.y; B=p2.x-p1.x; C=p1.x*p2.y-p2.x*p1.y; //使用距离公式判断圆心到直线ax+by+c=0的距离是否大于半径 dist1=A*c.x+B*c.y+C; dist1*=dist1; dist2=(A*A+B*B)*c.r*c.r; if(dist1&gt;dist2)//圆心到直线p1p2的距离大于半径，不相交 return false; angle1=(c.x-p1.x)*(p2.x-p1.x)+(c.y-p1.y)*(p2.y-p1.y); angle2=(c.x-p2.x)*(p1.x-p2.x)+(c.y-p2.y)*(p1.y-p2.y); if(angle1&gt;0&amp;&amp;angle2&gt;0)//余弦为正，则是锐角，一定相交 return true; else return false; &#125; &#125; int main()&#123; int t; Circle c;//圆 Point p[3];//三角形的三个顶点 scanf("%d",&amp;t); while(t--) &#123; scanf("%lf%lf%lf",&amp;c.x,&amp;c.y,&amp;c.r);//读入圆的圆心和半径 for(int i=0;i&lt;3;i++)//读入三角形的三个顶点 scanf("%lf%lf",&amp;p[i].x,&amp;p[i].y); //判断3条边是否与圆相交 bool flag1=judge(p[0],p[1],c); bool flag2=judge(p[1],p[2],c); bool flag3=judge(p[0],p[2],c); if(flag1||flag2||flag3) printf("Yes\n"); else printf("No\n"); &#125; return 0; &#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>51NOD</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[1384-全排列]]></title>
+    <url>%2F2019%2F08%2F21%2F51nod1384%E5%85%A8%E6%8E%92%E5%88%97%2F</url>
+    <content type="text"><![CDATA[写的有点憨憨 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;cstdio&gt;#include &lt;iostream&gt;#include &lt;set&gt;#include &lt;algorithm&gt;#include &lt;string.h&gt;#include&lt;queue&gt;#include&lt;map&gt;#define ll long longusing namespace std;map&lt;string,int&gt;mp;int m, n,cnt=1;const int N = 10005;bool vis[N];char ans[N];string str;string temp="";void dfs(int s,int k)&#123; if(s==k) &#123; temp=""; for (int i = 0; i &lt;k;i++) if((int)ans[i]==0) return ; for (int i = 0; i &lt;k;i++) &#123; temp+=ans[i]; &#125; if(mp[temp]) return ; cout &lt;&lt;temp&lt;&lt; endl; mp[temp]++; return ; &#125; for (int i = 0; i &lt;= str.size();i++) &#123; if(vis[i]) continue; vis[i] = 1; ans[s] = str[i];// cout&lt;&lt;"ans :---"&lt;&lt;ans[s]&lt;&lt;"ASCLL "&lt;&lt;(int)ans[s]&lt;&lt;endl; dfs(s + 1, k); vis[i] = 0; &#125;&#125;int main()&#123; cin &gt;&gt; str; sort(str.begin(), str.end()); //cout&lt;&lt;str&lt;&lt;endl; dfs(0,str.size());&#125; 还有一种用函数的写法。123456789101112131415#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;char s[10];int a[10];int main()&#123; int n; scanf("%s",s);n=strlen(s); sort(s,s+n);printf("%s\n",s); //for(int i=0;i&lt;n;i++)a[i]=s[i]-'0'; while(next_permutation(s,s+n))&#123; printf("%s\n",s); &#125;return 0;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -540,9 +551,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CodeForces 44C]]></title>
-    <url>%2F2019%2F08%2F13%2FCodeForces%2044C%2F</url>
-    <content type="text"><![CDATA[差分数组水题 123456789101112131415161718192021222324252627282930#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 200005;int l[maxn], r[maxn], ans[maxn], cf[maxn];int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin &gt;&gt; a &gt;&gt; b; cf[a]++; cf[b + 1]--; &#125; int sum = 0; int flag = 0; for (int i = 1; i &lt;= m;i++) &#123; sum += cf[i]; if(sum&gt;1||sum==0) &#123; flag = 1; cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; sum &lt;&lt; endl; break; &#125; &#125; if(!flag) cout &lt;&lt; "OK" &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[CF460C Present]]></title>
+    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
+    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -595,14 +606,14 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P2678 跳石头]]></title>
-    <url>%2F2019%2F08%2F13%2FP2678%20%E8%B7%B3%E7%9F%B3%E5%A4%B4%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;long long L,M,N;long long arr[manx];long long dis[manx];bool check(int x)&#123; long long now=0,last,sum,ans=0; for (int i = 1; i &lt;= M;i++) &#123; if(arr[i]-now&lt;=x) &#123; ans++; &#125; else &#123; now=arr[i]; &#125; &#125; if(ans&lt;=N) return 0; else return 1;&#125;int main()&#123; cin &gt;&gt; L &gt;&gt; M &gt;&gt; N; dis[M]=L; for (int i = 1; i &lt;= M;i++) &#123; cin &gt;&gt; arr[i]; &#125; arr[M+1]=L; for (int i = 2; i &lt;= M+1;i++) &#123; dis[i] = arr[i] - arr[i - 1]; &#125; long long l = 0, r = L; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[CodeForces 44C]]></title>
+    <url>%2F2019%2F08%2F13%2FCodeForces%2044C%2F</url>
+    <content type="text"><![CDATA[差分数组水题 123456789101112131415161718192021222324252627282930#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 200005;int l[maxn], r[maxn], ans[maxn], cf[maxn];int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin &gt;&gt; a &gt;&gt; b; cf[a]++; cf[b + 1]--; &#125; int sum = 0; int flag = 0; for (int i = 1; i &lt;= m;i++) &#123; sum += cf[i]; if(sum&gt;1||sum==0) &#123; flag = 1; cout &lt;&lt; i &lt;&lt; ' ' &lt;&lt; sum &lt;&lt; endl; break; &#125; &#125; if(!flag) cout &lt;&lt; "OK" &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
       <tags>
-        <tag>二分</tag>
+        <tag>差分数组</tag>
       </tags>
   </entry>
   <entry>
@@ -617,20 +628,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[CF460C Present]]></title>
-    <url>%2F2019%2F08%2F13%2FCF460C%20Present%2F</url>
-    <content type="text"><![CDATA[二分答案+差分数组好题 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455//二分答案+差分数组好题 #include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;long long N, M, W;long long h[100010], dis[100010];bool check(long long x)&#123; long long sum = 0, ans = 0; for (int i = 1; i &lt;= N;i++) &#123; sum += dis[i]; if(sum&lt;x) &#123; ans += x - sum; dis[i] += x - sum; if(i+W&lt;=N) dis[i + W] -= x - sum;//开始这个点写成了i+W+1，WA了后来知道这个和以前给的左右区间是有区别的。 sum += x - sum; &#125; &#125; return ans &lt;= M;&#125;int main()&#123; cin &gt;&gt; N &gt;&gt; M &gt;&gt; W; long long l = 9999999999999, r = -1; for (int i = 1; i &lt;= N;i++) &#123; cin &gt;&gt; h[i]; dis[i] = h[i] - h[i - 1]; l = min(l, h[i]); r = max(r, h[i]); &#125; r += M; long long ans; while(l&lt;=r) &#123; long long mid = l + r &gt;&gt; 1; if(check(mid)) &#123; l = mid+1; ans=mid; &#125; else r = mid-1; for (int i = 1; i &lt;= N;i++) &#123; dis[i] = h[i] - h[i - 1]; &#125; &#125; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>差分数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[P1843 奶牛晒衣服 二分]]></title>
-    <url>%2F2019%2F08%2F13%2FP1843%20%E5%A5%B6%E7%89%9B%E6%99%92%E8%A1%A3%E6%9C%8D%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
-    <content type="text"><![CDATA[简单的二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;int m,a,b;int arr[manx];int check(int k)&#123; int sum = 0; for (int i = 1; i &lt;= m;i++) &#123; int temp = arr[i] - k * a; if(temp&lt;=0) continue; if(temp%b!=0) sum++; sum += temp / b; &#125; if(sum&lt;=k) return 1; else return 0;&#125;int main()&#123; cin &gt;&gt; m &gt;&gt; a &gt;&gt; b; for (int i = 1; i &lt;= m;i++) &#123; cin &gt;&gt; arr[i]; &#125; int l = 0, r = 500005; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
+    <title><![CDATA[P2678 跳石头]]></title>
+    <url>%2F2019%2F08%2F13%2FP2678%20%E8%B7%B3%E7%9F%B3%E5%A4%B4%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;long long L,M,N;long long arr[manx];long long dis[manx];bool check(int x)&#123; long long now=0,last,sum,ans=0; for (int i = 1; i &lt;= M;i++) &#123; if(arr[i]-now&lt;=x) &#123; ans++; &#125; else &#123; now=arr[i]; &#125; &#125; if(ans&lt;=N) return 0; else return 1;&#125;int main()&#123; cin &gt;&gt; L &gt;&gt; M &gt;&gt; N; dis[M]=L; for (int i = 1; i &lt;= M;i++) &#123; cin &gt;&gt; arr[i]; &#125; arr[M+1]=L; for (int i = 2; i &lt;= M+1;i++) &#123; dis[i] = arr[i] - arr[i - 1]; &#125; long long l = 0, r = L; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -647,6 +647,17 @@
       </categories>
       <tags>
         <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[P1843 奶牛晒衣服 二分]]></title>
+    <url>%2F2019%2F08%2F13%2FP1843%20%E5%A5%B6%E7%89%9B%E6%99%92%E8%A1%A3%E6%9C%8D%EF%BC%88%E4%BA%8C%E5%88%86%EF%BC%89%2F</url>
+    <content type="text"><![CDATA[简单的二分答案 12345678910111213141516171819202122232425262728293031323334353637383940414243#include &lt;iostream&gt;#include &lt;cmath&gt;#include &lt;cstring&gt;#include &lt;cstdio&gt;using namespace std;const int manx = 500005;int m,a,b;int arr[manx];int check(int k)&#123; int sum = 0; for (int i = 1; i &lt;= m;i++) &#123; int temp = arr[i] - k * a; if(temp&lt;=0) continue; if(temp%b!=0) sum++; sum += temp / b; &#125; if(sum&lt;=k) return 1; else return 0;&#125;int main()&#123; cin &gt;&gt; m &gt;&gt; a &gt;&gt; b; for (int i = 1; i &lt;= m;i++) &#123; cin &gt;&gt; arr[i]; &#125; int l = 0, r = 500005; while(l!=r) &#123; int mid = l + r &gt;&gt; 1; if(check(mid)) r = mid; else l = mid + 1; &#125; cout &lt;&lt; l &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>二分</tag>
       </tags>
   </entry>
   <entry>
@@ -672,17 +683,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[动态规划-树形DP-上司舞会]]></title>
-    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP-%E4%B8%8A%E5%8F%B8%E8%88%9E%E4%BC%9A%2F</url>
-    <content type="text"><![CDATA[dp[][0]代表这个节点可以压缩（儿子节点不来）反之相反。 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;vector&lt;int&gt; g[N];int dp[N][2], root, flag[N];void dfs(int x)&#123; for (int i = 0; i &lt; g[x].size();i++) &#123; int son=g[x][i]; dfs(son); dp[x][1] = max(max(dp[x][1], dp[x][1] + dp[son][0]), dp[son][0]); dp[x][0] = max(max(dp[x][0], dp[x][0] + dp[son][1]), max(dp[son][1], dp[son][0])); &#125;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; dp[i][1]; &#125; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin&gt;&gt;a&gt;&gt;b; g[b].push_back(a); flag[a] = 1; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!flag[i]) &#123; root = i; break; &#125; &#125; dfs(root); cout &lt;&lt; max(dp[root][0], dp[root][1]) &lt;&lt; endl;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>树形DP</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[动态规划-区间DP-上司舞会]]></title>
     <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E5%8C%BA%E9%97%B4DP%E6%8E%92%E9%98%9F%2F</url>
     <content type="text"><![CDATA[区间DP。 思维：dp[i][j][0/1]代表i到j遇见最后一个人是从 左边/右边上车的。则状态转移方程如下。 12345678910111213141516171819202122232425262728#include&lt;iostream&gt;using namespace std;int n;int dp[1005][1005][2];int num[1005];const int p = 19650827;int main()&#123; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; num[i]; &#125; for (int i = 1; i &lt;= n;i++) &#123; dp[i][i][0] = 1; &#125; for (int l = 1; l &lt;= n; l++) &#123; for (int i = 1, j; (j=i+l) &lt;= n; i++) &#123; dp[i][j][0] = (dp[i + 1][j][1] * (num[j] &gt; num[i]) + dp[i + 1][j][0] * (num[i + 1] &gt; num[i])) % p; dp[i][j][1] = (dp[i][j - 1][1] * (num[j] &gt; num[j - 1]) + dp[i][j-1][0] * (num[j] &gt; num[i])) % p; &#125; &#125; cout &lt;&lt; (dp[1][n][0] + dp[1][n][1]) % p &lt;&lt; endl;&#125;//Stay foolish,stay hungry,stay young,stay simple]]></content>
@@ -691,6 +691,17 @@
       </categories>
       <tags>
         <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划-树形DP-上司舞会]]></title>
+    <url>%2F2019%2F08%2F12%2F%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E6%A0%91%E5%BD%A2DP-%E4%B8%8A%E5%8F%B8%E8%88%9E%E4%BC%9A%2F</url>
+    <content type="text"><![CDATA[dp[][0]代表这个节点可以压缩（儿子节点不来）反之相反。 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;cmath&gt;#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#define N 6001using namespace std;vector&lt;int&gt; g[N];int dp[N][2], root, flag[N];void dfs(int x)&#123; for (int i = 0; i &lt; g[x].size();i++) &#123; int son=g[x][i]; dfs(son); dp[x][1] = max(max(dp[x][1], dp[x][1] + dp[son][0]), dp[son][0]); dp[x][0] = max(max(dp[x][0], dp[x][0] + dp[son][1]), max(dp[son][1], dp[son][0])); &#125;&#125;int main()&#123; int n; cin &gt;&gt; n; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; dp[i][1]; &#125; for (int i = 1; i &lt;= n;i++) &#123; int a, b; cin&gt;&gt;a&gt;&gt;b; g[b].push_back(a); flag[a] = 1; &#125; for (int i = 1; i &lt;= n;i++) &#123; if(!flag[i]) &#123; root = i; break; &#125; &#125; dfs(root); cout &lt;&lt; max(dp[root][0], dp[root][1]) &lt;&lt; endl;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>树形DP</tag>
       </tags>
   </entry>
   <entry>
@@ -738,17 +749,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[动态规划-区间DP-P1220 关路灯]]></title>
-    <url>%2F2019%2F08%2F09%2F2019-08-09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8C%BA%E9%97%B4DP-P1220-%E5%85%B3%E8%B7%AF%E7%81%AF%2F</url>
-    <content type="text"><![CDATA[理解一下题目大意： 关灯不需要额外的时间，经过了灯就关了。但是可能折返回去关某一个大灯会比继续往下走关接下来的一个小灯更优， 那么可以得到两种状态（沿着当前方向继续往下走，改变方向回去关灯）。 f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) ( sum[i]+sum[n]-sum[j]) ); f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) ( sum[i-1] + sum[n] - sum[j-1] ) ); f函数代表i到j区间中关闭完路灯停留在在左0/右1位置的最小消耗功率。 我们画图可以知道我们有两种转移状态一种事i+1-&gt;i和j-1-&gt;j。但是因为关完灯在的位置不同我们又分了两种。所以我们可以得到上述的状态转移方程。 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;long long l[55],sum[55],power[55];long long dp[55][55][2];const long long INF=0x3f3f3f3f3f3f3f3fll;int main()&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;l[i]&gt;&gt;power[i]; sum[i]=sum[i-1]+power[i]; &#125; for(int k=1;k&lt;=n;k++) &#123; for(int i=1,j;(j=i+k-1)&lt;=n;++i) &#123; if(i&lt;=m&amp;&amp;m&lt;=j) &#123; dp[i][j][0]=min(dp[i+1][j][0]+(l[i+1]-l[i])*(sum[n]-sum[j]+sum[i]), dp[i+1][j][1]+(l[j]-l[i])*(sum[n]-sum[j]+sum[i])); dp[i][j][1]=min(dp[i][j-1][1]+(l[j]-l[j-1])*(sum[n]-sum[j-1]+sum[i-1]), dp[i][j-1][0]+(l[j]-l[i])*(sum[n]+sum[i-1]-sum[j-1])); &#125; else&#123; dp[i][j][0] = dp[i][j][1] = INF; &#125; &#125; &#125; cout&lt;&lt;min(dp[1][n][0],dp[1][n][1])&lt;&lt;endl; &#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>动态规划</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[CF11B Jumping Jack]]></title>
     <url>%2F2019%2F08%2F09%2F2019-08-09-CF11B-Jumping-Jack%2F</url>
     <content type="text"><![CDATA[题意：数轴上从0出发可向左右走，第i步的距离为i，求到达x的最小步数(x&lt;10^9)； 思路：考虑一直向右，若恰好到达则为最小步数； ​ 若路程大于x，且(路程-x)=n,n为偶数，则应向左移动距离n; ​ 要向左移动距离n，只需在第n/2步向左走；步数不变； ​ 若(路程-x)为奇数，一直走到偶数的情况； n/2步返回的目的是本来向前n/2如今向后了，所以加起来就是n的距离了。 123456789101112131415161718192021#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;algorithm&gt;using namespace std;int n,m,sum;int main()&#123; int i,j,k; while(scanf(&quot;%d&quot;,&amp;n)!=EOF)&#123; if(n&lt;0) n=-n; //printf(&quot;%d\n&quot;,n); sum=0; for(i=0;;i++)&#123; sum+=i; if(sum==n) break; if(sum&gt;n&amp;&amp;(sum-n)%2==0) break; &#125; printf(&quot;%d\n&quot;,i); &#125; return 0;&#125;]]></content>
@@ -757,6 +757,17 @@
       </categories>
       <tags>
         <tag>CodeFoeces</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[动态规划-区间DP-P1220 关路灯]]></title>
+    <url>%2F2019%2F08%2F09%2F2019-08-09-%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92-%E5%8C%BA%E9%97%B4DP-P1220-%E5%85%B3%E8%B7%AF%E7%81%AF%2F</url>
+    <content type="text"><![CDATA[理解一下题目大意： 关灯不需要额外的时间，经过了灯就关了。但是可能折返回去关某一个大灯会比继续往下走关接下来的一个小灯更优， 那么可以得到两种状态（沿着当前方向继续往下走，改变方向回去关灯）。 f[i][j][0] = min ( f[i+1][j][0] + ( a[i+1] - a[i] ) ( sum[i] + sum[n] - sum[j] ) , f[i+1][j][1] + ( a[j]-a[i] ) ( sum[i]+sum[n]-sum[j]) ); f[i][j][1] = min ( f[i][j-1][0] + ( a[j] - a[i] ) ( sum[i-1] + sum[n] - sum[j-1] ) , f[i][j-1][1] + ( a[j]-a[j-1] ) ( sum[i-1] + sum[n] - sum[j-1] ) ); f函数代表i到j区间中关闭完路灯停留在在左0/右1位置的最小消耗功率。 我们画图可以知道我们有两种转移状态一种事i+1-&gt;i和j-1-&gt;j。但是因为关完灯在的位置不同我们又分了两种。所以我们可以得到上述的状态转移方程。 123456789101112131415161718192021222324252627282930313233#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;long long l[55],sum[55],power[55];long long dp[55][55][2];const long long INF=0x3f3f3f3f3f3f3f3fll;int main()&#123; int n,m; cin&gt;&gt;n&gt;&gt;m; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;l[i]&gt;&gt;power[i]; sum[i]=sum[i-1]+power[i]; &#125; for(int k=1;k&lt;=n;k++) &#123; for(int i=1,j;(j=i+k-1)&lt;=n;++i) &#123; if(i&lt;=m&amp;&amp;m&lt;=j) &#123; dp[i][j][0]=min(dp[i+1][j][0]+(l[i+1]-l[i])*(sum[n]-sum[j]+sum[i]), dp[i+1][j][1]+(l[j]-l[i])*(sum[n]-sum[j]+sum[i])); dp[i][j][1]=min(dp[i][j-1][1]+(l[j]-l[j-1])*(sum[n]-sum[j-1]+sum[i-1]), dp[i][j-1][0]+(l[j]-l[i])*(sum[n]+sum[i-1]-sum[j-1])); &#125; else&#123; dp[i][j][0] = dp[i][j][1] = INF; &#125; &#125; &#125; cout&lt;&lt;min(dp[1][n][0],dp[1][n][1])&lt;&lt;endl; &#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -771,9 +782,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[模运算笔记]]></title>
-    <url>%2F2019%2F08%2F08%2F2019-08-08-%E6%A8%A1%E8%BF%90%E7%AE%97%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"><![CDATA[模运算： 运算规则模运算与基本四则运算有些相似，但是除法例外。其规则如下： (a + b) % p = (a % p + b % p) % p （1） (a - b) % p = (a % p - b % p + p) % p （2） (a b) % p = (a % p b % p) % p （3） a ^ b % p = ((a % p)^b) % p （4） 结合律： ((a+b) % p + c) % p = (a + (b+c) % p) % p （5） ((ab) % p c)% p = (a (bc) % p) % p （6） 交换律： (a + b) % p = (b+a) % p （7） (a b) % p = (b a) % p （8） 分配律： (a+b) % p = ( a % p + b % p ) % p （9） ((a +b)% p c) % p = ((a c) % p + (b * c) % p) % p （10）]]></content>
+    <title><![CDATA[P3197 [HNOI2008]越狱]]></title>
+    <url>%2F2019%2F08%2F08%2F2019-08-08-P3197-%5BHNOI2008%5D%E8%B6%8A%E7%8B%B1%2F</url>
+    <content type="text"><![CDATA[计数原理。 一个犯人有m种状态，在不考虑其它条件的情况下，两个犯人有m的平方种状态 =&gt;=&gt; n个犯人有m^{n}m**n种总状态。 我们你想思维，总状态数-不越狱的数=越狱的数。由于每一个房间的人的宗教有mm种可能，且有nn个房间，所以所有的方案数等于m^nm**n。由于当相邻的两个房间所关押的罪犯当宗教相同时就有可能会越狱，所以不可能会越狱的方案数为m \times (m-1)^{n-1}m×(m−1)n−1，这是因为第一个房间的最烦的宗教有mm种选择，而第二个房间的罪犯的宗教有m-1m−1种选择，第三个房间的罪犯的宗教有m-2m−2种选择，以此类推。因此越狱的方案数就有m^n-m \times (m-1)^{n-1}m**n−m×(m−1)n−1种。由于nn很大，所以我们用快速幂来解这道题。 1234567891011121314151617181920#include&lt;iostream&gt;int MOD=100003;using namespace std;long long qpow(long long m,long long n)&#123; long long ans=1; while(n) &#123; if(n&amp;1) ans=(ans%MOD*m%MOD)%MOD; m=(m%MOD*m%MOD)%MOD; n&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; long long m,n; cin&gt;&gt;m&gt;&gt;n; cout&lt;&lt;(((qpow(m,n)-m*qpow(m-1,n-1))%MOD+MOD)%MOD)&lt;&lt;endl;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -782,9 +793,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[P3197 [HNOI2008]越狱]]></title>
-    <url>%2F2019%2F08%2F08%2F2019-08-08-P3197-%5BHNOI2008%5D%E8%B6%8A%E7%8B%B1%2F</url>
-    <content type="text"><![CDATA[计数原理。 一个犯人有m种状态，在不考虑其它条件的情况下，两个犯人有m的平方种状态 =&gt;=&gt; n个犯人有m^{n}m**n种总状态。 我们你想思维，总状态数-不越狱的数=越狱的数。由于每一个房间的人的宗教有mm种可能，且有nn个房间，所以所有的方案数等于m^nm**n。由于当相邻的两个房间所关押的罪犯当宗教相同时就有可能会越狱，所以不可能会越狱的方案数为m \times (m-1)^{n-1}m×(m−1)n−1，这是因为第一个房间的最烦的宗教有mm种选择，而第二个房间的罪犯的宗教有m-1m−1种选择，第三个房间的罪犯的宗教有m-2m−2种选择，以此类推。因此越狱的方案数就有m^n-m \times (m-1)^{n-1}m**n−m×(m−1)n−1种。由于nn很大，所以我们用快速幂来解这道题。 1234567891011121314151617181920#include&lt;iostream&gt;int MOD=100003;using namespace std;long long qpow(long long m,long long n)&#123; long long ans=1; while(n) &#123; if(n&amp;1) ans=(ans%MOD*m%MOD)%MOD; m=(m%MOD*m%MOD)%MOD; n&gt;&gt;=1; &#125; return ans;&#125;int main()&#123; long long m,n; cin&gt;&gt;m&gt;&gt;n; cout&lt;&lt;(((qpow(m,n)-m*qpow(m-1,n-1))%MOD+MOD)%MOD)&lt;&lt;endl;&#125;]]></content>
+    <title><![CDATA[模运算笔记]]></title>
+    <url>%2F2019%2F08%2F08%2F2019-08-08-%E6%A8%A1%E8%BF%90%E7%AE%97%E7%AC%94%E8%AE%B0%2F</url>
+    <content type="text"><![CDATA[模运算： 运算规则模运算与基本四则运算有些相似，但是除法例外。其规则如下： (a + b) % p = (a % p + b % p) % p （1） (a - b) % p = (a % p - b % p + p) % p （2） (a b) % p = (a % p b % p) % p （3） a ^ b % p = ((a % p)^b) % p （4） 结合律： ((a+b) % p + c) % p = (a + (b+c) % p) % p （5） ((ab) % p c)% p = (a (bc) % p) % p （6） 交换律： (a + b) % p = (b+a) % p （7） (a b) % p = (b a) % p （8） 分配律： (a+b) % p = ( a % p + b % p ) % p （9） ((a +b)% p c) % p = ((a c) % p + (b * c) % p) % p （10）]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -837,20 +848,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[树状数组求逆序对-P1908 逆序对]]></title>
-    <url>%2F2019%2F08%2F03%2F2019-08-03-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9-P1908-%E9%80%86%E5%BA%8F%E5%AF%B9%2F</url>
-    <content type="text"><![CDATA[树状数组求逆序对。（二进制真好玩） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem :P1908 逆序对 * 用树状数组来求逆序对，思想很奇妙，很受益，对树状数组的理解又加深了一些。 * */#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;int tree[500010],rank[500010],n;long long ans; struct point&#123; int num,val;&#125;a[500010];inline bool cmp(point q,point w)&#123; if(q.val==w.val) return q.num&lt;w.num; return q.val&lt;w.val;&#125;inline void insert(int p,int d)&#123; for(;p&lt;=n;p+=p&amp;-p) tree[p]+=d; &#125;inline int query(int p)&#123; int sum=0; for(;p;p-=p&amp;-p) sum+=tree[p]; return sum;&#125;int main()&#123; scanf(&quot;%d&quot;,&amp;n); for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i].val),a[i].num=i; sort(a+1,a+1+n,cmp); for(int i=1;i&lt;=n;i++) rank[a[i].num]=i; for(int i=1;i&lt;=n;i++) &#123; insert(rank[i],1); ans+=i-query(rank[i]); &#125; printf(&quot;%lld&quot;,ans); return 0;&#125;]]></content>
-      <categories>
-        <category>学习</category>
-      </categories>
-      <tags>
-        <tag>树状数组</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[洛谷关闭农场]]></title>
-    <url>%2F2019%2F08%2F03%2F2019-08-03-%E6%B4%9B%E8%B0%B7%E5%85%B3%E9%97%AD%E5%86%9C%E5%9C%BA%2F</url>
-    <content type="text"><![CDATA[这道题的并查集作用和以前博主做的并查集的作用不一样。因为并查集一旦建立联系过后就不能撤回了，所以这道题我们采用的是逆向添边的操作。 添的边再用并查集合并到一个集合中，这样再遍历一共有几个祖先节点，如果只有一个并且被修复那么联通块依旧是1. 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include&lt;iostream&gt;using namespace std;struct point&#123; int nex,v,val;&#125;edge[1000005];int head[1000005],cnt;int pre[1000005];int a[1000005];int vis[1000005];int ans[1000005];void add(int u,int v)&#123; edge[++cnt].v=v; edge[cnt].val=1; edge[cnt].nex=head[u]; head[u]=cnt;&#125;int Find(int x)&#123; if(x==pre[x]) return x; return pre[x]=Find(pre[x]);&#125;int main()&#123; int m,n; cin&gt;&gt;m&gt;&gt;n; for(int i=1;i&lt;=m;i++) pre[i]=i; for(int i=1;i&lt;=n;i++) &#123; int u,v,val; cin&gt;&gt;u&gt;&gt;v; add(u,v); add(v,u); &#125; for(int i=m;i&gt;=1;i--) &#123; int temp; cin&gt;&gt;temp; a[i]=temp; &#125; int t=m; for(int i=1;i&lt;=m;i++) &#123; int con=0; vis[a[i]]=1; for(int j=head[a[i]];j;j=edge[j].nex) &#123; int v=edge[j].v; if(vis[v]) &#123; int x=Find(a[i]); int y=Find(v); if(x!=y) pre[x]=y; &#125; &#125; for(int j=1;j&lt;=m;j++) if(vis[j]&amp;&amp;pre[j]==j) con++; if(con==1) ans[m-i+1]=1; else ans[m-i+1]=0; &#125; for(int i=1;i&lt;=t;i++) if(ans[i]) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;&#125;]]></content>
+    <title><![CDATA[种类并查集-P1525 关押罪犯]]></title>
+    <url>%2F2019%2F08%2F03%2F2019-08-03-%E7%A7%8D%E7%B1%BB%E5%B9%B6%E6%9F%A5%E9%9B%86-P1525-%E5%85%B3%E6%8A%BC%E7%BD%AA%E7%8A%AF%2F</url>
+    <content type="text"><![CDATA[两种关系的种类并查集（有点像二分图匹配问题） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960/* problem:P1525 关押罪犯(种类并查集) * 题意：如何关押罪犯使其怒气值最小。 * 因为只有两个监狱有点像二分图匹配的意思，所以我使用了拆点，把每一个人拆成两个人。 * 我们先要从大到小排序，我们这里再确定祖先关系的时候并不是将两个罪犯合并，在我认为他们两个之间的连线更像是隔离线（要抵制，分开），把这两个人分开关在两个监狱中 * 从大到小的分割，最终我们分割到无法避免发生冲突的那个关系一定是最小的。 * 这道题让我对并查集又有了新的感受，相比于食物链三种关系的处理方式（向量） * 这道题的分离来处理两种关系（分割）真是好题。*/#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;string&gt;#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;using namespace std;int n,m,f[40001],x,y;int pre[100001];struct data&#123; int a,b,c;&#125; e[100001];int gz(const data &amp;a,const data &amp;b)&#123; if(a.c&gt;b.c)return 1; else return 0;&#125;int Find(int x)&#123; if(x==pre[x]) return x; return pre[x] = Find(pre[x]);&#125;int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= 2 * m;i++) &#123; pre[i] = i; &#125; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; e[i].a &gt;&gt; e[i].b &gt;&gt; e[i].c; &#125; sort(e + 1, e + 1 + n, gz); for (int i = 1; i &lt;= n;i++) &#123; int fx = Find(e[i].a); int fy = Find(e[i].b); if(fx==fy) &#123; cout &lt;&lt; e[i].c &lt;&lt; endl; return 0; &#125; pre[fx] = Find(e[i].b + m); pre[fy] = Find(e[i].a + m); &#125; puts(&quot;0&quot;);&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -870,6 +870,17 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[树状数组求逆序对-P1908 逆序对]]></title>
+    <url>%2F2019%2F08%2F03%2F2019-08-03-%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84%E6%B1%82%E9%80%86%E5%BA%8F%E5%AF%B9-P1908-%E9%80%86%E5%BA%8F%E5%AF%B9%2F</url>
+    <content type="text"><![CDATA[树状数组求逆序对。（二进制真好玩） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748/* problem :P1908 逆序对 * 用树状数组来求逆序对，思想很奇妙，很受益，对树状数组的理解又加深了一些。 * */#include&lt;iostream&gt;#include&lt;cstdio&gt;#include&lt;algorithm&gt;using namespace std;int tree[500010],rank[500010],n;long long ans; struct point&#123; int num,val;&#125;a[500010];inline bool cmp(point q,point w)&#123; if(q.val==w.val) return q.num&lt;w.num; return q.val&lt;w.val;&#125;inline void insert(int p,int d)&#123; for(;p&lt;=n;p+=p&amp;-p) tree[p]+=d; &#125;inline int query(int p)&#123; int sum=0; for(;p;p-=p&amp;-p) sum+=tree[p]; return sum;&#125;int main()&#123; scanf(&quot;%d&quot;,&amp;n); for(int i=1;i&lt;=n;i++) scanf(&quot;%d&quot;,&amp;a[i].val),a[i].num=i; sort(a+1,a+1+n,cmp); for(int i=1;i&lt;=n;i++) rank[a[i].num]=i; for(int i=1;i&lt;=n;i++) &#123; insert(rank[i],1); ans+=i-query(rank[i]); &#125; printf(&quot;%lld&quot;,ans); return 0;&#125;]]></content>
+      <categories>
+        <category>学习</category>
+      </categories>
+      <tags>
+        <tag>树状数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[差分数组-P1083 借教室]]></title>
     <url>%2F2019%2F08%2F03%2F2019-08-03-%E5%B7%AE%E5%88%86%E6%95%B0%E7%BB%84-P1083-%E5%80%9F%E6%95%99%E5%AE%A4%2F</url>
     <content type="text"><![CDATA[初次接触差分：感觉差分的思想还听常用的树状数组也是差分的思想，题解在注释中就不解释了。 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667/* problem:P1083 借教室 * 差分数组+二分 * 这是博主差分数组的第一道题，可能理解有错误，希望各位大牛指出 * 对于这道题，我们差分数组操作的对象是我们每次操作的时间，二分是步骤上的二分。 * 顺便附上差分数组一位大牛讲解的博客，讲的非常的好，特别是那两个定理。https://www.cnblogs.com/COLIN-LIGHTNING/p/8436624.html*/#include&lt;iostream&gt;#include&lt;algorithm&gt;#include&lt;vector&gt;#include&lt;queue&gt;#include&lt;string.h&gt;using namespace std;int m,n;int a[1000100];int cf[1000100];int l[1000100];int r[1000100];int d[1000100];bool check(int x)&#123; long long sum = 0; memset(cf, 0, sizeof cf); for (int i = 1; i &lt;= x;i++) &#123; cf[l[i]] += d[i]; cf[r[i] + 1] -= d[i]; &#125; for (int i = 1; i &lt;= m; i++) &#123; sum += cf[i]; if (sum &gt; a[i]) return false; &#125; return true;&#125;int main()&#123; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= m;i++) cin &gt;&gt; a[i]; for (int i = 1; i &lt;=n ;i++) &#123; cin &gt;&gt; d[i] &gt;&gt; l[i] &gt;&gt; r[i]; &#125; int l = 1, r = m; int ans=0; while(l&lt;=r) &#123; int mid = l + r &gt;&gt; 1; if(!check(mid)) &#123; r = mid - 1; ans = mid; &#125; else &#123; l = mid + 1; &#125; &#125; if(ans==0) &#123; cout &lt;&lt; 0 &lt;&lt; endl; return 0; &#125; cout &lt;&lt; -1 &lt;&lt; endl; cout &lt;&lt; ans &lt;&lt; endl;&#125;]]></content>
@@ -881,9 +892,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[种类并查集-P1525 关押罪犯]]></title>
-    <url>%2F2019%2F08%2F03%2F2019-08-03-%E7%A7%8D%E7%B1%BB%E5%B9%B6%E6%9F%A5%E9%9B%86-P1525-%E5%85%B3%E6%8A%BC%E7%BD%AA%E7%8A%AF%2F</url>
-    <content type="text"><![CDATA[两种关系的种类并查集（有点像二分图匹配问题） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960/* problem:P1525 关押罪犯(种类并查集) * 题意：如何关押罪犯使其怒气值最小。 * 因为只有两个监狱有点像二分图匹配的意思，所以我使用了拆点，把每一个人拆成两个人。 * 我们先要从大到小排序，我们这里再确定祖先关系的时候并不是将两个罪犯合并，在我认为他们两个之间的连线更像是隔离线（要抵制，分开），把这两个人分开关在两个监狱中 * 从大到小的分割，最终我们分割到无法避免发生冲突的那个关系一定是最小的。 * 这道题让我对并查集又有了新的感受，相比于食物链三种关系的处理方式（向量） * 这道题的分离来处理两种关系（分割）真是好题。*/#include&lt;cstdio&gt;#include&lt;cstring&gt;#include&lt;string&gt;#include&lt;iostream&gt;#include&lt;cstdlib&gt;#include&lt;algorithm&gt;using namespace std;int n,m,f[40001],x,y;int pre[100001];struct data&#123; int a,b,c;&#125; e[100001];int gz(const data &amp;a,const data &amp;b)&#123; if(a.c&gt;b.c)return 1; else return 0;&#125;int Find(int x)&#123; if(x==pre[x]) return x; return pre[x] = Find(pre[x]);&#125;int main()&#123; int m, n; cin &gt;&gt; m &gt;&gt; n; for (int i = 1; i &lt;= 2 * m;i++) &#123; pre[i] = i; &#125; for (int i = 1; i &lt;= n;i++) &#123; cin &gt;&gt; e[i].a &gt;&gt; e[i].b &gt;&gt; e[i].c; &#125; sort(e + 1, e + 1 + n, gz); for (int i = 1; i &lt;= n;i++) &#123; int fx = Find(e[i].a); int fy = Find(e[i].b); if(fx==fy) &#123; cout &lt;&lt; e[i].c &lt;&lt; endl; return 0; &#125; pre[fx] = Find(e[i].b + m); pre[fy] = Find(e[i].a + m); &#125; puts(&quot;0&quot;);&#125;]]></content>
+    <title><![CDATA[洛谷关闭农场]]></title>
+    <url>%2F2019%2F08%2F03%2F2019-08-03-%E6%B4%9B%E8%B0%B7%E5%85%B3%E9%97%AD%E5%86%9C%E5%9C%BA%2F</url>
+    <content type="text"><![CDATA[这道题的并查集作用和以前博主做的并查集的作用不一样。因为并查集一旦建立联系过后就不能撤回了，所以这道题我们采用的是逆向添边的操作。 添的边再用并查集合并到一个集合中，这样再遍历一共有几个祖先节点，如果只有一个并且被修复那么联通块依旧是1. 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273#include&lt;iostream&gt;using namespace std;struct point&#123; int nex,v,val;&#125;edge[1000005];int head[1000005],cnt;int pre[1000005];int a[1000005];int vis[1000005];int ans[1000005];void add(int u,int v)&#123; edge[++cnt].v=v; edge[cnt].val=1; edge[cnt].nex=head[u]; head[u]=cnt;&#125;int Find(int x)&#123; if(x==pre[x]) return x; return pre[x]=Find(pre[x]);&#125;int main()&#123; int m,n; cin&gt;&gt;m&gt;&gt;n; for(int i=1;i&lt;=m;i++) pre[i]=i; for(int i=1;i&lt;=n;i++) &#123; int u,v,val; cin&gt;&gt;u&gt;&gt;v; add(u,v); add(v,u); &#125; for(int i=m;i&gt;=1;i--) &#123; int temp; cin&gt;&gt;temp; a[i]=temp; &#125; int t=m; for(int i=1;i&lt;=m;i++) &#123; int con=0; vis[a[i]]=1; for(int j=head[a[i]];j;j=edge[j].nex) &#123; int v=edge[j].v; if(vis[v]) &#123; int x=Find(a[i]); int y=Find(v); if(x!=y) pre[x]=y; &#125; &#125; for(int j=1;j&lt;=m;j++) if(vis[j]&amp;&amp;pre[j]==j) con++; if(con==1) ans[m-i+1]=1; else ans[m-i+1]=0; &#125; for(int i=1;i&lt;=t;i++) if(ans[i]) cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; else cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl;&#125;]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -958,20 +969,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[poj 2756 二分图问题]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-poj-2756-%E4%BA%8C%E5%88%86%E5%9B%BE%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[这道题是一个二分 图的问题，但是博主最近学习了网络流，就用了网络流写了。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=50000;const int maxN=205;int N,M; //N个英飞，M个外飞int dis[maxN], r[maxN][maxN], cot=0, tot;int bfs()&#123; memset(dis, -1, sizeof dis); queue&lt;int&gt;q; while(!q.empty()) q.pop(); dis[0] = 1; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u]+1; q.push(i); &#125; &#125; &#125; return dis[tot] &gt; 0 ? 1 : 0;&#125;int dfs(int x,int remain)&#123; if(x==tot) return remain; int k; for (int i = 1; i &lt;= tot;i++) &#123; if (r[x][i] &gt; 0 &amp;&amp; dis[i] == dis[x] + 1&amp;&amp;(k=dfs(i,min(r[x][i],remain)))) &#123; r[x][i] -= k; r[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;M,&amp;N)) &#123; tot=N+1; memset(r, -1, sizeof(r)); memset(dis, -1, sizeof(dis)); int e1,e2; while (~scanf(&quot;%d%d&quot;,&amp;e1,&amp;e2)) &#123; if(e1==-1&amp;&amp;e2==-1) break; r[e1][e2] = 1; r[e2][e1] = 0; r[0][e1] = 1; r[e2][tot] = 1; &#125; int res=0; int ans = 0; while(bfs()) &#123; res = dfs(0, INF); ans += res; &#125; printf(&quot;%d\n&quot;, ans); for(int i=1; i&lt;=M; i++) &#123; for(int j=M+1; j&lt;tot; j++) &#123; if(r[i][j]==0) printf(&quot;%d %d\n&quot;,i,j); &#125; &#125; &#125;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>网络流</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[CodeForces 546E 网络流好题]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-CodeForces-546E-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%A5%BD%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[网络流好题：这里只说题目中未说明的一点，为什么指定有路径的城市可以设置容量为INF？因为他们可以无限往来兵力。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119/* Auther :CaiCai * 网络流拆点题目，网络流已经做了一些题目了，目前小结。如果遇见题目初始化一系列条件，并且问你能否达到某种状态那么大部分是最大流的问题。 * 这道题是一个好题难在建图上面，和一些网络流的题目一样，这道题也需要拆点每座城拆成两个点，然后分别建立源点和束点。 * 因为每一个兵可以自己留在自己的城里，所以a[i][i+N]=INF。自己指向自己的道路可以无限大。 * 因为建图的原因，所以最后存进去调配的兵力就是原来的大小减去网络图中残余的网络量就可以了。如果是0直接输出就完了，证明并没有兵力往来，可能是前面已经没有足够的带宽来进行兵力往来了。 * problem: Codeforces 546E.*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=205;int m, n;int tot;int temp;int r[maxN&lt;&lt;2][maxN&lt;&lt;2], flow[maxN&lt;&lt;2], pre[maxN&lt;&lt;2], food[maxN], drink[maxN];int sum1 = 0;int sum2 = 0;int bfs(int st,int en)&#123; queue&lt;int&gt; q; memset(pre, -1, sizeof pre); pre[st] = 0; flow[st] = INF; q.push(st); while (!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(pre[i]==-1&amp;&amp;r[u][i]&gt;0) &#123; pre[i] = u; flow[i] = min(r[u][i], flow[u]); q.push(i); &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int dfs(int st,int en)&#123; int maxflow=0, icu; while((icu=bfs(st,en))!=-1) &#123; int last = en; int k; while(last!=st) &#123; k = pre[last]; r[k][last] -= icu; r[last][k] += icu; last = k; &#125; maxflow += icu; &#125; return maxflow;&#125;int main()&#123; scanf(&quot;%d%d&quot;, &amp;m, &amp;n); tot = m * 2 + 1; for (int i = 1; i &lt;= m;i++) &#123; scanf(&quot;%d&quot;, &amp;temp); sum1 += temp; r[0][i] = temp; r[i][i + m] = INF; &#125; for (int i = m+1; i &lt;= 2*m;i++) &#123; scanf(&quot;%d&quot;, &amp;temp); sum2+=temp; r[i][tot] = temp; &#125; for (int i = 0; i &lt; n;i++) &#123; int a, b; scanf(&quot;%d%d&quot;, &amp;a, &amp;b); r[a][b+m] = INF; r[b][a+m] = INF; &#125; int result; int scr; result = dfs(0, tot); //cout&lt;&lt;result&lt;&lt;endl; if(sum1==result&amp;&amp;sum2==result) &#123; printf(&quot;YES\n&quot;); for (int i = 1; i &lt;= m;i++) &#123; for (int j = 1+m; j &lt;= m*2;j++) &#123; printf(&quot;%d%s&quot;, r[i][j]==0?(0):(INF - r[i][j]), j==2*m?(&quot;&quot;):(&quot; &quot;)); &#125; puts(&quot;&quot;); &#125; &#125; else &#123; printf(&quot;NO\n&quot;); &#125; &#125;]]></content>
+    <title><![CDATA[POJ 2135最小费用最大流]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-POJ-2135%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
+    <content type="text"><![CDATA[最小费用最大流的板子题。其实我觉得这道题还挺好的，最重要的是这道题让我对网络流EK算法有了更深的理解，其实网络流每次跑都和DFS有点像。而我最开始理解成了BFS的那种顺序。说说这道题吧，这道题，我们因为要跑来回，所以图中肯定存在两种路径可以从S到达T，所以我们直接设置S到1的容量为2，N到T的容量也为2。并且我们图中的代价边设置为路的长度，跑一下最短路，这样我们只需要跑两次就可以找到一个最大流了。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define INF 0x3f3f3f3f#define HalF (l + r)&gt;&gt;1#define lsn rt&lt;&lt;1#define rsn rt&lt;&lt;1|1#define Lson lsn, l, mid#define Rson rsn, mid+1, r#define QL Lson, ql, qr#define QR Rson, ql, qr#define myself rt, l, rusing namespace std;typedef unsigned long long ull;typedef long long ll;const int maxN = 1e5 + 7;const int maxE = 2e4 + 7;const int S = 0;int N, M, head[maxN], cnt, T;struct Edge&#123; int nex,u,v,cost,flow; Edge(int a=-1,int b=0,int c=0,int d=0,int e=0):nex(a),u(b),v(c),cost(e),flow(d)&#123;&#125;;&#125;edge[maxN&lt;&lt;1];void addedge(int u,int v,int flow,int cost)&#123; edge[cnt]= Edge(head[u],u,v,flow,cost); head[u]=cnt++;&#125;void init()&#123; T=N+1; cnt=0; memset(head,-1,sizeof head);&#125;int pre[maxN], Flow[maxN], dist[maxN]; bool inque[maxN];queue&lt;int&gt;q;int spfa()&#123; while(!q.empty()) q.pop(); memset(Flow,0,sizeof Flow); memset(dist,INF,sizeof dist); memset(inque,0,sizeof inque); memset(pre,-1,sizeof pre); dist[S]=0; inque[S]=1; Flow[S]=INF;pre[S]=0; q.push(S); while(!q.empty()) &#123; int u=q.front();q.pop();inque[u]=0; for(int i=head[u];~i;i=edge[i].nex) &#123; int v=edge[i].v; int cost=edge[i].cost; if(dist[v]&gt;dist[u]+cost&amp;&amp;edge[i].flow&gt;0) &#123; pre[v]=i; dist[v]=dist[u]+cost; Flow[v]=min(edge[i].flow,Flow[u]); if(!inque[v]) &#123; q.push(v); inque[v]=1; &#125; &#125; &#125; &#125; return pre[T]^-1;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;N,&amp;M)) &#123; init(); addedge(S,1,2,0); addedge(1,S,0,0); addedge(N,T,2,0); addedge(T,N,0,0); for(int i=0;i&lt;M;i++) &#123; int a,b,c; scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c); addedge(a,b,1,c); addedge(b,a,0,-c); addedge(a,b,0,-c); addedge(b,a,1,c); &#125; int ans=0; //for(int i=1;i&lt;=2;i++)也是可以的因为一定只跑了2次。 while(spfa()) &#123; int now=T,last=pre[now]; while(now) &#123; edge[last].flow-=Flow[T]; edge[last^1].flow+=Flow[T]; now=edge[last].u; last=pre[now]; &#125; ans+=dist[T]*Flow[T]; &#125; printf(&quot;%d\n&quot;,ans); &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -983,6 +983,17 @@
     <title><![CDATA[POJ 2516最小费用最大流]]></title>
     <url>%2F2019%2F07%2F30%2F2019-07-30-POJ-2516%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
     <content type="text"><![CDATA[提意：M个商店，N个供应商，K种商品，每个供应商向每个商店提供一种商品有他相应的代价，我们需要将这个代价最小化，并且满足各个商店的需求。 题解：建立源点与各个供应商的边，代价边为0，容量边为各个供应商拥有各个商品对应的商品数量。供应商和商店建立代价边为对应的代价，容量边为自己这种商品所拥有的数量，也可以是无限大，商店和汇点建立边，代价边为0，容量边为自己所需要的商品数量。 因为才入门的缘故，博主最开始在纠结为什么所有商品一起跑了，后来才明白每种商品需要一个个的跑，最后每种商品的流x代价相加就是答案。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045#define INF 0x3f3f3f3f#define HalF (l + r)&gt;&gt;1#define lsn rt&lt;&lt;1#define rsn rt&lt;&lt;1|1#define Lson lsn, l, mid#define Rson rsn, mid+1, r#define QL Lson, ql, qr#define QR Rson, ql, qr#define myself rt, l, rusing namespace std;typedef unsigned long long ull;typedef long long ll;const int S = 0;const int maxN = 107;int N, M, K, T, r[maxN][maxN], cost[maxN][maxN];struct node &#123; int thing[maxN];&#125;a[maxN&lt;&lt;1];int pre[maxN], dist[maxN], Flow[maxN]; bool inque[maxN];queue&lt;int&gt; Q;int spfa()&#123; while(!Q.empty()) Q.pop(); memset(pre, -1, sizeof pre); memset(dist, INF, sizeof dist); memset(inque, 0, sizeof inque); memset(Flow, 0, sizeof Flow); Flow[S] = INF; dist[S] = 0; Q.push(S); inque[S] = 1; while(!Q.empty()) &#123; int u = Q.front(); Q.pop(); inque[u] = 0; for (int i = 1; i &lt;= T;i++) &#123; if(r[u][i]&amp;&amp;dist[i]&gt;dist[u]+cost[u][i]) &#123; pre[i] = u; dist[i] = cost[u][i] + dist[u]; Flow[i] = min(Flow[u], r[u][i]); if(!inque[i]) &#123; Q.push(i); inque[i] = 1; &#125; &#125; &#125; &#125; return pre[T] != -1;&#125;int main()&#123; while(~scanf(&quot;%d%d%d&quot;,&amp;N,&amp;M,&amp;K),M,N,K) &#123; T = N + M + 1; for (int i = 1; i &lt;= N;i++)&#123; for (int j = 1; j &lt;= K;j++)&#123; scanf(&quot;%d&quot;, &amp;a[i].thing[j]); &#125; &#125; for (int i = 1; i &lt;= M;i++)&#123; for (int j = 1; j &lt;= K;j++)&#123; scanf(&quot;%d&quot;, &amp;a[i + N].thing[j]); &#125; &#125; bool flag = 0; for (int i = 1; i &lt;= K;i++)&#123; int sum1 = 0, sum2 = 0; for (int j = 1; j &lt;= N;j++)&#123; sum1 += a[j].thing[i]; &#125; for (int j = 1; j &lt;= M;j++)&#123; sum2 += a[j + N].thing[i]; &#125; if(sum1&gt;sum2)&#123; flag = 1; break; &#125; &#125; int ans = 0; for (int k = 1; k &lt;= K;k++)&#123; memset(r, 0, sizeof r); memset(cost, INF, sizeof cost); for (int i= 1; i &lt;= N;i++) &#123; r[i][T] = a[i].thing[k]; r[T][i] = 0; cost[i][T] = 0; for (int j = 1; j &lt;= M;j++)&#123; scanf(&quot;%d&quot;, &amp;cost[N + j][i]); cost[i][j + N] = -cost[N + j][i]; r[j+N][i]=a[j+N].thing[k]; r[S][j + N] = a[j + N].thing[k]; &#125; &#125; if(flag) continue; for (int i = 1; i &lt;= M;i++)&#123; r[S][i + N] = a[i + N].thing[k]; cost[S][i + N] = 0; &#125; while(spfa()) &#123; int now = T; int last; while(now) &#123; last = pre[now]; r[last][now] -= Flow[T]; r[now][last] += Flow[T]; now = last; &#125; ans += dist[T] * Flow[T]; &#125; &#125; printf(&quot;%d\n&quot;,flag==1?-1:ans); &#125;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>网络流</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[poj 2756 二分图问题]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-poj-2756-%E4%BA%8C%E5%88%86%E5%9B%BE%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[这道题是一个二分 图的问题，但是博主最近学习了网络流，就用了网络流写了。 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182838485868788899091929394#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=50000;const int maxN=205;int N,M; //N个英飞，M个外飞int dis[maxN], r[maxN][maxN], cot=0, tot;int bfs()&#123; memset(dis, -1, sizeof dis); queue&lt;int&gt;q; while(!q.empty()) q.pop(); dis[0] = 1; q.push(0); while(!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(r[u][i]&gt;0&amp;&amp;dis[i]==-1) &#123; dis[i] = dis[u]+1; q.push(i); &#125; &#125; &#125; return dis[tot] &gt; 0 ? 1 : 0;&#125;int dfs(int x,int remain)&#123; if(x==tot) return remain; int k; for (int i = 1; i &lt;= tot;i++) &#123; if (r[x][i] &gt; 0 &amp;&amp; dis[i] == dis[x] + 1&amp;&amp;(k=dfs(i,min(r[x][i],remain)))) &#123; r[x][i] -= k; r[i][x] += k; return k; &#125; &#125; return 0;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;M,&amp;N)) &#123; tot=N+1; memset(r, -1, sizeof(r)); memset(dis, -1, sizeof(dis)); int e1,e2; while (~scanf(&quot;%d%d&quot;,&amp;e1,&amp;e2)) &#123; if(e1==-1&amp;&amp;e2==-1) break; r[e1][e2] = 1; r[e2][e1] = 0; r[0][e1] = 1; r[e2][tot] = 1; &#125; int res=0; int ans = 0; while(bfs()) &#123; res = dfs(0, INF); ans += res; &#125; printf(&quot;%d\n&quot;, ans); for(int i=1; i&lt;=M; i++) &#123; for(int j=M+1; j&lt;tot; j++) &#123; if(r[i][j]==0) printf(&quot;%d %d\n&quot;,i,j); &#125; &#125; &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -1024,9 +1035,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[POJ 2135最小费用最大流]]></title>
-    <url>%2F2019%2F07%2F30%2F2019-07-30-POJ-2135%E6%9C%80%E5%B0%8F%E8%B4%B9%E7%94%A8%E6%9C%80%E5%A4%A7%E6%B5%81%2F</url>
-    <content type="text"><![CDATA[最小费用最大流的板子题。其实我觉得这道题还挺好的，最重要的是这道题让我对网络流EK算法有了更深的理解，其实网络流每次跑都和DFS有点像。而我最开始理解成了BFS的那种顺序。说说这道题吧，这道题，我们因为要跑来回，所以图中肯定存在两种路径可以从S到达T，所以我们直接设置S到1的容量为2，N到T的容量也为2。并且我们图中的代价边设置为路的长度，跑一下最短路，这样我们只需要跑两次就可以找到一个最大流了。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define INF 0x3f3f3f3f#define HalF (l + r)&gt;&gt;1#define lsn rt&lt;&lt;1#define rsn rt&lt;&lt;1|1#define Lson lsn, l, mid#define Rson rsn, mid+1, r#define QL Lson, ql, qr#define QR Rson, ql, qr#define myself rt, l, rusing namespace std;typedef unsigned long long ull;typedef long long ll;const int maxN = 1e5 + 7;const int maxE = 2e4 + 7;const int S = 0;int N, M, head[maxN], cnt, T;struct Edge&#123; int nex,u,v,cost,flow; Edge(int a=-1,int b=0,int c=0,int d=0,int e=0):nex(a),u(b),v(c),cost(e),flow(d)&#123;&#125;;&#125;edge[maxN&lt;&lt;1];void addedge(int u,int v,int flow,int cost)&#123; edge[cnt]= Edge(head[u],u,v,flow,cost); head[u]=cnt++;&#125;void init()&#123; T=N+1; cnt=0; memset(head,-1,sizeof head);&#125;int pre[maxN], Flow[maxN], dist[maxN]; bool inque[maxN];queue&lt;int&gt;q;int spfa()&#123; while(!q.empty()) q.pop(); memset(Flow,0,sizeof Flow); memset(dist,INF,sizeof dist); memset(inque,0,sizeof inque); memset(pre,-1,sizeof pre); dist[S]=0; inque[S]=1; Flow[S]=INF;pre[S]=0; q.push(S); while(!q.empty()) &#123; int u=q.front();q.pop();inque[u]=0; for(int i=head[u];~i;i=edge[i].nex) &#123; int v=edge[i].v; int cost=edge[i].cost; if(dist[v]&gt;dist[u]+cost&amp;&amp;edge[i].flow&gt;0) &#123; pre[v]=i; dist[v]=dist[u]+cost; Flow[v]=min(edge[i].flow,Flow[u]); if(!inque[v]) &#123; q.push(v); inque[v]=1; &#125; &#125; &#125; &#125; return pre[T]^-1;&#125;int main()&#123; while(~scanf(&quot;%d%d&quot;,&amp;N,&amp;M)) &#123; init(); addedge(S,1,2,0); addedge(1,S,0,0); addedge(N,T,2,0); addedge(T,N,0,0); for(int i=0;i&lt;M;i++) &#123; int a,b,c; scanf(&quot;%d%d%d&quot;,&amp;a,&amp;b,&amp;c); addedge(a,b,1,c); addedge(b,a,0,-c); addedge(a,b,0,-c); addedge(b,a,1,c); &#125; int ans=0; //for(int i=1;i&lt;=2;i++)也是可以的因为一定只跑了2次。 while(spfa()) &#123; int now=T,last=pre[now]; while(now) &#123; edge[last].flow-=Flow[T]; edge[last^1].flow+=Flow[T]; now=edge[last].u; last=pre[now]; &#125; ans+=dist[T]*Flow[T]; &#125; printf(&quot;%d\n&quot;,ans); &#125;&#125;]]></content>
+    <title><![CDATA[CodeForces 546E 网络流好题]]></title>
+    <url>%2F2019%2F07%2F30%2F2019-07-30-CodeForces-546E-%E7%BD%91%E7%BB%9C%E6%B5%81%E5%A5%BD%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[网络流好题：这里只说题目中未说明的一点，为什么指定有路径的城市可以设置容量为INF？因为他们可以无限往来兵力。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119/* Auther :CaiCai * 网络流拆点题目，网络流已经做了一些题目了，目前小结。如果遇见题目初始化一系列条件，并且问你能否达到某种状态那么大部分是最大流的问题。 * 这道题是一个好题难在建图上面，和一些网络流的题目一样，这道题也需要拆点每座城拆成两个点，然后分别建立源点和束点。 * 因为每一个兵可以自己留在自己的城里，所以a[i][i+N]=INF。自己指向自己的道路可以无限大。 * 因为建图的原因，所以最后存进去调配的兵力就是原来的大小减去网络图中残余的网络量就可以了。如果是0直接输出就完了，证明并没有兵力往来，可能是前面已经没有足够的带宽来进行兵力往来了。 * problem: Codeforces 546E.*/#include &lt;iostream&gt;#include &lt;cstdio&gt;#include &lt;cmath&gt;#include &lt;string&gt;#include &lt;cstring&gt;#include &lt;algorithm&gt;#include &lt;limits&gt;#include &lt;vector&gt;#include &lt;stack&gt;#include &lt;queue&gt;#include &lt;set&gt;#include &lt;map&gt;#define lowbit(x) ( x&amp;(-x) )#define pi 3.141592653589793#define e 2.718281828459045using namespace std;typedef long long ll;const int INF=0x3f3f3f3f;const int maxN=205;int m, n;int tot;int temp;int r[maxN&lt;&lt;2][maxN&lt;&lt;2], flow[maxN&lt;&lt;2], pre[maxN&lt;&lt;2], food[maxN], drink[maxN];int sum1 = 0;int sum2 = 0;int bfs(int st,int en)&#123; queue&lt;int&gt; q; memset(pre, -1, sizeof pre); pre[st] = 0; flow[st] = INF; q.push(st); while (!q.empty()) &#123; int u = q.front(); q.pop(); for (int i = 1; i &lt;= tot;i++) &#123; if(pre[i]==-1&amp;&amp;r[u][i]&gt;0) &#123; pre[i] = u; flow[i] = min(r[u][i], flow[u]); q.push(i); &#125; &#125; &#125; return pre[en] == -1 ? -1 : flow[en];&#125;int dfs(int st,int en)&#123; int maxflow=0, icu; while((icu=bfs(st,en))!=-1) &#123; int last = en; int k; while(last!=st) &#123; k = pre[last]; r[k][last] -= icu; r[last][k] += icu; last = k; &#125; maxflow += icu; &#125; return maxflow;&#125;int main()&#123; scanf(&quot;%d%d&quot;, &amp;m, &amp;n); tot = m * 2 + 1; for (int i = 1; i &lt;= m;i++) &#123; scanf(&quot;%d&quot;, &amp;temp); sum1 += temp; r[0][i] = temp; r[i][i + m] = INF; &#125; for (int i = m+1; i &lt;= 2*m;i++) &#123; scanf(&quot;%d&quot;, &amp;temp); sum2+=temp; r[i][tot] = temp; &#125; for (int i = 0; i &lt; n;i++) &#123; int a, b; scanf(&quot;%d%d&quot;, &amp;a, &amp;b); r[a][b+m] = INF; r[b][a+m] = INF; &#125; int result; int scr; result = dfs(0, tot); //cout&lt;&lt;result&lt;&lt;endl; if(sum1==result&amp;&amp;sum2==result) &#123; printf(&quot;YES\n&quot;); for (int i = 1; i &lt;= m;i++) &#123; for (int j = 1+m; j &lt;= m*2;j++) &#123; printf(&quot;%d%s&quot;, r[i][j]==0?(0):(INF - r[i][j]), j==2*m?(&quot;&quot;):(&quot; &quot;)); &#125; puts(&quot;&quot;); &#125; &#125; else &#123; printf(&quot;NO\n&quot;); &#125; &#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -1134,9 +1145,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[572 Div2 B]]></title>
-    <url>%2F2019%2F07%2F13%2F2019-06-26-572-Div2-B%2F</url>
-    <content type="text"><![CDATA[B. Number Circle time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output You are given nn numbers a1,a2,…,ana1,a2,…,an. Is it possible to arrange them in a circle in such a way that every number is strictly less than the sum of its neighbors? For example, for the array [1,4,5,6,7,8][1,4,5,6,7,8], the arrangement on the left is valid, while arrangement on the right is not, as 5≥4+15≥4+1 and 8&gt;1+68&gt;1+6. Input The first line contains a single integer nn (3≤n≤1053≤n≤105) — the number of numbers. The second line contains nn integers a1,a2,…,ana1,a2,…,an (1≤ai≤1091≤ai≤109) — the numbers. The given numbers are not necessarily distinct (i.e. duplicates are allowed). Output If there is no solution, output “NO” in the first line. If there is a solution, output “YES” in the first line. In the second line output nn numbers — elements of the array in the order they will stay in the circle. The first and the last element you output are considered neighbors in the circle. If there are multiple solutions, output any of them. You can print the circle starting with any element. 思路：先排序，如果最大的比第二第三的和还要大，则不可能有方案，否则可以先把最大的放在第一个第二大的放在第二个，第三大的放在最后一个，最后中间以此填补。 1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int arr[100005];int brr[100005];int cmp(int x,int y)&#123; return x&gt;y;&#125;int main()&#123; int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; sort(arr+1,arr+1+n,cmp); if(arr[1]&gt;=arr[2]+arr[3]) cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; else &#123; brr[1]=arr[1]; cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; for(int i=2,j=2,k=n;j&lt;=k;) &#123; //cout&lt;&lt;i&lt;&lt;endl; brr[j++]=arr[i++]; if(j&lt;=k)brr[k--]=arr[i++]; &#125; for(int i=1;i&lt;=n;i++) cout&lt;&lt;brr[i]&lt;&lt;&apos; &apos;; cout&lt;&lt;endl; &#125;&#125;]]></content>
+    <title><![CDATA[573 Div2 C]]></title>
+    <url>%2F2019%2F07%2F13%2F2019-07-13-573-Div2-C%2F</url>
+    <content type="text"><![CDATA[C. Tokitsukaze and Discard Items time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output Recently, Tokitsukaze found an interesting game. Tokitsukaze had nn items at the beginning of this game. However, she thought there were too many items, so now she wants to discard mm (1≤m≤n1≤m≤n) special items of them. These nn items are marked with indices from 11 to nn. In the beginning, the item with index ii is placed on the ii-th position. Items are divided into several pages orderly, such that each page contains exactly kk positions and the last positions on the last page may be left empty. Tokitsukaze would do the following operation: focus on the first special page that contains at least one special item, and at one time, Tokitsukaze would discard all special items on this page. After an item is discarded or moved, its old position would be empty, and then the item below it, if exists, would move up to this empty position. The movement may bring many items forward and even into previous pages, so Tokitsukaze would keep waiting until all the items stop moving, and then do the operation (i.e. check the special page and discard the special items) repeatedly until there is no item need to be discarded. Consider the first example from the statement: n=10n=10, m=4m=4, k=5k=5, p=[3,5,7,10]p=[3,5,7,10]. The are two pages. Initially, the first page is special (since it is the first page containing a special item). So Tokitsukaze discards the special items with indices 33 and 55. After, the first page remains to be special. It contains [1,2,4,6,7][1,2,4,6,7], Tokitsukaze discards the special item with index 77. After, the second page is special (since it is the first page containing a special item). It contains [9,10][9,10], Tokitsukaze discards the special item with index 1010. Tokitsukaze wants to know the number of operations she would do in total. Input The first line contains three integers nn, mm and kk (1≤n≤10181≤n≤1018, 1≤m≤1051≤m≤105, 1≤m,k≤n1≤m,k≤n) — the number of items, the number of special items to be discarded and the number of positions in each page. The second line contains mm distinct integers p1,p2,…,pmp1,p2,…,pm (1≤p1&lt;p2&lt;…&lt;pm≤n1≤p1&lt;p2&lt;…&lt;pm≤n) — the indices of special items which should be discarded. 思路：模拟题，直接按题意模拟就好了，每次找出需要动的第一页上的所有数，再将记录移动的计数器增加，重新找下一页， 注意找的时候位置要减去移动的计数器move。 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;const int manx=100005;long long arr[manx];int main()&#123; long long m,n,k; cin&gt;&gt;m&gt;&gt;n&gt;&gt;k; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; long long move=0; long long i=1,j=1; long ans=0; while(i&lt;=n) &#123; j=i; long long tag=(arr[i]-move-1)/k;//减1的目的是为了保证边缘也在这一页，比如k=5，如果不-1则5在下一页 while(((arr[j]-move-1)/k==tag)&amp;&amp;j&lt;=m)//找这一页第一个要删除的位置，并且和这个同一页的所有特殊数全部删掉。 j++; move+=j-i; ans++; i=j; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -1156,9 +1167,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[573 Div2 C]]></title>
-    <url>%2F2019%2F07%2F13%2F2019-07-13-573-Div2-C%2F</url>
-    <content type="text"><![CDATA[C. Tokitsukaze and Discard Items time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output Recently, Tokitsukaze found an interesting game. Tokitsukaze had nn items at the beginning of this game. However, she thought there were too many items, so now she wants to discard mm (1≤m≤n1≤m≤n) special items of them. These nn items are marked with indices from 11 to nn. In the beginning, the item with index ii is placed on the ii-th position. Items are divided into several pages orderly, such that each page contains exactly kk positions and the last positions on the last page may be left empty. Tokitsukaze would do the following operation: focus on the first special page that contains at least one special item, and at one time, Tokitsukaze would discard all special items on this page. After an item is discarded or moved, its old position would be empty, and then the item below it, if exists, would move up to this empty position. The movement may bring many items forward and even into previous pages, so Tokitsukaze would keep waiting until all the items stop moving, and then do the operation (i.e. check the special page and discard the special items) repeatedly until there is no item need to be discarded. Consider the first example from the statement: n=10n=10, m=4m=4, k=5k=5, p=[3,5,7,10]p=[3,5,7,10]. The are two pages. Initially, the first page is special (since it is the first page containing a special item). So Tokitsukaze discards the special items with indices 33 and 55. After, the first page remains to be special. It contains [1,2,4,6,7][1,2,4,6,7], Tokitsukaze discards the special item with index 77. After, the second page is special (since it is the first page containing a special item). It contains [9,10][9,10], Tokitsukaze discards the special item with index 1010. Tokitsukaze wants to know the number of operations she would do in total. Input The first line contains three integers nn, mm and kk (1≤n≤10181≤n≤1018, 1≤m≤1051≤m≤105, 1≤m,k≤n1≤m,k≤n) — the number of items, the number of special items to be discarded and the number of positions in each page. The second line contains mm distinct integers p1,p2,…,pmp1,p2,…,pm (1≤p1&lt;p2&lt;…&lt;pm≤n1≤p1&lt;p2&lt;…&lt;pm≤n) — the indices of special items which should be discarded. 思路：模拟题，直接按题意模拟就好了，每次找出需要动的第一页上的所有数，再将记录移动的计数器增加，重新找下一页， 注意找的时候位置要减去移动的计数器move。 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;const int manx=100005;long long arr[manx];int main()&#123; long long m,n,k; cin&gt;&gt;m&gt;&gt;n&gt;&gt;k; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; long long move=0; long long i=1,j=1; long ans=0; while(i&lt;=n) &#123; j=i; long long tag=(arr[i]-move-1)/k;//减1的目的是为了保证边缘也在这一页，比如k=5，如果不-1则5在下一页 while(((arr[j]-move-1)/k==tag)&amp;&amp;j&lt;=m)//找这一页第一个要删除的位置，并且和这个同一页的所有特殊数全部删掉。 j++; move+=j-i; ans++; i=j; &#125; cout&lt;&lt;ans&lt;&lt;endl; &#125;]]></content>
+    <title><![CDATA[572 Div2 B]]></title>
+    <url>%2F2019%2F07%2F13%2F2019-06-26-572-Div2-B%2F</url>
+    <content type="text"><![CDATA[B. Number Circle time limit per test 1 second memory limit per test 256 megabytes input standard input output standard output You are given nn numbers a1,a2,…,ana1,a2,…,an. Is it possible to arrange them in a circle in such a way that every number is strictly less than the sum of its neighbors? For example, for the array [1,4,5,6,7,8][1,4,5,6,7,8], the arrangement on the left is valid, while arrangement on the right is not, as 5≥4+15≥4+1 and 8&gt;1+68&gt;1+6. Input The first line contains a single integer nn (3≤n≤1053≤n≤105) — the number of numbers. The second line contains nn integers a1,a2,…,ana1,a2,…,an (1≤ai≤1091≤ai≤109) — the numbers. The given numbers are not necessarily distinct (i.e. duplicates are allowed). Output If there is no solution, output “NO” in the first line. If there is a solution, output “YES” in the first line. In the second line output nn numbers — elements of the array in the order they will stay in the circle. The first and the last element you output are considered neighbors in the circle. If there are multiple solutions, output any of them. You can print the circle starting with any element. 思路：先排序，如果最大的比第二第三的和还要大，则不可能有方案，否则可以先把最大的放在第一个第二大的放在第二个，第三大的放在最后一个，最后中间以此填补。 1234567891011121314151617181920212223242526272829303132333435#include&lt;iostream&gt;#include&lt;algorithm&gt;using namespace std;int arr[100005];int brr[100005];int cmp(int x,int y)&#123; return x&gt;y;&#125;int main()&#123; int n; cin&gt;&gt;n; for(int i=1;i&lt;=n;i++) &#123; cin&gt;&gt;arr[i]; &#125; sort(arr+1,arr+1+n,cmp); if(arr[1]&gt;=arr[2]+arr[3]) cout&lt;&lt;&quot;NO&quot;&lt;&lt;endl; else &#123; brr[1]=arr[1]; cout&lt;&lt;&quot;YES&quot;&lt;&lt;endl; for(int i=2,j=2,k=n;j&lt;=k;) &#123; //cout&lt;&lt;i&lt;&lt;endl; brr[j++]=arr[i++]; if(j&lt;=k)brr[k--]=arr[i++]; &#125; for(int i=1;i&lt;=n;i++) cout&lt;&lt;brr[i]&lt;&lt;&apos; &apos;; cout&lt;&lt;endl; &#125;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -1211,6 +1222,28 @@
       </tags>
   </entry>
   <entry>
+    <title><![CDATA[哥德巴赫猜想]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%2F</url>
+    <content type="text"><![CDATA[著名的哥德巴赫猜想是这样的。1.“任何一个大于二的偶数都可以分解成两个素数之和”。2.“任何一个大于5的奇数都可以分解成三个素数之和”。现在请你写两个函数验证一下这个著名的猜想。]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[唯一分解定理&算术基本定理]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
+    <content type="text"><![CDATA[算术基本定理 （1）一个大于1的正整数N，如果它的标准分解式为： ，那么它的正因数个数为 。 （2） 它的全体正因数之和为 。 当 时就称N为完全数。 是否存在奇完全数，是一个至今未解决之想。 （3） 利用算术基本定理可以重新定义整数a和b的最大公因子 和最小公倍数 ， 并证明 。 （4）此外还可证明根号2是无理数等等。 （5）证明素数个数无限。 LightOJ 1341 - Aladdin and the Flying Carpet（算术基本定理 唯一分解定理）题意： 给出整数 a 和 b ，求区间[b, a] 内的 a 的约数对的个数，即：满足c*d == a 且 c&gt;=b，d&gt;=b。a 的约数对（比如[2, 3] 与 [3, 2] 为同一对）。 题解： 先素数打表，然后利用基本算术定理1求出a（面积）以内的所有正因子个数，最后/2等于对数。最后因为要所有因子要大于b所以相减就是答案。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;cmath&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define maxn 1000047#define LL long longLL p[maxn], prim[maxn];int k = 0;void find_prim()&#123; k = 0; for(LL i = 2; i &lt;= maxn; i++) &#123; if(!p[i]) &#123; prim[k++] = i; for(LL j = i+i; j &lt;= maxn; j+=i) &#123; p[j] = 1; &#125; &#125; &#125;&#125;LL cont(LL a)&#123; LL s = 1; if(a == 0) &#123; return 0; &#125; LL tt = 0; LL i = 0; while(prim[i] &lt; a &amp;&amp; i &lt; k) &#123; tt = 0; if(a%prim[i] == 0) &#123; while(a%prim[i] == 0) &#123; a/=prim[i]; tt++; &#125; &#125; s *= tt+1; i++; &#125; if(a &gt; 1) &#123; s *= 1+1;//一次 &#125; return s;&#125;int main()&#123; LL a, b; int t; int cas = 0; find_prim(); scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b); int cnt = 0; LL num = 0, ans; if(b &gt;= sqrt(a)) ans = 0; // b大小限定 else &#123; for(LL i = 1; i &lt; b; i++) //暴力枚举[1, b]中a的约数 &#123; if(a%i == 0) &#123; cnt++; &#125; &#125; num = cont(a)/2; ans = num - cnt; &#125; printf(&quot;Case %d: %lld\n&quot;,++cas,ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>ACM</category>
+      </categories>
+      <tags>
+        <tag>数论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[除法分块]]></title>
     <url>%2F2019%2F07%2F07%2F2019-07-08-%E9%99%A4%E6%B3%95%E5%88%86%E5%9D%97%2F</url>
     <content type="text"><![CDATA[除法分块 求以NN为被除数，在[0,N][0,N]的范围内，将所得的商向下取整相同的所有除数区间。 N∈[0,109] 做法 维护两个变量L,RL,R，代表当前除数区间为闭区间[L,R][L,R]，LL初始值为11。 然后在L≤NL≤N时循环进行下面的过程： 设t=⌊NL⌋t=⌊NL⌋ 当前答案区间的右端点R=⌊Nt⌋R=⌊Nt⌋ L=R+1 1234567891011//经典模板：long long solve(int N)&#123; int L= 1,R; long long tot = 0; while (L &lt;= N)&#123; R = N / (N / L); //求出右边的范围 tot += (N / L) * (R - L + 1); //求出商相同区间的值 L = R + 1; //区间往后移动1 &#125; return tot;&#125; 附上模板题Light OJ 1245题意：求 sum(n/i) i=[1,n];在使用除法分块后我们可以讲复杂度从n降为sqrt从而避免超时，这道题也有规律，可以枚举出来，会返现有循环节。 123456789101112131415161718192021222324252627#include&lt;iostream&gt;using namespace std;long long solve(long long n)&#123; long long l=1,r; long long tot=0; while(l&lt;=n) &#123; //n/l就是这段区间的等分价; r=n/(n/l); tot+=(n/l)*(r-l+1);//等分价值乘区间总长度就是这段区间的贡献率 l=r+1; &#125; return tot;&#125;int main()&#123; int t; cin&gt;&gt;t; int cas=1; while(t--) &#123; long long m; cin&gt;&gt;m; printf(&quot;Case %d: %lld\n&quot;,cas++,solve(m)); &#125;&#125;]]></content>
@@ -1222,9 +1255,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[唯一分解定理&算术基本定理]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
-    <content type="text"><![CDATA[算术基本定理 （1）一个大于1的正整数N，如果它的标准分解式为： ，那么它的正因数个数为 。 （2） 它的全体正因数之和为 。 当 时就称N为完全数。 是否存在奇完全数，是一个至今未解决之想。 （3） 利用算术基本定理可以重新定义整数a和b的最大公因子 和最小公倍数 ， 并证明 。 （4）此外还可证明根号2是无理数等等。 （5）证明素数个数无限。 LightOJ 1341 - Aladdin and the Flying Carpet（算术基本定理 唯一分解定理）题意： 给出整数 a 和 b ，求区间[b, a] 内的 a 的约数对的个数，即：满足c*d == a 且 c&gt;=b，d&gt;=b。a 的约数对（比如[2, 3] 与 [3, 2] 为同一对）。 题解： 先素数打表，然后利用基本算术定理1求出a（面积）以内的所有正因子个数，最后/2等于对数。最后因为要所有因子要大于b所以相减就是答案。 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384#include &lt;cstdio&gt;#include &lt;cstring&gt;#include &lt;cmath&gt;#include &lt;iostream&gt;#include &lt;algorithm&gt;using namespace std;#define maxn 1000047#define LL long longLL p[maxn], prim[maxn];int k = 0;void find_prim()&#123; k = 0; for(LL i = 2; i &lt;= maxn; i++) &#123; if(!p[i]) &#123; prim[k++] = i; for(LL j = i+i; j &lt;= maxn; j+=i) &#123; p[j] = 1; &#125; &#125; &#125;&#125;LL cont(LL a)&#123; LL s = 1; if(a == 0) &#123; return 0; &#125; LL tt = 0; LL i = 0; while(prim[i] &lt; a &amp;&amp; i &lt; k) &#123; tt = 0; if(a%prim[i] == 0) &#123; while(a%prim[i] == 0) &#123; a/=prim[i]; tt++; &#125; &#125; s *= tt+1; i++; &#125; if(a &gt; 1) &#123; s *= 1+1;//一次 &#125; return s;&#125;int main()&#123; LL a, b; int t; int cas = 0; find_prim(); scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld%lld&quot;,&amp;a,&amp;b); int cnt = 0; LL num = 0, ans; if(b &gt;= sqrt(a)) ans = 0; // b大小限定 else &#123; for(LL i = 1; i &lt; b; i++) //暴力枚举[1, b]中a的约数 &#123; if(a%i == 0) &#123; cnt++; &#125; &#125; num = cont(a)/2; ans = num - cnt; &#125; printf(&quot;Case %d: %lld\n&quot;,++cas,ans); &#125; return 0;&#125;]]></content>
+    <title><![CDATA[因子求和&算术基本定理]]></title>
+    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%9B%A0%E5%AD%90%E6%B1%82%E5%92%8C%26%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
+    <content type="text"><![CDATA[Sigma Function (因子和)Sigma Function Description Sigma function is an interesting function in Number Theory. It is denoted by the Greek letter Sigma (σ). This function actually denotes the sum of all divisors of a number. For example σ(24) = 1+2+3+4+6+8+12+24=60. Sigma of small numbers is easy to find but for large numbers it is very difficult to find in a straight forward way. But mathematicians have discovered a formula to find sigma. If the prime power decomposition of an integer is Then we can write, For some n the value of σ(n) is odd and for others it is even. Given a value n, you will have to find how many integers from 1 to n have even value ofσ. Input Input starts with an integer T (≤ 100), denoting the number of test cases. Each case starts with a line containing an integer n (1 ≤ n ≤ 1012). Output For each case, print the case number and the result. Sample Input 4 3 10 100 1000 Sample Output Case 1: 1 Case 2: 5 Case 3: 83 Case 4: 947 题意：1~n (n:1~1012)中，因子和为偶数的有几个。 先附上超时代码，根据算术基本定理写的，不了解算术基本定理的，可以查上一篇博客 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;const int N=1e6+5; bool vis[N];int prime[N],cnt;void is_prime()&#123; cnt=0; memset(vis,0,sizeof(vis)); for(int i=2;i&lt;N;i++) &#123; if(!vis[i]) &#123; prime[cnt++]=i; for(int j=i+i;j&lt;N;j+=i) vis[j]=1; &#125; &#125;&#125; bool is_even(long long n)&#123; for(int i=0;i&lt;cnt&amp;&amp;prime[i]*prime[i]&lt;=n;i++) &#123; int count=0; if(n%prime[i]==0) &#123; while(n%prime[i]==0) &#123; n/=prime[i]; count++; &#125; if(prime[i]&amp;1) &#123; if(count&amp;1) return true; &#125; &#125; &#125; if(n&gt;1&amp;&amp;(n&amp;1)) return true; return false;&#125; int main()&#123; int t; cin&gt;&gt;t; is_prime(); for(int kase=1;kase&lt;=t;kase++) &#123; long long n; cin&gt;&gt;n; long long count=0; for(long long i=1;i&lt;=n;i++) &#123; if(is_even(i)) cout&lt;&lt;i&lt;&lt;endl; count++; &#125; printf(&quot;Case %d: %d\n&quot;,kase,count); &#125;&#125; 那我们该如何做这道题？ —-》分析：来考虑F（x）为奇数的情况，给据题目中给我们的公式，如果F（x）为奇数，那么这个多项式里面的任何一项都必须是奇数，可以知道p = 2时， p^e - 1肯定是奇数，如果p ！= 2，当且仅当e为偶数的时候，此项为奇数，证明如下： 原式变形为[ p^(e+1) -p + (p-1) ]/ (p-1) = p*(p^e-1)/(p-1) + 1； 所以p/(p-1) = 1 ，p^e一定是奇数（因为p是质数，质数肯定是奇数）,所以p^e-1为偶数，所以下划线式肯定是奇数，证明成立。 那么题目中的公式可以写成下面的形式： 2^k0 3^(2k1) 5^(2k2) … pn^(2*kn);下划线式可以表达为num ^ 2; 又k0&gt;=0， 所以满足条件的解为num^2和2 * num^2;因为满足2的更高次幂也一定是2的倍数，不可重复计算。代码如下： —》注意：这个题目不可以直接循环做，尽管题目中给的时间较长，但直接暴力仍然会超，这里直接计算，sqrt无法强制转换为LL，但是此题L也够了； —》感悟：数论的题目特点就是代码超短，但思维量和证明超多的那种…… 123456789101112131415161718192021#include&lt;cstring&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;iostream&gt;using namespace std;#define L longint main()&#123; int t,ca = 0; long long n; scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld&quot;,&amp;n); L ans = 0; double tmp = n; ans = L(sqrt(tmp)) + L(sqrt(tmp/2)); printf(&quot;Case %d: %ld\n&quot;,++ca,n-ans); &#125; return 0;&#125;]]></content>
       <categories>
         <category>ACM</category>
       </categories>
@@ -1255,28 +1288,6 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[因子求和&算术基本定理]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%9B%A0%E5%AD%90%E6%B1%82%E5%92%8C%26%E7%AE%97%E6%9C%AF%E5%9F%BA%E6%9C%AC%E5%AE%9A%E7%90%86%2F</url>
-    <content type="text"><![CDATA[Sigma Function (因子和)Sigma Function Description Sigma function is an interesting function in Number Theory. It is denoted by the Greek letter Sigma (σ). This function actually denotes the sum of all divisors of a number. For example σ(24) = 1+2+3+4+6+8+12+24=60. Sigma of small numbers is easy to find but for large numbers it is very difficult to find in a straight forward way. But mathematicians have discovered a formula to find sigma. If the prime power decomposition of an integer is Then we can write, For some n the value of σ(n) is odd and for others it is even. Given a value n, you will have to find how many integers from 1 to n have even value ofσ. Input Input starts with an integer T (≤ 100), denoting the number of test cases. Each case starts with a line containing an integer n (1 ≤ n ≤ 1012). Output For each case, print the case number and the result. Sample Input 4 3 10 100 1000 Sample Output Case 1: 1 Case 2: 5 Case 3: 83 Case 4: 947 题意：1~n (n:1~1012)中，因子和为偶数的有几个。 先附上超时代码，根据算术基本定理写的，不了解算术基本定理的，可以查上一篇博客 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566#include&lt;cstdio&gt;#include&lt;iostream&gt;#include&lt;cstring&gt;using namespace std;const int N=1e6+5; bool vis[N];int prime[N],cnt;void is_prime()&#123; cnt=0; memset(vis,0,sizeof(vis)); for(int i=2;i&lt;N;i++) &#123; if(!vis[i]) &#123; prime[cnt++]=i; for(int j=i+i;j&lt;N;j+=i) vis[j]=1; &#125; &#125;&#125; bool is_even(long long n)&#123; for(int i=0;i&lt;cnt&amp;&amp;prime[i]*prime[i]&lt;=n;i++) &#123; int count=0; if(n%prime[i]==0) &#123; while(n%prime[i]==0) &#123; n/=prime[i]; count++; &#125; if(prime[i]&amp;1) &#123; if(count&amp;1) return true; &#125; &#125; &#125; if(n&gt;1&amp;&amp;(n&amp;1)) return true; return false;&#125; int main()&#123; int t; cin&gt;&gt;t; is_prime(); for(int kase=1;kase&lt;=t;kase++) &#123; long long n; cin&gt;&gt;n; long long count=0; for(long long i=1;i&lt;=n;i++) &#123; if(is_even(i)) cout&lt;&lt;i&lt;&lt;endl; count++; &#125; printf(&quot;Case %d: %d\n&quot;,kase,count); &#125;&#125; 那我们该如何做这道题？ —-》分析：来考虑F（x）为奇数的情况，给据题目中给我们的公式，如果F（x）为奇数，那么这个多项式里面的任何一项都必须是奇数，可以知道p = 2时， p^e - 1肯定是奇数，如果p ！= 2，当且仅当e为偶数的时候，此项为奇数，证明如下： 原式变形为[ p^(e+1) -p + (p-1) ]/ (p-1) = p*(p^e-1)/(p-1) + 1； 所以p/(p-1) = 1 ，p^e一定是奇数（因为p是质数，质数肯定是奇数）,所以p^e-1为偶数，所以下划线式肯定是奇数，证明成立。 那么题目中的公式可以写成下面的形式： 2^k0 3^(2k1) 5^(2k2) … pn^(2*kn);下划线式可以表达为num ^ 2; 又k0&gt;=0， 所以满足条件的解为num^2和2 * num^2;因为满足2的更高次幂也一定是2的倍数，不可重复计算。代码如下： —》注意：这个题目不可以直接循环做，尽管题目中给的时间较长，但直接暴力仍然会超，这里直接计算，sqrt无法强制转换为LL，但是此题L也够了； —》感悟：数论的题目特点就是代码超短，但思维量和证明超多的那种…… 123456789101112131415161718192021#include&lt;cstring&gt;#include&lt;cstdio&gt;#include&lt;cmath&gt;#include&lt;iostream&gt;using namespace std;#define L longint main()&#123; int t,ca = 0; long long n; scanf(&quot;%d&quot;,&amp;t); while(t--) &#123; scanf(&quot;%lld&quot;,&amp;n); L ans = 0; double tmp = n; ans = L(sqrt(tmp)) + L(sqrt(tmp/2)); printf(&quot;Case %d: %ld\n&quot;,++ca,n-ans); &#125; return 0;&#125;]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title><![CDATA[哥德巴赫猜想]]></title>
-    <url>%2F2019%2F07%2F07%2F2019-07-07-%E5%93%A5%E5%BE%B7%E5%B7%B4%E8%B5%AB%E7%8C%9C%E6%83%B3%2F</url>
-    <content type="text"><![CDATA[著名的哥德巴赫猜想是这样的。1.“任何一个大于二的偶数都可以分解成两个素数之和”。2.“任何一个大于5的奇数都可以分解成三个素数之和”。现在请你写两个函数验证一下这个著名的猜想。]]></content>
-      <categories>
-        <category>ACM</category>
-      </categories>
-      <tags>
-        <tag>数论</tag>
-      </tags>
-  </entry>
-  <entry>
     <title><![CDATA[Unity中animator 和animation区别]]></title>
     <url>%2F2019%2F06%2F27%2F2019-06-27-Unity%E4%B8%ADanimator-%E5%92%8Canimation%E5%8C%BA%E5%88%AB%2F</url>
     <content type="text"><![CDATA[Unity中animator 和animation区别此文章转载于极视学堂！！！！ ①Animation和Animator 虽然都是控制动画的播放，但是它们的用法和相关语法都是大有不同的。 Animation 控制一个动画的播放，而Animator是多个动画之间相互切换，并且Animator 有一个动画控制器，俗称动画状态机。 ②Animator 利用它做动画的切换是很方便的，但是它有一个缺点就是占用内存比Animation大。 好吧！下面直接通过操作，深入理解它们的用法。 （一） Animation模块 1.新建一个Unity3d 项目，在场景中新增一个TestAnimation对象，并且在对象上附加Animation组件； 2.选中TestAnimation对象，按快捷键：ctrl+6 打开动画编辑器，新建test.anim 动画。 3.添加AnimationPlay.cs 播放类。 using UnityEngine; using System.Collections; public class AnimationPlay : MonoBehaviour { Animation _anim; // Use this for initialization void Start () { _anim = GetComponent(); if (_anim != null) _anim.Play(“Test”); } } 4.直接运行看效果哈！ （二） Animator 模块 1.新建一个Unity3d 项目，在场景中新增一个TestAnimator对象，在Unity 编辑器中Window -&gt; Animation 弹出Animation 编辑页面，新建一个动画保存，命名为Move.anim； 同时我们发现因为使用方式是直接用动画控制器创建动画，它还会生成一个TestAnimation.controller文件，而这个文件就是我们所说的状态机控制器Controller。 2.选中需要制作动画的对象TestAnimator，例如我需要改变对象的Position，然后在Add Property 上面添加。 3.选中TestAnimation.controller这个文件，Window -&gt; Animator 打开Aniamtor 编辑器。 4.需要增加一个largen.anim动画，可以让它们互相切换。 5.直接运行看效果。]]></content>
@@ -1288,9 +1299,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Unity中的一些鼠标事件]]></title>
-    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%2F</url>
-    <content type="text"><![CDATA[Unity中的一些鼠标事件 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。 GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下 GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下 GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。]]></content>
+    <title><![CDATA[Unity常用函数和变量汇总]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB%2F</url>
+    <content type="text"><![CDATA[1，代码。 1234567891011121314151617float3 WorldSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向 float3 ObjSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向 float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化 float3 UnityWorldSpaceLightDir(float4 v) //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化 float3 ObjSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化 float3 UnityObjectToWorldNormal(float3 norm) //把法线从模型空间转换到世界空间中 float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中 float3 UnityWorldToObjectDir(float3 dir) //把方向矢量从世界空间转换到模型空间中 float3 Shade4PointLights(...) //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照 2，语义。1234567891011121314151617181920POSITION //模型空间中的顶点位置，通常是float4类型 NORMAL //顶点法线，通常是float3类型 TANGENT //顶点法线，通常是float4类型 TEXCOORDn //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型 COLOR //顶点颜色，通常是fixed4或float4类型 SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的POSITION，但是最好是使用SV_POSITION COLOR0 //输出第一组顶点颜色 COLOR1 //输出第二组顶点颜色 TEXCOORD0~TEXCOORD7 //输出纹理坐标 SV_Target //输出值将会存储到渲染目标（render target）中 3，变量。1234567891011121314151617UNITY_MATRIX_MVP //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间 UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间 UNITY_MATRIX_V //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间 UNITY_MATRIX_P //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间 UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间 UNITY_MATRIX_T_MV //UNITY_MATRIX_MV的转置矩阵 UNITY_MATRIX_IT_MV //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵 unity_ObjectToWorld(_Object2World) //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间 unity_WorldToObject(_World2Object) //用于将顶点/方向矢量从世界空间转换到模型空间 4，摄像机和屏幕参数。123456789101112131415float3 _WorldSpaceCameraPos //该摄像机在世界空间中的位置 float4 _ProjectionParams //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离 float4 _ScreenParams //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度 float4 _ZBufferParams //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值 float4 unity_OrthoParams //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度 float4x4 unity_CameraProjection //该摄像机的投影矩阵 float4x4 unity_CameraInvProjection //该摄像机的投影矩阵的逆矩阵 float4 unity_CameraWorldClipPlanes[6] //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面 5,内置的光照变量。1234567891011_LightColor0 float4 //该Pass处理的逐像素光源的颜色 _WorldSpaceLightPos0 float4 //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1 _LightMatrix0 float4x4 //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理 unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0 float4 //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置 unity_4LightAtten() float4 //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子 unity_LightColor half4[4] //仅用于Base Pass，存储了前4个非重要的点光源的颜色 6，LightMode标签支持的渲染路径设置选项。12345678Always //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和LightmapsForwardAdd //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源Deferred //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）ShadowCaster //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分PrepassFinal //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色Vertex,VertexLMRGBM和VertexLM //用于遗留的顶点照明渲染 7，顶点照明渲染路径中可以使用的内置变量。1234567unity_LightColor half4[8] //光源颜色 unity_LightPosition float4[8] //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1 unity_LightAtten half4[8] //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果 unity_SpotDirection float4[8] //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0） 8，顶点照明渲染路径中可以使用的内置函数。123float3 ShadeVertexLights(float4 vertex,float normal) //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光 float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight) //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -1310,9 +1321,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[unity3d中awake和start函数的理解。]]></title>
-    <url>%2F2019%2F06%2F26%2F2019-06-26-unity3d%E4%B8%ADawake%E5%92%8Cstart%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E3%80%82%2F</url>
-    <content type="text"><![CDATA[unity3d中awake和start函数的理解。1、 Awake函数 ​ 首先，我们来看unity的参考手册中对Awake函数的一些说明情况： ​ 当脚本实例被加载时会调用Awake函数；Awake函数在所有的游戏对象被初始化完毕之后才会被调用；在脚本实例的整个生命周期中，Awake函数仅执行一次。那么，脚本实例何时被加载，脚本实例的整个生命周期又代表了什么，因为对这些概念存有疑惑，所以在此基础之上，自己又在引擎中进行了一些测试，通过打印输出的方式查看了一下Awake函数的执行情况，总结如下（没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象（即gameObject）的初始状态为关闭状态，那么运行程序，Awake函数不会执行；反之，如果游戏对象的初始状态为开启状态，那么Awake函数会执行。并且，值得注意的一点是，Awake函数的执行与否与脚本实例的状态（启用或禁用）并没有关系，而是与脚本实例所绑定的游戏对象的状态有关。 ​ （2） 在不切换场景的前提下，原本处于关闭状态的游戏对象，当它被首次开启时，Awake函数会执行，并且是只在首次开启时才会执行；而已经开启（激活）的游戏对象（Awake函数已经执行过一次），将它关闭后再次开启，Awake函数不会再次执行。看来这是对应了手册中说明的在脚本实例的整个生命周期中仅执行一次的情况。 ​ （3） 如果重新加载场景，那么场景内Awake函数的执行情况重新遵循上述两点。 2、 Start函数 ​ 还是先看参考手册中对Start函数的一些说明情况： ​ 当Update函数第一次被调用前会调用Start函数；Start函数只在脚本实例被启用时才会执行；Start函数总是在Awake函数之后执行。在此基础之上，自己的测试总结如下 （没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象被关闭，那么Start函数不会执行。想一想这是理所当然的，游戏对象关闭了，脚本实例不会被加载，Awake函数不会执行，Start函数不会执行，Update函数等也不会执行。 ​ （2） 如果游戏对象开启了，对象上绑定的脚本实例被禁用了，那么Start函数不会执行。这是Start函数的特点，只有在脚本实例被启用时它才会执行，这个说明中有提到。注意，这与Awake函数是有区别的。 ​ （3） 如果游戏对象开启了，对象上绑定的脚本实例也开启了，那么Start函数会执行。并且Start函数只会在脚本实例首次被开启时才会执行。如果是已经开启过的脚本实例被关闭后再次开启，那么Start函数不会再次执行。 ​ （4） 如果重新加载场景，那么场景内Start函数的执行情况重新遵循上述三点。 ​ 除此之外，还有对Awake函数和Start函数都比较重要的一点，那就是当游戏对象之间存在父子关系时（不论层级的多少）。这时，父游戏对象的状态（开启或关闭）完全决定了子游戏对象上的脚本函数的执行情况。总的来说就是，只有在父游戏对象被开启的状态下，程序才会考虑是否调用子游戏对象上的脚本函数（Awake与Start等）。自上而下，以此类推。 ​ 最后，自己对于Awake与Start函数的使用，一般都是在Awake函数中获取游戏对象或者脚本实例的信息，然后在Start函数中进行一些获取之后的初始化设置。]]></content>
+    <title><![CDATA[Unity中的一些鼠标事件]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E4%B8%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E9%BC%A0%E6%A0%87%E4%BA%8B%E4%BB%B6%2F</url>
+    <content type="text"><![CDATA[Unity中的一些鼠标事件 由于项目需求，需要使用鼠标点击来实现滑动事件，查看官方文档对Input.GetMouseButton部分进行了了解。 GetMouseButton:每一帧鼠标处于按下状态都会返回true,Input.GetMouseButton(0):表示鼠标左键按下，Input.GetMouseButton(1):表示鼠标右键按下，Input.GetMouseButton(2):表示鼠标中键按下 GetMouseButtonDown:鼠标按下的那一帧返回true,Input.GetMouseButtonDown(0):表示鼠标左键按下，Input.GetMouseButtonDown(1):表示鼠标右键按下，Input.GetMouseButtonDown(2):表示鼠标中键按下 GetMouseButtonUp:鼠标抬起的那一帧返回true,Input.GetMouseButtonUp(0):表示鼠标左键按下，Input.GetMouseButtonUp(1):表示鼠标右键按下，Input.GetMouseButtonUp(2):表示鼠标中键按下 鼠标按下和抬起的位置可以通过Input.mousePosition来获取，不过该参数返回的是屏幕坐标位置，即以左下角为原点的坐标系。]]></content>
       <categories>
         <category>学习</category>
       </categories>
@@ -1321,9 +1332,9 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[Unity常用函数和变量汇总]]></title>
-    <url>%2F2019%2F06%2F26%2F2019-06-26-Unity%E5%B8%B8%E7%94%A8%E5%87%BD%E6%95%B0%E5%92%8C%E5%8F%98%E9%87%8F%E6%B1%87%E6%80%BB%2F</url>
-    <content type="text"><![CDATA[1，代码。 1234567891011121314151617float3 WorldSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回世界空间中从该点到摄像机的观察方向 float3 ObjSpaceViewDir(float4 v) //输入一个模型空间中的顶点位置，返回模型空间中从该点到摄像机的观察方向 float3 WorldSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回世界空间中从该点到光源的光照方向，没有被归一化 float3 UnityWorldSpaceLightDir(float4 v) //仅可用于前向渲染中，输入一个世界空间的顶点位置，返回世界空间从该点到光源的光照方向，没有被归一化 float3 ObjSpaceLightDir(float4 v) //仅用于前向渲染中（ForwardBase）,输入一个模型空间中的顶点位置，返回模型空间中从该点到光源的光照方向，没有被归一化 float3 UnityObjectToWorldNormal(float3 norm) //把法线从模型空间转换到世界空间中 float3 UnityObjectToWorldDir(in float3 dir) //把方向矢量从模型空间转换到世界空间中 float3 UnityWorldToObjectDir(float3 dir) //把方向矢量从世界空间转换到模型空间中 float3 Shade4PointLights(...) //仅可用于前向渲染中，计算四个点光源的光照，它的参数是已经打包进矢量的光照数据。前向渲染通常会使用这个函数来计算逐顶点光照 2，语义。1234567891011121314151617181920POSITION //模型空间中的顶点位置，通常是float4类型 NORMAL //顶点法线，通常是float3类型 TANGENT //顶点法线，通常是float4类型 TEXCOORDn //该顶点的纹理坐标，TEXCOORD0表示第一组纹理坐标，…,通常是float2或float4类型 COLOR //顶点颜色，通常是fixed4或float4类型 SV_POSITION //裁剪空间中的顶点坐标，结构体中必须包含一个用该语义修饰的变量。等同于DirectX9中的POSITION，但是最好是使用SV_POSITION COLOR0 //输出第一组顶点颜色 COLOR1 //输出第二组顶点颜色 TEXCOORD0~TEXCOORD7 //输出纹理坐标 SV_Target //输出值将会存储到渲染目标（render target）中 3，变量。1234567891011121314151617UNITY_MATRIX_MVP //当前的模型*观察*投影矩阵，用于将顶点/方向矢量从模型空间转换到裁剪空间 UNITY_MATRIX_MV //当前的模型*观察矩阵，用于将顶点/方向矢量从模型空间转换到观察空间 UNITY_MATRIX_V //当前的观察矩阵，用于将顶点/方向矢量从世界空间转换到观察空间 UNITY_MATRIX_P //当前的投影矩阵，用于将顶点/方向矢量从观察空间转换到裁剪空间 UNITY_MATRIX_VP //当前的观察*投影矩阵，用于将顶点/方向矢量从世界空间转换到裁剪空间 UNITY_MATRIX_T_MV //UNITY_MATRIX_MV的转置矩阵 UNITY_MATRIX_IT_MV //UNITY_MATRIX_MV的逆转置矩阵，用于将发现从模型空间转换到观察空间，也可以用于得到UNITY_MATRIX_MV的逆矩阵 unity_ObjectToWorld(_Object2World) //当前的模型矩阵，用于将顶点/方向矢量从模型空间变换到世界空间 unity_WorldToObject(_World2Object) //用于将顶点/方向矢量从世界空间转换到模型空间 4，摄像机和屏幕参数。123456789101112131415float3 _WorldSpaceCameraPos //该摄像机在世界空间中的位置 float4 _ProjectionParams //x=1.0(或-1.0，如果正在使用一个翻转的投影矩阵进行渲染)，y=Near,z=Far,w=1.0+1.0/Far,其中Near和Far分别是近裁剪平面和远裁剪平面到摄像机的距离 float4 _ScreenParams //x=width,y=height,z=1.0+1.0/width,w=1.0+1.0/height,其中width和height分别是该摄像机的渲染目标（render target）的像素宽度和高度 float4 _ZBufferParams //x=1-Far/Near,y=Far/Near,z=x/Far,w=y/Far,该变量用于线性化Z缓存中的深度值 float4 unity_OrthoParams //x=width,y=height,z没有定义,w=1.0(该摄像机是正交摄像机)或w=0.0（该摄像机是透视摄像机），其中width和height是正交投影摄像机的宽度和高度 float4x4 unity_CameraProjection //该摄像机的投影矩阵 float4x4 unity_CameraInvProjection //该摄像机的投影矩阵的逆矩阵 float4 unity_CameraWorldClipPlanes[6] //该摄像机的6个裁剪平面在世界空间下的等式，按左、右、下、上、近、远裁剪平面 5,内置的光照变量。1234567891011_LightColor0 float4 //该Pass处理的逐像素光源的颜色 _WorldSpaceLightPos0 float4 //_WorldSpaceLightPos0.xyz是该Pass处理的逐像素光源的位置。如果该光源是平行光，那么_WorldSpaceLightPos0.w是0，其他光源类型是1 _LightMatrix0 float4x4 //从世界空间到光源空间的变换矩阵，可以用于采样cookie和光强衰减纹理 unity_4LightPosX0,unity_4LightPosY0,unity_4LightPosZ0 float4 //仅用于Base Pass,前4个非重要的点光源在世界空间中的位置 unity_4LightAtten() float4 //仅用于Base Pass， 存储了前4个非重要的点光源的衰减因子 unity_LightColor half4[4] //仅用于Base Pass，存储了前4个非重要的点光源的颜色 6，LightMode标签支持的渲染路径设置选项。12345678Always //不管使用哪种渲染路径，该Pass总会被渲染，但是不会计算任何光照ForwardBase //用于前向渲染，该Pass会计算环境光，最重要的的平行光，逐顶点/SH光源和LightmapsForwardAdd //用于前向渲染，该Pass会计算额外的逐像素光源，每个Pass对应一个光源Deferred //用于延迟渲染，该Pass会渲染G缓冲（G_buffer）ShadowCaster //把物体的深度信息渲染到阴影映射纹理或一张深度纹理中PrepassBase //用于遗留延迟渲染，该Pass会渲染法线和高光反射的指数部分PrepassFinal //用于遗留延迟渲染，该Pass通过合并纹理、光照、自发光来渲染得到的最后的颜色Vertex,VertexLMRGBM和VertexLM //用于遗留的顶点照明渲染 7，顶点照明渲染路径中可以使用的内置变量。1234567unity_LightColor half4[8] //光源颜色 unity_LightPosition float4[8] //xyz分量是视角空间中的光源位置，如果光源是平行光，那么z分量值为0，其他光源类型z分量值为1 unity_LightAtten half4[8] //光源衰减因子，如果光源是聚光灯，x分量是cos(spotAngle/2),y分量是1/cos(spotAngle/4);如果是其他光源，x分量是-1，y分量是1，z分量是衰减的平分，w分量是光源范围开根号的结果 unity_SpotDirection float4[8] //如果光源是聚光灯的话，值为视角空间的聚光灯的位置，如果是其他类型的光源，值为（0,0,1,0） 8，顶点照明渲染路径中可以使用的内置函数。123float3 ShadeVertexLights(float4 vertex,float normal) //输入模型空间中的顶点位置和法线，计算四个顶点光源的光照以及环境光 float3 ShadeVertexLightsFull(float4 vertex, float3 normal, int lightCount, bool spotLight) //输入模型空间中的顶点位置和法线，计算lightCount个光源的光照以及环境光，如果SpotLight值为true，那么这些光源会被当成聚光灯来处理，虽然结果更精确，但计算更加耗时，否则，按点光源处理]]></content>
+    <title><![CDATA[unity3d中awake和start函数的理解。]]></title>
+    <url>%2F2019%2F06%2F26%2F2019-06-26-unity3d%E4%B8%ADawake%E5%92%8Cstart%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E3%80%82%2F</url>
+    <content type="text"><![CDATA[unity3d中awake和start函数的理解。1、 Awake函数 ​ 首先，我们来看unity的参考手册中对Awake函数的一些说明情况： ​ 当脚本实例被加载时会调用Awake函数；Awake函数在所有的游戏对象被初始化完毕之后才会被调用；在脚本实例的整个生命周期中，Awake函数仅执行一次。那么，脚本实例何时被加载，脚本实例的整个生命周期又代表了什么，因为对这些概念存有疑惑，所以在此基础之上，自己又在引擎中进行了一些测试，通过打印输出的方式查看了一下Awake函数的执行情况，总结如下（没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象（即gameObject）的初始状态为关闭状态，那么运行程序，Awake函数不会执行；反之，如果游戏对象的初始状态为开启状态，那么Awake函数会执行。并且，值得注意的一点是，Awake函数的执行与否与脚本实例的状态（启用或禁用）并没有关系，而是与脚本实例所绑定的游戏对象的状态有关。 ​ （2） 在不切换场景的前提下，原本处于关闭状态的游戏对象，当它被首次开启时，Awake函数会执行，并且是只在首次开启时才会执行；而已经开启（激活）的游戏对象（Awake函数已经执行过一次），将它关闭后再次开启，Awake函数不会再次执行。看来这是对应了手册中说明的在脚本实例的整个生命周期中仅执行一次的情况。 ​ （3） 如果重新加载场景，那么场景内Awake函数的执行情况重新遵循上述两点。 2、 Start函数 ​ 还是先看参考手册中对Start函数的一些说明情况： ​ 当Update函数第一次被调用前会调用Start函数；Start函数只在脚本实例被启用时才会执行；Start函数总是在Awake函数之后执行。在此基础之上，自己的测试总结如下 （没有特殊说明，均为在不切换场景的前提下）： ​ （1） 如果游戏对象被关闭，那么Start函数不会执行。想一想这是理所当然的，游戏对象关闭了，脚本实例不会被加载，Awake函数不会执行，Start函数不会执行，Update函数等也不会执行。 ​ （2） 如果游戏对象开启了，对象上绑定的脚本实例被禁用了，那么Start函数不会执行。这是Start函数的特点，只有在脚本实例被启用时它才会执行，这个说明中有提到。注意，这与Awake函数是有区别的。 ​ （3） 如果游戏对象开启了，对象上绑定的脚本实例也开启了，那么Start函数会执行。并且Start函数只会在脚本实例首次被开启时才会执行。如果是已经开启过的脚本实例被关闭后再次开启，那么Start函数不会再次执行。 ​ （4） 如果重新加载场景，那么场景内Start函数的执行情况重新遵循上述三点。 ​ 除此之外，还有对Awake函数和Start函数都比较重要的一点，那就是当游戏对象之间存在父子关系时（不论层级的多少）。这时，父游戏对象的状态（开启或关闭）完全决定了子游戏对象上的脚本函数的执行情况。总的来说就是，只有在父游戏对象被开启的状态下，程序才会考虑是否调用子游戏对象上的脚本函数（Awake与Start等）。自上而下，以此类推。 ​ 最后，自己对于Awake与Start函数的使用，一般都是在Awake函数中获取游戏对象或者脚本实例的信息，然后在Start函数中进行一些获取之后的初始化设置。]]></content>
       <categories>
         <category>学习</category>
       </categories>

@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="并查集+离散化用unordered_map来模拟pre数组，用并查集来模拟一个链表关系。 123456789101112131415161718192021222324252627282930#include&amp;lt;bits/stdc++.h&amp;gt;using namespace std;unordered_map&amp;lt;int,int&amp;gt; mp;int find(int x)&amp;#123;	i">
-<meta name="keywords" content="2019徐州网络赛">
+  <meta name="description" content="第一个主席树+懒惰标记，先码在这里感悟后面写。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
+<meta name="keywords" content="主席树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2019ICPC-徐州网络赛-so easy">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/09/07/so easy/index.html">
+<meta property="og:title" content="hdu 4348">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/10/09/hdu 4348/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="并查集+离散化用unordered_map来模拟pre数组，用并查集来模拟一个链表关系。 123456789101112131415161718192021222324252627282930#include&amp;lt;bits/stdc++.h&amp;gt;using namespace std;unordered_map&amp;lt;int,int&amp;gt; mp;int find(int x)&amp;#123;	i">
+<meta property="og:description" content="第一个主席树+懒惰标记，先码在这里感悟后面写。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-10T15:31:06.294Z">
+<meta property="og:updated_time" content="2019-10-09T15:51:03.300Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2019ICPC-徐州网络赛-so easy">
-<meta name="twitter:description" content="并查集+离散化用unordered_map来模拟pre数组，用并查集来模拟一个链表关系。 123456789101112131415161718192021222324252627282930#include&amp;lt;bits/stdc++.h&amp;gt;using namespace std;unordered_map&amp;lt;int,int&amp;gt; mp;int find(int x)&amp;#123;	i">
+<meta name="twitter:title" content="hdu 4348">
+<meta name="twitter:description" content="第一个主席树+懒惰标记，先码在这里感悟后面写。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/09/07/so easy/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/10/09/hdu 4348/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>2019ICPC-徐州网络赛-so easy | Cai's blogs</title>
+  <title>hdu 4348 | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/09/07/so easy/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/10/09/hdu 4348/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2019ICPC-徐州网络赛-so easy
+          <h1 class="post-title" itemprop="name headline">hdu 4348
 
               
             
@@ -418,24 +418,12 @@
                 
               
 
-              <time title="创建时间：2019-09-07 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-07T00:00:00+08:00">2019-09-07</time>
+              <time title="创建时间：2019-10-09 00:00:00 / 修改时间：23:51:03" itemprop="dateCreated datePublished" datetime="2019-10-09T00:00:00+08:00">2019-10-09</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-09-10 23:31:06" itemprop="dateModified" datetime="2019-09-10T23:31:06+08:00">2019-09-10</time>
               
             
           </span>
@@ -452,7 +440,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/2019徐州网络赛/" itemprop="url" rel="index"><span itemprop="name">2019徐州网络赛</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
 
                 
                 
@@ -471,8 +459,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/09/07/so easy/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/07/so easy/" itemprop="commentCount"></span>
+                <a href="/2019/10/09/hdu 4348/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/09/hdu 4348/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -507,8 +495,8 @@
       
 
       
-        <h4 id="并查集-离散化"><a href="#并查集-离散化" class="headerlink" title="并查集+离散化"></a>并查集+离散化</h4><p><strong>用unordered_map来模拟pre数组，用并查集来模拟一个链表关系。</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">unordered_map&lt;int,int&gt; mp;</span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">	if(!mp.count(x)) return x;</span><br><span class="line">	return mp[x]=find(mp[x]);</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">	int n,m;</span><br><span class="line">	scanf(&quot;%d%d&quot;,&amp;n,&amp;m);</span><br><span class="line">	while(m--)&#123;</span><br><span class="line">		int a,b;</span><br><span class="line">		scanf(&quot;%d%d&quot;,&amp;a,&amp;b);</span><br><span class="line">		if(a==1)</span><br><span class="line">		&#123;</span><br><span class="line">			mp[b]=find(b+1);</span><br><span class="line">		&#125;</span><br><span class="line">		else</span><br><span class="line">		&#123;</span><br><span class="line">			int ans=find(b);</span><br><span class="line">			if(ans&lt;=n)</span><br><span class="line">			printf(&quot;%d\n&quot;,ans);</span><br><span class="line">			else</span><br><span class="line">			printf(&quot;-1\n&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="第一个主席树-懒惰标记，先码在这里感悟后面写。"><a href="#第一个主席树-懒惰标记，先码在这里感悟后面写。" class="headerlink" title="第一个主席树+懒惰标记，先码在这里感悟后面写。"></a>第一个主席树+懒惰标记，先码在这里感悟后面写。</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">1e5</span>+<span class="number">7</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM=MAXN*<span class="number">30</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> T[MAXN],lson[MAXM],rson[MAXM],lazy[MAXM],tot;</span><br><span class="line">ll sum[MAXM],a[MAXN];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">pushUp</span><span class="params">(<span class="keyword">int</span> rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    sum[rt]=sum[lson[rt]]+sum[rson[rt]]+(ll)lazy[rt]*(r-l+<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> rt=tot++;</span><br><span class="line">    lazy[rt]=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span>(l==r)&#123;</span><br><span class="line">        sum[rt]=a[l];</span><br><span class="line">        <span class="keyword">return</span> rt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    lson[rt]=build(l,mid);</span><br><span class="line">    rson[rt]=build(mid+<span class="number">1</span>,r);</span><br><span class="line">    pushUp(rt,l,r);</span><br><span class="line">    <span class="keyword">return</span> rt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ll,<span class="keyword">int</span> rr,<span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> newrt=tot++;</span><br><span class="line">    lazy[newrt]=lazy[rt];</span><br><span class="line">    <span class="keyword">if</span>(ll&lt;=l&amp;&amp;r&lt;=rr)&#123;</span><br><span class="line">        lson[newrt]=lson[rt]; rson[newrt]=rson[rt];</span><br><span class="line">        lazy[newrt]=lazy[rt]+v;</span><br><span class="line">        sum[newrt]=sum[rt]+(<span class="keyword">long</span> <span class="keyword">long</span>)v*(r-l+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> newrt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(rr&lt;=mid)&#123;</span><br><span class="line">        rson[newrt]=rson[rt];</span><br><span class="line">        lson[newrt]=update(lson[rt],l,mid,ll,rr,v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(ll&gt;mid)&#123;</span><br><span class="line">        lson[newrt]=lson[rt];</span><br><span class="line">        rson[newrt]=update(rson[rt],mid+<span class="number">1</span>,r,ll,rr,v);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">        lson[newrt]=update(lson[rt],l,mid,ll,rr,v);</span><br><span class="line">        rson[newrt]=update(rson[rt],mid+<span class="number">1</span>,r,ll,rr,v);</span><br><span class="line">    &#125;</span><br><span class="line">    pushUp(newrt,l,r);</span><br><span class="line">    <span class="keyword">return</span> newrt;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> rt,<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ll,<span class="keyword">int</span> rr,<span class="keyword">int</span> la)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//cout&lt;&lt;"l : "&lt;&lt;l&lt;&lt;"r: "&lt;&lt;r&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">if</span>(ll&lt;=l&amp;&amp;r&lt;=rr)&#123;</span><br><span class="line">        <span class="keyword">return</span> sum[rt]+(<span class="keyword">long</span> <span class="keyword">long</span>)la*(r-l+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    la+=lazy[rt];</span><br><span class="line">    <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(rr&lt;=mid) <span class="keyword">return</span> query(lson[rt],l,mid,ll,rr,la);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(ll&gt;mid) <span class="keyword">return</span> query(rson[rt],mid+<span class="number">1</span>,r,ll,rr,la);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(lson[rt],l,mid,ll,mid,la)+query(rson[rt],mid+<span class="number">1</span>,r,mid+<span class="number">1</span>,rr,la);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,q;</span><br><span class="line">    <span class="keyword">while</span>(<span class="built_in">cin</span>&gt;&gt;n&gt;&gt;q)&#123;</span><br><span class="line">        tot=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++) <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        T[<span class="number">0</span>]=build(<span class="number">1</span>,n);</span><br><span class="line">        <span class="keyword">int</span> tag=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(q--)&#123;</span><br><span class="line">            <span class="keyword">char</span> a;</span><br><span class="line">            <span class="keyword">int</span> l,r;</span><br><span class="line">            <span class="built_in">cin</span>&gt;&gt;a&gt;&gt;l;</span><br><span class="line">            <span class="keyword">if</span>(a==<span class="string">'B'</span>) tag=l;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">int</span> d;</span><br><span class="line">                <span class="built_in">cin</span>&gt;&gt;r;</span><br><span class="line">                <span class="keyword">if</span>(a==<span class="string">'Q'</span>)&#123;</span><br><span class="line">                    ll res=query(T[tag],<span class="number">1</span>,n,l,r,<span class="number">0</span>);</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span> <span class="keyword">if</span>(a==<span class="string">'C'</span>)&#123;</span><br><span class="line">                    <span class="built_in">cin</span>&gt;&gt;d;</span><br><span class="line">                    tag++;</span><br><span class="line">                    T[tag]=update(T[tag<span class="number">-1</span>],<span class="number">1</span>,n,l,r,d);</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">else</span>&#123;</span><br><span class="line">                    <span class="built_in">cin</span>&gt;&gt;d;</span><br><span class="line">                    ll res=query(T[d],<span class="number">1</span>,n,l,r,<span class="number">0</span>);</span><br><span class="line">                    <span class="built_in">cout</span>&lt;&lt;res&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>线段树的懒惰操作是为了节约时间，主席树有点像节约内存，不然每次都新开估计会炸掉的。其他的操作就这题而言对一个初学者还是很有意义的，后面仔细学习品味（留坑）</strong></p>
 
       
     </div>
@@ -535,7 +523,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/2019徐州网络赛/" rel="tag"># 2019徐州网络赛</a>
+            <a href="/tags/主席树/" rel="tag"># 主席树</a>
           
         </div>
       
@@ -548,8 +536,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/07/HDU6581/" rel="next" title="Vacation">
-                <i class="fa fa-chevron-left"></i> Vacation
+              <a href="/2019/10/08/Super Mario/" rel="next" title="Stas and the Queue at the Buffet">
+                <i class="fa fa-chevron-left"></i> Stas and the Queue at the Buffet
               </a>
             
           </div>
@@ -557,10 +545,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/09/Center/" rel="prev" title="2019ICPC-徐州网络赛-Center">
-                2019ICPC-徐州网络赛-Center <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -778,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#并查集-离散化"><span class="nav-number">1.</span> <span class="nav-text">并查集+离散化</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一个主席树-懒惰标记，先码在这里感悟后面写。"><span class="nav-number">1.</span> <span class="nav-text">第一个主席树+懒惰标记，先码在这里感悟后面写。</span></a></li></ol></div>
             
 
           </div>
@@ -1066,7 +1050,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/09/07/so easy/'
+    refer: '2019/10/09/hdu 4348/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
