@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="All the Vowels Please">
-<meta name="keywords" content="数论">
+  <meta name="description" content="二分+RMQ">
+<meta name="keywords" content="明年一定拿牌子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="All the Vowels Please">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/10/03/All the Vowels Please/index.html">
+<meta property="og:title" content="Yet Another Monster Killing Problem">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/11/14/Yet Another Monster Killing Problem/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="All the Vowels Please">
+<meta property="og:description" content="二分+RMQ">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-03T15:43:21.020Z">
+<meta property="og:updated_time" content="2019-11-14T14:59:55.631Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="All the Vowels Please">
-<meta name="twitter:description" content="All the Vowels Please">
+<meta name="twitter:title" content="Yet Another Monster Killing Problem">
+<meta name="twitter:description" content="二分+RMQ">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/10/03/All the Vowels Please/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/11/14/Yet Another Monster Killing Problem/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>All the Vowels Please | Cai's blogs</title>
+  <title>Yet Another Monster Killing Problem | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/10/03/All the Vowels Please/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/11/14/Yet Another Monster Killing Problem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">All the Vowels Please
+          <h1 class="post-title" itemprop="name headline">Yet Another Monster Killing Problem
 
               
             
@@ -418,7 +418,7 @@
                 
               
 
-              <time title="创建时间：2019-10-03 00:00:00 / 修改时间：23:43:21" itemprop="dateCreated datePublished" datetime="2019-10-03T00:00:00+08:00">2019-10-03</time>
+              <time title="创建时间：2019-11-14 00:00:00 / 修改时间：22:59:55" itemprop="dateCreated datePublished" datetime="2019-11-14T00:00:00+08:00">2019-11-14</time>
             
 
             
@@ -459,8 +459,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/10/03/All the Vowels Please/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/10/03/All the Vowels Please/" itemprop="commentCount"></span>
+                <a href="/2019/11/14/Yet Another Monster Killing Problem/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/14/Yet Another Monster Killing Problem/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,9 +495,9 @@
       
 
       
-        <h4 id="All-the-Vowels-Please"><a href="#All-the-Vowels-Please" class="headerlink" title="All the Vowels Please"></a>All the Vowels Please</h4><a id="more"></a>
-<p>思维+构造<br><strong>对角线填充就能保证每一行都有完整的五个元音字母</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;algorithm&gt;//算法库</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">string</span> arr=<span class="string">"aeiou"</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> t; <span class="built_in">cin</span>&gt;&gt;t;</span><br><span class="line">    <span class="built_in">string</span> ans=<span class="string">""</span>;</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">5</span>;i&lt;=t;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(t%i==<span class="number">0</span>&amp;&amp;t/i&gt;=<span class="number">5</span>)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>;k&lt;i;k++)&#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;t/i;j++)&#123;</span><br><span class="line">                    ans+=arr[(k+j)%<span class="number">5</span>];<span class="comment">//对角线填充</span></span><br><span class="line">                    flag=<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(flag)&#123;</span><br><span class="line">            <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="二分-RMQ"><a href="#二分-RMQ" class="headerlink" title="二分+RMQ"></a>二分+RMQ</h3><a id="more"></a>
+<p>我们可以二分每天杀多少个怪物，并且RMQ查询区间怪物攻击的最大值。并且我们排序英雄的攻击从大到小排序，也倒序，存一个区间耐力的最大值。la数组的定义为后面所有点到这个点是递减的。所以满足二分性。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">200000</span> + <span class="number">10</span>;</span><br><span class="line"><span class="keyword">const</span> ll mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; v[maxn];</span><br><span class="line"><span class="keyword">int</span> a[maxn], mp[maxn];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> p, s;</span><br><span class="line">&#125; hero[maxn];</span><br><span class="line"><span class="keyword">int</span> dp[maxn][<span class="number">20</span>], n, m;</span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">cmp</span><span class="params">(node a, node b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a.p &lt; b.p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">RMQ</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++)</span><br><span class="line">        dp[i][<span class="number">0</span>] = a[i];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; (<span class="number">1</span> &lt;&lt; j) &lt;= n; j++)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= n; i++)</span><br><span class="line">            dp[i][j] = max(dp[i][j - <span class="number">1</span>], dp[i + (<span class="number">1</span> &lt;&lt; j - <span class="number">1</span>)][j - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RMQ_query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = log2(r - l + <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> max(dp[l][k], dp[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> pp[maxn], la[maxn];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> T;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;T);</span><br><span class="line">    <span class="keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">        <span class="keyword">int</span> MAX = <span class="number">0</span>, MAXX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>,a+i);</span><br><span class="line">            MAX = max(MAX, a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        RMQ();</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;m);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;hero[i].p,&amp;hero[i].s);</span><br><span class="line">            pp[i] = hero[i].p;</span><br><span class="line">            MAXX = max(MAXX, pp[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (MAXX &lt; MAX) &#123;</span><br><span class="line">            <span class="built_in">cout</span> &lt;&lt; <span class="number">-1</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">            <span class="keyword">continue</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        sort(hero + <span class="number">1</span>, hero + <span class="number">1</span> + m, cmp);</span><br><span class="line">        sort(pp + <span class="number">1</span>, pp + <span class="number">1</span> + m);</span><br><span class="line">        la[m + <span class="number">1</span>] = <span class="number">0</span>, la[m] = hero[m].s;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = m - <span class="number">1</span>; i &gt;= <span class="number">1</span>; i--)</span><br><span class="line">            la[i] = max(la[i + <span class="number">1</span>], hero[i].s);</span><br><span class="line">        <span class="keyword">int</span> now = <span class="number">1</span>, ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (now &lt;= n) &#123;</span><br><span class="line">            <span class="keyword">int</span> l = <span class="number">1</span>, r = n - now + <span class="number">1</span>, tmp;</span><br><span class="line">            <span class="keyword">while</span> (l &lt;= r) &#123;</span><br><span class="line">                <span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">int</span> mons = RMQ_query(now, now + mid - <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">int</span> pos = lower_bound(pp + <span class="number">1</span>, pp + <span class="number">1</span> + m, mons) - pp;</span><br><span class="line">                <span class="keyword">if</span> (la[pos] &gt;= mid) &#123;</span><br><span class="line">                    tmp = mid;</span><br><span class="line">                    l = mid + <span class="number">1</span>;</span><br><span class="line">                &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    r = mid - <span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            ans++;</span><br><span class="line">            now = now + tmp;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -524,7 +524,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/数论/" rel="tag"># 数论</a>
+            <a href="/tags/明年一定拿牌子/" rel="tag"># 明年一定拿牌子</a>
           
         </div>
       
@@ -537,8 +537,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/10/03/CodePlus 2017 12 月赛 可做题2/" rel="next" title="CodePlus 2017 12 月赛 可做题2">
-                <i class="fa fa-chevron-left"></i> CodePlus 2017 12 月赛 可做题2
+              <a href="/2019/11/12/Math/" rel="next" title="Math">
+                <i class="fa fa-chevron-left"></i> Math
               </a>
             
           </div>
@@ -546,10 +546,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/10/03/Stas and the Queue at the Buffet/" rel="prev" title="Stas and the Queue at the Buffet">
-                Stas and the Queue at the Buffet <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -777,7 +773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#All-the-Vowels-Please"><span class="nav-number">1.</span> <span class="nav-text">All the Vowels Please</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#二分-RMQ"><span class="nav-number">1.</span> <span class="nav-text">二分+RMQ</span></a></li></ol></div>
             
 
           </div>
@@ -1065,7 +1061,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/10/03/All the Vowels Please/'
+    refer: '2019/11/14/Yet Another Monster Killing Problem/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
