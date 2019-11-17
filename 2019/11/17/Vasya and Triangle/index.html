@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.">
-<meta name="keywords" content="codeforces">
+  <meta name="description" content="GCD+思维">
+<meta name="keywords" content="数论,明年一定拿牌子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ropewalkers">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/06/21/Ropewalkers/index.html">
+<meta property="og:title" content="Yet Another Monster Killing Problem">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/11/17/Vasya and Triangle/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.">
+<meta property="og:description" content="GCD+思维">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-22T04:13:09.146Z">
+<meta property="og:updated_time" content="2019-11-17T15:56:37.340Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ropewalkers">
-<meta name="twitter:description" content="RopewalkersPolycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.">
+<meta name="twitter:title" content="Yet Another Monster Killing Problem">
+<meta name="twitter:description" content="GCD+思维">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/06/21/Ropewalkers/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/11/17/Vasya and Triangle/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>Ropewalkers | Cai's blogs</title>
+  <title>Yet Another Monster Killing Problem | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/06/21/Ropewalkers/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/11/17/Vasya and Triangle/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Ropewalkers
+          <h1 class="post-title" itemprop="name headline">Yet Another Monster Killing Problem
 
               
             
@@ -418,24 +418,12 @@
                 
               
 
-              <time title="创建时间：2019-06-21 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-21T00:00:00+08:00">2019-06-21</time>
+              <time title="创建时间：2019-11-17 00:00:00 / 修改时间：23:56:37" itemprop="dateCreated datePublished" datetime="2019-11-17T00:00:00+08:00">2019-11-17</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-06-22 12:13:09" itemprop="dateModified" datetime="2019-06-22T12:13:09+08:00">2019-06-22</time>
               
             
           </span>
@@ -452,7 +440,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/codeforces/" itemprop="url" rel="index"><span itemprop="name">codeforces</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/学习/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
 
                 
                 
@@ -471,8 +459,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/06/21/Ropewalkers/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/21/Ropewalkers/" itemprop="commentCount"></span>
+                <a href="/2019/11/17/Vasya and Triangle/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/17/Vasya and Triangle/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -507,18 +495,10 @@
       
 
       
-        <h2 id="Ropewalkers"><a href="#Ropewalkers" class="headerlink" title="Ropewalkers"></a>Ropewalkers</h2><p>Polycarp decided to relax on his weekend and visited to the performance of famous ropewalkers: Agafon, Boniface and Konrad.</p>
-<a id="more"></a>
-<p>The rope is straight and infinite in both directions. At the beginning of the performance, Agafon, Boniface and Konrad are located in positions aa, bb and cc respectively. At the end of the performance, the distance between each pair of ropewalkers was <strong>at least</strong> dd.</p>
-<p>Ropewalkers can walk on the rope. In one second, only one ropewalker can change his position. Every ropewalker can change his position exactly by 11 (i. e. shift by 11 to the left or right direction on the rope). Agafon, Boniface and Konrad <strong>can not</strong> move at the same time (<strong>Only one of them can move at each moment</strong>). Ropewalkers can be at the same positions at the same time and can “walk past each other”.</p>
-<p>You should find the minimum duration (in seconds) of the performance. In other words, find the minimum number of seconds needed so that the distance between each pair of ropewalkers can be greater or equal to dd.</p>
-<p>Ropewalkers can walk to negative coordinates, due to the rope is infinite to both sides.</p>
-<p>Input</p>
-<p>The only line of the input contains four integers aa, bb, cc, dd (1≤a,b,c,d≤1091≤a,b,c,d≤109). It is possible that any two (or all three) ropewalkers are in the same position at the beginning of the performance.</p>
-<p>Output</p>
-<p>Output one integer — the minimum duration (in seconds) of the performance.</p>
-<p>``</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> ll = <span class="keyword">long</span> <span class="keyword">long</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">int</span> a, b, c, d;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cin</span> &gt;&gt; a &gt;&gt; b &gt;&gt; c &gt;&gt; d;</span><br><span class="line">  <span class="keyword">int</span> x[]=&#123;a,b,c&#125;;</span><br><span class="line">  sort(x,x+<span class="number">3</span>);</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cout</span>&lt;&lt;max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">0</span>]-x[<span class="number">1</span>]))+max(<span class="number">0</span>,d-<span class="built_in">abs</span>(x[<span class="number">1</span>]-x[<span class="number">2</span>]))&lt;&lt;<span class="string">'\n'</span>;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h3 id="GCD-思维"><a href="#GCD-思维" class="headerlink" title="GCD+思维"></a>GCD+思维</h3><a id="more"></a>
+<p>题目大意就是确定三个点，围成的面积是否能等于n<em>m/k；我们通过移项可以知道, x</em>y=2<em>n</em>m/k。所以只要2<em>n</em>m能够整除k的话那么我们就可以组成这样的三角形，而坐标点就是(0,0),(x,0),(y,0)。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,m,k;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n&gt;&gt;m&gt;&gt;k;</span><br><span class="line"><span class="comment">//    cout&lt;&lt;__gcd(2*n*m,k)&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">if</span>((<span class="number">2</span>*n*m%k)!=<span class="number">0</span>)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"NO"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp=<span class="number">2</span>*n*m/k;</span><br><span class="line">        <span class="keyword">int</span> x=__gcd(tmp,n);</span><br><span class="line">        <span class="keyword">int</span> y=tmp/x;</span><br><span class="line">        <span class="keyword">while</span>(y&gt;m)&#123;</span><br><span class="line">            y/=<span class="number">2</span>;</span><br><span class="line">            x*=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span>(x&gt;n)&#123;</span><br><span class="line">            x/=<span class="number">2</span>;</span><br><span class="line">            y*=<span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"YES\n"</span>);</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"0 0"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="string">"0 "</span>&lt;&lt;y&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;x&lt;&lt;<span class="string">" 0"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -544,7 +524,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/codeforces/" rel="tag"># codeforces</a>
+            <a href="/tags/数论/" rel="tag"># 数论</a>
+          
+            <a href="/tags/明年一定拿牌子/" rel="tag"># 明年一定拿牌子</a>
           
         </div>
       
@@ -557,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/06/21/Exam in BerSU (easy version)/" rel="next" title="Email from Polycarp">
-                <i class="fa fa-chevron-left"></i> Email from Polycarp
+              <a href="/2019/11/14/Yet Another Monster Killing Problem/" rel="next" title="Yet Another Monster Killing Problem">
+                <i class="fa fa-chevron-left"></i> Yet Another Monster Killing Problem
               </a>
             
           </div>
@@ -566,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/06/21/Email from Polycarp/" rel="prev" title="Email from Polycarp">
-                Email from Polycarp <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -797,7 +775,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ropewalkers"><span class="nav-number">1.</span> <span class="nav-text">Ropewalkers</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#GCD-思维"><span class="nav-number">1.</span> <span class="nav-text">GCD+思维</span></a></li></ol></div>
             
 
           </div>
@@ -1085,7 +1063,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/06/21/Ropewalkers/'
+    refer: '2019/11/17/Vasya and Triangle/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
