@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="回顾篇-每次写老题有了新的感悟。">
-<meta name="keywords" content="并查集">
+  <meta name="description" content="质数分解+思维">
+<meta name="keywords" content="数论,明年一定拿牌子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="POJ - 1703（并查集变形）">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/08/17/【POJ - 1703】【并查集的变形】/index.html">
+<meta property="og:title" content="Yet Another Monster Killing Problem">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/11/17/Power Products/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="回顾篇-每次写老题有了新的感悟。">
+<meta property="og:description" content="质数分解+思维">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-17T09:50:07.381Z">
+<meta property="og:updated_time" content="2019-11-18T15:24:51.394Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="POJ - 1703（并查集变形）">
-<meta name="twitter:description" content="回顾篇-每次写老题有了新的感悟。">
+<meta name="twitter:title" content="Yet Another Monster Killing Problem">
+<meta name="twitter:description" content="质数分解+思维">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/08/17/【POJ - 1703】【并查集的变形】/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/11/17/Power Products/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>POJ - 1703（并查集变形） | Cai's blogs</title>
+  <title>Yet Another Monster Killing Problem | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/08/17/【POJ - 1703】【并查集的变形】/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/11/17/Power Products/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">POJ - 1703（并查集变形）
+          <h1 class="post-title" itemprop="name headline">Yet Another Monster Killing Problem
 
               
             
@@ -418,12 +418,24 @@
                 
               
 
-              <time title="创建时间：2019-08-17 00:00:00 / 修改时间：17:50:07" itemprop="dateCreated datePublished" datetime="2019-08-17T00:00:00+08:00">2019-08-17</time>
+              <time title="创建时间：2019-11-17 00:00:00" itemprop="dateCreated datePublished" datetime="2019-11-17T00:00:00+08:00">2019-11-17</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-11-18 23:24:51" itemprop="dateModified" datetime="2019-11-18T23:24:51+08:00">2019-11-18</time>
               
             
           </span>
@@ -459,8 +471,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/08/17/【POJ - 1703】【并查集的变形】/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/08/17/【POJ - 1703】【并查集的变形】/" itemprop="commentCount"></span>
+                <a href="/2019/11/17/Power Products/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/17/Power Products/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -495,8 +507,12 @@
       
 
       
-        <h4 id="回顾篇-每次写老题有了新的感悟。"><a href="#回顾篇-每次写老题有了新的感悟。" class="headerlink" title="回顾篇-每次写老题有了新的感悟。"></a>回顾篇-每次写老题有了新的感悟。</h4><a id="more"></a>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">#include&lt;iostream&gt;</span><br><span class="line">#include&lt;cstdio&gt;</span><br><span class="line">#include&lt;cstring&gt;</span><br><span class="line">#include&lt;algorithm&gt;</span><br><span class="line">#include&lt;queue&gt;</span><br><span class="line">#include&lt;set&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">const int N = 500005;</span><br><span class="line">int pre[N], ran[N];</span><br><span class="line">int m,n;</span><br><span class="line">void init()</span><br><span class="line">&#123;</span><br><span class="line">    for (int i = 1; i &lt;= m;i++)</span><br><span class="line">    &#123;</span><br><span class="line">        pre[i] = i;</span><br><span class="line">        ran[i] = 0;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">int find(int x)</span><br><span class="line">&#123;</span><br><span class="line">    if(pre[x]==x)</span><br><span class="line">        return x;</span><br><span class="line">    int f = find(pre[x]);</span><br><span class="line">    ran[x] = (ran[x] + ran[pre[x]]) % 2;</span><br><span class="line">    return pre[x] = f;</span><br><span class="line">&#125;</span><br><span class="line">void un(int a,int b)</span><br><span class="line">&#123;</span><br><span class="line">    int fx = find(a);</span><br><span class="line">    int fy = find(b);</span><br><span class="line">    if(fx!=fy)</span><br><span class="line">    &#123;</span><br><span class="line">        ran[fx] = (ran[b] - ran[a] + 1) % 2;</span><br><span class="line">        pre[fx] = fy;</span><br><span class="line">    &#125;</span><br><span class="line">    return;</span><br><span class="line">&#125;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t;</span><br><span class="line">    scanf(&quot;%d&quot;,&amp;t);</span><br><span class="line">    while(t--)</span><br><span class="line">    &#123;</span><br><span class="line">        scanf(&quot;%d%d&quot;,&amp;m,&amp;n);</span><br><span class="line">        init();</span><br><span class="line">        for (int i = 1; i &lt;= n;i++)</span><br><span class="line">        &#123;</span><br><span class="line">            char a;</span><br><span class="line">            cin &gt;&gt; a;</span><br><span class="line">            if(a==&apos;A&apos;)</span><br><span class="line">            &#123;</span><br><span class="line">                int c, d;</span><br><span class="line">                scanf(&quot;%d%d&quot;,&amp;c,&amp;d);</span><br><span class="line">                int fx = find(c);</span><br><span class="line">                int fy = find(d);</span><br><span class="line">                if(fx!=fy)</span><br><span class="line">                    printf(&quot;Not sure yet.\n&quot;);</span><br><span class="line">                else if(fx==fy&amp;&amp;ran[c]==ran[d])</span><br><span class="line">                    printf(&quot;In the same gang.\n&quot;);</span><br><span class="line">                else</span><br><span class="line">                    printf(&quot;In different gangs.\n&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            else </span><br><span class="line">            &#123;</span><br><span class="line">                int c, d;</span><br><span class="line">                scanf(&quot;%d%d&quot;,&amp;c,&amp;d);</span><br><span class="line">                un(c, d);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="质数分解-思维"><a href="#质数分解-思维" class="headerlink" title="质数分解+思维"></a>质数分解+思维</h4><a id="more"></a>
+<p>对于质数pp，如果pa×pb=xkpa×pb=xk ，则 a+b≡0(modk)a+b≡0(modk),即<br>a≡k−b(mod k)a≡k−b(modk)</p>
+<p>设aa分解质因数后为 pc11×pc22×p3c3×…p1c1×p2c2×p3c3×…</p>
+<p>记 f(a)=∏pc1 mod k1×pc2 mod k2×p3c3 mod k×…f(a)=∏p1c1modk×p2c2modk×p3c3modk×…</p>
+<p>记 g(a)=∏p(k−c1 mod k)mod k1×p(k−c2 mod k)mod k2×p3(k−c3 mod k)mod k×…<br>所以桶排找互补项就可以了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">6</span>;</span><br><span class="line"><span class="keyword">int</span> n, a[N], k;</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;, <span class="keyword">int</span>&gt; m;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    ios_base::sync_with_stdio(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cin</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="built_in">cout</span>.tie(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> ans = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; n &gt;&gt; k;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">int</span> t=<span class="number">0</span>;</span><br><span class="line">        <span class="built_in">cin</span>&gt;&gt;a[i];</span><br><span class="line">        <span class="keyword">int</span> x=a[i];</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; b;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>;j*j&lt;=x;j++)&#123;</span><br><span class="line">            <span class="keyword">if</span>(a[i]%j==<span class="number">0</span>)&#123;</span><br><span class="line">                t=<span class="number">0</span>;</span><br><span class="line">                <span class="keyword">while</span>(a[i]%j==<span class="number">0</span>)&#123;</span><br><span class="line">                    t++;</span><br><span class="line">                    a[i]/=j;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">if</span>(t%k==<span class="number">0</span>) <span class="keyword">continue</span>;</span><br><span class="line">                t=t%k;</span><br><span class="line">                b.pb(t);</span><br><span class="line">                b.pb(j);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(a[i]!=<span class="number">1</span>)&#123;</span><br><span class="line">            b.pb(<span class="number">1</span>);</span><br><span class="line">            b.pb(a[i]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; c=b;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;c.size();j+=<span class="number">2</span>)&#123;</span><br><span class="line">            c[j]=k-c[j];</span><br><span class="line">        &#125;</span><br><span class="line">        ans=ans+m[c];<span class="comment">//如果存在他的互补项则可以配成一个答案。</span></span><br><span class="line">        m[b]++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;ans&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -523,7 +539,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/并查集/" rel="tag"># 并查集</a>
+            <a href="/tags/数论/" rel="tag"># 数论</a>
+          
+            <a href="/tags/明年一定拿牌子/" rel="tag"># 明年一定拿牌子</a>
           
         </div>
       
@@ -536,8 +554,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/15/P2024 [NOI2001]食物链/" rel="next" title="P2024 [NOI2001]食物链">
-                <i class="fa fa-chevron-left"></i> P2024 [NOI2001]食物链
+              <a href="/2019/11/17/Vasya and Triangle/" rel="next" title="Yet Another Monster Killing Problem">
+                <i class="fa fa-chevron-left"></i> Yet Another Monster Killing Problem
               </a>
             
           </div>
@@ -545,10 +563,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/17/Big Christmas Tree 【POJ - 3013】【优先队列优化的dijkstra】/" rel="prev" title="Big Christmas Tree 【POJ - 3013】【优先队列优化的dijkstra】">
-                Big Christmas Tree 【POJ - 3013】【优先队列优化的dijkstra】 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -776,7 +790,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#回顾篇-每次写老题有了新的感悟。"><span class="nav-number">1.</span> <span class="nav-text">回顾篇-每次写老题有了新的感悟。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#质数分解-思维"><span class="nav-number">1.</span> <span class="nav-text">质数分解+思维</span></a></li></ol></div>
             
 
           </div>
@@ -1064,7 +1078,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/08/17/【POJ - 1703】【并查集的变形】/'
+    refer: '2019/11/17/Power Products/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
