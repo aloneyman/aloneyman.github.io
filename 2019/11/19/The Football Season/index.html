@@ -101,18 +101,18 @@
 
 
 
-  <meta name="description" content="费马小定理。">
-<meta name="keywords" content="数论">
+  <meta name="description" content="欧几里得+细节或者枚举">
+<meta name="keywords" content="数论,明年一定拿牌子">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CCPC2018网络赛-Dream-费马小定理。">
-<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/09/20/Dream/index.html">
+<meta property="og:title" content="Yet Another Monster Killing Problem">
+<meta property="og:url" content="https://cclf.caicaimengxin.com/2019/11/19/The Football Season/index.html">
 <meta property="og:site_name" content="Cai&#39;s blogs">
-<meta property="og:description" content="费马小定理。">
+<meta property="og:description" content="欧几里得+细节或者枚举">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-23T13:48:35.643Z">
+<meta property="og:updated_time" content="2019-11-19T13:34:19.109Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CCPC2018网络赛-Dream-费马小定理。">
-<meta name="twitter:description" content="费马小定理。">
+<meta name="twitter:title" content="Yet Another Monster Killing Problem">
+<meta name="twitter:description" content="欧几里得+细节或者枚举">
 
 
 
@@ -120,7 +120,7 @@
 
   
   
-  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/09/20/Dream/">
+  <link rel="canonical" href="https://cclf.caicaimengxin.com/2019/11/19/The Football Season/">
 
 
 
@@ -130,7 +130,7 @@
   };
 </script>
 
-  <title>CCPC2018网络赛-Dream-费马小定理。 | Cai's blogs</title>
+  <title>Yet Another Monster Killing Problem | Cai's blogs</title>
   
 
 
@@ -375,7 +375,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/09/20/Dream/">
+    <link itemprop="mainEntityOfPage" href="https://cclf.caicaimengxin.com/2019/11/19/The Football Season/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="深海的鱼">
@@ -392,7 +392,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">CCPC2018网络赛-Dream-费马小定理。
+          <h1 class="post-title" itemprop="name headline">Yet Another Monster Killing Problem
 
               
             
@@ -418,24 +418,12 @@
                 
               
 
-              <time title="创建时间：2019-09-20 00:00:00" itemprop="dateCreated datePublished" datetime="2019-09-20T00:00:00+08:00">2019-09-20</time>
+              <time title="创建时间：2019-11-19 00:00:00 / 修改时间：21:34:19" itemprop="dateCreated datePublished" datetime="2019-11-19T00:00:00+08:00">2019-11-19</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-09-23 21:48:35" itemprop="dateModified" datetime="2019-09-23T21:48:35+08:00">2019-09-23</time>
               
             
           </span>
@@ -471,8 +459,8 @@
                 </span>
             
                 <span class="post-meta-item-text">评论数：</span>
-                <a href="/2019/09/20/Dream/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2019/09/20/Dream/" itemprop="commentCount"></span>
+                <a href="/2019/11/19/The Football Season/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/11/19/The Football Season/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -507,9 +495,12 @@
       
 
       
-        <h4 id="费马小定理。"><a href="#费马小定理。" class="headerlink" title="费马小定理。"></a>费马小定理。</h4><a id="more"></a>
-<p>题目有点难懂，但是看懂还是比较简单的，他给了一个质数p，并且是幂的形式给出来的，所以我们很容易想得到费马小定理。<br>他让m^p+n^p=(m+n)^p<br>我们两边同时%p，可以轻松证明两式相等。<br>所以我们直接讲输出的结果%p就好了。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;bits/stdc++.h&gt;</span><br><span class="line">using namespace std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int t; cin&gt;&gt;t;</span><br><span class="line">    while(t--)&#123;</span><br><span class="line">    int n; cin&gt;&gt;n;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;n;j++)&#123;</span><br><span class="line">            cout&lt;&lt;(i+j)%n&lt;&lt;&apos; &apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    for(int i=0;i&lt;n;i++)&#123;</span><br><span class="line">        for(int j=0;j&lt;n;j++)&#123;</span><br><span class="line">            cout&lt;&lt;(i*j)%n&lt;&lt;&apos; &apos;;</span><br><span class="line">        &#125;</span><br><span class="line">        cout&lt;&lt;endl;</span><br><span class="line">    &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h4 id="欧几里得-细节或者枚举"><a href="#欧几里得-细节或者枚举" class="headerlink" title="欧几里得+细节或者枚举"></a>欧几里得+细节或者枚举</h4><a id="more"></a>
+<p>法一：枚举+暴力，只不过这里的枚举区间是0-w，</p>
+<h4 id="xw-yd-p"><a href="#xw-yd-p" class="headerlink" title="xw+yd=p;"></a>xw+yd=p;</h4><h4 id="x-y-lt-n"><a href="#x-y-lt-n" class="headerlink" title="x+y&lt;=n;"></a>x+y&lt;=n;</h4><h4 id="x-y-z-n"><a href="#x-y-z-n" class="headerlink" title="x+y+z=n;"></a>x+y+z=n;</h4><p>因为如果平局的局数大于w，则可以通过胜局来分摊。所以在0-w的时候就已经把所有局数枚举完了。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">6</span>;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,p,w,d; <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;n,&amp;p,&amp;w,&amp;d);</span><br><span class="line">    <span class="keyword">int</span> flag=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;w;i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>((p-i*d)%w==<span class="number">0</span>)&#123;</span><br><span class="line">            <span class="keyword">int</span> x=(p-i*d)/w;</span><br><span class="line">            <span class="keyword">if</span>(x+i&lt;=n&amp;&amp;x&gt;=<span class="number">0</span>)&#123;</span><br><span class="line"><span class="comment">//                cout&lt;&lt;x&lt;&lt;' '&lt;&lt;i&lt;&lt;' '&lt;&lt;n-x-i&lt;&lt;endl;</span></span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">"%lld %lld %lld\n"</span>,x,i,n-x-i);</span><br><span class="line">                flag=<span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span>(!flag)&#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"-1\n"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>法二：exgcd+细节处理。<br>由第一个公式x<em>w+y</em>d=p，用扩展欧几里得求出gcd（w，d）；和x，y的通解，由于y的值可能爆long long 所以需要处理一下，首先我们要知道的是，x的周期为d / gcd,y的周期为w / gcd;  y应该等于y<em>（p%gcd）但是y会超long long 所以令y</em>（p%gcd）对y的周期求余；即可求出答案。<br><strong>和前面一种做法有相同的思路，应该如果平局的数量太大则可以通过胜局的数量来分担分数。</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> pb push_back</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">6</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b,<span class="keyword">int</span> &amp;x,<span class="keyword">int</span> &amp;y)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">//    cout&lt;&lt;"___"&lt;&lt;endl;</span></span><br><span class="line">    <span class="keyword">if</span>(b==<span class="number">0</span>)&#123;</span><br><span class="line">        x=<span class="number">1</span>;y=<span class="number">0</span>;<span class="keyword">return</span> a;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> r=gcd(b,a%b,x,y);</span><br><span class="line">    <span class="keyword">int</span> temp=y;</span><br><span class="line">    y=x-a/b*y;</span><br><span class="line">    x=temp;</span><br><span class="line">    <span class="keyword">return</span> r;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> n,p,w,d,x,y;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%lld%lld%lld%lld"</span>,&amp;n,&amp;p,&amp;w,&amp;d);</span><br><span class="line">    <span class="keyword">int</span> k=gcd(w,d,x,y);</span><br><span class="line">    <span class="keyword">if</span>(p%k)&#123;</span><br><span class="line">        <span class="built_in">cout</span>&lt;&lt;<span class="number">-1</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span>&#123;</span><br><span class="line"><span class="comment">//        cout&lt;&lt;"---"&lt;&lt;endl;</span></span><br><span class="line">        <span class="keyword">int</span> h=w/k;</span><br><span class="line">        y=(y%h*((p/k)%h)%h+h)%h;</span><br><span class="line">        x=(p-y*d)/w;</span><br><span class="line">        <span class="keyword">if</span>(x&gt;=<span class="number">0</span>&amp;&amp;x+y&lt;=n&amp;&amp;n-x-y&gt;=<span class="number">0</span>) <span class="built_in">printf</span>(<span class="string">"%lld %lld %lld\n"</span>,x,y,n-x-y);</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">puts</span>(<span class="string">"-1"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -538,6 +529,8 @@
           
             <a href="/tags/数论/" rel="tag"># 数论</a>
           
+            <a href="/tags/明年一定拿牌子/" rel="tag"># 明年一定拿牌子</a>
+          
         </div>
       
 
@@ -549,8 +542,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/09/20/P3455 [POI2007]ZAP-Queries/" rel="next" title="P3455 [POI2007]ZAP-Queries">
-                <i class="fa fa-chevron-left"></i> P3455 [POI2007]ZAP-Queries
+              <a href="/2019/11/17/Power Products/" rel="next" title="Yet Another Monster Killing Problem">
+                <i class="fa fa-chevron-left"></i> Yet Another Monster Killing Problem
               </a>
             
           </div>
@@ -558,10 +551,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/09/28/Primes and Multiplication/" rel="prev" title="Primes and Multiplication">
-                Primes and Multiplication <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -789,7 +778,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#费马小定理。"><span class="nav-number">1.</span> <span class="nav-text">费马小定理。</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#欧几里得-细节或者枚举"><span class="nav-number">1.</span> <span class="nav-text">欧几里得+细节或者枚举</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#xw-yd-p"><span class="nav-number">2.</span> <span class="nav-text">xw+yd=p;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x-y-lt-n"><span class="nav-number">3.</span> <span class="nav-text">x+y&lt;=n;</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#x-y-z-n"><span class="nav-number">4.</span> <span class="nav-text">x+y+z=n;</span></a></li></ol></div>
             
 
           </div>
@@ -1077,7 +1066,7 @@
     <script>
 
   window.livereOptions = {
-    refer: '2019/09/20/Dream/'
+    refer: '2019/11/19/The Football Season/'
   };
   (function(d, s) {
     var j, e = d.getElementsByTagName(s)[0];
